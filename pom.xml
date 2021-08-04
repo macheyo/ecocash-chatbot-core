@@ -14,6 +14,9 @@
 	<name>ecocash-chatbot-core</name>
 	<description>Ecocash chatbot core application</description>
 	<properties>
+		<jaxb2.version>0.6.0</jaxb2.version>
+		<maven-jaxb2-plugin.version>0.14.0</maven-jaxb2-plugin.version>
+		<hibernate-envers.version>5.4.2.Final</hibernate-envers.version>
 		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
@@ -40,6 +43,19 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.jvnet.jaxb2_commons</groupId>
+			<artifactId>jaxb2-basics-runtime</artifactId>
+			<version>${jaxb2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-envers</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -76,6 +92,49 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<artifactId>maven-jaxb2-plugin</artifactId>
+				<version>${maven-jaxb2-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>ecocash-inbound</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<schemaDirectory>${project.basedir}/src/main/resources/xsd</schemaDirectory>
+							<bindingDirectory>src/main/resources/xjb</bindingDirectory>
+							<generateDirectory>target/generated-sources/xjc/ecocash-inbound</generateDirectory>
+							<generatePackage>com.cassavasmartech.cpg.data</generatePackage>
+							<bindingIncludes>
+								<bindingInclude>ecocash-inbound-binding.xjb</bindingInclude>
+							</bindingIncludes>
+							<schemaIncludes>
+								<schemaInclude>ecocash-inbound-api.xsd</schemaInclude>
+								<schemaInclude>request-response-api.xsd</schemaInclude>
+							</schemaIncludes>
+							<args>
+								<arg>-Xannotate</arg>
+								<arg>-XtoString</arg>
+								<args>-npa</args>
+							</args>
+							<plugins>
+								<plugin>
+									<groupId>org.jvnet.jaxb2_commons</groupId>
+									<artifactId>jaxb2-basics</artifactId>
+									<version>${jaxb2.version}</version>
+								</plugin>
+								<plugin>
+									<groupId>org.jvnet.jaxb2_commons</groupId>
+									<artifactId>jaxb2-basics-annotate</artifactId>
+									<version>${jaxb2.version}</version>
+								</plugin>
+							</plugins>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified"
+           targetNamespace="http://www.econetwiress/ecocash/api/soap"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:ns="http://www.econetwiress/ecocash/api"
+           version="1.0">
+
+    <xs:import namespace="http://www.econetwiress/ecocash/api" schemaLocation="request-response-api.xsd"/>
+
+    <xs:element name="postTransaction">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="transactionRequest" type="ns:transactionRequest"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="postTransactionResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="return" type="ns:response"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

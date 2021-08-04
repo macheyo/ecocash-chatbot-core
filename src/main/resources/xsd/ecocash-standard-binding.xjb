@@ -1,0 +1,21 @@
+<jaxb:bindings xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+               xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:annox="http://annox.dev.java.net"
+               xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd"
+               jaxb:extensionBindingPrefixes="xjc annox" version="2.1">
+    <jaxb:globalBindings>
+        <xjc:simple />
+    </jaxb:globalBindings>
+    <jaxb:bindings schemaLocation="ecocashCommand.xsd">
+        <jaxb:bindings node="//xs:element[@name='ISCHECKSUMREQ']/xs:simpleType">
+            <jaxb:typesafeEnumClass name="ISCHECKSUMREQ" />
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:element[@name='ISPINCHECKREQ']/xs:simpleType">
+            <jaxb:typesafeEnumClass name="ISPINCHECKREQ" />
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:element[@name='SECURITYMODE']/xs:simpleType">
+            <jaxb:typesafeEnumClass name="SECURITYMODE" />
+        </jaxb:bindings>
+    </jaxb:bindings>
+</jaxb:bindings>
+

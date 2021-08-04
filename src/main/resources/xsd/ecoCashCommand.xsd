@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="COMMAND" type="COMMANDType"/>
+  <xs:complexType name="COMMANDType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="LANGUAGE1"/>
+      <xs:element type="xs:string" name="PROVIDER"/>
+      <xs:element type="xs:string" name="TYPE"/>
+      <xs:element type="xs:string" name="FNAME"/>
+      <xs:element type="xs:string" name="LNAME"/>
+      <xs:element type="xs:string" name="COUNTRYCODE"/>
+      <xs:element type="xs:string" name="MSISDN2"/>
+      <xs:element type="xs:string" name="MSISDN"/>
+      <xs:element type="xs:string" name="PAYID"/>
+      <xs:element type="xs:string" name="AMOUNT"/>
+      <xs:element type="xs:string" name="CHECKSUM"/>
+      <xs:element type="xs:string" name="CURRENCY"/>
+      <xs:element type="xs:string" name="PIN"/>
+      <xs:element type="xs:string" name="SOURCE"/>
+      <xs:element type="xs:string" name="TXN"/>
+      <xs:element type="xs:string" name="DATE"/>
+      <xs:element type="xs:string" name="TIME"/>
+      <xs:element type="xs:string" name="EXTTRANSACTIONID"/>
+      <xs:element type="xs:string" name="TXNSTATUS"/>
+      <xs:element type="xs:string" name="MERCHANTCODE"/>
+      <xs:element type="xs:string" name="SERVICE"/>
+      <xs:element type="xs:string" name="REFERENCE"/>
+      <xs:element type="xs:string" name="TXNID"/>
+      <xs:element type="xs:string" name="TRID"/>
+      <xs:element type="xs:string" name="TRANSACTIONID"/>
+      <xs:element type="xs:string" name="MESSAGE"/>
+      <xs:element type="xs:string" name="CHECKSUMKEY"/>
+      <xs:element type="xs:string" name="MERCODE"/>
+      <xs:element type="xs:string" name="AGNTCODE"/>
+      <xs:element type="xs:string" name="REMARKS"/>
+      <xs:element type="xs:string" name="ACTION"/>
+      <xs:element type="xs:string" name="USERTYPE"/>
+      <xs:element type="xs:string" name="BARTYPE"/>
+      <xs:element type="xs:string" name="REASON"/>
+      <xs:element type="xs:string" name="REMARK"/>
+      <xs:element type="xs:string" name="BLOCKSMS"/>
+      <xs:element name="SECURITYMODE">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="PINLESS"/>
+            <xs:enumeration value="PINFULL"/>
+            <xs:enumeration value="USSDPUSH"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="ISCHECKSUMREQ">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="FALSE"/>
+            <xs:enumeration value="TRUE"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="ISPINCHECKREQ">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Y"/>
+            <xs:enumeration value="N"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

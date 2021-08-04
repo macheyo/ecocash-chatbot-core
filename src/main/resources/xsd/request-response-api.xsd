@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema targetNamespace="http://www.econetwiress/ecocash/api"
+           xmlns:ns="http://www.econetwiress/ecocash/api"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0">
+
+    <xs:element name="transactionRequest" type="ns:transactionRequest"/>
+    <xs:element name="response" type="ns:response"/>
+
+    <xs:complexType name="transactionRequest">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="field1" type="xs:string"/>
+            <xs:element minOccurs="0" name="field2" type="xs:string"/>
+            <xs:element minOccurs="0" name="field3" type="xs:string"/>
+            <xs:element minOccurs="0" name="field4" type="xs:string"/>
+            <xs:element minOccurs="0" name="field5" type="xs:string"/>
+            <xs:element minOccurs="0" name="field6" type="xs:string"/>
+            <xs:element minOccurs="0" name="field7" type="xs:string"/>
+            <xs:element minOccurs="0" name="field8" type="xs:string"/>
+            <xs:element minOccurs="0" name="field9" type="xs:string"/>
+            <xs:element minOccurs="0" name="field10" type="xs:string"/>
+            <xs:element minOccurs="0" name="field11" type="xs:string"/>
+            <xs:element minOccurs="0" name="field12" type="xs:string"/>
+            <xs:element minOccurs="0" name="field13" type="xs:string"/>
+            <xs:element minOccurs="0" name="field14" type="xs:string"/>
+            <xs:element minOccurs="0" name="field15" type="xs:string"/>
+            <xs:element minOccurs="0" name="field16" type="xs:string"/>
+            <xs:element minOccurs="0" name="field17" type="xs:string"/>
+            <xs:element minOccurs="0" name="field18" type="xs:string"/>
+            <xs:element minOccurs="0" name="field19" type="xs:string"/>
+            <xs:element minOccurs="0" name="field20" type="xs:string"/>
+            <xs:element minOccurs="0" name="field21" type="xs:string"/>
+            <xs:element minOccurs="0" name="field22" type="xs:string"/>
+            <xs:element minOccurs="0" name="field23" type="xs:string"/>
+            <xs:element minOccurs="0" name="field24" type="xs:string"/>
+            <xs:element minOccurs="0" name="field25" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="response">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="field1" type="xs:string"/>
+            <xs:element minOccurs="0" name="field2" type="xs:string"/>
+            <xs:element minOccurs="0" name="field3" type="xs:string"/>
+            <xs:element minOccurs="0" name="field4" type="xs:string"/>
+            <xs:element minOccurs="0" name="field5" type="xs:string"/>
+            <xs:element minOccurs="0" name="field6" type="xs:string"/>
+            <xs:element minOccurs="0" name="field7" type="xs:string"/>
+            <xs:element minOccurs="0" name="field8" type="xs:string"/>
+            <xs:element minOccurs="0" name="field9" type="xs:string"/>
+            <xs:element minOccurs="0" name="field10" type="xs:string"/>
+            <xs:element minOccurs="0" name="field11" type="xs:string"/>
+            <xs:element minOccurs="0" name="field12" type="xs:string"/>
+            <xs:element minOccurs="0" name="field13" type="xs:string"/>
+            <xs:element minOccurs="0" name="field14" type="xs:string"/>
+            <xs:element minOccurs="0" name="field15" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
