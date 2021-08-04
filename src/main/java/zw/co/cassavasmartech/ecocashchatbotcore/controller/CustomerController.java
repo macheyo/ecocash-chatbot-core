@@ -55,9 +55,17 @@ public class CustomerController {
         return CollectionModel.of(customers, linkTo(methodOn(CustomerController.class).allCustomers()).withSelfRel());
     }
 
-    @GetMapping("/otp/{id}")
-    public ResponseEntity getOTP(@PathVariable String customerChatId){
-        ResponseEntity responseEntity = new ResponseEntity(HttpStatus.CREATED);
+    @GetMapping("/otp/generate/{id}")
+    public ResponseEntity generateOTP(@PathVariable String id){
+        ResponseEntity responseEntity = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        if(customerService.generateOtp(id)) responseEntity = new ResponseEntity(HttpStatus.CREATED);
+        return responseEntity;
+    }
+
+    @GetMapping("/otp/{otp}/verify/{id}")
+    public ResponseEntity verifyCustomer(@PathVariable String id, @PathVariable String otp){
+        ResponseEntity responseEntity = new ResponseEntity(HttpStatus.UNAUTHORIZED);
+        if(customerService.verifyCustomer(id, otp)) responseEntity = new ResponseEntity(HttpStatus.OK);
         return responseEntity;
     }
 

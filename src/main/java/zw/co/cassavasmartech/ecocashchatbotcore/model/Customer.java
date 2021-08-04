@@ -14,6 +14,6 @@ public class Customer extends BaseEntity{
     private String dob;
     private String natId;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn
+    @JoinColumn(name = "customer")
     private List<Profile> profiles;
 }

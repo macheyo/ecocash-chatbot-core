@@ -12,7 +12,7 @@ public class Profile extends BaseEntity{
     private String alias;
     private Platform platform;
     private String chatId;
-//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JoinColumn
-//    private List<OTP> otps;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "otp", referencedColumnName = "id")
+    private OTP otp;
 }

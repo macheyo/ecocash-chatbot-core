@@ -13,7 +13,7 @@ public interface CustomerService {
     Optional<Customer> findByCustomerChatId(String id);
     List<EntityModel<Customer>> findAll();
     Optional<Customer> update(String chatId, Customer customer);
-    //Optional<CPGPostTransactionResponse> invoke(CPGPostTransaction cpgPostTransaction);
     Boolean generateOtp(String id);
+    Boolean verifyCustomer(String id, String verificationCode);
     Optional<Customer> findById(Long id);
 }
