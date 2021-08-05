@@ -7,6 +7,7 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.CustomerNotFoundException;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Answer;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Customer;
@@ -75,6 +76,11 @@ public class CustomerController {
         return ResponseEntity
                 .created(linkTo(methodOn(CustomerController.class).getCustomerById(customer.getId())).toUri())
                 .body(customerService.getAlternative(id));
+    }
+
+    @GetMapping("/statement/{id}")
+    public ApiResponse<String> getStatement(@PathVariable String id){
+        return customerService.getStatement(id);
     }
 
     @GetMapping("/pinreset/{id}")

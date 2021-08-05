@@ -1,17 +1,10 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.service;
 
-import javafx.util.converter.LocalDateTimeStringConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.MessagePropertiesService;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessor;
@@ -26,19 +19,12 @@ import zw.co.cassavasmartech.ecocashchatbotcore.selfServiceCore.SelfServiceCoreP
 import zw.co.cassavasmartech.ecocashchatbotcore.sms.Sms;
 import zw.co.cassavasmartech.ecocashchatbotcore.sms.SmsDispatchStrategy;
 
-import java.net.URI;
 import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
-
-import static zw.co.cassavasmartech.ecocashchatbotcore.common.Util.buildJsonHttpHeaders;
 
 @Service
 @Slf4j
@@ -162,6 +148,22 @@ public class CustomerServiceImpl implements CustomerService{
             if (response.getField1().equalsIgnoreCase(String.valueOf(HttpStatus.OK.value()))) return true;
         }
         return false;
+    }
+
+    @Override
+    public ApiResponse<String> getStatement(String id) {
+        Customer customer = customerRepository.findByProfilesChatId(id).orElseThrow(()->new CustomerNotFoundException(id));
+        ApiResponse<String> response = new ApiResponse<>();
+        TransactionResponse transactionResponse = paymentGatewayProcessor.getStatement(customer.getMsisdn());
+        if(transactionResponse!=null&&transactionResponse.getField1()!=null) {
+            if (transactionResponse.getField1().equalsIgnoreCase(String.valueOf(HttpStatus.OK.value()))) {
+                response.setBody(transactionResponse.getField14());
+                response.setStatus(Integer.parseInt(transactionResponse.getField1()));
+                response.setMessage(transactionResponse.getField2());
+            }
+        }
+
+        return response;
     }
 
     private Boolean sendSms(String msisdn, String verificationCode) {

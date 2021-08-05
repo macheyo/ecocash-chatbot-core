@@ -90,7 +90,7 @@ public class RequestBuilder {
 
     public TransactionRequest build() {
         final String checksum = checksumGenerator.generateCheckSum(request);
-        checksum(checksum);
+        //checksum(checksum);
         log.debug("checksum generated {}",checksum);
         log.info("request: {}", request);
         return request;

@@ -2,6 +2,7 @@ package zw.co.cassavasmartech.ecocashchatbotcore.service;
 
 import org.springframework.hateoas.EntityModel;
 import org.springframework.stereotype.Service;
+import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 
 import java.util.List;
@@ -20,4 +21,5 @@ public interface CustomerService {
     List<Answer> getAnswers(String chatId);
     SubscriberDto getAlternative(String chatId);
     Boolean pinReset(String id);
+    ApiResponse<String> getStatement(String id);
 }

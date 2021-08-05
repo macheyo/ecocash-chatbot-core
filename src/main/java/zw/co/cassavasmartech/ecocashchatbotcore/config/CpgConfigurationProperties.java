@@ -35,6 +35,8 @@ public class CpgConfigurationProperties {
     private String pinResetTranType;
     @NotEmpty
     private String customerLookupTranType;
+    @NotEmpty
+    private String customerStatementTranType;
 
 
 }

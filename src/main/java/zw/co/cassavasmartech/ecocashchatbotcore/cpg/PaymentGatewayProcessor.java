@@ -18,4 +18,6 @@ public interface PaymentGatewayProcessor {
     TransactionResponse pinReset(String msisdn);
 
     TransactionResponse lookupCustomer(String msisdn);
+
+    TransactionResponse getStatement(String msisdn);
 }
