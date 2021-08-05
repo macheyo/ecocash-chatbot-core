@@ -29,12 +29,21 @@ public class RestConfiguration {
     @Value("${sms.endpoint.password}")
     private String smsPassword;
     public static final String SMS_REST_TEMPLATE = "SMS_REST_TEMPLATE";
+    public static final String SMS_REST_TEMPLATE_V2 = "SMS_REST_TEMPLATE_V2";
     public static final String ECOCASH_REST_TEMPLATE = "ECOCASH_REST_TEMPLATE";
 
     @Bean(name = SMS_REST_TEMPLATE)
     public RestTemplate smsRestTemplate(RestTemplateBuilder restTemplateBuilder) {
         return restTemplateBuilder
                 .basicAuthentication(smsApiUser, smsPassword)
+                .setConnectTimeout(httpClientConfig.connectTimeout)
+                .setReadTimeout(httpClientConfig.getReadTimeout())
+                .build();
+    }
+
+    @Bean(name = SMS_REST_TEMPLATE_V2)
+    public RestTemplate smsRestTemplateV2(RestTemplateBuilder restTemplateBuilder) {
+        return restTemplateBuilder
                 .setConnectTimeout(httpClientConfig.connectTimeout)
                 .setReadTimeout(httpClientConfig.getReadTimeout())
                 .build();
