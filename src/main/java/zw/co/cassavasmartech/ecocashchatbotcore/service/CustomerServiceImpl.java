@@ -154,6 +154,16 @@ public class CustomerServiceImpl implements CustomerService{
         return selfServiceCoreProcessor.getAlternative(customer.getMsisdn());
     }
 
+    @Override
+    public Boolean pinReset(String id) {
+        Customer customer = customerRepository.findByProfilesChatId(id).orElseThrow(()->new CustomerNotFoundException(id));
+        TransactionResponse response = paymentGatewayProcessor.pinReset(customer.getMsisdn());
+        if(response!=null&&response.getField1()!=null) {
+            if (response.getField1().equalsIgnoreCase(String.valueOf(HttpStatus.OK.value()))) return true;
+        }
+        return false;
+    }
+
     private Boolean sendSms(String msisdn, String verificationCode) {
         final String notificationMessage = String.format(messagePropertiesService.getByKey("messages.otp"), verificationCode);
         final Sms sms = new Sms(msisdn, notificationMessage);

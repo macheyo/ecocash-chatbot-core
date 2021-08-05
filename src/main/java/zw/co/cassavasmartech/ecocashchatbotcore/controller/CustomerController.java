@@ -77,7 +77,12 @@ public class CustomerController {
                 .body(customerService.getAlternative(id));
     }
 
-
+    @GetMapping("/pinreset/{id}")
+    public ResponseEntity pinreset(@PathVariable String id){
+        ResponseEntity responseEntity = new ResponseEntity(HttpStatus.NOT_FOUND);
+        if(customerService.generateOtp(id)) responseEntity = new ResponseEntity(HttpStatus.CREATED);
+        return responseEntity;
+    }
 
     @GetMapping("/otp/generate/{id}")
     public ResponseEntity generateOTP(@PathVariable String id){

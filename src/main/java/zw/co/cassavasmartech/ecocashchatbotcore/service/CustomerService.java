@@ -19,4 +19,5 @@ public interface CustomerService {
     Optional<Customer> findById(Long id);
     List<Answer> getAnswers(String chatId);
     SubscriberDto getAlternative(String chatId);
+    Boolean pinReset(String id);
 }
