@@ -38,17 +38,27 @@ public class CustomerController {
     }
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
-    public ResponseEntity<EntityModel<Customer>> newCustomer(@Valid @RequestBody Customer customer) throws NotFoundException {
+    public ApiResponse<ResponseEntity<EntityModel<Customer>>> newCustomer(@Valid @RequestBody Customer customer) throws NotFoundException {
         Customer newCustomer = customerService.save(customer);
-        return ResponseEntity
+        ApiResponse<ResponseEntity<EntityModel<Customer>>> response = new ApiResponse<>();
+        ResponseEntity<EntityModel<Customer>> entity = ResponseEntity
                 .created(linkTo(methodOn(CustomerController.class).getCustomerByCustomerChatId(newCustomer.getProfiles().get(0).getChatId())).toUri())
                 .body(assembler.toModel(customer));
+        response.setStatus(HttpStatus.OK.value());
+        response.setBody(entity);
+        response.setMessage("Success");
+        return response;
     }
 
     @GetMapping("/chat/{id}")
-    public EntityModel<Customer> getCustomerByCustomerChatId(@PathVariable String id) {
+    public ApiResponse<EntityModel<Customer>> getCustomerByCustomerChatId(@PathVariable String id) {
         Customer customer = customerService.findByCustomerChatId(id).orElseThrow(()->new CustomerNotFoundException(id));
-        return assembler.toModel(customer);
+        ApiResponse<EntityModel<Customer>> response = new ApiResponse<>();
+        response.setStatus(HttpStatus.OK.value());
+        response.setMessage("Success");
+        response.setBody(assembler.toModel(customer));
+        return response;
+
     }
 
     @GetMapping("/list")

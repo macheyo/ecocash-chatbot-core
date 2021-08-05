@@ -97,14 +97,12 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
         return RequestBuilder.newInstance()
                 .vendorCode("EPGTESTPT")
                 .checksumGenerator(checksumGenerator)
-                .vendorApiKey("abf8988717c777874645af9e60db6e607dd5962c6e9c821f775c515618d2393e")
-                .checksum("dxxx/rmaqNjx1SD4RLxQs6hKP4wNBtnawdWCkopUg8aH8EtkyURzYWu6adhhsCo69N9QNtnZr/Tc\\r\\nrAlS0dyCeMxGfpe9Kg6HFg/hINd2uuU0t12ChL0eWKsFAT2Po68Jy9bBaJyqg+wtSyK8XOnqoSdG\\r\\nwJ2YX9EHslptwjOxgQz+anAGXy3C8kYhi8IBy4xit6Gy5Ray+zaXPQhz6s1isaJjj7dZXn8MHxoA\\r\\ncUrtn67A5ZkYY8vtrH/EomVMGuVfjCXgSO3EXLlMUReACmoMDreJvFdl7DsWrqFJGL2+sHwkODZu\\r\\nSXmNiarQ+2whnafSIz42g3kpWJcNHoBBBkdzTw==")
-                .tranType(cpgConfigProperties.getCustomerStatementTranType())
+                .tranType("00029")
                 .applicationCode("ecocashzw")
                 .reference(Util.generateReference(msisdn))
-                .msisdn(msisdn)
                 .securityMode("101")
-                .currency("ZWL")
+                .vendorApiKey("abf8988717c777874645af9e60db6e607dd5962c6e9c821f775c515618d2393e")
+                .msisdn(msisdn)
                 .build();
     }
 
