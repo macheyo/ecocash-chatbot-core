@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.MessagePropertiesService;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessor;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.BusinessException;
@@ -21,6 +22,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.modelAssembler.CustomerModelAsse
 import zw.co.cassavasmartech.ecocashchatbotcore.notification.NotificationService;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.CustomerRepository;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.ProfileRepository;
+import zw.co.cassavasmartech.ecocashchatbotcore.selfServiceCore.SelfServiceCoreProcessor;
 import zw.co.cassavasmartech.ecocashchatbotcore.sms.Sms;
 import zw.co.cassavasmartech.ecocashchatbotcore.sms.SmsDispatchStrategy;
 
@@ -58,6 +60,9 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Autowired
     PaymentGatewayProcessor paymentGatewayProcessor;
+
+    @Autowired
+    SelfServiceCoreProcessor selfServiceCoreProcessor;
 
     @Override
     public Customer save(Customer customer) {
@@ -105,6 +110,12 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
+    public Boolean isEnrolled(String id) {
+        Customer customer = customerRepository.findByProfilesChatId(id).orElseThrow(()->new CustomerNotFoundException(id));
+        return selfServiceCoreProcessor.isEnrolled(customer.getMsisdn());
+    }
+
+    @Override
     public Boolean verifyCustomer(String id, String verificationCode) {
         Customer customer = customerRepository.findByProfilesChatId(id).orElseThrow(()->new CustomerNotFoundException(id));
         Profile profile = customer.getProfiles().get(customer.getProfiles().indexOf(profileRepository.getByChatId(id)));
@@ -125,9 +136,22 @@ public class CustomerServiceImpl implements CustomerService{
         return otp;
     }
 
+
     @Override
     public Optional<Customer> findById(Long id) {
         return customerRepository.findById(id);
+    }
+
+    @Override
+    public List<Answer> getAnswers(String chatId) {
+        Customer customer = customerRepository.findByProfilesChatId(chatId).orElseThrow(()->new CustomerNotFoundException(chatId));
+        return selfServiceCoreProcessor.getAnswerByMsisdnAndAnswerStatus(customer.getMsisdn());
+    }
+
+    @Override
+    public SubscriberDto getAlternative(String chatId) {
+        Customer customer = customerRepository.findByProfilesChatId(chatId).orElseThrow(()->new CustomerNotFoundException(chatId));
+        return selfServiceCoreProcessor.getAlternative(customer.getMsisdn());
     }
 
     private Boolean sendSms(String msisdn, String verificationCode) {

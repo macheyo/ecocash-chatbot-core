@@ -92,11 +92,3 @@ public class TransactionRequest implements Serializable {
    private static final long serialVersionUID = -3734546037674257624L;
 }
 
-//   private String field1 = "GIGAIOTBPFT";
-//   private String field2 = "b9ceb559e12a8c7dc6c1a6044f9ddc8ceabb6bf4c793888936ad7cda3b8e267f";
-//   private String field6 = "checksum";
-//   private String field7 = "000021";
-//   private String field8 = "ecocashzw";
-//   private String field10 = "1598427396539";
-//   private String field3 = "774222689";
-//   private String field13 = "ZWL";

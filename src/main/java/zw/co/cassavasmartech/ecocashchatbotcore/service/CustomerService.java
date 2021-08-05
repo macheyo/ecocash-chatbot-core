@@ -14,6 +14,9 @@ public interface CustomerService {
     List<EntityModel<Customer>> findAll();
     Optional<Customer> update(String chatId, Customer customer);
     Boolean generateOtp(String id);
+    Boolean isEnrolled(String id);
     Boolean verifyCustomer(String id, String verificationCode);
     Optional<Customer> findById(Long id);
+    List<Answer> getAnswers(String chatId);
+    SubscriberDto getAlternative(String chatId);
 }

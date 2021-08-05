@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import zw.co.cassavasmartech.ecocashchatbotcore.config.CpgConfigurationProperties;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.PostTransaction;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.PostTransactionResponse;
 
@@ -23,7 +24,7 @@ import static zw.co.cassavasmartech.ecocashchatbotcore.common.Util.buildJsonHttp
 public class PaymentGatewayInvokerImpl implements PaymentGatewayInvoker {
 
     @Autowired
-    private  CpgConfigurationProperties configProperties;
+    private CpgConfigurationProperties configProperties;
     @Autowired
     private RestTemplate restTemplate;
 
