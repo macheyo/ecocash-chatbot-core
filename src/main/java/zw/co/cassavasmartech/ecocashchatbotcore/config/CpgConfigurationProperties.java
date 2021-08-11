@@ -37,6 +37,9 @@ public class CpgConfigurationProperties {
     private String customerLookupTranType;
     @NotEmpty
     private String customerStatementTranType;
+    @NotEmpty
+    private String subscriberToSubscriberTranType;
+
 
 
 }
