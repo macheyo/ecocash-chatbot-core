@@ -1,6 +1,7 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.config;
 
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -56,6 +57,11 @@ public class RestConfiguration {
         requestFactory.setConnectTimeout(5 * 1000);
         requestFactory.setReadTimeout(18 * 1000);
         return new RestTemplate(requestFactory);
+    }
+
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
     }
 
     @Bean(name = ECOCASH_REST_TEMPLATE)

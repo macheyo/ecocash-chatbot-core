@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
 
 @ControllerAdvice
-public class CustomerNotFoundAdvice {
+public class CustomerAlreadyExistAdvice {
     @ResponseBody
-    @ExceptionHandler(CustomerNotFoundException.class)
+    @ExceptionHandler(CustomerAlreadyExistsException.class)
     @ResponseStatus(HttpStatus.OK)
-    ApiResponse<?> customerNotFoundHandler(CustomerNotFoundException ex) {
+    ApiResponse<?> customerAlreadyExistsHandler(CustomerAlreadyExistsException ex) {
         ApiResponse<?> response = new ApiResponse();
         response.setMessage(ex.getMessage());
-        response.setStatus(HttpStatus.NOT_FOUND.value());
+        response.setStatus(HttpStatus.BAD_REQUEST.value());
         return response;
     }
 }
