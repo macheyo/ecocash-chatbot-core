@@ -9,6 +9,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.config.CpgConfigurationPropertie
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.MerchantToMerchantRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.MerchantToSubscriberRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToSubscriberRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.BusinessException;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.PostTransaction;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.PostTransactionResponse;
@@ -64,6 +65,15 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
     }
 
     @Override
+    public TransactionResponse subscriberToSubscriber(SubscriberToSubscriberRequest subscriberToSubscriberRequest) {
+        final TransactionRequest transactionRequest = getSubscriberToSubscriberRequest(subscriberToSubscriberRequest);
+        log.debug("Processing send money Peer to Peer");
+        return invokeApi(transactionRequest);
+    }
+
+
+
+    @Override
     public TransactionResponse getStatement(String msisdn) {
         final TransactionRequest transactionRequest = getStatementRequest(msisdn);
         log.debug("Processing get Statement request");
@@ -78,6 +88,8 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .map(PostTransactionResponse::getTransactionResponse)
                 .orElseThrow(() -> new BusinessException("Received null response from payment gateway"));
     }
+
+
 
     private TransactionRequest getLookUpCustomerRequest(String msisdn) {
         return RequestBuilder.newInstance()
@@ -120,6 +132,26 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .applicationCode("ecocash")
                 .build();
     }
+
+// PEER TO PEER
+    private TransactionRequest getSubscriberToSubscriberRequest(SubscriberToSubscriberRequest request) {
+        return RequestBuilder.newInstance()
+                .vendorCode(vendorCode)
+                .vendorApiKey(vendorApiKey)
+                .msisdn(request.getField3())
+                .checksumGenerator(checksumGenerator)
+                .tranType(cpgConfigProperties.getSubscriberToSubscriberTranType())
+                .applicationCode("ecocashzw")
+                .reference(Util.generateReference(request.getField3()))
+                .msisdn2(request.getField11())
+                .amount(String.valueOf(request.getField12()))
+                .currency("RTGS")
+                .countryCode("ZW")
+                .build();
+
+    }
+
+
 
     private TransactionRequest getMerchantTosubscriberRequest(MerchantToSubscriberRequest request) {
         return RequestBuilder.newInstance()

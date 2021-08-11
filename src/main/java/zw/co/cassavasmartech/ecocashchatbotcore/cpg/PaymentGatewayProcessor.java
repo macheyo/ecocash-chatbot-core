@@ -4,6 +4,7 @@ package zw.co.cassavasmartech.ecocashchatbotcore.cpg;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.MerchantToMerchantRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.MerchantToSubscriberRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToSubscriberRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.TransactionResponse;
 
 
@@ -20,4 +21,7 @@ public interface PaymentGatewayProcessor {
     TransactionResponse lookupCustomer(String msisdn);
 
     TransactionResponse getStatement(String msisdn);
+
+    TransactionResponse subscriberToSubscriber(SubscriberToSubscriberRequest subscriberToSubscriberRequest);
+
 }
