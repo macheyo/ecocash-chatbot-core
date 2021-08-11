@@ -23,10 +23,14 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
     private final CheckSumGenerator checksumGenerator;
     private final PaymentGatewayInvoker paymentGatewayInvoker;
     private final CpgConfigurationProperties cpgConfigProperties;
-    @Value("${ecocash.chatbot.core.cpg-api.vendorCode}")
-    private String vendorCode;
-    @Value("${ecocash.chatbot.core.cpg-api.vendorApiKey}")
-    private String vendorApiKey;
+    @Value("${ecocash.chatbot.core.cpg-api.vendorGIGAIOTCode}")
+    private String vendorGIGAIOTCode;
+    @Value("${ecocash.chatbot.core.cpg-api.vendorGIGAIOTCode}")
+    private String vendorGIGAIOTApiKey;
+    @Value("${ecocash.chatbot.core.cpg-api.vendorEPGCode}")
+    private String vendorEPGCode;
+    @Value("${ecocash.chatbot.core.cpg-api.vendorEPGApiKey}")
+    private String vendorEPGApiKey;
 
 
     @Override
@@ -81,9 +85,9 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
 
     private TransactionRequest getLookUpCustomerRequest(String msisdn) {
         return RequestBuilder.newInstance()
-                .vendorCode(vendorCode)
+                .vendorCode(vendorGIGAIOTCode)
                 .checksumGenerator(checksumGenerator)
-                .vendorApiKey(vendorApiKey)
+                .vendorApiKey(vendorGIGAIOTApiKey)
                 .checksum("checksum")
                 .tranType(cpgConfigProperties.getCustomerLookupTranType())
                 .applicationCode("ecocashzw")
@@ -108,8 +112,8 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
 
     private TransactionRequest getTransactionRequest(SubscriberToMerchantRequest request) {
         return RequestBuilder.newInstance()
-                .vendorCode(vendorCode)
-                .vendorApiKey(vendorApiKey)
+                .vendorCode(vendorGIGAIOTCode)
+                .vendorApiKey(vendorGIGAIOTApiKey)
                 .checksumGenerator(checksumGenerator)
                 .currency(request.getCurrency())
                 .amount(String.valueOf(request.getAmount()))
@@ -123,8 +127,8 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
 
     private TransactionRequest getMerchantTosubscriberRequest(MerchantToSubscriberRequest request) {
         return RequestBuilder.newInstance()
-                .vendorCode(vendorCode)
-                .vendorApiKey(vendorApiKey)
+                .vendorCode(vendorGIGAIOTCode)
+                .vendorApiKey(vendorGIGAIOTApiKey)
                 .checksumGenerator(checksumGenerator)
                 .currency(request.getCurrency())
                 .amount(String.valueOf(request.getAmount()))
@@ -138,8 +142,8 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
 
     private TransactionRequest getMerchantToMerchantRequest(MerchantToMerchantRequest request) {
         return RequestBuilder.newInstance()
-                .vendorCode(vendorCode)
-                .vendorApiKey(vendorApiKey)
+                .vendorCode(vendorGIGAIOTCode)
+                .vendorApiKey(vendorGIGAIOTApiKey)
                 .checksumGenerator(checksumGenerator)
                 .currency(request.getCurrency())
                 .amount(String.valueOf(request.getAmount()))
@@ -153,8 +157,8 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
 
     private TransactionRequest getPinResetRequest(String msisdn) {
         return RequestBuilder.newInstance()
-                .vendorCode(vendorCode)
-                .vendorApiKey(vendorApiKey)
+                .vendorCode(vendorGIGAIOTCode)
+                .vendorApiKey(vendorGIGAIOTApiKey)
                 .checksumGenerator(checksumGenerator)
                 .tranType(cpgConfigProperties.getPinResetTranType())
                 .msisdn(msisdn)

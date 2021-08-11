@@ -1,5 +1,6 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,7 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 @Service
+@Slf4j
 public class ProfileServiceImpl implements ProfileService{
     @Autowired
     CustomerRepository customerRepository;
@@ -45,6 +47,7 @@ public class ProfileServiceImpl implements ProfileService{
         if(profileRepository.getByChatId(profile.getChatId()).isPresent()) throw new CustomerAlreadyExistsException(profile.getChatId());
         return customerRepository.findByMsisdn(msisdn).map(customer -> {
             profile.setCustomer(customer);
+            log.info("new profile created {}", profile);
             return profileRepository.save(profile);
         }).orElseThrow(()->new CustomerNotFoundException(msisdn));
     }

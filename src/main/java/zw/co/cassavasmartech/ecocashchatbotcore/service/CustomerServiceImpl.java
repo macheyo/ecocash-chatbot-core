@@ -15,6 +15,10 @@ import zw.co.cassavasmartech.ecocashchatbotcore.selfServiceCore.SelfServiceCoreP
 import zw.co.cassavasmartech.ecocashchatbotcore.statementProcessor.StatementProcessor;
 
 import javax.validation.Valid;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -42,9 +46,11 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public Customer save(Customer customer) {
-        if (customerRepository.findByMsisdn(customer.getMsisdn()).isPresent())throw new CustomerAlreadyExistsException(customer.getMsisdn());
         Customer validCustomer = isCustomerValid(customer.getMsisdn());
-        if(validCustomer != null) return customerRepository.save(modelMapper.map(validCustomer,Customer.class));
+        if(validCustomer != null) {
+            if (customerRepository.findByMsisdn(validCustomer.getMsisdn()).isPresent())throw new CustomerAlreadyExistsException(validCustomer.getMsisdn());
+            return customerRepository.save(modelMapper.map(validCustomer, Customer.class));
+        }
         else throw new CustomerNotValidException(customer.getMsisdn());
 
     }
@@ -95,7 +101,13 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public Statement getStatement(String chatId, StatementRequest statementRequest) {
+    public Statement getStatement(String chatId, StatementRequest statementRequest) throws ParseException {
+        DateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss+02:00");
+        DateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date startDate = isoFormat.parse(statementRequest.getStartDate());
+        Date endDate = isoFormat.parse(statementRequest.getEndDate());
+        statementRequest.setEndDate(newFormat.format(startDate));
+        statementRequest.setStartDate(newFormat.format(endDate));
         Customer customer = customerRepository.findByProfilesChatId(chatId).orElseThrow(()->new CustomerNotFoundException(chatId));
         statementRequest.setMsisdn(customer.getMsisdn());
         return statementProcessor.getStatement(statementRequest);

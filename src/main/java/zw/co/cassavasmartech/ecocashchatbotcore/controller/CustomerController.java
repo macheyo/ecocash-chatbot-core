@@ -16,6 +16,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.modelAssembler.CustomerModelAsse
 import zw.co.cassavasmartech.ecocashchatbotcore.service.CustomerService;
 
 import javax.validation.Valid;
+import java.text.ParseException;
 import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -82,8 +83,8 @@ public class CustomerController {
                 customerService.getAlternative(chatId));
     }
 
-    @GetMapping("/statement/{chatId}")
-    public ApiResponse<Statement> getStatement(@PathVariable String chatId, @Valid @RequestBody StatementRequest statementRequest){
+    @PostMapping("/statement/{chatId}")
+    public ApiResponse<Statement> getStatement(@PathVariable String chatId, @Valid @RequestBody StatementRequest statementRequest) throws ParseException {
         return new ApiResponse<>(HttpStatus.OK.value(),
                 ApiConstants.SUCCESS_MESSAGE,
                 customerService.getStatement(chatId, statementRequest));

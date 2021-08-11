@@ -7,7 +7,7 @@ import java.util.Date;
 @Data
 public class StatementRequest {
     private String msisdn;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private String mime;
 }

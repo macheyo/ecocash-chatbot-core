@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 
 import javax.validation.Valid;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +19,6 @@ public interface CustomerService {
     List<Answer> getAnswers(String chatId);
     SubscriberDto getAlternative(String chatId);
     Boolean pinReset(String id);
-    Statement getStatement(String id, StatementRequest statementRequest);
+    Statement getStatement(String id, StatementRequest statementRequest) throws ParseException;
 
 }

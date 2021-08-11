@@ -46,10 +46,9 @@ public class SelfServiceCoreProcessorImpl implements SelfServiceCoreProcessor{
     @Override
     public List<Answer> getAnswerByMsisdnAndAnswerStatus(String msisdn) {
         return coreInvoker.invoke(null,
-                selfServiceConfigurationProperties.getSelfServiceEndPointUrl()+mobileNumberFormater.formatMsisdnMinimum(msisdn)+"/"+ AnswerStatus.ACTIVE,
+                selfServiceConfigurationProperties.getSelfServiceEndPointUrl()+"/answer/findAnswersByMsisdnAndAnswerStatus/"+mobileNumberFormater.formatMsisdnMinimum(msisdn)+"/"+ AnswerStatus.ACTIVE,
                 HttpMethod.GET,
                 new ParameterizedTypeReference<ApiResponse<List<Answer>>>() {});
-
     }
 
     @Override
