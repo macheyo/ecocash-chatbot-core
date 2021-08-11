@@ -2,6 +2,7 @@ package zw.co.cassavasmartech.ecocashchatbotcore.service;
 
 import org.springframework.hateoas.EntityModel;
 import org.springframework.stereotype.Service;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberAirtimeRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 
 import javax.validation.Valid;
@@ -21,4 +22,5 @@ public interface CustomerService {
     Boolean pinReset(String id);
     Statement getStatement(String id, StatementRequest statementRequest) throws ParseException;
 
+    TransactionResponse buyAirtime(String chatId, SubscriberAirtimeRequest subscriberAirtimeRequest);
 }
