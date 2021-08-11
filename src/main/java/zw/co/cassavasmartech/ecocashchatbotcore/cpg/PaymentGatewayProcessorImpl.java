@@ -140,8 +140,8 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
 // PEER TO PEER
     private TransactionRequest getSubscriberToSubscriberRequest(SubscriberToSubscriberRequest request) {
         return RequestBuilder.newInstance()
-                .vendorCode(vendorCode)
-                .vendorApiKey(vendorApiKey)
+                .vendorCode(vendorGIGAIOTCode)
+                .vendorApiKey(vendorGIGAIOTApiKey)
                 .msisdn(request.getField3())
                 .checksumGenerator(checksumGenerator)
                 .tranType(cpgConfigProperties.getSubscriberToSubscriberTranType())
