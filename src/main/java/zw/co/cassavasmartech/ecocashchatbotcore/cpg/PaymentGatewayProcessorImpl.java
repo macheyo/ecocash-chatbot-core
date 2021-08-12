@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.Util;
 import zw.co.cassavasmartech.ecocashchatbotcore.config.CpgConfigurationProperties;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.*;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.MerchantToMerchantRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.MerchantToSubscriberRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToSubscriberRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.BusinessException;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.PostTransaction;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.PostTransactionResponse;
@@ -69,12 +72,6 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
     public TransactionResponse subscriberToSubscriber(SubscriberToSubscriberRequest subscriberToSubscriberRequest) {
         final TransactionRequest transactionRequest = getSubscriberToSubscriberRequest(subscriberToSubscriberRequest);
         log.debug("Processing send money Peer to Peer");
-        return invokeApi(transactionRequest);
-    }
-
-    @Override
-    public TransactionResponse buyAirtime(SubscriberAirtimeRequest subscriberAirtimeRequest) {
-        final TransactionRequest transactionRequest = getSubscriberAirtimeRequest(subscriberAirtimeRequest);
         return invokeApi(transactionRequest);
     }
 
@@ -198,22 +195,6 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .tranType(cpgConfigProperties.getPinResetTranType())
                 .msisdn(msisdn)
                 .reference(Util.generateReference(msisdn))
-                .build();
-    }
-
-
-    private TransactionRequest getSubscriberAirtimeRequest(SubscriberAirtimeRequest subscriberAirtimeRequest) {
-        return RequestBuilder.newInstance()
-                .vendorCode(vendorEPGCode)
-                .vendorApiKey(vendorEPGApiKey)
-                .checksumGenerator(checksumGenerator)
-                .msisdn(subscriberAirtimeRequest.getMsisdn1())
-                .tranType(cpgConfigProperties.getSubscriberAirtimeTranType())
-                .msisdn2(subscriberAirtimeRequest.getMsisdn2())
-                .reference(Util.generateReference(subscriberAirtimeRequest.getMsisdn1()))
-                .currency("RTGS")
-                .applicationCode("ecocashzw")
-                .amount(subscriberAirtimeRequest.getAmount())
                 .build();
     }
 }

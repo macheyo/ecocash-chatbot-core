@@ -1,7 +1,10 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.cpg;
 
 //import com.cassavasmartech.cpg.data.Response;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.*;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.MerchantToMerchantRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.MerchantToSubscriberRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToSubscriberRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.TransactionResponse;
 
 
@@ -21,5 +24,4 @@ public interface PaymentGatewayProcessor {
 
     TransactionResponse subscriberToSubscriber(SubscriberToSubscriberRequest subscriberToSubscriberRequest);
 
-    TransactionResponse buyAirtime(SubscriberAirtimeRequest subscriberAirtimeRequest);
 }

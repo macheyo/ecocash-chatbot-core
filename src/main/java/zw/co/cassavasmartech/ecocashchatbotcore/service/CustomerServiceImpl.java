@@ -7,7 +7,6 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessor;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberAirtimeRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.modelAssembler.CustomerModelAssembler;
@@ -114,13 +113,6 @@ public class CustomerServiceImpl implements CustomerService{
         return statementProcessor.getStatement(statementRequest);
     }
 
-    @Override
-    public TransactionResponse buyAirtime(String chatId, SubscriberAirtimeRequest subscriberAirtimeRequest) {
-        Customer customer = customerRepository.findByProfilesChatId(chatId).orElseThrow(()->new CustomerNotFoundException(chatId));
-        subscriberAirtimeRequest.setMsisdn1(customer.getMsisdn());
-        return paymentGatewayProcessor.buyAirtime(subscriberAirtimeRequest);
-
-    }
 
 
     private Customer isCustomerValid(String msisdn){

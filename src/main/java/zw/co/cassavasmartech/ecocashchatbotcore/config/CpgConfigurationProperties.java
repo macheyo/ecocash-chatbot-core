@@ -39,8 +39,6 @@ public class CpgConfigurationProperties {
     private String customerStatementTranType;
     @NotEmpty
     private String subscriberToSubscriberTranType;
-    @NotEmpty
-    private String subscriberAirtimeTranType;
 
 
 

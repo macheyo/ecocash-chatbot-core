@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiConstants;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberAirtimeRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.CustomerAlreadyExistsException;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.CustomerNotFoundException;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
@@ -96,16 +95,6 @@ public class CustomerController {
         return new ApiResponse<>(HttpStatus.OK.value(),
                 ApiConstants.SUCCESS_MESSAGE,
                 customerService.pinReset(chatId));
-
-    }
-
-    @PostMapping("/buyairtime/{chatId}")
-    public ApiResponse<TransactionResponse> buyAirtime(@PathVariable String chatId, @Valid @RequestBody SubscriberAirtimeRequest subscriberAirtimeRequest){
-        return new ApiResponse<>(HttpStatus.OK.value(),
-                ApiConstants.SUCCESS_MESSAGE,
-                customerService.buyAirtime(chatId, subscriberAirtimeRequest)
-                );
-
 
     }
 
