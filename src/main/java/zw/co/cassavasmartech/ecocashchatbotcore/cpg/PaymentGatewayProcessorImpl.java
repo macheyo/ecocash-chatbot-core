@@ -23,7 +23,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
     private final CpgConfigurationProperties cpgConfigProperties;
     @Value("${ecocash.chatbot.core.cpg-api.vendorGIGAIOTCode}")
     private String vendorGIGAIOTCode;
-    @Value("${ecocash.chatbot.core.cpg-api.vendorGIGAIOTCode}")
+    @Value("${ecocash.chatbot.core.cpg-api.vendorGIGAIOTApiKey}")
     private String vendorGIGAIOTApiKey;
     @Value("${ecocash.chatbot.core.cpg-api.vendorEPGCode}")
     private String vendorEPGCode;
