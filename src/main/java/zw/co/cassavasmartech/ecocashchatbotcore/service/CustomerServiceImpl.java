@@ -7,6 +7,9 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessor;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToBillerRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToSubscriberRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.modelAssembler.CustomerModelAssembler;
@@ -113,6 +116,27 @@ public class CustomerServiceImpl implements CustomerService{
         return statementProcessor.getStatement(statementRequest);
     }
 
+    @Override
+    public TransactionResponse sendMoney(String chatId, SubscriberToSubscriberRequest subscriberToSubscriberRequest) {
+        Customer customer = customerRepository.findByProfilesChatId(chatId).orElseThrow(()->new CustomerNotFoundException(chatId));
+        subscriberToSubscriberRequest.setMsisdn1(customer.getMsisdn());
+        return paymentGatewayProcessor.subscriberToSubscriber(subscriberToSubscriberRequest);
+
+    }
+
+    @Override
+    public TransactionResponse payMerchant(String chatId, SubscriberToMerchantRequest subscriberToMerchantRequest) {
+        Customer customer = customerRepository.findByProfilesChatId(chatId).orElseThrow(()->new CustomerNotFoundException(chatId));
+        subscriberToMerchantRequest.setSubscriberMsisdn(customer.getMsisdn());
+        return paymentGatewayProcessor.subscriberToMerchant(subscriberToMerchantRequest);
+    }
+
+    @Override
+    public TransactionResponse payBiller(String chatId, SubscriberToBillerRequest subscriberToBillerRequest) {
+        Customer customer = customerRepository.findByProfilesChatId(chatId).orElseThrow(()->new CustomerNotFoundException(chatId));
+        subscriberToBillerRequest.setMsisdn(customer.getMsisdn());
+        return paymentGatewayProcessor.subscriberToBiller(subscriberToBillerRequest);
+    }
 
 
     private Customer isCustomerValid(String msisdn){

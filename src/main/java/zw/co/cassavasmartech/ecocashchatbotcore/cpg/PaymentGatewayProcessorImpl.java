@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.Util;
 import zw.co.cassavasmartech.ecocashchatbotcore.config.CpgConfigurationProperties;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.MerchantToMerchantRequest;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.MerchantToSubscriberRequest;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToSubscriberRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.BusinessException;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.PostTransaction;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.PostTransactionResponse;
@@ -75,6 +72,12 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
         return invokeApi(transactionRequest);
     }
 
+    @Override
+    public TransactionResponse subscriberToBiller(SubscriberToBillerRequest subscriberToBillerRequest) {
+        final TransactionRequest transactionRequest = getSubscriberToBillerRequest(subscriberToBillerRequest);
+        log.debug("Processing send money subscriber to Biller");
+        return invokeApi(transactionRequest);
+    }
 
 
     @Override
@@ -124,31 +127,47 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
 
     private TransactionRequest getTransactionRequest(SubscriberToMerchantRequest request) {
         return RequestBuilder.newInstance()
-                .vendorCode(vendorGIGAIOTCode)
-                .vendorApiKey(vendorGIGAIOTApiKey)
+                .vendorCode(vendorEPGCode)
+                .vendorApiKey(vendorEPGApiKey)
                 .checksumGenerator(checksumGenerator)
-                .currency(request.getCurrency())
+                .currency("RTGS")
+                .pin(request.getPin())
                 .amount(String.valueOf(request.getAmount()))
                 .tranType(cpgConfigProperties.getSubscriberToMerchantTranType())
                 .msisdn2(request.getMerchantMsisdn())
                 .msisdn(request.getSubscriberMsisdn())
-                .reference(request.getSourceRef())
-                .applicationCode("ecocash")
+                .reference(Util.generateReference(request.getSubscriberMsisdn()))
+                .applicationCode("ecocashzw")
                 .build();
     }
 
-// PEER TO PEER
+    private TransactionRequest getSubscriberToBillerRequest(SubscriberToBillerRequest request) {
+        return RequestBuilder.newInstance()
+                .vendorCode(vendorEPGCode)
+                .vendorApiKey(vendorEPGApiKey)
+                .checksumGenerator(checksumGenerator)
+                .msisdn(request.getMsisdn())
+                .accountNumber(request.getBillerCode())
+                .tranType(cpgConfigProperties.getSubscriberToBillerTranType())
+                .applicationCode("ecocashzw")
+                .reference(Util.generateReference(request.getMsisdn()))
+                .currency("ZWL")
+                .countryCode("ZW")
+                .amount(String.valueOf(request.getAmount()))
+                .build();
+    }
+
     private TransactionRequest getSubscriberToSubscriberRequest(SubscriberToSubscriberRequest request) {
         return RequestBuilder.newInstance()
-                .vendorCode(vendorGIGAIOTCode)
-                .vendorApiKey(vendorGIGAIOTApiKey)
-                .msisdn(request.getField3())
+                .vendorCode(vendorEPGCode)
+                .vendorApiKey(vendorEPGApiKey)
+                .msisdn(request.getMsisdn1())
                 .checksumGenerator(checksumGenerator)
                 .tranType(cpgConfigProperties.getSubscriberToSubscriberTranType())
                 .applicationCode("ecocashzw")
-                .reference(Util.generateReference(request.getField3()))
-                .msisdn2(request.getField11())
-                .amount(String.valueOf(request.getField12()))
+                .reference(Util.generateReference(request.getMsisdn1()))
+                .msisdn2(request.getMsisdn2())
+                .amount(String.valueOf(request.getAmount()))
                 .currency("RTGS")
                 .countryCode("ZW")
                 .build();

@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiConstants;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToBillerRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToSubscriberRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.CustomerAlreadyExistsException;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.CustomerNotFoundException;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
@@ -88,6 +91,27 @@ public class CustomerController {
         return new ApiResponse<>(HttpStatus.OK.value(),
                 ApiConstants.SUCCESS_MESSAGE,
                 customerService.getStatement(chatId, statementRequest));
+    }
+
+    @PostMapping("/sendmoney/{chatId}")
+    public ApiResponse<TransactionResponse> sendMoney(@PathVariable String chatId, @Valid @RequestBody SubscriberToSubscriberRequest subscriberToSubscriberRequest){
+        return new ApiResponse<>(HttpStatus.OK.value(),
+                ApiConstants.SUCCESS_MESSAGE,
+                customerService.sendMoney(chatId, subscriberToSubscriberRequest));
+    }
+
+    @PostMapping("/paymerchant/{chatId}")
+    public ApiResponse<TransactionResponse> payMerchant(@PathVariable String chatId, @Valid @RequestBody SubscriberToMerchantRequest subscriberToMerchantRequest){
+        return new ApiResponse<>(HttpStatus.OK.value(),
+                ApiConstants.SUCCESS_MESSAGE,
+                customerService.payMerchant(chatId, subscriberToMerchantRequest));
+    }
+
+    @PostMapping("/paybiller/{chatId}")
+    public ApiResponse<TransactionResponse> payBiller(@PathVariable String chatId, @Valid @RequestBody SubscriberToBillerRequest subscriberToBillerRequest){
+        return new ApiResponse<>(HttpStatus.OK.value(),
+                ApiConstants.SUCCESS_MESSAGE,
+                customerService.payBiller(chatId, subscriberToBillerRequest));
     }
 
     @GetMapping("/pinreset/{chatId}")

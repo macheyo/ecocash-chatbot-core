@@ -2,6 +2,9 @@ package zw.co.cassavasmartech.ecocashchatbotcore.service;
 
 import org.springframework.hateoas.EntityModel;
 import org.springframework.stereotype.Service;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToBillerRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToSubscriberRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 
 import javax.validation.Valid;
@@ -20,5 +23,9 @@ public interface CustomerService {
     SubscriberDto getAlternative(String chatId);
     Boolean pinReset(String id);
     Statement getStatement(String id, StatementRequest statementRequest) throws ParseException;
+    TransactionResponse sendMoney(String chatId, SubscriberToSubscriberRequest subscriberToSubscriberRequest);
 
+    TransactionResponse payMerchant(String chatId, SubscriberToMerchantRequest subscriberToMerchantRequest);
+
+    TransactionResponse payBiller(String chatId, SubscriberToBillerRequest subscriberToBillerRequest);
 }
