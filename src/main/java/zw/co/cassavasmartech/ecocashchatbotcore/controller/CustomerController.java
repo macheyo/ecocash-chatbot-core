@@ -1,6 +1,7 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.controller;
 
 import javassist.NotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -9,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiConstants;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.BillerLookupRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToBillerRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.CustomerAlreadyExistsException;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.CustomerNotFoundException;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
@@ -24,6 +27,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
+@Slf4j
 @RequestMapping("/customer")
 public class CustomerController {
     @Autowired
@@ -62,7 +66,7 @@ public class CustomerController {
     }
 
     @GetMapping("/is-enrolled/{chatId}")
-    public ApiResponse<Boolean> isEnrolled(@PathVariable String chatId)
+    public ApiResponse<EnrollmentResponse> isEnrolled(@PathVariable String chatId)
     {
         return new ApiResponse<>(HttpStatus.OK.value(),
                 ApiConstants.SUCCESS_MESSAGE,
@@ -85,9 +89,9 @@ public class CustomerController {
 
     @PostMapping("/statement/{chatId}")
     public ApiResponse<Statement> getStatement(@PathVariable String chatId, @Valid @RequestBody StatementRequest statementRequest) throws ParseException {
-        return new ApiResponse<>(HttpStatus.OK.value(),
-                ApiConstants.SUCCESS_MESSAGE,
-                customerService.getStatement(chatId, statementRequest));
+        ApiResponse<Statement> response = new ApiResponse<>(HttpStatus.OK.value(), ApiConstants.SUCCESS_MESSAGE, customerService.getStatement(chatId, statementRequest));
+        log.info("Statement response: {}",response);
+        return response;
     }
 
     @GetMapping("/pinreset/{chatId}")
@@ -96,6 +100,20 @@ public class CustomerController {
                 ApiConstants.SUCCESS_MESSAGE,
                 customerService.pinReset(chatId));
 
+    }
+
+    @PostMapping("/paybiller/{chatId}")
+    public ApiResponse<TransactionResponse> payBiller(@PathVariable String chatId, @Valid @RequestBody SubscriberToBillerRequest subscriberToBillerRequest){
+        return new ApiResponse<>(HttpStatus.OK.value(),
+                ApiConstants.SUCCESS_MESSAGE,
+                customerService.payBiller(chatId,subscriberToBillerRequest));
+    }
+
+    @PostMapping("/biller-lookup")
+    public ApiResponse<TransactionResponse> billerLookup(@RequestBody BillerLookupRequest billerLookupRequest){
+        return new ApiResponse<>(HttpStatus.OK.value(),
+                ApiConstants.SUCCESS_MESSAGE,
+                customerService.billerLookup(billerLookupRequest));
     }
 
 }

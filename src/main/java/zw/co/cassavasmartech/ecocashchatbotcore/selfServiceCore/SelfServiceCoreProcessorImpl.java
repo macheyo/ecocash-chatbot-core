@@ -14,6 +14,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.config.SelfServiceConfigurationP
 import zw.co.cassavasmartech.ecocashchatbotcore.invoker.CoreInvoker;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Answer;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.AnswerStatus;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.EnrollmentResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.SubscriberDto;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class SelfServiceCoreProcessorImpl implements SelfServiceCoreProcessor{
     private final CoreInvoker coreInvoker;
 
     @Override
-    public Boolean isEnrolled(String msisdn) {
+    public EnrollmentResponse isEnrolled(String msisdn) {
         String minimumMsisdn = mobileNumberFormater.formatMsisdnMinimum(msisdn);
         log.debug("Processing customer enrollment lookup transaction request for {} to url {}", msisdn, selfServiceConfigurationProperties.getSelfServiceEndPointUrl());
         HttpHeaders headers = new HttpHeaders();
@@ -39,7 +40,7 @@ public class SelfServiceCoreProcessorImpl implements SelfServiceCoreProcessor{
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(selfServiceConfigurationProperties.getSelfServiceEndPointUrl()+"/subscriber/isEnrolled/"+minimumMsisdn);
         final HttpEntity<?> requestEntity = new HttpEntity<>(headers);
         final HttpEntity<String> responseEntity = restTemplate.exchange(builder.toUriString(), HttpMethod.GET,requestEntity, String.class);
-        return Boolean.valueOf(responseEntity.getBody());
+        return new EnrollmentResponse(responseEntity.getBody());
 
     }
 

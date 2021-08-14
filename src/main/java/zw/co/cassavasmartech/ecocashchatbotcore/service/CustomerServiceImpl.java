@@ -7,6 +7,8 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessor;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.BillerLookupRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToBillerRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.modelAssembler.CustomerModelAssembler;
@@ -14,7 +16,6 @@ import zw.co.cassavasmartech.ecocashchatbotcore.repository.CustomerRepository;
 import zw.co.cassavasmartech.ecocashchatbotcore.selfServiceCore.SelfServiceCoreProcessor;
 import zw.co.cassavasmartech.ecocashchatbotcore.statementProcessor.StatementProcessor;
 
-import javax.validation.Valid;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -74,7 +75,7 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public Boolean isEnrolled(String id) {
+    public EnrollmentResponse isEnrolled(String id) {
         Customer customer = customerRepository.findByProfilesChatId(id).orElseThrow(()->new CustomerNotFoundException(id));
         return selfServiceCoreProcessor.isEnrolled(customer.getMsisdn());
     }
@@ -110,9 +111,21 @@ public class CustomerServiceImpl implements CustomerService{
         statementRequest.setStartDate(newFormat.format(endDate));
         Customer customer = customerRepository.findByProfilesChatId(chatId).orElseThrow(()->new CustomerNotFoundException(chatId));
         statementRequest.setMsisdn(customer.getMsisdn());
+        log.info("Statement processer transaction request {}", statementRequest);
         return statementProcessor.getStatement(statementRequest);
     }
 
+    @Override
+    public TransactionResponse billerLookup(BillerLookupRequest billerLookupRequest) {
+        return paymentGatewayProcessor.lookupBiller(billerLookupRequest);
+    }
+
+    @Override
+    public TransactionResponse payBiller(String chatId, SubscriberToBillerRequest subscriberToBillerRequest) {
+        Customer customer = customerRepository.findByProfilesChatId(chatId).orElseThrow(()->new CustomerNotFoundException(chatId));
+        subscriberToBillerRequest.setMsisdn(customer.getMsisdn());
+        return paymentGatewayProcessor.subscriberToBiller(subscriberToBillerRequest);
+    }
 
 
     private Customer isCustomerValid(String msisdn){

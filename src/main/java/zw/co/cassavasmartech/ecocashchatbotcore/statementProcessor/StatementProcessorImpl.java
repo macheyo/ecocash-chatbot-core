@@ -40,26 +40,21 @@ public class StatementProcessorImpl implements StatementProcessor {
 
     @Override
     public Statement getStatement(StatementRequest statementRequest) {
-        final URI uri = UriComponentsBuilder.fromHttpUrl(statementServiceConfigurationProperties.getStatementServiceEndPointUrl()+"/customer/statement/request/").buildAndExpand().toUri();
-        final RequestEntity<StatementRequest> requestEntity = new RequestEntity<>(statementRequest, buildJsonHttpHeaders(), HttpMethod.POST, uri);
-        final ResponseEntity<ApiResponse<Statement>> responseEntity = restTemplate.exchange(requestEntity, new ParameterizedTypeReference<ApiResponse<Statement>>() {});
 
-        return responseEntity.getBody().getBody();
-//        String token = tokenService.getToken("Munyaradzi.Takayindi",
-//                "mtakayindisa");
-//        httpSession.setAttribute("TOKEN", "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJNdW55YXJhZHppLlRha2F5aW5kaSIsImlhdCI6MTYyODY2NTMwOSwiZXhwIjoxNjI4NjY3OTAxfQ._imeg1qwvLQrmgCxhp2igG2NQ7WxDSdWajdnVLCB7ZNcsXZ2PWeCxodzBCIQD09ENg4wKifdqGoCVorcS1QbFQ");
-//        log.info("========>TOKEN", token);
-//        return coreInvoker.invoke(statementRequest,
-//                statementServiceConfigurationProperties.getStatementServiceEndPointUrl() + "/customer/statement/request",
-//                HttpMethod.POST,
-//                new ParameterizedTypeReference<ApiResponse<Statement>>() {});
+        String token = tokenService.getToken(statementServiceConfigurationProperties.getUsername(),
+                statementServiceConfigurationProperties.getPassword());
+        httpSession.setAttribute("TOKEN", token);
+        return coreInvoker.invoke(statementRequest,
+                statementServiceConfigurationProperties.getStatementServiceEndPointUrl() + "/customer/statement/request/",
+                HttpMethod.POST,
+                new ParameterizedTypeReference<ApiResponse<Statement>>() {});
     }
 
     HttpHeaders buildJsonHttpHeaders() {
         final HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         headers.add(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE);
-        headers.add(HttpHeaders.AUTHORIZATION, "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJNdW55YXJhZHppLlRha2F5aW5kaSIsImlhdCI6MTYyODY5Nzk0MCwiZXhwIjoxNjI4NzIzODYwfQ.forQK_tIHcKaRUKefUno7uUZAcCKl6vTwIb1-IjMfa_eHMpXuLATRiVofzyCop0yYDzPKRq0oi3DTWSWbLIAMw");
+        headers.add(HttpHeaders.AUTHORIZATION, "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJNdW55YXJhZHppLlRha2F5aW5kaSIsImlhdCI6MTYyODc1Mzg0MywiZXhwIjoxNjI4Nzc5NzYzfQ.ameDqFtP39B7PvzqerQ5yrtVFOQgxn43nFWneHg3brJWeu6ggzvNmy9nkYQL6vrDawKamDMEZCSQA4Fz0agm9A");
         return headers;
     }
 }

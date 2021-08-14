@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.Util;
 import zw.co.cassavasmartech.ecocashchatbotcore.config.CpgConfigurationProperties;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.MerchantToMerchantRequest;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.MerchantToSubscriberRequest;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToSubscriberRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.BusinessException;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.PostTransaction;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.PostTransactionResponse;
@@ -26,7 +23,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
     private final CpgConfigurationProperties cpgConfigProperties;
     @Value("${ecocash.chatbot.core.cpg-api.vendorGIGAIOTCode}")
     private String vendorGIGAIOTCode;
-    @Value("${ecocash.chatbot.core.cpg-api.vendorGIGAIOTCode}")
+    @Value("${ecocash.chatbot.core.cpg-api.vendorGIGAIOTApiKey}")
     private String vendorGIGAIOTApiKey;
     @Value("${ecocash.chatbot.core.cpg-api.vendorEPGCode}")
     private String vendorEPGCode;
@@ -75,6 +72,19 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
         return invokeApi(transactionRequest);
     }
 
+    @Override
+    public TransactionResponse subscriberToBiller(SubscriberToBillerRequest subscriberToBillerRequest) {
+        final TransactionRequest transactionRequest = getSubscriberToBillerRequest(subscriberToBillerRequest);
+        log.debug("Processing send money subscriber to Biller");
+        return invokeApi(transactionRequest);
+    }
+
+    @Override
+    public TransactionResponse lookupBiller(BillerLookupRequest billerLookupRequest) {
+        final TransactionRequest transactionRequest = getBillerLookupRequest(billerLookupRequest);
+        log.debug("Processing biller lookup");
+        return invokeApi(transactionRequest);
+    }
 
 
     @Override
@@ -109,6 +119,18 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .build();
     }
 
+    private TransactionRequest getBillerLookupRequest(BillerLookupRequest billerLookupRequest) {
+        return RequestBuilder.newInstance()
+                .vendorCode(vendorGIGAIOTCode)
+                .vendorApiKey(vendorGIGAIOTApiKey)
+                .checksumGenerator(checksumGenerator)
+                .tranType(cpgConfigProperties.getBillerLookupTranType())
+                .msisdn(billerLookupRequest.getBiller())
+                .applicationCode("ecocashzw")
+                .reference(Util.generateReference(billerLookupRequest.getBiller()))
+                .build();
+    }
+
     private TransactionRequest getStatementRequest(String msisdn) {
         return RequestBuilder.newInstance()
                 .vendorCode("EPGTESTPT")
@@ -124,24 +146,40 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
 
     private TransactionRequest getTransactionRequest(SubscriberToMerchantRequest request) {
         return RequestBuilder.newInstance()
-                .vendorCode(vendorGIGAIOTCode)
-                .vendorApiKey(vendorGIGAIOTApiKey)
+                .vendorCode(vendorEPGCode)
+                .vendorApiKey(vendorEPGApiKey)
                 .checksumGenerator(checksumGenerator)
-                .currency("ZWL")
+                .currency("RTGS")
+                .pin(request.getPin())
                 .amount(String.valueOf(request.getAmount()))
                 .tranType(cpgConfigProperties.getSubscriberToMerchantTranType())
                 .msisdn2(request.getMerchantMsisdn())
                 .msisdn(request.getSubscriberMsisdn())
                 .reference(Util.generateReference(request.getSubscriberMsisdn()))
-                .applicationCode("ecocash")
+                .applicationCode("ecocashzw")
                 .build();
     }
 
-// PEER TO PEER
+    private TransactionRequest getSubscriberToBillerRequest(SubscriberToBillerRequest request) {
+        return RequestBuilder.newInstance()
+                .vendorCode(vendorEPGCode)
+                .vendorApiKey(vendorEPGApiKey)
+                .checksumGenerator(checksumGenerator)
+                .msisdn(request.getMsisdn())
+                .accountNumber(request.getBillerCode())
+                .tranType(cpgConfigProperties.getSubscriberToBillerTranType())
+                .applicationCode("ecocashzw")
+                .reference(Util.generateReference(request.getMsisdn()))
+                .currency("ZWL")
+                .countryCode("ZW")
+                .amount(String.valueOf(request.getAmount()))
+                .build();
+    }
+
     private TransactionRequest getSubscriberToSubscriberRequest(SubscriberToSubscriberRequest request) {
         return RequestBuilder.newInstance()
-                .vendorCode(vendorGIGAIOTCode)
-                .vendorApiKey(vendorGIGAIOTApiKey)
+                .vendorCode(vendorEPGCode)
+                .vendorApiKey(vendorEPGApiKey)
                 .msisdn(request.getMsisdn1())
                 .checksumGenerator(checksumGenerator)
                 .tranType(cpgConfigProperties.getSubscriberToSubscriberTranType())
