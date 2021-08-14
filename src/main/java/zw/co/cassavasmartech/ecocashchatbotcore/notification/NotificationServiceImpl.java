@@ -5,10 +5,16 @@ package zw.co.cassavasmartech.ecocashchatbotcore.notification;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.scheduling.support.CronSequenceGenerator;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.MobileNumberFormater;
+import zw.co.cassavasmartech.ecocashchatbotcore.invoker.CoreInvoker;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.Answer;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.AnswerStatus;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.ScheduledSms;
 import zw.co.cassavasmartech.ecocashchatbotcore.sms.Sms;
 import zw.co.cassavasmartech.ecocashchatbotcore.sms.SmsDispatchStrategy;
@@ -18,6 +24,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.sms.scheduledsms.ScheduledSmsSer
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 
 @Component
 @Slf4j
@@ -29,6 +36,7 @@ public class NotificationServiceImpl implements NotificationService {
     private final SmsProperties smsProperties;
     private final ScheduledSmsService scheduledSmsService;
     private final MobileNumberFormater mobileNumberFormater;
+    private final CoreInvoker coreInvoker;
 
 
     @Override
@@ -37,7 +45,11 @@ public class NotificationServiceImpl implements NotificationService {
         if (dispatchStrategy.equals(SmsDispatchStrategy.DISPATCH_NOW) || isDispatchEnabledForTime(LocalDateTime.now())) {
             sms.setFrom(smsProperties.getSender());
             sms.setTo(mobileNumberFormater.formatMobileNumberInternational(sms.getTo()));
-            rabbitTemplate.convertAndSend(smsProperties.getSmsQueueName(), sms);
+            coreInvoker.invoke(sms,
+                    smsProperties.getEndPointUrl(),
+                    HttpMethod.POST,
+                    new ParameterizedTypeReference<ApiResponse<Sms>>() {});
+            //rabbitTemplate.convertAndSend(smsProperties.getSmsQueueName(), sms);
         } else {
             scheduleSms(sms);
         }
