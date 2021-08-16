@@ -14,7 +14,6 @@ import javax.validation.constraints.NotEmpty;
 @Setter
 @Validated
 public class CpgConfigurationProperties {
-
     @NotEmpty
     private String keystoreType;
     @NotEmpty
@@ -43,5 +42,7 @@ public class CpgConfigurationProperties {
     private String subscriberToBillerTranType;
     @NotEmpty
     private String billerLookupTranType;
+    @NotEmpty
+    private String subscriberAirtimeTranType;
 
 }

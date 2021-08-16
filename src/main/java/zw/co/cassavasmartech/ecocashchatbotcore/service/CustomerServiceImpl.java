@@ -8,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessor;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.BillerLookupRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberAirtimeRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToBillerRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.modelAssembler.CustomerModelAssembler;
@@ -125,6 +127,20 @@ public class CustomerServiceImpl implements CustomerService{
         Customer customer = customerRepository.findByProfilesChatId(chatId).orElseThrow(()->new CustomerNotFoundException(chatId));
         subscriberToBillerRequest.setMsisdn(customer.getMsisdn());
         return paymentGatewayProcessor.subscriberToBiller(subscriberToBillerRequest);
+    }
+
+    @Override
+    public TransactionResponse payMerchant(String chatId, SubscriberToMerchantRequest subscriberToMerchantRequest) {
+        Customer customer = customerRepository.findByProfilesChatId(chatId).orElseThrow(()->new CustomerNotFoundException(chatId));
+        subscriberToMerchantRequest.setSubscriberMsisdn(customer.getMsisdn());
+        return paymentGatewayProcessor.subscriberToMerchant(subscriberToMerchantRequest);
+    }
+
+    @Override
+    public TransactionResponse buyAirtime(String chatId, SubscriberAirtimeRequest subscriberAirtimeRequest) {
+        Customer customer = customerRepository.findByProfilesChatId(chatId).orElseThrow(()->new CustomerNotFoundException(chatId));
+        subscriberAirtimeRequest.setMsisdn1(customer.getMsisdn());
+        return paymentGatewayProcessor.subscriberAirtime(subscriberAirtimeRequest);
     }
 
 

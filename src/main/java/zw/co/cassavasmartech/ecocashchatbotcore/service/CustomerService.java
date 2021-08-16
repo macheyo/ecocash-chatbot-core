@@ -3,7 +3,9 @@ package zw.co.cassavasmartech.ecocashchatbotcore.service;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.stereotype.Service;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.BillerLookupRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberAirtimeRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToBillerRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 
 import java.text.ParseException;
@@ -25,4 +27,8 @@ public interface CustomerService {
     TransactionResponse billerLookup(BillerLookupRequest billerLookupRequest);
 
     TransactionResponse payBiller(String chatId, SubscriberToBillerRequest subscriberToBillerRequest);
+
+    TransactionResponse payMerchant(String chatId, SubscriberToMerchantRequest subscriberToMerchantRequest);
+
+    TransactionResponse buyAirtime(String chatId, SubscriberAirtimeRequest subscriberAirtimeRequest);
 }

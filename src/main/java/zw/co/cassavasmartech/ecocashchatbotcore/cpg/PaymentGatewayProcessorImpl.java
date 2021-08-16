@@ -86,6 +86,13 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
         return invokeApi(transactionRequest);
     }
 
+    @Override
+    public TransactionResponse subscriberAirtime(SubscriberAirtimeRequest subscriberAirtimeRequest) {
+        final TransactionRequest transactionRequest = getSubscriberAirtimeRequest(subscriberAirtimeRequest);
+        log.debug("Processing airtime request");
+        return invokeApi(transactionRequest);
+    }
+
 
     @Override
     public TransactionResponse getStatement(String msisdn) {
@@ -131,6 +138,20 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .build();
     }
 
+    private TransactionRequest getSubscriberAirtimeRequest(SubscriberAirtimeRequest subscriberAirtimeRequest){
+        return RequestBuilder.newInstance()
+                .vendorCode(vendorEPGCode)
+                .vendorApiKey(vendorEPGApiKey)
+                .checksumGenerator(checksumGenerator)
+                .msisdn(subscriberAirtimeRequest.getMsisdn1())
+                .applicationCode("ecocashzw")
+                .reference(Util.generateReference(subscriberAirtimeRequest.getMsisdn1()))
+                .msisdn2(subscriberAirtimeRequest.getMsisdn2())
+                .amount(subscriberAirtimeRequest.getAmount())
+                .tranType(cpgConfigProperties.getSubscriberAirtimeTranType())
+                .build();
+    }
+
     private TransactionRequest getStatementRequest(String msisdn) {
         return RequestBuilder.newInstance()
                 .vendorCode("EPGTESTPT")
@@ -167,6 +188,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .checksumGenerator(checksumGenerator)
                 .msisdn(request.getMsisdn())
                 .accountNumber(request.getBillerCode())
+                .msisdn2(request.getBillerCode())
                 .tranType(cpgConfigProperties.getSubscriberToBillerTranType())
                 .applicationCode("ecocashzw")
                 .reference(Util.generateReference(request.getMsisdn()))

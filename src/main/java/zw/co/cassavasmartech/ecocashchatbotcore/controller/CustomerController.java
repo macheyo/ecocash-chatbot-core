@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiConstants;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.BillerLookupRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberAirtimeRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToBillerRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.CustomerAlreadyExistsException;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.CustomerNotFoundException;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
@@ -104,16 +106,31 @@ public class CustomerController {
 
     @PostMapping("/paybiller/{chatId}")
     public ApiResponse<TransactionResponse> payBiller(@PathVariable String chatId, @Valid @RequestBody SubscriberToBillerRequest subscriberToBillerRequest){
+        log.info("Request from pay biller bot: {}", subscriberToBillerRequest.getBillerCode());
         return new ApiResponse<>(HttpStatus.OK.value(),
                 ApiConstants.SUCCESS_MESSAGE,
                 customerService.payBiller(chatId,subscriberToBillerRequest));
     }
 
-    @PostMapping("/biller-lookup")
+    @PostMapping("/biller/lookup")
     public ApiResponse<TransactionResponse> billerLookup(@RequestBody BillerLookupRequest billerLookupRequest){
         return new ApiResponse<>(HttpStatus.OK.value(),
                 ApiConstants.SUCCESS_MESSAGE,
                 customerService.billerLookup(billerLookupRequest));
+    }
+
+    @PostMapping("/paymerchant/{chatId}")
+    public ApiResponse<TransactionResponse> payMerchant(@PathVariable String chatId, @Valid @RequestBody SubscriberToMerchantRequest subscriberToMerchantRequest){
+        return new ApiResponse<>(HttpStatus.OK.value(),
+                ApiConstants.SUCCESS_MESSAGE,
+                customerService.payMerchant(chatId, subscriberToMerchantRequest));
+    }
+
+    @PostMapping("/airtime/{chatId}")
+    public ApiResponse<TransactionResponse> buyAirtime(@PathVariable String chatId, @Valid @RequestBody SubscriberAirtimeRequest subscriberAirtimeRequest){
+        return new ApiResponse<>(HttpStatus.OK.value(),
+                ApiConstants.SUCCESS_MESSAGE,
+                customerService.buyAirtime(chatId,subscriberAirtimeRequest));
     }
 
 }
