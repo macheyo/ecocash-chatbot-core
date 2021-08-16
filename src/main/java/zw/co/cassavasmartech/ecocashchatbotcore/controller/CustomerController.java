@@ -1,12 +1,10 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.controller;
 
-import javassist.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiConstants;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
@@ -14,15 +12,15 @@ import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.BillerLookupRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberAirtimeRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToBillerRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest;
-import zw.co.cassavasmartech.ecocashchatbotcore.exception.CustomerAlreadyExistsException;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.CustomerNotFoundException;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.modelAssembler.CustomerModelAssembler;
 import zw.co.cassavasmartech.ecocashchatbotcore.service.CustomerService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.text.ParseException;
-import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -92,12 +90,17 @@ public class CustomerController {
     @PostMapping("/statement/{chatId}")
     public ApiResponse<Statement> getStatement(@PathVariable String chatId, @Valid @RequestBody StatementRequest statementRequest) throws ParseException {
         ApiResponse<Statement> response = new ApiResponse<>(HttpStatus.OK.value(), ApiConstants.SUCCESS_MESSAGE, customerService.getStatement(chatId, statementRequest));
-        log.info("Statement response: {}",response);
+        log.info("Statement response: {}", response);
         return response;
     }
 
+    @GetMapping("/statement/downloadFile/{chatId}/{documentId}")
+    public void downloadFile(@PathVariable String chatId, @PathVariable("documentId") String documentId, HttpServletRequest req, HttpServletResponse resp) {
+        customerService.getStatementFile(chatId, documentId, req, resp);
+    }
+
     @GetMapping("/pinreset/{chatId}")
-    public ApiResponse<Boolean> pinreset(@PathVariable String chatId){
+    public ApiResponse<Boolean> pinreset(@PathVariable String chatId) {
         return new ApiResponse<>(HttpStatus.OK.value(),
                 ApiConstants.SUCCESS_MESSAGE,
                 customerService.pinReset(chatId));

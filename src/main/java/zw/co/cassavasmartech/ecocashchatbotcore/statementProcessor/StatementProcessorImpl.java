@@ -4,24 +4,22 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.*;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.MobileNumberFormater;
-import zw.co.cassavasmartech.ecocashchatbotcore.config.SelfServiceConfigurationProperties;
+import zw.co.cassavasmartech.ecocashchatbotcore.common.PassThroughUtil;
 import zw.co.cassavasmartech.ecocashchatbotcore.config.StatementServiceConfigurationProperties;
 import zw.co.cassavasmartech.ecocashchatbotcore.invoker.CoreInvoker;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
-import zw.co.cassavasmartech.ecocashchatbotcore.selfServiceCore.SelfServiceCoreProcessor;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.Statement;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.StatementRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.token.TokenService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.net.URI;
-import java.util.List;
-
-import static zw.co.cassavasmartech.ecocashchatbotcore.common.Util.buildJsonHttpHeaders;
 
 @Component
 @RequiredArgsConstructor
@@ -33,10 +31,11 @@ public class StatementProcessorImpl implements StatementProcessor {
     StatementServiceConfigurationProperties statementServiceConfigurationProperties;
     @Autowired
     private HttpSession httpSession;
+    @Autowired
+    private PassThroughUtil passThroughUtil;
 
     private final CoreInvoker coreInvoker;
     private final TokenService tokenService;
-    private final RestTemplate restTemplate;
 
     @Override
     public Statement getStatement(StatementRequest statementRequest) {
@@ -47,8 +46,17 @@ public class StatementProcessorImpl implements StatementProcessor {
         return coreInvoker.invoke(statementRequest,
                 statementServiceConfigurationProperties.getStatementServiceEndPointUrl() + "/customer/statement/request/",
                 HttpMethod.POST,
-                new ParameterizedTypeReference<ApiResponse<Statement>>() {});
+                new ParameterizedTypeReference<ApiResponse<Statement>>() {
+                });
     }
+
+    @Override
+    public void getStatementFile(String documentId, HttpServletRequest req, HttpServletResponse resp) {
+
+        passThroughUtil.forwardRequest(String.format("%s/customer/statement/downloadFile/%s", statementServiceConfigurationProperties.getStatementServiceEndPointUrl(), documentId),
+                "GET", req, resp);
+    }
+
 
     HttpHeaders buildJsonHttpHeaders() {
         final HttpHeaders headers = new HttpHeaders();

@@ -11,13 +11,18 @@ import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.BillerLookupRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberAirtimeRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToBillerRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest;
-import zw.co.cassavasmartech.ecocashchatbotcore.exception.*;
+import zw.co.cassavasmartech.ecocashchatbotcore.exception.BusinessException;
+import zw.co.cassavasmartech.ecocashchatbotcore.exception.CustomerAlreadyExistsException;
+import zw.co.cassavasmartech.ecocashchatbotcore.exception.CustomerNotFoundException;
+import zw.co.cassavasmartech.ecocashchatbotcore.exception.CustomerNotValidException;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.modelAssembler.CustomerModelAssembler;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.CustomerRepository;
 import zw.co.cassavasmartech.ecocashchatbotcore.selfServiceCore.SelfServiceCoreProcessor;
 import zw.co.cassavasmartech.ecocashchatbotcore.statementProcessor.StatementProcessor;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -111,10 +116,16 @@ public class CustomerServiceImpl implements CustomerService{
         Date endDate = isoFormat.parse(statementRequest.getEndDate());
         statementRequest.setEndDate(newFormat.format(startDate));
         statementRequest.setStartDate(newFormat.format(endDate));
-        Customer customer = customerRepository.findByProfilesChatId(chatId).orElseThrow(()->new CustomerNotFoundException(chatId));
+        Customer customer = customerRepository.findByProfilesChatId(chatId).orElseThrow(() -> new CustomerNotFoundException(chatId));
         statementRequest.setMsisdn(customer.getMsisdn());
-        log.info("Statement processer transaction request {}", statementRequest);
+        log.info("Statement processor transaction request {}", statementRequest);
         return statementProcessor.getStatement(statementRequest);
+    }
+
+    @Override
+    public void getStatementFile(String chatId, String documentId, HttpServletRequest req, HttpServletResponse resp) {
+        customerRepository.findByProfilesChatId(chatId).orElseThrow(() -> new CustomerNotFoundException(chatId));
+        statementProcessor.getStatementFile(documentId, req, resp);
     }
 
     @Override
@@ -124,7 +135,7 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public TransactionResponse payBiller(String chatId, SubscriberToBillerRequest subscriberToBillerRequest) {
-        Customer customer = customerRepository.findByProfilesChatId(chatId).orElseThrow(()->new CustomerNotFoundException(chatId));
+        Customer customer = customerRepository.findByProfilesChatId(chatId).orElseThrow(() -> new CustomerNotFoundException(chatId));
         subscriberToBillerRequest.setMsisdn(customer.getMsisdn());
         return paymentGatewayProcessor.subscriberToBiller(subscriberToBillerRequest);
     }

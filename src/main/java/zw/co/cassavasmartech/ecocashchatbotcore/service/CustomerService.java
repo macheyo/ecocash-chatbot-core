@@ -8,6 +8,8 @@ import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToBillerReque
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +24,7 @@ public interface CustomerService {
     List<Answer> getAnswers(String chatId);
     SubscriberDto getAlternative(String chatId);
     Boolean pinReset(String id);
+
     Statement getStatement(String id, StatementRequest statementRequest) throws ParseException;
 
     TransactionResponse billerLookup(BillerLookupRequest billerLookupRequest);
@@ -31,4 +34,6 @@ public interface CustomerService {
     TransactionResponse payMerchant(String chatId, SubscriberToMerchantRequest subscriberToMerchantRequest);
 
     TransactionResponse buyAirtime(String chatId, SubscriberAirtimeRequest subscriberAirtimeRequest);
+
+    void getStatementFile(String chatId, String documentId, HttpServletRequest req, HttpServletResponse resp);
 }
