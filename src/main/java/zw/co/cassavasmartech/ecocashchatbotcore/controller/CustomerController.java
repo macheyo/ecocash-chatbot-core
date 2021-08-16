@@ -80,6 +80,14 @@ public class CustomerController {
                 CollectionModel.of(customerService.getAnswers(chatId),linkTo(methodOn(CustomerController.class).allCustomers()).withSelfRel()));
     }
 
+    @PostMapping("/security/question/answer/{chatId}")
+    public ApiResponse<Boolean> verifyAnswer(@PathVariable String chatId, @Valid @RequestBody VerifyAnswerRequest verifyAnswerRequest){
+        return new ApiResponse<>(HttpStatus.OK.value(),
+                ApiConstants.SUCCESS_MESSAGE,
+                customerService.verifyAnswer(chatId, verifyAnswerRequest));
+    }
+
+
     @GetMapping("/alternative/{chatId}")
     public ApiResponse<?> getAlternative(@PathVariable String chatId){
         return new ApiResponse<>(HttpStatus.OK.value(),

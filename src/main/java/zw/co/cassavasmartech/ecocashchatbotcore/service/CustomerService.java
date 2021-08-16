@@ -24,7 +24,6 @@ public interface CustomerService {
     List<Answer> getAnswers(String chatId);
     SubscriberDto getAlternative(String chatId);
     Boolean pinReset(String id);
-
     Statement getStatement(String id, StatementRequest statementRequest) throws ParseException;
 
     TransactionResponse billerLookup(BillerLookupRequest billerLookupRequest);
@@ -36,4 +35,6 @@ public interface CustomerService {
     TransactionResponse buyAirtime(String chatId, SubscriberAirtimeRequest subscriberAirtimeRequest);
 
     void getStatementFile(String chatId, String documentId, HttpServletRequest req, HttpServletResponse resp);
+
+    Boolean verifyAnswer(String chatId, VerifyAnswerRequest verifyAnswerRequest);
 }

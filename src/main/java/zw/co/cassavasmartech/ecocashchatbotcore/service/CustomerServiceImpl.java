@@ -154,6 +154,21 @@ public class CustomerServiceImpl implements CustomerService{
         return paymentGatewayProcessor.subscriberAirtime(subscriberAirtimeRequest);
     }
 
+    @Override
+    public Boolean verifyAnswer(String chatId, VerifyAnswerRequest verifyAnswerRequest) {
+        Boolean verified = true;
+        String[] answers = verifyAnswerRequest.getAnswers().split(",");
+        Customer customer = customerRepository.findByProfilesChatId(chatId).orElseThrow(()->new CustomerNotFoundException(chatId));
+        List<Answer> answerList = selfServiceCoreProcessor.getAnswerByMsisdnAndAnswerStatus(customer.getMsisdn());
+        int count = 0;
+        for (Answer answer: answerList){
+            log.info("This is the answer provided: {} and the correct answe {}", answer.getAnswer(), answers[count]);
+            if(!answer.getAnswer().equals(answers[count]))verified = false;
+            count++;
+        }
+        return verified;
+    }
+
 
     private Customer isCustomerValid(String msisdn){
         Customer customer = new Customer();
