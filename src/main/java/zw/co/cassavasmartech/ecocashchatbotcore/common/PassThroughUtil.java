@@ -30,7 +30,6 @@ public class PassThroughUtil {
                 }
             }
 
-            //conn.setFollowRedirects(false);  // throws AccessDenied exception
             conn.setUseCaches(false);
             conn.setDoInput(true);
             conn.setDoOutput(hasoutbody);

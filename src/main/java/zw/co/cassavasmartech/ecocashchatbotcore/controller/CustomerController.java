@@ -94,9 +94,9 @@ public class CustomerController {
         return response;
     }
 
-    @GetMapping("/statement/downloadFile/{chatId}/{documentId}")
-    public void downloadFile(@PathVariable String chatId, @PathVariable("documentId") String documentId, HttpServletRequest req, HttpServletResponse resp) {
-        customerService.getStatementFile(chatId, documentId, req, resp);
+    @GetMapping("/statement/downloadFile/{documentId}")
+    public void downloadFile(@PathVariable("documentId") String documentId, HttpServletRequest req, HttpServletResponse resp) {
+        customerService.getStatementFile(documentId, req, resp);
     }
 
     @GetMapping("/pinreset/{chatId}")

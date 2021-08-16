@@ -123,8 +123,7 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public void getStatementFile(String chatId, String documentId, HttpServletRequest req, HttpServletResponse resp) {
-        customerRepository.findByProfilesChatId(chatId).orElseThrow(() -> new CustomerNotFoundException(chatId));
+    public void getStatementFile(String documentId, HttpServletRequest req, HttpServletResponse resp) {
         statementProcessor.getStatementFile(documentId, req, resp);
     }
 
