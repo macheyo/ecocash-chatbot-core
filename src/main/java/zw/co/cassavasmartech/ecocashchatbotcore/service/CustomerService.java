@@ -36,4 +36,6 @@ public interface CustomerService {
     TransactionResponse buyAirtime(String chatId, SubscriberAirtimeRequest subscriberAirtimeRequest);
 
     void getStatementFile(String documentId, HttpServletRequest req, HttpServletResponse resp);
+
+    Boolean verifyAnswers(String chatId, VerifyAnswerRequest verifyAnswerRequest);
 }

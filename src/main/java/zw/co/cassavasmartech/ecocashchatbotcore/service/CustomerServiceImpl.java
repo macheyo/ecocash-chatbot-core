@@ -128,6 +128,20 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
+    public Boolean verifyAnswers(String chatId, VerifyAnswerRequest verifyAnswerRequest) {
+        Boolean verified=true;
+        Customer customer = customerRepository.findByProfilesChatId(chatId).orElseThrow(()->new CustomerNotFoundException(chatId));
+        String[] customerAnswers = verifyAnswerRequest.getAnswers().split(",");
+        List<Answer> correctAnswerList= selfServiceCoreProcessor.getAnswerByMsisdnAndAnswerStatus(customer.getMsisdn());
+        int count=0;
+        for(Answer answer:correctAnswerList){
+            if(!answer.getAnswer().equalsIgnoreCase(customerAnswers[count]))verified=false;
+            count++;
+        }
+        return verified;
+    }
+
+    @Override
     public TransactionResponse billerLookup(BillerLookupRequest billerLookupRequest) {
         return paymentGatewayProcessor.lookupBiller(billerLookupRequest);
     }
