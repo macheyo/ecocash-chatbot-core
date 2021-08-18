@@ -1,6 +1,7 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -84,9 +85,9 @@ public class CustomerController {
     public ApiResponse<Boolean> verifyAnswer(@PathVariable String chatId, @Valid @RequestBody VerifyAnswerRequest verifyAnswerRequest){
         return new ApiResponse<>(HttpStatus.OK.value(),
                 ApiConstants.SUCCESS_MESSAGE,
-                customerService.verifyAnswer(chatId, verifyAnswerRequest));
-    }
+                customerService.verifyAnswers(chatId,verifyAnswerRequest));
 
+    }
 
     @GetMapping("/alternative/{chatId}")
     public ApiResponse<?> getAlternative(@PathVariable String chatId){
@@ -102,9 +103,9 @@ public class CustomerController {
         return response;
     }
 
-    @GetMapping("/statement/downloadFile/{chatId}/{documentId}")
-    public void downloadFile(@PathVariable String chatId, @PathVariable("documentId") String documentId, HttpServletRequest req, HttpServletResponse resp) {
-        customerService.getStatementFile(chatId, documentId, req, resp);
+    @GetMapping("/statement/downloadFile/{documentId}")
+    public void downloadFile(@PathVariable("documentId") String documentId, HttpServletRequest req, HttpServletResponse resp) {
+        customerService.getStatementFile(documentId, req, resp);
     }
 
     @GetMapping("/pinreset/{chatId}")
@@ -142,6 +143,13 @@ public class CustomerController {
         return new ApiResponse<>(HttpStatus.OK.value(),
                 ApiConstants.SUCCESS_MESSAGE,
                 customerService.buyAirtime(chatId,subscriberAirtimeRequest));
+    }
+
+    @PostMapping("/subscriber/lookup")
+    public ApiResponse<TransactionResponse> lookupSubscriber(@Valid @RequestBody SubscriberDto subscriberDto){
+        return new ApiResponse<>(HttpStatus.OK.value(),
+                ApiConstants.SUCCESS_MESSAGE,
+                customerService.customerLookup(subscriberDto));
     }
 
 }

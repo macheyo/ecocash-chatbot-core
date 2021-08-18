@@ -123,9 +123,27 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public void getStatementFile(String chatId, String documentId, HttpServletRequest req, HttpServletResponse resp) {
-        customerRepository.findByProfilesChatId(chatId).orElseThrow(() -> new CustomerNotFoundException(chatId));
+    public void getStatementFile(String documentId, HttpServletRequest req, HttpServletResponse resp) {
         statementProcessor.getStatementFile(documentId, req, resp);
+    }
+
+    @Override
+    public Boolean verifyAnswers(String chatId, VerifyAnswerRequest verifyAnswerRequest) {
+        Boolean verified=true;
+        Customer customer = customerRepository.findByProfilesChatId(chatId).orElseThrow(()->new CustomerNotFoundException(chatId));
+        String[] customerAnswers = verifyAnswerRequest.getAnswers().split(",");
+        List<Answer> correctAnswerList= selfServiceCoreProcessor.getAnswerByMsisdnAndAnswerStatus(customer.getMsisdn());
+        int count=0;
+        for(Answer answer:correctAnswerList){
+            if(!answer.getAnswer().equalsIgnoreCase(customerAnswers[count]))verified=false;
+            count++;
+        }
+        return verified;
+    }
+
+    @Override
+    public TransactionResponse customerLookup(SubscriberDto subscriberDto) {
+        return paymentGatewayProcessor.lookupCustomer(subscriberDto.getMsisdn());
     }
 
     @Override

@@ -254,6 +254,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .checksumGenerator(checksumGenerator)
                 .tranType(cpgConfigProperties.getPinResetTranType())
                 .msisdn(msisdn)
+                .applicationCode("ecocashzw")
                 .reference(Util.generateReference(msisdn))
                 .build();
     }
