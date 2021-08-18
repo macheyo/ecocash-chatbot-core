@@ -191,6 +191,11 @@ public class CustomerServiceImpl implements CustomerService{
         return verified;
     }
 
+    @Override
+    public TransactionResponse registerCustomer(Registration registration) {
+        return paymentGatewayProcessor.registerCustomer(registration);
+    }
+
 
     private Customer isCustomerValid(String msisdn){
         Customer customer = new Customer();

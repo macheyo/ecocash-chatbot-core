@@ -44,5 +44,7 @@ public class CpgConfigurationProperties {
     private String billerLookupTranType;
     @NotEmpty
     private String subscriberAirtimeTranType;
+    @NotEmpty
+    private String registrationTrasType;
 
 }

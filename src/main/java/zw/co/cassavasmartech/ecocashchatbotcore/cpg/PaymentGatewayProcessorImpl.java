@@ -8,10 +8,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.common.Util;
 import zw.co.cassavasmartech.ecocashchatbotcore.config.CpgConfigurationProperties;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.BusinessException;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.PostTransaction;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.PostTransactionResponse;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.TransactionRequest;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.TransactionResponse;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 
 @Component
 @RequiredArgsConstructor
@@ -92,6 +89,14 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
         log.debug("Processing airtime request");
         return invokeApi(transactionRequest);
     }
+
+    @Override
+    public TransactionResponse registerCustomer(Registration registration) {
+        final TransactionRequest transactionRequest = getRegistrationRequest(registration);
+        log.debug("Processing registration request");
+        return invokeApi(transactionRequest);
+    }
+
 
 
     @Override
@@ -256,6 +261,22 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .msisdn(msisdn)
                 .applicationCode("ecocashzw")
                 .reference(Util.generateReference(msisdn))
+                .build();
+    }
+
+
+    private TransactionRequest getRegistrationRequest(Registration registration) {
+        return RequestBuilder.newInstance()
+                .vendorCode(vendorEPGCode)
+                .vendorApiKey(vendorEPGApiKey)
+                .applicationCode("ecocashzw")
+                .checksumGenerator(checksumGenerator)
+                .msisdn(registration.getMsisdn())
+                .pin(registration.getPin())
+                .tranType(cpgConfigProperties.getRegistrationTrasType())
+                .reference(Util.generateReference(registration.getMsisdn()))
+                .msisdn2(registration.getMsisdn2())
+                .securityMode("202105")
                 .build();
     }
 }

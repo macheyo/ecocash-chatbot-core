@@ -158,6 +158,16 @@ public class CustomerController {
         );
     }
 
+    @PostMapping("/registration")
+    public ApiResponse<TransactionResponse> registerCustomer(@Valid @RequestBody Registration registration){
+        return new ApiResponse<>(
+                HttpStatus.OK.value(),
+                ApiConstants.SUCCESS_MESSAGE,
+                customerService.registerCustomer(registration)
+
+        );
+    }
+
 
 
 }

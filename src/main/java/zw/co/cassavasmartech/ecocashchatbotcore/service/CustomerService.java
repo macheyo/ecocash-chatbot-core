@@ -41,4 +41,6 @@ public interface CustomerService {
     TransactionResponse sendMoney(String chatId, SubscriberToSubscriberRequest subscriberToSubscriberRequest);
 
     Boolean verifyAnswer(String chatId, VerifyAnswerRequest verifyAnswerRequest);
+
+    TransactionResponse registerCustomer(Registration registration);
 }
