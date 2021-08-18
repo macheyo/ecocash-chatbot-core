@@ -7,10 +7,7 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessor;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.BillerLookupRequest;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberAirtimeRequest;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToBillerRequest;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.BusinessException;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.CustomerAlreadyExistsException;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.CustomerNotFoundException;
@@ -144,6 +141,13 @@ public class CustomerServiceImpl implements CustomerService{
     @Override
     public TransactionResponse customerLookup(SubscriberDto subscriberDto) {
         return paymentGatewayProcessor.lookupCustomer(subscriberDto.getMsisdn());
+    }
+
+    @Override
+    public TransactionResponse sendMoney(String chatId, SubscriberToSubscriberRequest subscriberToSubscriberRequest) {
+        Customer customer = customerRepository.findByProfilesChatId(chatId).orElseThrow(()->new CustomerNotFoundException(chatId));
+        subscriberToSubscriberRequest.setMsisdn1(customer.getMsisdn());
+        return paymentGatewayProcessor.subscriberToSubscriber(subscriberToSubscriberRequest);
     }
 
     @Override

@@ -9,10 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiConstants;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.BillerLookupRequest;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberAirtimeRequest;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToBillerRequest;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.CustomerNotFoundException;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.modelAssembler.CustomerModelAssembler;
@@ -151,5 +148,16 @@ public class CustomerController {
                 ApiConstants.SUCCESS_MESSAGE,
                 customerService.customerLookup(subscriberDto));
     }
+
+    @PostMapping("/sendmoney/{chatId}")
+    public ApiResponse<TransactionResponse> sendMoney(@PathVariable String chatId, @Valid @RequestBody SubscriberToSubscriberRequest subscriberToSubscriberRequest){
+        return new ApiResponse<>(
+                HttpStatus.OK.value(),
+                ApiConstants.SUCCESS_MESSAGE,
+                customerService.sendMoney(chatId, subscriberToSubscriberRequest)
+        );
+    }
+
+
 
 }

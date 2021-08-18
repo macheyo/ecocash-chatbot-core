@@ -2,10 +2,7 @@ package zw.co.cassavasmartech.ecocashchatbotcore.service;
 
 import org.springframework.hateoas.EntityModel;
 import org.springframework.stereotype.Service;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.BillerLookupRequest;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberAirtimeRequest;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToBillerRequest;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,4 +37,8 @@ public interface CustomerService {
     Boolean verifyAnswers(String chatId, VerifyAnswerRequest verifyAnswerRequest);
 
     TransactionResponse customerLookup(SubscriberDto subscriberDto);
+
+    TransactionResponse sendMoney(String chatId, SubscriberToSubscriberRequest subscriberToSubscriberRequest);
+
+    Boolean verifyAnswer(String chatId, VerifyAnswerRequest verifyAnswerRequest);
 }
