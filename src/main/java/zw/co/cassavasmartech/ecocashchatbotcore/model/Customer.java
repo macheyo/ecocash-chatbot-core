@@ -23,4 +23,7 @@ public class Customer extends BaseEntity{
     @OneToMany(mappedBy = "customer")
     @JsonBackReference
     private Set<Profile> profiles;
+    @OneToMany(mappedBy = "ticket")
+    @JsonBackReference
+    private Set<Ticket> tickets;
 }
