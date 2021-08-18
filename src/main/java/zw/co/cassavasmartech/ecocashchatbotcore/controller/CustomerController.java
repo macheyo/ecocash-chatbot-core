@@ -1,6 +1,7 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -142,6 +143,13 @@ public class CustomerController {
         return new ApiResponse<>(HttpStatus.OK.value(),
                 ApiConstants.SUCCESS_MESSAGE,
                 customerService.buyAirtime(chatId,subscriberAirtimeRequest));
+    }
+
+    @PostMapping("/subscriber/lookup")
+    public ApiResponse<TransactionResponse> lookupSubscriber(@Valid @RequestBody SubscriberDto subscriberDto){
+        return new ApiResponse<>(HttpStatus.OK.value(),
+                ApiConstants.SUCCESS_MESSAGE,
+                customerService.customerLookup(subscriberDto));
     }
 
 }

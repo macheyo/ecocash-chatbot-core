@@ -142,6 +142,11 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
+    public TransactionResponse customerLookup(SubscriberDto subscriberDto) {
+        return paymentGatewayProcessor.lookupCustomer(subscriberDto.getMsisdn());
+    }
+
+    @Override
     public TransactionResponse billerLookup(BillerLookupRequest billerLookupRequest) {
         return paymentGatewayProcessor.lookupBiller(billerLookupRequest);
     }
