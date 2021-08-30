@@ -8,10 +8,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessor;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.*;
-import zw.co.cassavasmartech.ecocashchatbotcore.exception.BusinessException;
-import zw.co.cassavasmartech.ecocashchatbotcore.exception.CustomerAlreadyExistsException;
-import zw.co.cassavasmartech.ecocashchatbotcore.exception.CustomerNotFoundException;
-import zw.co.cassavasmartech.ecocashchatbotcore.exception.CustomerNotValidException;
+import zw.co.cassavasmartech.ecocashchatbotcore.eip.EipService;
+import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.EipTransaction;
+import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.Merchant;
+import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.MerchantRepository;
+import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.SubscriberToMerchant;
+import zw.co.cassavasmartech.ecocashchatbotcore.exception.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.modelAssembler.CustomerModelAssembler;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.CustomerRepository;
@@ -44,10 +46,16 @@ public class CustomerServiceImpl implements CustomerService{
     PaymentGatewayProcessor paymentGatewayProcessor;
 
     @Autowired
+    EipService eipService;
+
+    @Autowired
     SelfServiceCoreProcessor selfServiceCoreProcessor;
 
     @Autowired
     StatementProcessor statementProcessor;
+
+    @Autowired
+    MerchantRepository merchantRepository;
 
     @Override
     public Customer save(Customer customer) {
@@ -163,10 +171,10 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public TransactionResponse payMerchant(String chatId, SubscriberToMerchantRequest subscriberToMerchantRequest) {
+    public EipTransaction payMerchant(String chatId, SubscriberToMerchant subscriberToMerchant) {
         Customer customer = customerRepository.findByProfilesChatId(chatId).orElseThrow(()->new CustomerNotFoundException(chatId));
-        subscriberToMerchantRequest.setSubscriberMsisdn(customer.getMsisdn());
-        return paymentGatewayProcessor.subscriberToMerchant(subscriberToMerchantRequest);
+        subscriberToMerchant.setMsisdn(customer.getMsisdn());
+        return eipService.postPayment(subscriberToMerchant);
     }
 
     @Override
@@ -194,6 +202,15 @@ public class CustomerServiceImpl implements CustomerService{
     @Override
     public TransactionResponse registerCustomer(Registration registration) {
         return paymentGatewayProcessor.registerCustomer(registration);
+    }
+
+    @Override
+    public EipTransaction payMerchant2(String chatId, SubscriberToMerchant subscriberToMerchant) {
+        Merchant merchant = merchantRepository.findByName(subscriberToMerchant.getMerchantName()).orElseThrow(()->new MerchantNotFoundException(subscriberToMerchant.getMerchantName()));
+        Customer customer = customerRepository.findByProfilesChatId(chatId).orElseThrow(()->new CustomerNotFoundException(chatId));
+        subscriberToMerchant.setMsisdn(customer.getMsisdn());
+        subscriberToMerchant.setMerchantCode(merchant.getMerchantCode());
+        return eipService.postPayment(subscriberToMerchant);
     }
 
 

@@ -7,8 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiConstants;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
+import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.EipTransaction;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.PostTransaction;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Profile;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Ticket;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.TransactionRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.modelAssembler.TicketModelAssembler;
 import zw.co.cassavasmartech.ecocashchatbotcore.service.TicketService;
 
@@ -47,4 +50,19 @@ public class TicketController {
                 ApiConstants.SUCCESS_MESSAGE,
                 ticketModelAssembler.toModel(ticketService.update(chatId,ticketId,ticket)));
     }
+
+    @PostMapping("/ticket/eip/callback")
+    public ApiResponse<Boolean> eipCallback(@Valid @RequestBody EipTransaction eipTransaction){
+        return new ApiResponse<>(HttpStatus.OK.value(),
+                ApiConstants.SUCCESS_MESSAGE,
+                ticketService.handleEipCallback(eipTransaction));
+    }
+
+    @PostMapping("/ticket/cpg/callback")
+    public ApiResponse<Boolean> cpgCallback(@Valid @RequestBody PostTransaction postTransaction){
+        return new ApiResponse<>(HttpStatus.OK.value(),
+                ApiConstants.SUCCESS_MESSAGE,
+                ticketService.handleCpgCallback(postTransaction));
+    }
+
 }

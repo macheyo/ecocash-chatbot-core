@@ -55,6 +55,11 @@ public class RequestBuilder {
         return this;
     }
 
+    public RequestBuilder callbackUrl(String callbackUrl){
+        request.setField9(callbackUrl);
+        return this;
+    }
+
     public RequestBuilder countryCode(String accountNumber) {
         request.setField23(accountNumber);
         return this;

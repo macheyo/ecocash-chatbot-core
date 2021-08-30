@@ -1,5 +1,6 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -18,9 +19,10 @@ public class Ticket extends BaseEntity{
     private Double sentimentStart;
     private Double sentimentEnd;
     private Status status;
-    private String refrence;
+    private String reference;
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Customer customer;
+    private Profile profile;
 }

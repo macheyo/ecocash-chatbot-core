@@ -8,5 +8,7 @@ public class SubscriberToBillerRequest {
     private BigDecimal amount;
     private String billerCode;
     private String msisdn;
+    private String msisdn2;
     private String pin;
+    private Long ticketId;
 }

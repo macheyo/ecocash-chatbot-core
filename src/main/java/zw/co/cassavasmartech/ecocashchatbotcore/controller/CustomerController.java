@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiConstants;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.*;
+import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.EipTransaction;
+import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.SubscriberToMerchant;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.CustomerNotFoundException;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.modelAssembler.CustomerModelAssembler;
@@ -129,10 +131,17 @@ public class CustomerController {
     }
 
     @PostMapping("/paymerchant/{chatId}")
-    public ApiResponse<TransactionResponse> payMerchant(@PathVariable String chatId, @Valid @RequestBody SubscriberToMerchantRequest subscriberToMerchantRequest){
+    public ApiResponse<EipTransaction> payMerchant(@PathVariable String chatId, @Valid @RequestBody SubscriberToMerchant subscriberToMerchant){
         return new ApiResponse<>(HttpStatus.OK.value(),
                 ApiConstants.SUCCESS_MESSAGE,
-                customerService.payMerchant(chatId, subscriberToMerchantRequest));
+                customerService.payMerchant(chatId, subscriberToMerchant));
+    }
+
+    @PostMapping("/paymerchant2/{chatId}")
+    public ApiResponse<EipTransaction> payMerchant2(@PathVariable String chatId, @Valid @RequestBody SubscriberToMerchant subscriberToMerchant){
+        return new ApiResponse<>(HttpStatus.OK.value(),
+                ApiConstants.SUCCESS_MESSAGE,
+                customerService.payMerchant2(chatId, subscriberToMerchant));
     }
 
     @PostMapping("/airtime/{chatId}")

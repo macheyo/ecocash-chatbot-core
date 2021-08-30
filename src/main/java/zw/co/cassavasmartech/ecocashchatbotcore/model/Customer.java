@@ -1,13 +1,11 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.Set;
 
 @Entity
@@ -23,7 +21,5 @@ public class Customer extends BaseEntity{
     @OneToMany(mappedBy = "customer")
     @JsonBackReference
     private Set<Profile> profiles;
-    @OneToMany(mappedBy = "ticket")
-    @JsonBackReference
-    private Set<Ticket> tickets;
+
 }

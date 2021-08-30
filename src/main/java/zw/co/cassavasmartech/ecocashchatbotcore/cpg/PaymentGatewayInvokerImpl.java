@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import zw.co.cassavasmartech.ecocashchatbotcore.config.CpgConfigurationProperties;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.PostTransaction;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.PostTransactionResponse;
 
@@ -32,6 +31,17 @@ public class PaymentGatewayInvokerImpl implements PaymentGatewayInvoker {
     public Optional<PostTransactionResponse> invoke(PostTransaction postTransaction) {
         log.debug("Processing cpg transaction request {} to url {}", postTransaction, configProperties.getCpgEndPointUrl());
         final URI uri = UriComponentsBuilder.fromHttpUrl(configProperties.getCpgEndPointUrl()).buildAndExpand().toUri();
+        final RequestEntity<PostTransaction> requestEntity = new RequestEntity<>(postTransaction, buildJsonHttpHeaders(), HttpMethod.POST, uri);
+        final ResponseEntity<PostTransactionResponse> responseEntity = restTemplate.exchange(requestEntity, PostTransactionResponse.class);
+        final PostTransactionResponse response = responseEntity.getBody();
+        log.info("Cpg transaction response {}", response);
+        return Optional.ofNullable(response);
+    }
+
+    @Override
+    public Optional<PostTransactionResponse> invoke2(PostTransaction postTransaction) {
+        log.debug("Processing cpg transaction request {} to url {}", postTransaction, configProperties.getCpgEndPointUrl());
+        final URI uri = UriComponentsBuilder.fromHttpUrl(configProperties.getCpgEndPointUrl2()).buildAndExpand().toUri();
         final RequestEntity<PostTransaction> requestEntity = new RequestEntity<>(postTransaction, buildJsonHttpHeaders(), HttpMethod.POST, uri);
         final ResponseEntity<PostTransactionResponse> responseEntity = restTemplate.exchange(requestEntity, PostTransactionResponse.class);
         final PostTransactionResponse response = responseEntity.getBody();

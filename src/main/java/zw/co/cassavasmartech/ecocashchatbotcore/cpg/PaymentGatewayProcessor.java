@@ -2,7 +2,9 @@ package zw.co.cassavasmartech.ecocashchatbotcore.cpg;
 
 //import com.cassavasmartech.cpg.data.Response;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.*;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.PostTransaction;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Registration;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.TransactionRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.TransactionResponse;
 
 
@@ -29,4 +31,6 @@ public interface PaymentGatewayProcessor {
     TransactionResponse subscriberAirtime(SubscriberAirtimeRequest subscriberAirtimeRequest);
 
     TransactionResponse registerCustomer(Registration registration);
+
+    Boolean handleCallBack(PostTransaction postTransaction);
 }

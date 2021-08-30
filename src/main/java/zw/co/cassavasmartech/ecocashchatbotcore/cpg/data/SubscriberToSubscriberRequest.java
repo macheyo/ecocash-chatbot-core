@@ -8,6 +8,7 @@ public class SubscriberToSubscriberRequest {
     private String msisdn1;
     private String msisdn2;
     private String amount;
+    private Long ticketId;
 
 
 }
