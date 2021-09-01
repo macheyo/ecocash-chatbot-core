@@ -117,8 +117,11 @@ public class CustomerServiceImpl implements CustomerService{
     public Statement getStatement(String chatId, StatementRequest statementRequest) throws ParseException {
         DateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss+02:00");
         DateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date today = new Date();
         Date startDate = isoFormat.parse(statementRequest.getStartDate());
         Date endDate = isoFormat.parse(statementRequest.getEndDate());
+        if(startDate.getYear()>today.getYear())startDate.setYear(today.getYear());
+        if(endDate.getTime()>today.getYear())endDate.setYear(today.getYear());
         statementRequest.setEndDate(newFormat.format(startDate));
         statementRequest.setStartDate(newFormat.format(endDate));
         Customer customer = customerRepository.findByProfilesChatId(chatId).orElseThrow(() -> new CustomerNotFoundException(chatId));

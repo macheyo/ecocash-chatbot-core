@@ -17,8 +17,11 @@ import zw.co.cassavasmartech.ecocashchatbotcore.repository.CustomerRepository;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.ProfileRepository;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.TicketRepository;
 import zw.co.cassavasmartech.ecocashchatbotcore.selfServiceCore.SelfServiceCoreProcessor;
+import zw.co.cassavasmartech.ecocashchatbotcore.service.CustomerService;
+import zw.co.cassavasmartech.ecocashchatbotcore.statementProcessor.StatementServiceConfigurationProperties;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -37,43 +40,156 @@ public class DialogFlowServiceImpl implements DialogFlowService {
     SelfServiceCoreProcessor selfServiceCoreProcessor;
     @Autowired
     PaymentGatewayProcessor paymentGatewayProcessor;
+    @Autowired
+    CustomerService customerService;
+    @Autowired
+    StatementServiceConfigurationProperties statementServiceConfigurationProperties;
 
     @Override
-    public WebhookResponse processWebhookCall(WebhookRequest webhookRequest) {
+    public WebhookResponse processWebhookCall(WebhookRequest webhookRequest) throws ParseException {
         log.info("Processing dialogflow transaction request {}\n", webhookRequest);
         switch (webhookRequest.getQueryResult().getIntent().getDisplayName()) {
             case "Default Welcome Intent":
-                return welcomeIntentHandler(webhookRequest);
+                return welcomeHandler(webhookRequest);
             case "usecase.pinreset":
                 return pinresetUsecaseHandler(webhookRequest);
             case "usecase.pinreset.security.questions.affirmative":
                 return pinresetUsecaseSecurityQuestionsAffirmativeHandler(webhookRequest);
             case "usecase.pinreset.security.questions.first.answer":
-                return pinresetUsecaseSecurityQuestionsFirstAnswer(webhookRequest);
+                return pinresetUsecaseSecurityQuestionsFirstAnswerHandler(webhookRequest);
             case "usecase.pay.biller.scenario1":
-                return payBillerUsecaseScenario1(webhookRequest);
+                return payBillerUsecaseScenario1Handler(webhookRequest);
             case "usecase.pay.biller.scenario2":
-                return payBillerUsecaseScenario2(webhookRequest);
+                return payBillerUsecaseScenario2Handler(webhookRequest);
             case "usecase.pay.biller.get.biller.amount":
-                return payBillerUsecaseGetBillerAmount(webhookRequest);
+                return payBillerUsecaseGetBillerAmountHandler(webhookRequest);
             case "usecase.pay.biller.get.biller.code":
-                return payBillerUsecaseGetBillerCode(webhookRequest);
+                return payBillerUsecaseGetBillerCodeHandler(webhookRequest);
             case "usecase.pay.biller.get.account.intent":
-                return payBillerUsecaseGetBillerAccount(webhookRequest);
+                return payBillerUsecaseGetBillerAccountHandler(webhookRequest);
             case "usecase.pay.biller.get.biller.confirmation.affirmative":
-                return payBillerUsecaseGetBillerConfirmationAffirmative(webhookRequest);
+                return payBillerUsecaseGetBillerConfirmationAffirmativeHandler(webhookRequest);
             case "usecase.pay.biller.get.biller.confirmation.negative":
-                return payBillerUsecaseGetBillerConfirmationNegative(webhookRequest);
+                return payBillerUsecaseGetBillerConfirmationNegativeHandler(webhookRequest);
+            case "usecase.statement.scenario.1":
+                return statementUsecaseScenario1Handler(webhookRequest);
+            case "usecase.statement.scenario.2":
+                return statementUsecaseScenario2Handler(webhookRequest);
+            case "usecase.statement.scenario.3":
+                return statementUsecaseScenario3Handler(webhookRequest);
+            case "usecase.statement.end.date":
+                return statementUsecaseEndDateHandler(webhookRequest);
+            case "usecase.statement.start.date":
+                return statementUsecaseStartDateHandler(webhookRequest);
+
         }
         return null;
     }
 
-    private WebhookResponse payBillerUsecaseGetBillerConfirmationNegative(WebhookRequest webhookRequest) {
+    private WebhookResponse statementUsecaseStartDateHandler(WebhookRequest webhookRequest) {
+        String prompt = "Ok to which date would you want the statement to be generated "+Emoji.Date+"?";
+        return getWebhookResponse(webhookRequest,prompt,null);
+    }
+
+    private WebhookResponse statementUsecaseEndDateHandler(WebhookRequest webhookRequest) throws ParseException {
+        log.info("Processing dialogflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
+        List<OutputContext> outputContexts = webhookRequest.getQueryResult().getOutputContexts();
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String,Object> map = objectMapper.convertValue(outputContexts.get(outputContexts.size()-2).getParameters(),Map.class);
+        Optional<Customer> customer = isNewCustomer(webhookRequest);
+        String prompt;
+        if(customer.isPresent()) {
+            Statement statement = customerService.getStatement(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()), StatementRequest.builder()
+                            .endDate(map.get("startDateTime").toString())
+                            .startDate(map.get("endDateTime").toString())
+                            .msisdn(customer.get().getMsisdn())
+                            .mime("PDF")
+                            .build());
+            if(statement!=null)
+                prompt = "Done"+Emoji.Smiley+Emoji.ThumbsUp+"Here you go, please click the link below to download"+Emoji.PointDown+"\n"+statement.getFileDownloadUri().replace("http://217.15.118.15",statementServiceConfigurationProperties.getNgrokServiceEndpointUrl())+"\n\nIs there anything else I can assist you with?"+Emoji.Smiley;
+            else prompt = "Oops!!"+Emoji.Pensive+"Something went wrong with the transaction\nWould you like to try this again?";
+        }
+        else prompt = "Alright " + DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest())+Emoji.Smiley+", but before we get your statement, what is your Ecocash number?";
+        WebhookResponse webhookResponse = WebhookResponse.builder()
+                .fulfillmentText(prompt)
+                .source("ecocashchatbotcore")
+                .build();
+        log.info("Sending response to dialogFlow: {}\n", webhookResponse);
+        return webhookResponse;
+    }
+
+    private WebhookResponse statementUsecaseScenario3Handler(WebhookRequest webhookRequest) throws ParseException {
+        log.info("Processing dialogflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
+        List<OutputContext> outputContexts = webhookRequest.getQueryResult().getOutputContexts();
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String,Object> map = objectMapper.convertValue(outputContexts.get(outputContexts.size()-2).getParameters(),Map.class);
+        Map<String,Object> datePeriod = objectMapper.convertValue(map.get("datePeriod"),Map.class);
+        Optional<Customer> customer = isNewCustomer(webhookRequest);
+        Object[] context=null;
+        String prompt;
+        if(customer.isPresent()) {
+            context = createTicket(webhookRequest, Usecase.SUBSCRIBER_STATEMENT);
+            Statement statement = customerService.getStatement(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()), StatementRequest.builder()
+                    .endDate(datePeriod.get("startDate").toString())
+                    .startDate(datePeriod.get("endDate").toString())
+                    .msisdn(customer.get().getMsisdn())
+                    .mime("PDF")
+                    .build());
+            if(statement!=null)
+                prompt = "Done"+Emoji.Smiley+Emoji.ThumbsUp+"Here you go, please click the link below to download"+Emoji.PointDown+"\n"+statement.getFileDownloadUri().replace("http://217.15.118.15",statementServiceConfigurationProperties.getNgrokServiceEndpointUrl())+"\n\nIs there anything else I can assist you with?"+Emoji.Smiley;
+            else prompt = "Oops!!"+Emoji.Pensive+"Something went wrong with the transaction\nWould you like to try this again?";
+        }
+        else prompt = "Alright " + DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest())+Emoji.Smiley+", but before we get your statement, what is your Ecocash number?";
+        WebhookResponse webhookResponse = WebhookResponse.builder()
+                .fulfillmentText(prompt)
+                .source("ecocashchatbotcore")
+                .outputContexts(context)
+                .build();
+        log.info("Sending response to dialogFlow: {}\n", webhookResponse);
+        return webhookResponse;
+    }
+
+    private WebhookResponse statementUsecaseScenario2Handler(WebhookRequest webhookRequest) throws ParseException {
+        log.info("Processing dialogflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
+        List<OutputContext> outputContexts = webhookRequest.getQueryResult().getOutputContexts();
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String,Object> map = objectMapper.convertValue(outputContexts.get(outputContexts.size()-2).getParameters(),Map.class);
+        Optional<Customer> customer = isNewCustomer(webhookRequest);
+        Object[] context=null;
+        String prompt;
+        if(customer.isPresent()) {
+            context = createTicket(webhookRequest, Usecase.SUBSCRIBER_STATEMENT);
+            Statement statement = customerService.getStatement(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()), StatementRequest.builder()
+                    .endDate(map.get("startdate").toString())
+                    .startDate(map.get("enddate").toString())
+                    .msisdn(customer.get().getMsisdn())
+                    .mime("PDF")
+                    .build());
+            if(statement!=null)
+                prompt = "Done"+Emoji.Smiley+Emoji.ThumbsUp+"Here you go, please click the link below to download"+Emoji.PointDown+"\n"+statement.getFileDownloadUri().replace("http://217.15.118.15",statementServiceConfigurationProperties.getNgrokServiceEndpointUrl())+"\n\nIs there anything else I can assist you with?"+Emoji.Smiley;
+            else prompt = "Oops!!"+Emoji.Pensive+"Something went wrong with the transaction\nWould you like to try this again?";
+        }
+        else prompt = "Alright " + DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest())+Emoji.Smiley+", but before we get your statement, what is your Ecocash number?";
+        WebhookResponse webhookResponse = WebhookResponse.builder()
+                .fulfillmentText(prompt)
+                .source("ecocashchatbotcore")
+                .outputContexts(context)
+                .build();
+        log.info("Sending response to dialogFlow: {}\n", webhookResponse);
+        return webhookResponse;
+    }
+
+    private WebhookResponse statementUsecaseScenario1Handler(WebhookRequest webhookRequest) {
+        String prompt = "Alright, lets quickly do that"+Emoji.Smiley+" from which date "+Emoji.Date+" would you want the statement to be generated?";
+        return getWebhookResponse(webhookRequest,prompt,createTicket(webhookRequest,Usecase.SUBSCRIBER_STATEMENT));
+    }
+
+    private WebhookResponse payBillerUsecaseGetBillerConfirmationNegativeHandler(WebhookRequest webhookRequest) {
         String prompt = "That's great!!"+Emoji.Smiley+" Thank you for using EcoCash "+DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest())+". Continue living life the EcoCash way!!!";
         return getWebhookResponse(webhookRequest, prompt, null);
     }
 
-    private WebhookResponse payBillerUsecaseGetBillerConfirmationAffirmative(WebhookRequest webhookRequest) {
+    private WebhookResponse payBillerUsecaseGetBillerConfirmationAffirmativeHandler(WebhookRequest webhookRequest) {
         log.info("Processing dialogflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
         List<OutputContext> outputContexts = webhookRequest.getQueryResult().getOutputContexts();
         ObjectMapper objectMapper = new ObjectMapper();
@@ -101,17 +217,17 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         return webhookResponse;
     }
 
-    private WebhookResponse payBillerUsecaseGetBillerAccount(WebhookRequest webhookRequest) {
-        String prompt = "Alrighty"+Emoji.Smiley+"How much do you want to pay?";
+    private WebhookResponse payBillerUsecaseGetBillerAccountHandler(WebhookRequest webhookRequest) {
+        String prompt = "Alrighty"+Emoji.Smiley+" How much do you want to pay?";
         return getWebhookResponse(webhookRequest,prompt,null);
     }
 
-    private WebhookResponse payBillerUsecaseGetBillerCode(WebhookRequest webhookRequest) {
+    private WebhookResponse payBillerUsecaseGetBillerCodeHandler(WebhookRequest webhookRequest) {
         String  prompt = "Got it"+Emoji.Smiley+" What is your Account Number?";
         return getWebhookResponse(webhookRequest,prompt,null);
     }
 
-    private WebhookResponse payBillerUsecaseGetBillerAmount(WebhookRequest webhookRequest) {
+    private WebhookResponse payBillerUsecaseGetBillerAmountHandler(WebhookRequest webhookRequest) {
         log.info("Processing dialogflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
         List<OutputContext> outputContexts = webhookRequest.getQueryResult().getOutputContexts();
         BillerLookupRequest billerLookupRequest = new BillerLookupRequest();
@@ -134,16 +250,16 @@ public class DialogFlowServiceImpl implements DialogFlowService {
 
     }
 
-    private WebhookResponse payBillerUsecaseScenario2(WebhookRequest webhookRequest) {
+    private WebhookResponse payBillerUsecaseScenario2Handler(WebhookRequest webhookRequest) {
         return null;
     }
 
-    private WebhookResponse payBillerUsecaseScenario1(WebhookRequest webhookRequest) {
+    private WebhookResponse payBillerUsecaseScenario1Handler(WebhookRequest webhookRequest) {
         String prompt = "I can help you do that"+Emoji.Smiley+"\nWhat is the biller code or Name of the organisation you want to pay?";
         return getWebhookResponse(webhookRequest,prompt,createTicket(webhookRequest,Usecase.BILL_PAYMENT));
     }
 
-    private WebhookResponse pinresetUsecaseSecurityQuestionsFirstAnswer(WebhookRequest webhookRequest) {
+    private WebhookResponse pinresetUsecaseSecurityQuestionsFirstAnswerHandler(WebhookRequest webhookRequest) {
         log.info("Processing dialogflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
         Optional<Customer> customer = isNewCustomer(webhookRequest);
         String[] customerAnswers = webhookRequest.getQueryResult().getQueryText().split(",");
@@ -212,7 +328,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         return webhookResponse;
     }
 
-    private WebhookResponse welcomeIntentHandler(WebhookRequest webhookRequest){
+    private WebhookResponse welcomeHandler(WebhookRequest webhookRequest){
         log.info("Processing dialogflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
         Optional<Customer> customer = isNewCustomer(webhookRequest);
         String prompt;

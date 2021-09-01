@@ -1,4 +1,4 @@
-package zw.co.cassavasmartech.ecocashchatbotcore.config;
+package zw.co.cassavasmartech.ecocashchatbotcore.selfServiceCore;
 
 import lombok.Getter;
 import lombok.Setter;
