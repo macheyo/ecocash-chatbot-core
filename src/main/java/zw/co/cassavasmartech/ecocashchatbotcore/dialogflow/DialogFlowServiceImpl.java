@@ -8,6 +8,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Customer;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Emoji;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.CustomerRepository;
+import zw.co.cassavasmartech.ecocashchatbotcore.selfServiceCore.SelfServiceCoreProcessor;
 import zw.co.cassavasmartech.ecocashchatbotcore.service.ProfileService;
 
 import java.util.Optional;
@@ -19,6 +20,8 @@ public class DialogFlowServiceImpl implements DialogFlowService {
     ProfileService profileService;
     @Autowired
     CustomerRepository customerRepository;
+    @Autowired
+    SelfServiceCoreProcessor selfServiceCoreProcessor;
 
     @Override
     public WebhookResponse processWebhookCall(WebhookRequest webhookRequest) {
@@ -37,10 +40,13 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         log.info("Processing dialogflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
         Optional<Customer> customer = isNewCustomer(webhookRequest);
         String prompt="";
-        if(customer.isPresent())
-
-            prompt = String.format("Welcome back %s%s hope you are having a beautiful %s so far. What can I do for you today?", customer.get().getFirstName(), Emoji.Smiley,DialogFlowUtil.getTimeOfDay());
-        else prompt = String.format("Hi there %s and good %s to you %s! Welcome to Ecocash. My name is ***, your Ecocash Digital Assistant. I can help you to register for Ecocash and Self-Services,send money, get your statement, reset your pin, make payments, buy airtime, resolve queries and much much more via chat. To start, tell me what you need or just ask me a question, and I’ll be happy to assist you right away!",new String(Character.toChars( 0x1F349)),DialogFlowUtil.getTimeOfDay(),DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest()));
+        if(customer.isPresent()) {
+            if (selfServiceCoreProcessor.isEnrolled(customer.get().getMsisdn()).getIsEnrolled().equalsIgnoreCase("true"))
+                prompt = "Great!! I can see you are enrolled on our self service platform" + Emoji.Smiley + "may I go on to ask your security questions to verify your identity?";
+            else
+                prompt = "You are currently not enrolled on our self " + Emoji.Pensive + "service platform. An agent is going to call you in a few minutes to verify your identity and reset your PIN";
+        }
+        else prompt = "Alright " + DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest())+Emoji.Smiley+", but before we reset your PIN, what is your Ecocash number?";
         return WebhookResponse.builder()
                 .fulfillmentText(prompt)
                 .source("ecocashchatbotcore")
@@ -52,8 +58,8 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         Optional<Customer> customer = isNewCustomer(webhookRequest);
         String prompt="";
         if(customer.isPresent())
-            prompt = String.format("Welcome back %s%s hope you are having a beautiful %s so far. What can I do for you today?", customer.get().getFirstName(),Emoji.Smiley,DialogFlowUtil.getTimeOfDay());
-        else prompt = String.format("Hi there %s and good %s to you %s! Welcome to Ecocash. My name is ***, your Ecocash Digital Assistant. I can help you to register for Ecocash and Self-Services,send money, get your statement, reset your pin, make payments, buy airtime, resolve queries and much much more via chat. To start, tell me what you need or just ask me a question, and I’ll be happy to assist you right away!",Emoji.Smiley,DialogFlowUtil.getTimeOfDay(),DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest()));
+            prompt = String.format("Welcome back %s%s%s hope you are having a beautiful %s so far. What can I do for you today?", customer.get().getFirstName(),Emoji.Smiley,Emoji.Wave,DialogFlowUtil.getTimeOfDay());
+        else prompt = String.format("Hi there %s%s and good %s to you %s! Welcome to Ecocash. My name is ***, your Ecocash Digital Assistant. I can help you to register for Ecocash and Self-Services,send money, get your statement, reset your pin, make payments, buy airtime, resolve queries and much much more via chat. To start, tell me what you need or just ask me a question, and I’ll be happy to assist you right away!",Emoji.Smiley,Emoji.Wave,DialogFlowUtil.getTimeOfDay(),DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest()));
         return WebhookResponse.builder()
                 .fulfillmentText(prompt)
                 .source("ecocashchatbotcore")
