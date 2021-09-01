@@ -1,97 +1,424 @@
-.04:14:21.366 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final 
-.04:14:21.375 INFO  z.c.c.e.EcocashChatbotCoreApplication - Starting EcocashChatbotCoreApplication using Java 1.8.0_271 on LAPTOP-1JQH6S1S with PID 23932 (C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core\target\classes started by Kudzai Macheyo in C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core) 
-.04:14:21.377 INFO  z.c.c.e.EcocashChatbotCoreApplication - The following profiles are active: dev 
-.04:14:22.250 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFERRED mode. 
-.04:14:22.378 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 120 ms. Found 5 JPA repository interfaces. 
-.04:14:23.272 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http) 
-.04:14:23.283 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
-.04:14:23.284 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
-.04:14:23.284 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.50] 
-.04:14:23.409 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring embedded WebApplicationContext 
-.04:14:23.409 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1985 ms 
-.04:14:23.602 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default] 
-.04:14:23.703 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final 
-.04:14:24.101 INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
-.04:14:24.637 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting... 
-.04:14:25.186 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed. 
-.04:14:25.483 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect 
-.04:14:25.851 INFO  o.h.e.b.internal.EnversServiceImpl - Envers integration enabled? : true 
-.04:14:27.560 INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - Autowired annotation is not supported on static fields: private static java.lang.String zw.co.cassavasmartech.ecocashchatbotcore.sms.SmsNotificationReceiverImpl.basicAuth 
-.04:14:27.763 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
-.04:14:29.453 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
-.04:14:29.507 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default' 
-.04:14:29.574 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
-.04:14:29.666 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/ecocashbotcore' 
-.04:14:29.671 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.04:14:30.034 INFO  o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#261ea657:0/SimpleConnection@626d2016 [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 51446] 
-.04:14:32.096 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Triggering deferred initialization of Spring Data repositories… 
-.04:14:32.633 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Spring Data repositories initialized! 
-.04:14:32.672 INFO  z.c.c.e.EcocashChatbotCoreApplication - Started EcocashChatbotCoreApplication in 11.674 seconds (JVM running for 12.162) 
-.04:14:38.937 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
-.04:14:38.937 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
-.04:14:38.940 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms 
-.04:14:39.126 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=c85ca75b-3960-4d1d-b329-469494c0aa60-b9889856, queryResult=QueryResult(queryText=hi, action=input.welcome, parameters={}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_answers, lifespanCount=0, parameters=null), OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0})], intent=Intent(name=projects/ecocash-onuv/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3, displayName=Welcome), intentDetectionConfidence=1.0, languageCode=en, sentimentAnalysisResult=SentimentAnalysisResult(queryTextSentiment=Sentiment(score=0.3, magnitude=0.3))), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={chat={type=private, id=1610924700}, from={id=1.6109247E9, last_name=Macheyo, language_code=en, first_name=Kudzai}, text=hi, date=1.630462497E9, message_id=4733.0}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
-.04:14:39.130 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: Welcome 
-.04:14:50.424 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=b4321841-9d8f-4c60-9e6f-dc2981b36440-b9889856, queryResult=QueryResult(queryText=can you reset my pin, action=null, parameters={}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_pinreset_enrollment_confirmation, lifespanCount=1, parameters=null), OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0})], intent=Intent(name=projects/ecocash-onuv/agent/intents/cbd27331-6c49-4632-8f75-a3398cb8b7d2, displayName=usecase.pinreset), intentDetectionConfidence=0.8183289, languageCode=en, sentimentAnalysisResult=SentimentAnalysisResult(queryTextSentiment=Sentiment(score=-0.4, magnitude=0.4))), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={chat={id=1610924700, type=private}, text=can you reset my pin, date=1.630462508E9, message_id=4735.0, from={id=1.6109247E9, language_code=en, first_name=Kudzai, last_name=Macheyo}}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
-.04:14:50.425 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pinreset 
-.04:14:56.196 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=2cbdd7b1-d2a2-4110-af0a-8a803923324a-b9889856, queryResult=QueryResult(queryText=yes, action=null, parameters={}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_answers, lifespanCount=1, parameters=null), OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_pinreset_enrollment_confirmation, lifespanCount=0, parameters=null), OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0})], intent=Intent(name=projects/ecocash-onuv/agent/intents/799768aa-ff3f-4b08-9975-b5a572df8b66, displayName=usecase.pinreset.security.questions.affirmative), intentDetectionConfidence=1.0, languageCode=en, sentimentAnalysisResult=SentimentAnalysisResult(queryTextSentiment=Sentiment(score=0.6, magnitude=0.6))), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={date=1.630462514E9, text=yes, message_id=4737.0, chat={id=1610924700, type=private}, from={last_name=Macheyo, first_name=Kudzai, id=1.6109247E9, language_code=en}}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
-.04:14:56.196 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pinreset.security.questions.affirmative 
-.04:15:10.308 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=6613c3c8-c301-4fc5-871b-7cbc650f9f42-b9889856, queryResult=QueryResult(queryText=soccer,chitekete, action=null, parameters={any=[soccer,chitekete]}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_answers, lifespanCount=0, parameters={any=[soccer,chitekete], any.original=[soccer,chitekete]}), OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0, any=[soccer,chitekete], any.original=[soccer,chitekete]})], intent=Intent(name=projects/ecocash-onuv/agent/intents/e3b607ca-bdcf-480e-9a59-ceb3098f0c67, displayName=usecase.pinreset.security.questions.first.answer), intentDetectionConfidence=1.0, languageCode=en, sentimentAnalysisResult=null), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={date=1.630462528E9, chat={type=private, id=1610924700}, from={id=1.6109247E9, last_name=Macheyo, first_name=Kudzai, language_code=en}, message_id=4739.0, text=soccer,chitekete}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
-.04:15:10.308 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pinreset.security.questions.first.answer 
-.04:37:15.391 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Waiting for workers to finish. 
-.04:37:15.456 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Successfully waited for workers to finish. 
-.04:37:15.705 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default' 
-.04:37:15.710 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated... 
-.04:37:15.744 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed. 
-.04:37:26.312 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final 
-.04:37:26.458 INFO  z.c.c.e.EcocashChatbotCoreApplication - Starting EcocashChatbotCoreApplication using Java 1.8.0_271 on LAPTOP-1JQH6S1S with PID 24504 (C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core\target\classes started by Kudzai Macheyo in C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core) 
-.04:37:26.460 INFO  z.c.c.e.EcocashChatbotCoreApplication - The following profiles are active: dev 
-.04:37:29.497 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFERRED mode. 
-.04:37:29.753 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 248 ms. Found 5 JPA repository interfaces. 
-.04:37:32.067 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http) 
-.04:37:32.090 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
-.04:37:32.090 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
-.04:37:32.090 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.50] 
-.04:37:32.365 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring embedded WebApplicationContext 
-.04:37:32.365 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 5631 ms 
-.04:37:33.337 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default] 
-.04:37:33.573 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final 
-.04:37:34.603 INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
-.04:37:34.774 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting... 
-.04:37:35.135 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed. 
-.04:37:35.347 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect 
-.04:37:35.745 INFO  o.h.e.b.internal.EnversServiceImpl - Envers integration enabled? : true 
-.04:37:38.733 INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - Autowired annotation is not supported on static fields: private static java.lang.String zw.co.cassavasmartech.ecocashchatbotcore.sms.SmsNotificationReceiverImpl.basicAuth 
-.04:37:38.839 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
-.04:37:40.279 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
-.04:37:40.325 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default' 
-.04:37:40.417 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
-.04:37:40.525 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/ecocashbotcore' 
-.04:37:40.531 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.04:37:41.056 INFO  o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#658255aa:0/SimpleConnection@4f116ca2 [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 51347] 
-.04:37:41.303 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
-.04:37:41.303 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
-.04:37:41.306 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms 
-.04:37:41.909 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=27014c43-11ae-4a42-bf37-acf343a8e729-b9889856, queryResult=QueryResult(queryText=hello, action=input.welcome, parameters={}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0})], intent=Intent(name=projects/ecocash-onuv/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3, displayName=Welcome), intentDetectionConfidence=1.0, languageCode=en, sentimentAnalysisResult=SentimentAnalysisResult(queryTextSentiment=Sentiment(score=0.2, magnitude=0.2))), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={from={language_code=en, id=1.6109247E9, first_name=Kudzai, last_name=Macheyo}, message_id=4741.0, chat={id=1610924700, type=private}, date=1.630463878E9, text=hello}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
-.04:37:41.910 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: Welcome 
-.04:37:43.433 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Triggering deferred initialization of Spring Data repositories… 
-.04:37:43.919 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Spring Data repositories initialized! 
-.04:37:43.968 INFO  z.c.c.e.EcocashChatbotCoreApplication - Started EcocashChatbotCoreApplication in 18.673 seconds (JVM running for 20.888) 
-.04:37:57.154 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=92cd214f-93b9-4fac-96af-b02cd0c19146-b9889856, queryResult=QueryResult(queryText=i want you to reset my pin, action=null, parameters={}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_pinreset_enrollment_confirmation, lifespanCount=1, parameters=null), OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0})], intent=Intent(name=projects/ecocash-onuv/agent/intents/cbd27331-6c49-4632-8f75-a3398cb8b7d2, displayName=usecase.pinreset), intentDetectionConfidence=0.814681, languageCode=en, sentimentAnalysisResult=SentimentAnalysisResult(queryTextSentiment=Sentiment(score=-0.6, magnitude=0.6))), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={message_id=4743.0, text=i want you to reset my pin, from={id=1.6109247E9, first_name=Kudzai, language_code=en, last_name=Macheyo}, chat={id=1610924700, type=private}, date=1.630463895E9}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
-.04:37:57.154 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pinreset 
-.04:38:03.597 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=88365a58-c344-4222-b25e-d343d829b7d6-b9889856, queryResult=QueryResult(queryText=yes, action=null, parameters={}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_answers, lifespanCount=1, parameters=null), OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_pinreset_enrollment_confirmation, lifespanCount=0, parameters=null), OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0})], intent=Intent(name=projects/ecocash-onuv/agent/intents/799768aa-ff3f-4b08-9975-b5a572df8b66, displayName=usecase.pinreset.security.questions.affirmative), intentDetectionConfidence=1.0, languageCode=en, sentimentAnalysisResult=SentimentAnalysisResult(queryTextSentiment=Sentiment(score=0.6, magnitude=0.6))), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={from={first_name=Kudzai, language_code=en, last_name=Macheyo, id=1.6109247E9}, date=1.630463901E9, message_id=4745.0, text=yes, chat={type=private, id=1610924700}}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
-.04:38:03.597 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pinreset.security.questions.affirmative 
-.04:38:16.409 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=940cbeff-cdd8-4895-ae81-2f920b05b95f-b9889856, queryResult=QueryResult(queryText=soccer,chitekete, action=null, parameters={any=[soccer,chitekete]}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_answers, lifespanCount=0, parameters={any=[soccer,chitekete], any.original=[soccer,chitekete]}), OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0, any=[soccer,chitekete], any.original=[soccer,chitekete]})], intent=Intent(name=projects/ecocash-onuv/agent/intents/e3b607ca-bdcf-480e-9a59-ceb3098f0c67, displayName=usecase.pinreset.security.questions.first.answer), intentDetectionConfidence=1.0, languageCode=en, sentimentAnalysisResult=null), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={chat={id=1610924700, type=private}, from={id=1.6109247E9, last_name=Macheyo, first_name=Kudzai, language_code=en}, text=soccer,chitekete, date=1.630463914E9, message_id=4747.0}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
-.04:38:16.410 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pinreset.security.questions.first.answer 
-.04:38:16.500 ERROR z.c.c.e.cpg.CheckSumGeneratorImpl - Exception on generating checksum  
+.15:09:46.194 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "cfc52600-95cc-48a1-8d89-41191d9db828-b9889856",
+  "queryResult": {
+    "queryText": "hi",
+    "action": "input.welcome",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_pay_bill_confirmation",
+        "lifespanCount": 0,
+        "parameters": {
+          "amount": 500.0,
+          "amount.original": "500"
+        }
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/ticket",
+        "lifespanCount": 46,
+        "parameters": {
+          "id": 36.0,
+          "biller": 72297.0,
+          "biller.original": "72297",
+          "number": 1234.0,
+          "number.original": "1234",
+          "amount": 500.0,
+          "amount.original": "500"
+        }
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/ecocash-onuv/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3",
+      "displayName": "Default Welcome Intent"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.3,
+        "magnitude": 0.3
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "source": "telegram",
+    "payload": {
+      "data": {
+        "text": "hi",
+        "message_id": 5005.0,
+        "from": {
+          "id": 1.6109247E9,
+          "first_name": "Kudzai",
+          "language_code": "en",
+          "last_name": "Macheyo"
+        },
+        "chat": {
+          "type": "private",
+          "id": "1610924700"
+        },
+        "date": 1.630501805E9
+      }
+    }
+  },
+  "session": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f"
+}
+ 
+.15:09:46.194 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: Default Welcome Intent 
+.15:09:46.208 INFO  z.c.c.e.d.DialogFlowServiceImpl - Sending response to dialogFlow: {
+  "fulfillmentText": "Welcome back Dagl😃👋 hope you are having a beautiful afternoon so far. What can I do for you today?",
+  "source": "ecocashchatbotcore"
+}
+ 
+.15:10:02.789 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "0d4cad68-5088-4d68-9ef2-2955649eed57-b9889856",
+  "queryResult": {
+    "queryText": "pay a bill",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_biller_code",
+        "lifespanCount": 1
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/ticket",
+        "lifespanCount": 45,
+        "parameters": {
+          "id": 36.0,
+          "biller": 72297.0,
+          "biller.original": "72297",
+          "number": 1234.0,
+          "number.original": "1234",
+          "amount": 500.0,
+          "amount.original": "500"
+        }
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/ecocash-onuv/agent/intents/70af6cec-60ae-43fd-961a-b87d02023de0",
+      "displayName": "usecase.pay.biller.scenario1"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": -0.3,
+        "magnitude": 0.3
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "source": "telegram",
+    "payload": {
+      "data": {
+        "from": {
+          "id": 1.6109247E9,
+          "last_name": "Macheyo",
+          "language_code": "en",
+          "first_name": "Kudzai"
+        },
+        "text": "pay a bill",
+        "date": 1.630501822E9,
+        "message_id": 5007.0,
+        "chat": {
+          "type": "private",
+          "id": "1610924700"
+        }
+      }
+    }
+  },
+  "session": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f"
+}
+ 
+.15:10:02.814 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pay.biller.scenario1 
+.15:10:12.205 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "64eb7db6-85ab-4711-a68e-2919b2276422-b9889856",
+  "queryResult": {
+    "queryText": "72297",
+    "parameters": {
+      "biller": 72297.0
+    },
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_biller_account",
+        "lifespanCount": 1,
+        "parameters": {
+          "biller": 72297.0,
+          "biller.original": "72297"
+        }
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/ticket",
+        "lifespanCount": 49,
+        "parameters": {
+          "id": 37.0,
+          "biller": 72297.0,
+          "biller.original": "72297",
+          "number": 1234.0,
+          "number.original": "1234",
+          "amount": 500.0,
+          "amount.original": "500"
+        }
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_biller_code",
+        "lifespanCount": 0,
+        "parameters": {
+          "biller": 72297.0,
+          "biller.original": "72297"
+        }
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0,
+          "biller": 72297.0,
+          "biller.original": "72297"
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/ecocash-onuv/agent/intents/30278eed-3fca-4d38-a9b7-8518bce225ec",
+      "displayName": "usecase.pay.biller.get.biller.code"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.3,
+        "magnitude": 0.3
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "source": "telegram",
+    "payload": {
+      "data": {
+        "date": 1.630501831E9,
+        "from": {
+          "last_name": "Macheyo",
+          "language_code": "en",
+          "first_name": "Kudzai",
+          "id": 1.6109247E9
+        },
+        "text": "72297",
+        "message_id": 5009.0,
+        "chat": {
+          "id": "1610924700",
+          "type": "private"
+        }
+      }
+    }
+  },
+  "session": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f"
+}
+ 
+.15:10:12.207 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pay.biller.get.biller.code 
+.15:10:17.418 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "e0fe5e44-4f66-4d8e-9d45-b004acf83699-b9889856",
+  "queryResult": {
+    "queryText": "1234",
+    "parameters": {
+      "number": 1234.0
+    },
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_biller_amount",
+        "lifespanCount": 1,
+        "parameters": {
+          "number": 1234.0,
+          "number.original": "1234"
+        }
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_biller_account",
+        "lifespanCount": 0,
+        "parameters": {
+          "biller": 72297.0,
+          "biller.original": "72297",
+          "number": 1234.0,
+          "number.original": "1234"
+        }
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/ticket",
+        "lifespanCount": 48,
+        "parameters": {
+          "id": 37.0,
+          "biller": 72297.0,
+          "biller.original": "72297",
+          "number": 1234.0,
+          "number.original": "1234",
+          "amount": 500.0,
+          "amount.original": "500"
+        }
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0,
+          "number": 1234.0,
+          "number.original": "1234"
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/ecocash-onuv/agent/intents/00fe1c4e-9bdf-4292-9900-f44feebc8333",
+      "displayName": "usecase.pay.biller.get.account.intent"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.3,
+        "magnitude": 0.3
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "source": "telegram",
+    "payload": {
+      "data": {
+        "from": {
+          "last_name": "Macheyo",
+          "id": 1.6109247E9,
+          "first_name": "Kudzai",
+          "language_code": "en"
+        },
+        "date": 1.630501836E9,
+        "message_id": 5011.0,
+        "chat": {
+          "type": "private",
+          "id": "1610924700"
+        },
+        "text": "1234"
+      }
+    }
+  },
+  "session": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f"
+}
+ 
+.15:10:17.418 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pay.biller.get.account.intent 
+.15:10:25.826 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "61ae7ff0-ef03-4adf-9304-27b1721fd962-b9889856",
+  "queryResult": {
+    "queryText": "500",
+    "parameters": {
+      "amount": 500.0
+    },
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_pay_bill_confirmation",
+        "lifespanCount": 1,
+        "parameters": {
+          "amount": 500.0,
+          "amount.original": "500"
+        }
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_biller_amount",
+        "lifespanCount": 0,
+        "parameters": {
+          "number": 1234.0,
+          "number.original": "1234",
+          "amount": 500.0,
+          "amount.original": "500"
+        }
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/ticket",
+        "lifespanCount": 47,
+        "parameters": {
+          "id": 37.0,
+          "biller": 72297.0,
+          "biller.original": "72297",
+          "number": 1234.0,
+          "number.original": "1234",
+          "amount": 500.0,
+          "amount.original": "500"
+        }
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0,
+          "amount": 500.0,
+          "amount.original": "500"
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/ecocash-onuv/agent/intents/bf73e60a-113c-4ea2-9a2e-904d57d673c3",
+      "displayName": "usecase.pay.biller.get.biller.amount"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.1,
+        "magnitude": 0.1
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "source": "telegram",
+    "payload": {
+      "data": {
+        "date": 1.630501845E9,
+        "text": "500",
+        "message_id": 5013.0,
+        "from": {
+          "first_name": "Kudzai",
+          "id": 1.6109247E9,
+          "language_code": "en",
+          "last_name": "Macheyo"
+        },
+        "chat": {
+          "type": "private",
+          "id": "1610924700"
+        }
+      }
+    }
+  },
+  "session": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f"
+}
+ 
+.15:10:25.831 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pay.biller.get.biller.amount 
+.15:10:25.843 ERROR z.c.c.e.cpg.CheckSumGeneratorImpl - Exception on generating checksum  
 java.io.FileNotFoundException: class path resource [cassavasmartech.jks] cannot be opened because it does not exist
 	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:187)
 	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.CheckSumGeneratorImpl.generateCheckSum(CheckSumGeneratorImpl.java:42)
 	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.RequestBuilder.build(RequestBuilder.java:97)
-	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessorImpl.getPinResetRequest(PaymentGatewayProcessorImpl.java:312)
-	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessorImpl.pinReset(PaymentGatewayProcessorImpl.java:66)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.pinresetUsecaseSecurityQuestionsFirstAnswer(DialogFlowServiceImpl.java:64)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:43)
+	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessorImpl.getBillerLookupRequest(PaymentGatewayProcessorImpl.java:174)
+	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessorImpl.lookupBiller(PaymentGatewayProcessorImpl.java:94)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.payBillerUsecaseGetBillerAmount(DialogFlowServiceImpl.java:121)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:58)
 	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:22)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -143,62 +470,100 @@ java.io.FileNotFoundException: class path resource [cassavasmartech.jks] cannot 
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.lang.Thread.run(Thread.java:748)
-.04:38:16.500 INFO  z.c.c.e.cpg.RequestBuilder - request: TransactionRequest(field1=SASAISTAG, field2=8b2c493a5cc3b0c0bc1c4aecefb32a0bb18650aa1f0a70e2a92de335452b5000, field3=772222726, field4=null, field5=null, field6=null, field7=ECO0007, field8=ecocashzw, field9=http://217.15.118.15/ecocashbotcore/customer/ticket/cpg/callback, field10=772222726210901043816499, field11=null, field12=null, field13=null, field14=null, field15=null, field16=null, field17=null, field18=null, field19=null, field20=null, field21=null, field22=null, field23=null) 
-.04:38:20.656 INFO  z.c.c.e.c.PaymentGatewayInvokerImpl - Cpg transaction response PostTransactionResponse(transactionResponse=TransactionResponse(field1=, field2=You do not have permissions to access requested service, field3=null, field4=null, field5=null, field6=null, field7=null, field8=null, field9=null, field10=null, field11=null, field12=null, field13=null, field14=null, field15=null, field16=null, field17=null, field18=null, field19=null, field20=null, field21=null, field22=null, field23=null)) 
-.04:40:04.030 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Waiting for workers to finish. 
-.04:40:04.240 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Successfully waited for workers to finish. 
-.04:40:04.540 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default' 
-.04:40:04.542 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated... 
-.04:40:04.558 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed. 
-.04:40:13.438 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final 
-.04:40:13.449 INFO  z.c.c.e.EcocashChatbotCoreApplication - Starting EcocashChatbotCoreApplication using Java 1.8.0_271 on LAPTOP-1JQH6S1S with PID 24952 (C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core\target\classes started by Kudzai Macheyo in C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core) 
-.04:40:13.451 INFO  z.c.c.e.EcocashChatbotCoreApplication - The following profiles are active: dev 
-.04:40:16.828 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFERRED mode. 
-.04:40:17.068 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 214 ms. Found 5 JPA repository interfaces. 
-.04:40:18.621 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http) 
-.04:40:18.649 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
-.04:40:18.650 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
-.04:40:18.651 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.50] 
-.04:40:18.933 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring embedded WebApplicationContext 
-.04:40:18.933 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 5134 ms 
-.04:40:19.381 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default] 
-.04:40:19.531 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final 
-.04:40:19.870 INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
-.04:40:20.148 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting... 
-.04:40:20.582 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed. 
-.04:40:20.668 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect 
-.04:40:20.860 INFO  o.h.e.b.internal.EnversServiceImpl - Envers integration enabled? : true 
-.04:40:22.055 INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - Autowired annotation is not supported on static fields: private static java.lang.String zw.co.cassavasmartech.ecocashchatbotcore.sms.SmsNotificationReceiverImpl.basicAuth 
-.04:40:22.448 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
-.04:40:23.233 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
-.04:40:23.254 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default' 
-.04:40:23.386 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
-.04:40:23.437 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/ecocashbotcore' 
-.04:40:23.440 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.04:40:23.772 INFO  o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#35c12c7a:0/SimpleConnection@19489b27 [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 60549] 
-.04:40:25.399 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Triggering deferred initialization of Spring Data repositories… 
-.04:40:25.929 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Spring Data repositories initialized! 
-.04:40:25.947 INFO  z.c.c.e.EcocashChatbotCoreApplication - Started EcocashChatbotCoreApplication in 12.886 seconds (JVM running for 14.682) 
-.04:44:23.305 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
-.04:44:23.305 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
-.04:44:23.308 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms 
-.04:44:23.498 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=5b79e288-4950-46f6-92c1-ec1f846bf6bb-b9889856, queryResult=QueryResult(queryText=hi, action=input.welcome, parameters={}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0})], intent=Intent(name=projects/ecocash-onuv/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3, displayName=Welcome), intentDetectionConfidence=1.0, languageCode=en, sentimentAnalysisResult=SentimentAnalysisResult(queryTextSentiment=Sentiment(score=0.3, magnitude=0.3))), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={chat={id=1610924700, type=private}, message_id=4749.0, date=1.630464281E9, from={last_name=Macheyo, language_code=en, id=1.6109247E9, first_name=Kudzai}, text=hi}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
-.04:44:23.498 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: Welcome 
-.04:44:36.597 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=f4831c3c-4a85-45a9-b857-0cadbffd63eb-b9889856, queryResult=QueryResult(queryText=can you reset my password, action=null, parameters={}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_pinreset_enrollment_confirmation, lifespanCount=1, parameters=null), OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0})], intent=Intent(name=projects/ecocash-onuv/agent/intents/cbd27331-6c49-4632-8f75-a3398cb8b7d2, displayName=usecase.pinreset), intentDetectionConfidence=0.7290329, languageCode=en, sentimentAnalysisResult=SentimentAnalysisResult(queryTextSentiment=Sentiment(score=-0.5, magnitude=0.5))), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={message_id=4751.0, chat={type=private, id=1610924700}, from={language_code=en, first_name=Kudzai, id=1.6109247E9, last_name=Macheyo}, text=can you reset my password, date=1.630464294E9}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
-.04:44:36.597 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pinreset 
-.04:44:43.318 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=3741d473-4804-444f-b314-e20743e6e8aa-b9889856, queryResult=QueryResult(queryText=yes, action=null, parameters={}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_answers, lifespanCount=1, parameters=null), OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_pinreset_enrollment_confirmation, lifespanCount=0, parameters=null), OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0})], intent=Intent(name=projects/ecocash-onuv/agent/intents/799768aa-ff3f-4b08-9975-b5a572df8b66, displayName=usecase.pinreset.security.questions.affirmative), intentDetectionConfidence=1.0, languageCode=en, sentimentAnalysisResult=SentimentAnalysisResult(queryTextSentiment=Sentiment(score=0.6, magnitude=0.6))), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={chat={id=1610924700, type=private}, text=yes, message_id=4753.0, date=1.630464301E9, from={language_code=en, id=1.6109247E9, last_name=Macheyo, first_name=Kudzai}}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
-.04:44:43.319 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pinreset.security.questions.affirmative 
-.04:44:52.368 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=235adc78-6a09-4485-a8c2-afe6ece2ce36-b9889856, queryResult=QueryResult(queryText=soccer,chitekete, action=null, parameters={any=[soccer,chitekete]}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_answers, lifespanCount=0, parameters={any=[soccer,chitekete], any.original=[soccer,chitekete]}), OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0, any=[soccer,chitekete], any.original=[soccer,chitekete]})], intent=Intent(name=projects/ecocash-onuv/agent/intents/e3b607ca-bdcf-480e-9a59-ceb3098f0c67, displayName=usecase.pinreset.security.questions.first.answer), intentDetectionConfidence=1.0, languageCode=en, sentimentAnalysisResult=null), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={from={last_name=Macheyo, first_name=Kudzai, id=1.6109247E9, language_code=en}, message_id=4755.0, chat={type=private, id=1610924700}, date=1.63046431E9, text=soccer,chitekete}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
-.04:44:52.369 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pinreset.security.questions.first.answer 
-.04:44:52.509 ERROR z.c.c.e.cpg.CheckSumGeneratorImpl - Exception on generating checksum  
+.15:10:25.843 INFO  z.c.c.e.cpg.RequestBuilder - request: TransactionRequest(field1=SASAISTAG, field2=8b2c493a5cc3b0c0bc1c4aecefb32a0bb18650aa1f0a70e2a92de335452b5000, field3=72297, field4=null, field5=null, field6=null, field7=CAS0009, field8=ecocashzw, field9=null, field10=72297210901151025835, field11=null, field12=null, field13=null, field14=null, field15=null, field16=null, field17=null, field18=null, field19=null, field20=null, field21=null, field22=null, field23=null) 
+.15:10:26.690 INFO  z.c.c.e.c.PaymentGatewayInvokerImpl - Cpg transaction response PostTransactionResponse(transactionResponse=TransactionResponse(field1=200, field2=SUCCESS, field3=null, field4=null, field5=BILLER, field6=FIDELITY LIFE ASSURANCE OF ZIMBABWE, field7=Active, field8=null, field9=, field10=783758190, field11=18-08-2014, field12=, field13=null, field14=null, field15=null, field16=null, field17=null, field18=null, field19=null, field20=null, field21=null, field22=null, field23=null)) 
+.15:10:26.707 INFO  z.c.c.e.d.DialogFlowServiceImpl - Sending response to dialogFlow: {
+  "fulfillmentText": "Alright thats fine,😃\nSo in summary you want to pay $ZWL500 to biller code 72297 (FIDELITY LIFE ASSURANCE OF ZIMBABWE) for account 1234\ncan you confirm this is correct?",
+  "source": "ecocashchatbotcore"
+}
+ 
+.15:10:33.489 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "56491a2c-a942-4e46-b070-7361493869fe-b9889856",
+  "queryResult": {
+    "queryText": "yes",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_pay_bill_more",
+        "lifespanCount": 1
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_pay_bill_confirmation",
+        "lifespanCount": 0,
+        "parameters": {
+          "amount": 500.0,
+          "amount.original": "500"
+        }
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/ticket",
+        "lifespanCount": 46,
+        "parameters": {
+          "id": 37.0,
+          "biller": 72297.0,
+          "biller.original": "72297",
+          "number": 1234.0,
+          "number.original": "1234",
+          "amount": 500.0,
+          "amount.original": "500"
+        }
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/ecocash-onuv/agent/intents/2e6a9d1a-67f8-4742-9618-c952864a2682",
+      "displayName": "usecase.pay.biller.get.biller.confirmation.affirmative"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.6,
+        "magnitude": 0.6
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "source": "telegram",
+    "payload": {
+      "data": {
+        "message_id": 5015.0,
+        "date": 1.630501853E9,
+        "text": "yes",
+        "chat": {
+          "id": "1610924700",
+          "type": "private"
+        },
+        "from": {
+          "id": 1.6109247E9,
+          "last_name": "Macheyo",
+          "first_name": "Kudzai",
+          "language_code": "en"
+        }
+      }
+    }
+  },
+  "session": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f"
+}
+ 
+.15:10:33.489 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pay.biller.get.biller.confirmation.affirmative 
+.15:10:33.587 ERROR z.c.c.e.cpg.CheckSumGeneratorImpl - Exception on generating checksum  
 java.io.FileNotFoundException: class path resource [cassavasmartech.jks] cannot be opened because it does not exist
 	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:187)
 	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.CheckSumGeneratorImpl.generateCheckSum(CheckSumGeneratorImpl.java:42)
 	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.RequestBuilder.build(RequestBuilder.java:97)
-	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessorImpl.getPinResetRequest(PaymentGatewayProcessorImpl.java:312)
-	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessorImpl.pinReset(PaymentGatewayProcessorImpl.java:66)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.pinresetUsecaseSecurityQuestionsFirstAnswer(DialogFlowServiceImpl.java:64)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:43)
+	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessorImpl.getSubscriberToBillerRequest(PaymentGatewayProcessorImpl.java:245)
+	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessorImpl.subscriberToBiller(PaymentGatewayProcessorImpl.java:87)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.payBillerUsecaseGetBillerConfirmationAffirmative(DialogFlowServiceImpl.java:84)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:64)
 	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:22)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -250,17 +615,732 @@ java.io.FileNotFoundException: class path resource [cassavasmartech.jks] cannot 
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.lang.Thread.run(Thread.java:748)
-.04:44:52.509 INFO  z.c.c.e.cpg.RequestBuilder - request: TransactionRequest(field1=SASAISTAG, field2=8b2c493a5cc3b0c0bc1c4aecefb32a0bb18650aa1f0a70e2a92de335452b5000, field3=772222726, field4=null, field5=null, field6=null, field7=ECO0007, field8=ecocashzw, field9=http://217.15.118.15/ecocashbotcore/customer/ticket/cpg/callback, field10=772222726210901044452502, field11=null, field12=null, field13=null, field14=null, field15=null, field16=null, field17=null, field18=null, field19=null, field20=null, field21=null, field22=null, field23=null) 
-.04:44:52.753 INFO  z.c.c.e.c.PaymentGatewayInvokerImpl - Cpg transaction response PostTransactionResponse(transactionResponse=TransactionResponse(field1=, field2=You do not have permissions to access requested service, field3=null, field4=null, field5=null, field6=null, field7=null, field8=null, field9=null, field10=null, field11=null, field12=null, field13=null, field14=null, field15=null, field16=null, field17=null, field18=null, field19=null, field20=null, field21=null, field22=null, field23=null)) 
-.04:54:56.409 WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occured (Exception message: Connection reset) 
-.04:54:56.731 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@6c3f1658: tags=[[amq.ctag-B35ffQrUWV738rzXBmgeSA]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,8), conn: Proxy@20801cbb Shared Rabbit Connection: SimpleConnection@19489b27 [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 60549], acknowledgeMode=AUTO local queue size=0 
-.04:54:56.731 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@110e9982: tags=[[amq.ctag-NRVrXd0TC9FWyt5U4ga3Iw]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,4), conn: Proxy@20801cbb Shared Rabbit Connection: SimpleConnection@19489b27 [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 60549], acknowledgeMode=AUTO local queue size=0 
-.04:54:56.731 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@5eb0a686: tags=[[amq.ctag-xCmh6yKmM1kAF4MH3h89Tg]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,9), conn: Proxy@20801cbb Shared Rabbit Connection: SimpleConnection@19489b27 [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 60549], acknowledgeMode=AUTO local queue size=0 
-.04:54:56.731 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@67f9cb52: tags=[[amq.ctag-dDa2WRjYFc8hvu4-Y-zJ3Q]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,5), conn: Proxy@20801cbb Shared Rabbit Connection: SimpleConnection@19489b27 [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 60549], acknowledgeMode=AUTO local queue size=0 
-.04:54:56.873 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.04:54:57.085 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
-org.springframework.amqp.AmqpIOException: java.net.SocketException: Permission denied: connect
-	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
+.15:10:33.587 INFO  z.c.c.e.cpg.RequestBuilder - request: TransactionRequest(field1=SASAISTAG, field2=8b2c493a5cc3b0c0bc1c4aecefb32a0bb18650aa1f0a70e2a92de335452b5000, field3=772222726, field4=72297, field5=null, field6=null, field7=ECO003, field8=ecocashzw, field9=http://217.15.118.15/ecocashbotcore/customer/ticket/cpg/callback, field10=772222726210901151033514, field11=1234, field12=500.0, field13=ZWL, field14=null, field15=null, field16=null, field17=null, field18=null, field19=null, field20=null, field21=null, field22=null, field23=ZW) 
+.15:10:33.795 INFO  z.c.c.e.c.PaymentGatewayInvokerImpl - Cpg transaction response PostTransactionResponse(transactionResponse=TransactionResponse(field1=, field2=You do not have permissions to access requested service, field3=null, field4=null, field5=null, field6=null, field7=null, field8=null, field9=null, field10=null, field11=null, field12=null, field13=null, field14=null, field15=null, field16=null, field17=null, field18=null, field19=null, field20=null, field21=null, field22=null, field23=null)) 
+.15:10:33.795 INFO  z.c.c.e.d.DialogFlowServiceImpl - Sending response to dialogFlow: {
+  "fulfillmentText": "Oops!!😔Something went wrong with the transaction:\nYou do not have permissions to access requested service\nWould you like to try this again?",
+  "source": "ecocashchatbotcore"
+}
+ 
+.15:15:26.677 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Waiting for workers to finish. 
+.15:15:26.843 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Successfully waited for workers to finish. 
+.15:15:27.283 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default' 
+.15:15:27.285 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated... 
+.15:15:27.310 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed. 
+.15:15:29.768 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final 
+.15:15:29.777 INFO  z.c.c.e.EcocashChatbotCoreApplication - Starting EcocashChatbotCoreApplication using Java 1.8.0_271 on LAPTOP-1JQH6S1S with PID 11412 (C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core\target\classes started by Kudzai Macheyo in C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core) 
+.15:15:29.778 INFO  z.c.c.e.EcocashChatbotCoreApplication - The following profiles are active: dev 
+.15:15:30.569 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFERRED mode. 
+.15:15:30.689 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 106 ms. Found 5 JPA repository interfaces. 
+.15:15:31.494 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http) 
+.15:15:31.502 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
+.15:15:31.502 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
+.15:15:31.502 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.50] 
+.15:15:31.615 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring embedded WebApplicationContext 
+.15:15:31.615 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1791 ms 
+.15:15:31.798 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default] 
+.15:15:31.853 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final 
+.15:15:31.996 INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+.15:15:32.100 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting... 
+.15:15:32.275 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed. 
+.15:15:32.304 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect 
+.15:15:32.367 INFO  o.h.e.b.internal.EnversServiceImpl - Envers integration enabled? : true 
+.15:15:33.025 INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - Autowired annotation is not supported on static fields: private static java.lang.String zw.co.cassavasmartech.ecocashchatbotcore.sms.SmsNotificationReceiverImpl.basicAuth 
+.15:15:33.090 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+.15:15:33.391 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+.15:15:33.400 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+.15:15:33.510 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
+.15:15:33.527 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/ecocashbotcore' 
+.15:15:33.528 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.15:15:33.845 INFO  o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#26c47874:0/SimpleConnection@515b9d4a [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 61361] 
+.15:15:35.533 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Triggering deferred initialization of Spring Data repositories… 
+.15:15:35.773 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Spring Data repositories initialized! 
+.15:15:35.779 INFO  z.c.c.e.EcocashChatbotCoreApplication - Started EcocashChatbotCoreApplication in 6.381 seconds (JVM running for 6.862) 
+.15:16:05.754 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Waiting for workers to finish. 
+.15:16:05.862 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Successfully waited for workers to finish. 
+.15:16:06.225 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default' 
+.15:16:06.229 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated... 
+.15:16:06.251 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed. 
+.15:16:08.536 INFO  z.c.c.e.EcocashChatbotCoreApplication - Starting EcocashChatbotCoreApplication using Java 1.8.0_271 on LAPTOP-1JQH6S1S with PID 5076 (C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core\target\classes started by Kudzai Macheyo in C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core) 
+.15:16:08.534 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final 
+.15:16:08.538 INFO  z.c.c.e.EcocashChatbotCoreApplication - The following profiles are active: dev 
+.15:16:09.341 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFERRED mode. 
+.15:16:09.471 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 116 ms. Found 5 JPA repository interfaces. 
+.15:16:10.317 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http) 
+.15:16:10.325 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
+.15:16:10.325 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
+.15:16:10.325 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.50] 
+.15:16:10.419 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring embedded WebApplicationContext 
+.15:16:10.419 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1836 ms 
+.15:16:10.576 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default] 
+.15:16:10.631 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final 
+.15:16:10.772 INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+.15:16:10.887 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting... 
+.15:16:11.061 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed. 
+.15:16:11.083 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect 
+.15:16:11.152 INFO  o.h.e.b.internal.EnversServiceImpl - Envers integration enabled? : true 
+.15:16:11.794 INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - Autowired annotation is not supported on static fields: private static java.lang.String zw.co.cassavasmartech.ecocashchatbotcore.sms.SmsNotificationReceiverImpl.basicAuth 
+.15:16:11.855 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+.15:16:12.172 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+.15:16:12.182 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+.15:16:12.318 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
+.15:16:12.334 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/ecocashbotcore' 
+.15:16:12.336 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.15:16:12.591 INFO  o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#421056e5:0/SimpleConnection@39b626e5 [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 52963] 
+.15:16:14.723 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Triggering deferred initialization of Spring Data repositories… 
+.15:16:14.957 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Spring Data repositories initialized! 
+.15:16:14.964 INFO  z.c.c.e.EcocashChatbotCoreApplication - Started EcocashChatbotCoreApplication in 6.782 seconds (JVM running for 7.269) 
+.15:16:33.677 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
+.15:16:33.677 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
+.15:16:33.685 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 8 ms 
+.15:16:33.881 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "76feb3bf-21d1-4000-8c66-f720f792a21d-b9889856",
+  "queryResult": {
+    "queryText": "hi",
+    "action": "input.welcome",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/ticket",
+        "lifespanCount": 45,
+        "parameters": {
+          "id": 37.0,
+          "biller": 72297.0,
+          "biller.original": "72297",
+          "number": 1234.0,
+          "number.original": "1234",
+          "amount": 500.0,
+          "amount.original": "500"
+        }
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_pay_bill_more",
+        "lifespanCount": 0
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/ecocash-onuv/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3",
+      "displayName": "Default Welcome Intent"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.3,
+        "magnitude": 0.3
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "source": "telegram",
+    "payload": {
+      "data": {
+        "from": {
+          "language_code": "en",
+          "last_name": "Macheyo",
+          "id": 1.6109247E9,
+          "first_name": "Kudzai"
+        },
+        "message_id": 5017.0,
+        "chat": {
+          "id": "1610924700",
+          "type": "private"
+        },
+        "text": "hi",
+        "date": 1.630502212E9
+      }
+    }
+  },
+  "session": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f"
+}
+ 
+.15:16:33.901 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: Default Welcome Intent 
+.15:16:34.395 INFO  z.c.c.e.d.DialogFlowServiceImpl - Sending response to dialogFlow: {
+  "fulfillmentText": "Welcome back Dagl😃👋 hope you are having a beautiful afternoon so far. What can I do for you today?",
+  "source": "ecocashchatbotcore"
+}
+ 
+.15:16:44.205 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "ad6499a6-7f42-4e33-a5be-a917553da5f2-b9889856",
+  "queryResult": {
+    "queryText": "pay a bill",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_biller_code",
+        "lifespanCount": 1
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/ticket",
+        "lifespanCount": 44,
+        "parameters": {
+          "id": 37.0,
+          "biller": 72297.0,
+          "biller.original": "72297",
+          "number": 1234.0,
+          "number.original": "1234",
+          "amount": 500.0,
+          "amount.original": "500"
+        }
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/ecocash-onuv/agent/intents/70af6cec-60ae-43fd-961a-b87d02023de0",
+      "displayName": "usecase.pay.biller.scenario1"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": -0.3,
+        "magnitude": 0.3
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "source": "telegram",
+    "payload": {
+      "data": {
+        "message_id": 5019.0,
+        "from": {
+          "first_name": "Kudzai",
+          "language_code": "en",
+          "last_name": "Macheyo",
+          "id": 1.6109247E9
+        },
+        "chat": {
+          "id": "1610924700",
+          "type": "private"
+        },
+        "date": 1.630502223E9,
+        "text": "pay a bill"
+      }
+    }
+  },
+  "session": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f"
+}
+ 
+.15:16:44.355 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pay.biller.scenario1 
+.15:16:56.884 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "fb8b2dee-7f8e-489c-aa6c-8b40f277bea3-b9889856",
+  "queryResult": {
+    "queryText": "72297",
+    "parameters": {
+      "biller": 72297.0
+    },
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_biller_account",
+        "lifespanCount": 1,
+        "parameters": {
+          "biller": 72297.0,
+          "biller.original": "72297"
+        }
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/ticket",
+        "lifespanCount": 49,
+        "parameters": {
+          "id": 38.0,
+          "biller": 72297.0,
+          "biller.original": "72297",
+          "number": 1234.0,
+          "number.original": "1234",
+          "amount": 500.0,
+          "amount.original": "500"
+        }
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_biller_code",
+        "lifespanCount": 0,
+        "parameters": {
+          "biller": 72297.0,
+          "biller.original": "72297"
+        }
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0,
+          "biller": 72297.0,
+          "biller.original": "72297"
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/ecocash-onuv/agent/intents/30278eed-3fca-4d38-a9b7-8518bce225ec",
+      "displayName": "usecase.pay.biller.get.biller.code"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.3,
+        "magnitude": 0.3
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "source": "telegram",
+    "payload": {
+      "data": {
+        "chat": {
+          "type": "private",
+          "id": "1610924700"
+        },
+        "message_id": 5021.0,
+        "from": {
+          "id": 1.6109247E9,
+          "first_name": "Kudzai",
+          "last_name": "Macheyo",
+          "language_code": "en"
+        },
+        "text": "72297",
+        "date": 1.630502236E9
+      }
+    }
+  },
+  "session": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f"
+}
+ 
+.15:16:56.890 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pay.biller.get.biller.code 
+.15:16:59.170 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "a56e2b62-2139-4a6b-83c1-1531736edb8e-b9889856",
+  "queryResult": {
+    "queryText": "1234",
+    "parameters": {
+      "number": 1234.0
+    },
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_biller_amount",
+        "lifespanCount": 1,
+        "parameters": {
+          "number": 1234.0,
+          "number.original": "1234"
+        }
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_biller_account",
+        "lifespanCount": 0,
+        "parameters": {
+          "biller": 72297.0,
+          "biller.original": "72297",
+          "number": 1234.0,
+          "number.original": "1234"
+        }
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/ticket",
+        "lifespanCount": 48,
+        "parameters": {
+          "id": 38.0,
+          "biller": 72297.0,
+          "biller.original": "72297",
+          "number": 1234.0,
+          "number.original": "1234",
+          "amount": 500.0,
+          "amount.original": "500"
+        }
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0,
+          "number": 1234.0,
+          "number.original": "1234"
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/ecocash-onuv/agent/intents/00fe1c4e-9bdf-4292-9900-f44feebc8333",
+      "displayName": "usecase.pay.biller.get.account.intent"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.3,
+        "magnitude": 0.3
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "source": "telegram",
+    "payload": {
+      "data": {
+        "date": 1.630502238E9,
+        "from": {
+          "first_name": "Kudzai",
+          "id": 1.6109247E9,
+          "language_code": "en",
+          "last_name": "Macheyo"
+        },
+        "text": "1234",
+        "chat": {
+          "type": "private",
+          "id": "1610924700"
+        },
+        "message_id": 5023.0
+      }
+    }
+  },
+  "session": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f"
+}
+ 
+.15:16:59.180 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pay.biller.get.account.intent 
+.15:17:03.589 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "2d7f3a62-bd87-4fca-b224-adb4d0ad8003-b9889856",
+  "queryResult": {
+    "queryText": "500",
+    "parameters": {
+      "amount": 500.0
+    },
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_pay_bill_confirmation",
+        "lifespanCount": 1,
+        "parameters": {
+          "amount": 500.0,
+          "amount.original": "500"
+        }
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_biller_amount",
+        "lifespanCount": 0,
+        "parameters": {
+          "number": 1234.0,
+          "number.original": "1234",
+          "amount": 500.0,
+          "amount.original": "500"
+        }
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/ticket",
+        "lifespanCount": 47,
+        "parameters": {
+          "id": 38.0,
+          "biller": 72297.0,
+          "biller.original": "72297",
+          "number": 1234.0,
+          "number.original": "1234",
+          "amount": 500.0,
+          "amount.original": "500"
+        }
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0,
+          "amount": 500.0,
+          "amount.original": "500"
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/ecocash-onuv/agent/intents/bf73e60a-113c-4ea2-9a2e-904d57d673c3",
+      "displayName": "usecase.pay.biller.get.biller.amount"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.1,
+        "magnitude": 0.1
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "source": "telegram",
+    "payload": {
+      "data": {
+        "message_id": 5025.0,
+        "date": 1.630502243E9,
+        "text": "500",
+        "from": {
+          "last_name": "Macheyo",
+          "first_name": "Kudzai",
+          "id": 1.6109247E9,
+          "language_code": "en"
+        },
+        "chat": {
+          "id": "1610924700",
+          "type": "private"
+        }
+      }
+    }
+  },
+  "session": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f"
+}
+ 
+.15:17:03.589 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pay.biller.get.biller.amount 
+.15:17:03.653 ERROR z.c.c.e.cpg.CheckSumGeneratorImpl - Exception on generating checksum  
+java.io.FileNotFoundException: class path resource [cassavasmartech.jks] cannot be opened because it does not exist
+	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:187)
+	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.CheckSumGeneratorImpl.generateCheckSum(CheckSumGeneratorImpl.java:42)
+	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.RequestBuilder.build(RequestBuilder.java:97)
+	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessorImpl.getBillerLookupRequest(PaymentGatewayProcessorImpl.java:174)
+	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessorImpl.lookupBiller(PaymentGatewayProcessorImpl.java:94)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.payBillerUsecaseGetBillerAmount(DialogFlowServiceImpl.java:121)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:58)
+	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:22)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1064)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:681)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:228)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1723)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+.15:17:03.653 INFO  z.c.c.e.cpg.RequestBuilder - request: TransactionRequest(field1=SASAISTAG, field2=8b2c493a5cc3b0c0bc1c4aecefb32a0bb18650aa1f0a70e2a92de335452b5000, field3=72297, field4=null, field5=null, field6=null, field7=CAS0009, field8=ecocashzw, field9=null, field10=72297210901151703646, field11=null, field12=null, field13=null, field14=null, field15=null, field16=null, field17=null, field18=null, field19=null, field20=null, field21=null, field22=null, field23=null) 
+.15:17:04.629 INFO  z.c.c.e.c.PaymentGatewayInvokerImpl - Cpg transaction response PostTransactionResponse(transactionResponse=TransactionResponse(field1=200, field2=SUCCESS, field3=null, field4=null, field5=BILLER, field6=FIDELITY LIFE ASSURANCE OF ZIMBABWE, field7=Active, field8=null, field9=, field10=783758190, field11=18-08-2014, field12=, field13=null, field14=null, field15=null, field16=null, field17=null, field18=null, field19=null, field20=null, field21=null, field22=null, field23=null)) 
+.15:17:04.643 INFO  z.c.c.e.d.DialogFlowServiceImpl - Sending response to dialogFlow: {
+  "fulfillmentText": "Alright thats fine,😃\nSo in summary you want to pay $ZWL500 to biller code 72297 (FIDELITY LIFE ASSURANCE OF ZIMBABWE) for account 1234\ncan you confirm this is correct?",
+  "source": "ecocashchatbotcore"
+}
+ 
+.15:17:08.321 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "22bce46a-dbb1-4a05-a1b0-204650607019-b9889856",
+  "queryResult": {
+    "queryText": "yes",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_pay_bill_more",
+        "lifespanCount": 1
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_pay_bill_confirmation",
+        "lifespanCount": 0,
+        "parameters": {
+          "amount": 500.0,
+          "amount.original": "500"
+        }
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/ticket",
+        "lifespanCount": 46,
+        "parameters": {
+          "id": 38.0,
+          "biller": 72297.0,
+          "biller.original": "72297",
+          "number": 1234.0,
+          "number.original": "1234",
+          "amount": 500.0,
+          "amount.original": "500"
+        }
+      },
+      {
+        "name": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/ecocash-onuv/agent/intents/2e6a9d1a-67f8-4742-9618-c952864a2682",
+      "displayName": "usecase.pay.biller.get.biller.confirmation.affirmative"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.6,
+        "magnitude": 0.6
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "source": "telegram",
+    "payload": {
+      "data": {
+        "text": "yes",
+        "from": {
+          "first_name": "Kudzai",
+          "last_name": "Macheyo",
+          "language_code": "en",
+          "id": 1.6109247E9
+        },
+        "chat": {
+          "id": "1610924700",
+          "type": "private"
+        },
+        "date": 1.630502247E9,
+        "message_id": 5027.0
+      }
+    }
+  },
+  "session": "projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f"
+}
+ 
+.15:17:08.321 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pay.biller.get.biller.confirmation.affirmative 
+.15:17:08.392 ERROR z.c.c.e.cpg.CheckSumGeneratorImpl - Exception on generating checksum  
+java.io.FileNotFoundException: class path resource [cassavasmartech.jks] cannot be opened because it does not exist
+	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:187)
+	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.CheckSumGeneratorImpl.generateCheckSum(CheckSumGeneratorImpl.java:42)
+	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.RequestBuilder.build(RequestBuilder.java:97)
+	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessorImpl.getSubscriberToBillerRequest(PaymentGatewayProcessorImpl.java:245)
+	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessorImpl.subscriberToBiller(PaymentGatewayProcessorImpl.java:87)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.payBillerUsecaseGetBillerConfirmationAffirmative(DialogFlowServiceImpl.java:84)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:64)
+	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:22)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1064)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:681)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:228)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1723)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+.15:17:08.393 INFO  z.c.c.e.cpg.RequestBuilder - request: TransactionRequest(field1=SASAISTAG, field2=8b2c493a5cc3b0c0bc1c4aecefb32a0bb18650aa1f0a70e2a92de335452b5000, field3=772222726, field4=72297, field5=null, field6=null, field7=ECO004, field8=ecocashzw, field9=http://217.15.118.15/ecocashbotcore/customer/ticket/cpg/callback, field10=772222726210901151708332, field11=1234, field12=500.0, field13=ZWL, field14=null, field15=null, field16=null, field17=null, field18=null, field19=null, field20=null, field21=null, field22=null, field23=ZW) 
+.15:17:08.849 INFO  z.c.c.e.c.PaymentGatewayInvokerImpl - Cpg transaction response PostTransactionResponse(transactionResponse=TransactionResponse(field1=603, field2=PENDING_PAYMENT, field3=772222726210901151708332, field4=null, field5=null, field6=null, field7=null, field8=null, field9=null, field10=null, field11=null, field12=null, field13=null, field14=null, field15=null, field16=null, field17=null, field18=null, field19=null, field20=null, field21=null, field22=null, field23=null)) 
+.15:17:08.849 INFO  z.c.c.e.d.DialogFlowServiceImpl - Sending response to dialogFlow: {
+  "fulfillmentText": "Great!!😃Processing your payment right now.\nYou will receive a prompt on your phone for you to enter your PIN.\n❗You have to enter the correct PIN to complete this transaction",
+  "source": "ecocashchatbotcore"
+}
+ 
+.16:02:05.696 WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occured (Exception message: Connection reset) 
+.16:02:06.266 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@426131d7: tags=[[amq.ctag-o4nzUwz6yW5egAWRiRvzSw]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,6), conn: Proxy@50085d9c Shared Rabbit Connection: SimpleConnection@39b626e5 [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 52963], acknowledgeMode=AUTO local queue size=0 
+.16:02:06.266 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@3554bdc0: tags=[[amq.ctag-whyEthq1aGzr0aTjIZTDXg]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,5), conn: Proxy@50085d9c Shared Rabbit Connection: SimpleConnection@39b626e5 [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 52963], acknowledgeMode=AUTO local queue size=0 
+.16:02:06.266 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@7c7e73c5: tags=[[amq.ctag-XDWK5FFnktBiW2war9Yu8w]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,7), conn: Proxy@50085d9c Shared Rabbit Connection: SimpleConnection@39b626e5 [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 52963], acknowledgeMode=AUTO local queue size=0 
+.16:02:06.267 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@13cc0b90: tags=[[amq.ctag-a2xs1UIgS09Y8sr9Or6taw]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,9), conn: Proxy@50085d9c Shared Rabbit Connection: SimpleConnection@39b626e5 [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 52963], acknowledgeMode=AUTO local queue size=0 
+.16:02:06.271 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@3a0aaaf0: tags=[[amq.ctag-KcuU2KzYthm0-fci8q4uCw]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,1), conn: Proxy@50085d9c Shared Rabbit Connection: SimpleConnection@39b626e5 [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 52963], acknowledgeMode=AUTO local queue size=0 
+.16:02:06.271 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@784d9bc: tags=[[amq.ctag-F-hjgdBrSiurJWRvtVTXtA]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,10), conn: Proxy@50085d9c Shared Rabbit Connection: SimpleConnection@39b626e5 [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 52963], acknowledgeMode=AUTO local queue size=0 
+.16:02:06.272 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@3a3b10f4: tags=[[amq.ctag-cg-qJwYWSVlPtDTFvJr8EA]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,4), conn: Proxy@50085d9c Shared Rabbit Connection: SimpleConnection@39b626e5 [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 52963], acknowledgeMode=AUTO local queue size=0 
+.16:02:06.276 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@58687fb7: tags=[[amq.ctag-Rm3AKfW474cIkoOdiL6DXw]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,3), conn: Proxy@50085d9c Shared Rabbit Connection: SimpleConnection@39b626e5 [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 52963], acknowledgeMode=AUTO local queue size=0 
+.16:02:06.276 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@5d9618f2: tags=[[amq.ctag-NfMeUWTef0WsDI2Xv7LnXw]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,8), conn: Proxy@50085d9c Shared Rabbit Connection: SimpleConnection@39b626e5 [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 52963], acknowledgeMode=AUTO local queue size=0 
+.16:02:06.277 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@49580ca8: tags=[[amq.ctag-mjSJLVaPTg6Gf3uUMphxHw]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,2), conn: Proxy@50085d9c Shared Rabbit Connection: SimpleConnection@39b626e5 [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 52963], acknowledgeMode=AUTO local queue size=0 
+.16:02:06.284 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.16:02:11.332 ERROR c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occured 
+java.net.SocketException: Socket Closed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:171)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:265)
+	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288)
+	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91)
+	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:184)
+	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:665)
+	at java.lang.Thread.run(Thread.java:748)
+.16:02:11.337 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
+org.springframework.amqp.AmqpTimeoutException: java.util.concurrent.TimeoutException
+	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:73)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:602)
 	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:724)
 	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createBareChannel(CachingConnectionFactory.java:675)
@@ -278,27 +1358,49 @@ org.springframework.amqp.AmqpIOException: java.net.SocketException: Permission d
 	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1347)
 	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1193)
 	at java.lang.Thread.run(Thread.java:748)
-Caused by: java.net.SocketException: Permission denied: connect
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:81)
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:476)
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:218)
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:200)
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:162)
-	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:394)
-	at java.net.Socket.connect(Socket.java:606)
-	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:60)
-	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1220)
+Caused by: java.util.concurrent.TimeoutException: null
+	at com.rabbitmq.utility.BlockingCell.get(BlockingCell.java:77)
+	at com.rabbitmq.utility.BlockingCell.uninterruptibleGet(BlockingCell.java:120)
+	at com.rabbitmq.utility.BlockingValueOrException.uninterruptibleGetValue(BlockingValueOrException.java:36)
+	at com.rabbitmq.client.impl.AMQChannel$BlockingRpcContinuation.getReply(AMQChannel.java:502)
+	at com.rabbitmq.client.impl.AMQConnection.start(AMQConnection.java:326)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1222)
 	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1170)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:640)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:615)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:565)
 	... 16 common frames omitted
-.04:54:57.087 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.04:54:57.090 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.04:54:57.092 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
-org.springframework.amqp.AmqpIOException: java.net.SocketException: Permission denied: connect
-	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
+.16:02:11.337 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.16:02:16.377 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.16:02:16.377 ERROR c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occured 
+java.net.SocketException: Socket Closed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:171)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:265)
+	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288)
+	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91)
+	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:184)
+	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:665)
+	at java.lang.Thread.run(Thread.java:748)
+.16:02:21.421 ERROR c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occured 
+java.net.SocketException: Socket Closed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:171)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:265)
+	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288)
+	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91)
+	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:184)
+	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:665)
+	at java.lang.Thread.run(Thread.java:748)
+.16:02:21.421 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
+org.springframework.amqp.AmqpTimeoutException: java.util.concurrent.TimeoutException
+	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:73)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:602)
 	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:724)
 	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:252)
@@ -312,27 +1414,38 @@ org.springframework.amqp.AmqpIOException: java.net.SocketException: Permission d
 	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1347)
 	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1193)
 	at java.lang.Thread.run(Thread.java:748)
-Caused by: java.net.SocketException: Permission denied: connect
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:81)
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:476)
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:218)
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:200)
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:162)
-	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:394)
-	at java.net.Socket.connect(Socket.java:606)
-	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:60)
-	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1220)
+Caused by: java.util.concurrent.TimeoutException: null
+	at com.rabbitmq.utility.BlockingCell.get(BlockingCell.java:77)
+	at com.rabbitmq.utility.BlockingCell.uninterruptibleGet(BlockingCell.java:120)
+	at com.rabbitmq.utility.BlockingValueOrException.uninterruptibleGetValue(BlockingValueOrException.java:36)
+	at com.rabbitmq.client.impl.AMQChannel$BlockingRpcContinuation.getReply(AMQChannel.java:502)
+	at com.rabbitmq.client.impl.AMQConnection.start(AMQConnection.java:326)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1222)
 	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1170)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:640)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:615)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:565)
 	... 12 common frames omitted
-.04:54:57.093 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.04:54:57.107 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.04:54:57.109 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
-org.springframework.amqp.AmqpIOException: java.net.SocketException: Permission denied: connect
-	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
+.16:02:21.421 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.16:02:21.468 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@32157c94: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
+.16:02:21.501 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=41m40s297ms532µs600ns). 
+.16:02:26.486 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.16:02:26.486 ERROR c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occured 
+java.net.SocketException: Socket Closed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:171)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:265)
+	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288)
+	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91)
+	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:184)
+	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:665)
+	at java.lang.Thread.run(Thread.java:748)
+.16:02:26.486 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
+org.springframework.amqp.AmqpTimeoutException: java.util.concurrent.TimeoutException
+	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:73)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:602)
 	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:724)
 	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:252)
@@ -346,27 +1459,50 @@ org.springframework.amqp.AmqpIOException: java.net.SocketException: Permission d
 	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1347)
 	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1193)
 	at java.lang.Thread.run(Thread.java:748)
-Caused by: java.net.SocketException: Permission denied: connect
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:81)
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:476)
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:218)
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:200)
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:162)
-	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:394)
-	at java.net.Socket.connect(Socket.java:606)
-	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:60)
-	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1220)
+Caused by: java.util.concurrent.TimeoutException: null
+	at com.rabbitmq.utility.BlockingCell.get(BlockingCell.java:77)
+	at com.rabbitmq.utility.BlockingCell.uninterruptibleGet(BlockingCell.java:120)
+	at com.rabbitmq.utility.BlockingValueOrException.uninterruptibleGetValue(BlockingValueOrException.java:36)
+	at com.rabbitmq.client.impl.AMQChannel$BlockingRpcContinuation.getReply(AMQChannel.java:502)
+	at com.rabbitmq.client.impl.AMQConnection.start(AMQConnection.java:326)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1222)
 	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1170)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:640)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:615)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:565)
 	... 12 common frames omitted
-.04:54:57.111 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.04:54:57.112 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.04:54:57.114 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
-org.springframework.amqp.AmqpIOException: java.net.SocketException: Permission denied: connect
-	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
+.16:02:31.539 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.16:02:31.539 ERROR c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occured 
+java.net.SocketException: Socket Closed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:171)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:265)
+	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288)
+	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91)
+	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:184)
+	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:665)
+	at java.lang.Thread.run(Thread.java:748)
+.16:02:36.579 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@78e0654d: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
+.16:02:36.594 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.16:02:36.594 ERROR c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occured 
+java.net.SocketException: Socket Closed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:171)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:265)
+	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288)
+	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91)
+	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:184)
+	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:665)
+	at java.lang.Thread.run(Thread.java:748)
+.16:02:36.594 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
+org.springframework.amqp.AmqpTimeoutException: java.util.concurrent.TimeoutException
+	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:73)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:602)
 	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:724)
 	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:252)
@@ -380,30 +1516,49 @@ org.springframework.amqp.AmqpIOException: java.net.SocketException: Permission d
 	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1347)
 	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1193)
 	at java.lang.Thread.run(Thread.java:748)
-Caused by: java.net.SocketException: Permission denied: connect
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:81)
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:476)
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:218)
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:200)
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:162)
-	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:394)
-	at java.net.Socket.connect(Socket.java:606)
-	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:60)
-	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1220)
+Caused by: java.util.concurrent.TimeoutException: null
+	at com.rabbitmq.utility.BlockingCell.get(BlockingCell.java:77)
+	at com.rabbitmq.utility.BlockingCell.uninterruptibleGet(BlockingCell.java:120)
+	at com.rabbitmq.utility.BlockingValueOrException.uninterruptibleGetValue(BlockingValueOrException.java:36)
+	at com.rabbitmq.client.impl.AMQChannel$BlockingRpcContinuation.getReply(AMQChannel.java:502)
+	at com.rabbitmq.client.impl.AMQConnection.start(AMQConnection.java:326)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1222)
 	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1170)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:640)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:615)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:565)
 	... 12 common frames omitted
-.04:54:57.115 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.04:54:57.219 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@480cbe2e: tags=[[amq.ctag-lLOORKWEoBgYAusVAZ7MLQ]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,10), conn: Proxy@20801cbb Shared Rabbit Connection: null, acknowledgeMode=AUTO local queue size=0 
-.04:54:57.220 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@2de9ca6: tags=[[amq.ctag-p4HIojz2mNDAl03Q2holxQ]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,7), conn: Proxy@20801cbb Shared Rabbit Connection: null, acknowledgeMode=AUTO local queue size=0 
-.04:54:57.350 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@7f5614f9: tags=[[amq.ctag-2ri-tE0SUDsNqH26tbSeNQ]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,1), conn: Proxy@20801cbb Shared Rabbit Connection: null, acknowledgeMode=AUTO local queue size=0 
-.04:54:57.356 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.04:54:57.361 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
-org.springframework.amqp.AmqpIOException: java.net.SocketException: Permission denied: connect
-	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
+.16:02:41.651 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.16:02:41.651 ERROR c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occured 
+java.net.SocketException: Socket Closed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:171)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:265)
+	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288)
+	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91)
+	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:184)
+	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:665)
+	at java.lang.Thread.run(Thread.java:748)
+.16:02:46.701 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.16:02:46.701 ERROR c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occured 
+java.net.SocketException: Socket Closed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:171)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:265)
+	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288)
+	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91)
+	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:184)
+	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:665)
+	at java.lang.Thread.run(Thread.java:748)
+.16:02:46.701 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
+org.springframework.amqp.AmqpTimeoutException: java.util.concurrent.TimeoutException
+	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:73)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:602)
 	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:724)
 	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:252)
@@ -417,30 +1572,50 @@ org.springframework.amqp.AmqpIOException: java.net.SocketException: Permission d
 	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1347)
 	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1193)
 	at java.lang.Thread.run(Thread.java:748)
-Caused by: java.net.SocketException: Permission denied: connect
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:81)
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:476)
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:218)
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:200)
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:162)
-	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:394)
-	at java.net.Socket.connect(Socket.java:606)
-	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:60)
-	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1220)
+Caused by: java.util.concurrent.TimeoutException: null
+	at com.rabbitmq.utility.BlockingCell.get(BlockingCell.java:77)
+	at com.rabbitmq.utility.BlockingCell.uninterruptibleGet(BlockingCell.java:120)
+	at com.rabbitmq.utility.BlockingValueOrException.uninterruptibleGetValue(BlockingValueOrException.java:36)
+	at com.rabbitmq.client.impl.AMQChannel$BlockingRpcContinuation.getReply(AMQChannel.java:502)
+	at com.rabbitmq.client.impl.AMQConnection.start(AMQConnection.java:326)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1222)
 	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1170)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:640)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:615)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:565)
 	... 12 common frames omitted
-.04:54:57.363 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.04:54:57.394 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@73608eb0: tags=[[amq.ctag-CEYPujSob-TuXPYO-uVzyw]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,2), conn: Proxy@20801cbb Shared Rabbit Connection: null, acknowledgeMode=AUTO local queue size=0 
-.04:54:57.394 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@3b78c683: tags=[[amq.ctag-Gw5vwfDDRL_xrxjxieqbng]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,6), conn: Proxy@20801cbb Shared Rabbit Connection: null, acknowledgeMode=AUTO local queue size=0 
-.04:54:57.394 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@59018eed: tags=[[amq.ctag-_aHJkaG3uGdIJ808hy_eSA]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,3), conn: Proxy@20801cbb Shared Rabbit Connection: null, acknowledgeMode=AUTO local queue size=0 
-.04:54:57.445 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.04:54:57.446 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
-org.springframework.amqp.AmqpIOException: java.net.SocketException: Permission denied: connect
-	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
+.16:02:46.738 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@4079c842: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
+.16:02:51.744 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.16:02:51.744 ERROR c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occured 
+java.net.SocketException: Socket Closed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:171)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:265)
+	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288)
+	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91)
+	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:184)
+	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:665)
+	at java.lang.Thread.run(Thread.java:748)
+.16:02:56.776 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.16:02:56.776 ERROR c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occured 
+java.net.SocketException: Socket Closed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:171)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:265)
+	at java.io.DataInputStream.readUnsignedByte(DataInputStream.java:288)
+	at com.rabbitmq.client.impl.Frame.readFrom(Frame.java:91)
+	at com.rabbitmq.client.impl.SocketFrameHandler.readFrame(SocketFrameHandler.java:184)
+	at com.rabbitmq.client.impl.AMQConnection$MainLoop.run(AMQConnection.java:665)
+	at java.lang.Thread.run(Thread.java:748)
+.16:02:56.776 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
+org.springframework.amqp.AmqpTimeoutException: java.util.concurrent.TimeoutException
+	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:73)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:602)
 	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:724)
 	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:252)
@@ -454,168 +1629,16 @@ org.springframework.amqp.AmqpIOException: java.net.SocketException: Permission d
 	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1347)
 	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1193)
 	at java.lang.Thread.run(Thread.java:748)
-Caused by: java.net.SocketException: Permission denied: connect
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:81)
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:476)
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:218)
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:200)
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:162)
-	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:394)
-	at java.net.Socket.connect(Socket.java:606)
-	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:60)
-	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1220)
+Caused by: java.util.concurrent.TimeoutException: null
+	at com.rabbitmq.utility.BlockingCell.get(BlockingCell.java:77)
+	at com.rabbitmq.utility.BlockingCell.uninterruptibleGet(BlockingCell.java:120)
+	at com.rabbitmq.utility.BlockingValueOrException.uninterruptibleGetValue(BlockingValueOrException.java:36)
+	at com.rabbitmq.client.impl.AMQChannel$BlockingRpcContinuation.getReply(AMQChannel.java:502)
+	at com.rabbitmq.client.impl.AMQConnection.start(AMQConnection.java:326)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1222)
 	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1170)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:640)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:615)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:565)
 	... 12 common frames omitted
-.04:54:57.446 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.04:54:57.447 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.04:54:57.448 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
-org.springframework.amqp.AmqpIOException: java.net.SocketException: Permission denied: connect
-	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
-	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:602)
-	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:724)
-	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:252)
-	at org.springframework.amqp.rabbit.core.RabbitTemplate.doExecute(RabbitTemplate.java:2163)
-	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2136)
-	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2116)
-	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueInfo(RabbitAdmin.java:407)
-	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueProperties(RabbitAdmin.java:391)
-	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.attemptDeclarations(AbstractMessageListenerContainer.java:1914)
-	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.redeclareElementsIfNecessary(AbstractMessageListenerContainer.java:1895)
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1347)
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1193)
-	at java.lang.Thread.run(Thread.java:748)
-Caused by: java.net.SocketException: Permission denied: connect
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:81)
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:476)
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:218)
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:200)
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:162)
-	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:394)
-	at java.net.Socket.connect(Socket.java:606)
-	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:60)
-	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1220)
-	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1170)
-	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:640)
-	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:615)
-	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:565)
-	... 12 common frames omitted
-.04:54:57.448 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.04:54:57.452 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.04:54:57.453 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
-org.springframework.amqp.AmqpIOException: java.net.SocketException: Permission denied: connect
-	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
-	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:602)
-	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:724)
-	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:252)
-	at org.springframework.amqp.rabbit.core.RabbitTemplate.doExecute(RabbitTemplate.java:2163)
-	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2136)
-	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2116)
-	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueInfo(RabbitAdmin.java:407)
-	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueProperties(RabbitAdmin.java:391)
-	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.attemptDeclarations(AbstractMessageListenerContainer.java:1914)
-	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.redeclareElementsIfNecessary(AbstractMessageListenerContainer.java:1895)
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1347)
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1193)
-	at java.lang.Thread.run(Thread.java:748)
-Caused by: java.net.SocketException: Permission denied: connect
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:81)
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:476)
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:218)
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:200)
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:162)
-	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:394)
-	at java.net.Socket.connect(Socket.java:606)
-	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:60)
-	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1220)
-	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1170)
-	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:640)
-	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:615)
-	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:565)
-	... 12 common frames omitted
-.04:54:57.453 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.04:54:57.463 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.04:54:57.464 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
-org.springframework.amqp.AmqpIOException: java.net.SocketException: Permission denied: connect
-	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
-	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:602)
-	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:724)
-	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:252)
-	at org.springframework.amqp.rabbit.core.RabbitTemplate.doExecute(RabbitTemplate.java:2163)
-	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2136)
-	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2116)
-	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueInfo(RabbitAdmin.java:407)
-	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueProperties(RabbitAdmin.java:391)
-	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.attemptDeclarations(AbstractMessageListenerContainer.java:1914)
-	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.redeclareElementsIfNecessary(AbstractMessageListenerContainer.java:1895)
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1347)
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1193)
-	at java.lang.Thread.run(Thread.java:748)
-Caused by: java.net.SocketException: Permission denied: connect
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:81)
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:476)
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:218)
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:200)
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:162)
-	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:394)
-	at java.net.Socket.connect(Socket.java:606)
-	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:60)
-	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1220)
-	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1170)
-	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:640)
-	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:615)
-	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:565)
-	... 12 common frames omitted
-.04:54:57.464 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.04:54:57.464 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.04:54:57.465 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
-org.springframework.amqp.AmqpIOException: java.net.SocketException: Permission denied: connect
-	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
-	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:602)
-	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:724)
-	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:252)
-	at org.springframework.amqp.rabbit.core.RabbitTemplate.doExecute(RabbitTemplate.java:2163)
-	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2136)
-	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2116)
-	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueInfo(RabbitAdmin.java:407)
-	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueProperties(RabbitAdmin.java:391)
-	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.attemptDeclarations(AbstractMessageListenerContainer.java:1914)
-	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.redeclareElementsIfNecessary(AbstractMessageListenerContainer.java:1895)
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1347)
-	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1193)
-	at java.lang.Thread.run(Thread.java:748)
-Caused by: java.net.SocketException: Permission denied: connect
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:81)
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:476)
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:218)
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:200)
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:162)
-	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:394)
-	at java.net.Socket.connect(Socket.java:606)
-	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:60)
-	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1220)
-	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1170)
-	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:640)
-	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:615)
-	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:565)
-	... 12 common frames omitted
-.04:54:57.465 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.04:55:02.158 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@4f581b2d: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
-.04:55:02.158 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@366174a0: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
-.04:55:02.159 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.04:55:02.187 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@5170f8c5: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
-.04:55:02.191 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@668ffd98: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
-.04:55:02.360 INFO  o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#35c12c7a:21/SimpleConnection@65b1a7dd [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 54875] 
-.04:55:02.483 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@1c04a2e1: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
-.04:55:02.498 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@683e1a2d: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
-.04:55:02.498 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@46c7c6d: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
-.04:55:02.544 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@d02ee7e: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
-.04:55:02.551 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@fa74bf2: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
-.04:55:02.551 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@5122797c: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
+.16:02:56.824 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@57845f0b: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
