@@ -1,53 +1,97 @@
-.03:31:43.009 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final 
-.03:31:43.021 INFO  z.c.c.e.EcocashChatbotCoreApplication - Starting EcocashChatbotCoreApplication using Java 1.8.0_271 on LAPTOP-1JQH6S1S with PID 612 (C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core\target\classes started by Kudzai Macheyo in C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core) 
-.03:31:43.021 INFO  z.c.c.e.EcocashChatbotCoreApplication - The following profiles are active: dev 
-.03:31:44.968 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFERRED mode. 
-.03:31:45.329 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 344 ms. Found 5 JPA repository interfaces. 
-.03:31:46.695 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http) 
-.03:31:46.707 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
-.03:31:46.707 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
-.03:31:46.707 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.50] 
-.03:31:46.808 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring embedded WebApplicationContext 
-.03:31:46.808 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3681 ms 
-.03:31:46.989 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default] 
-.03:31:47.056 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final 
-.03:31:47.197 INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
-.03:31:47.307 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting... 
-.03:31:48.397 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed. 
-.03:31:48.483 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect 
-.03:31:48.624 INFO  o.h.e.b.internal.EnversServiceImpl - Envers integration enabled? : true 
-.03:31:50.651 INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - Autowired annotation is not supported on static fields: private static java.lang.String zw.co.cassavasmartech.ecocashchatbotcore.sms.SmsNotificationReceiverImpl.basicAuth 
-.03:31:50.719 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
-.03:31:51.986 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
-.03:31:51.997 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default' 
-.03:31:52.145 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
-.03:31:52.164 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/ecocashbotcore' 
-.03:31:52.165 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.03:31:52.395 INFO  o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#4649d70a:0/SimpleConnection@1c240cf2 [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 59047] 
-.03:31:54.148 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Triggering deferred initialization of Spring Data repositories… 
-.03:31:54.429 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Spring Data repositories initialized! 
-.03:31:54.438 INFO  z.c.c.e.EcocashChatbotCoreApplication - Started EcocashChatbotCoreApplication in 12.469 seconds (JVM running for 13.956) 
-.03:32:37.314 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
-.03:32:37.314 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
-.03:32:37.315 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms 
-.03:32:37.463 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=4f606262-c3bd-499a-b3c9-0b6a53b0f76a-b9889856, queryResult=QueryResult(queryText=hello, action=input.welcome, parameters={}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0})], intent=Intent(name=projects/ecocash-onuv/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3, displayName=Welcome), intentDetectionConfidence=1.0, languageCode=en, sentimentAnalysisResult=SentimentAnalysisResult(queryTextSentiment=Sentiment(score=0.2, magnitude=0.2))), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={chat={type=private, id=1610924700}, text=hello, date=1.630459974E9, message_id=4695.0, from={language_code=en, first_name=Kudzai, id=1.6109247E9, last_name=Macheyo}}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
-.03:32:37.463 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: Welcome 
-.03:32:37.905 ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [/ecocashbotcore] threw exception [Handler dispatch failed; nested exception is java.lang.UnsupportedClassVersionError: emoji4j/EmojiUtils has been compiled by a more recent version of the Java Runtime (class file version 53.0), this version of the Java Runtime only recognizes class file versions up to 52.0] with root cause 
-java.lang.UnsupportedClassVersionError: emoji4j/EmojiUtils has been compiled by a more recent version of the Java Runtime (class file version 53.0), this version of the Java Runtime only recognizes class file versions up to 52.0
-	at java.lang.ClassLoader.defineClass1(Native Method)
-	at java.lang.ClassLoader.defineClass(ClassLoader.java:756)
-	at java.security.SecureClassLoader.defineClass(SecureClassLoader.java:142)
-	at java.net.URLClassLoader.defineClass(URLClassLoader.java:468)
-	at java.net.URLClassLoader.access$100(URLClassLoader.java:74)
-	at java.net.URLClassLoader$1.run(URLClassLoader.java:369)
-	at java.net.URLClassLoader$1.run(URLClassLoader.java:363)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.net.URLClassLoader.findClass(URLClassLoader.java:362)
-	at java.lang.ClassLoader.loadClass(ClassLoader.java:418)
-	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:355)
-	at java.lang.ClassLoader.loadClass(ClassLoader.java:351)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.welcomeIntentHandler(DialogFlowServiceImpl.java:56)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:29)
+.04:14:21.366 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final 
+.04:14:21.375 INFO  z.c.c.e.EcocashChatbotCoreApplication - Starting EcocashChatbotCoreApplication using Java 1.8.0_271 on LAPTOP-1JQH6S1S with PID 23932 (C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core\target\classes started by Kudzai Macheyo in C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core) 
+.04:14:21.377 INFO  z.c.c.e.EcocashChatbotCoreApplication - The following profiles are active: dev 
+.04:14:22.250 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFERRED mode. 
+.04:14:22.378 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 120 ms. Found 5 JPA repository interfaces. 
+.04:14:23.272 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http) 
+.04:14:23.283 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
+.04:14:23.284 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
+.04:14:23.284 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.50] 
+.04:14:23.409 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring embedded WebApplicationContext 
+.04:14:23.409 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1985 ms 
+.04:14:23.602 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default] 
+.04:14:23.703 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final 
+.04:14:24.101 INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+.04:14:24.637 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting... 
+.04:14:25.186 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed. 
+.04:14:25.483 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect 
+.04:14:25.851 INFO  o.h.e.b.internal.EnversServiceImpl - Envers integration enabled? : true 
+.04:14:27.560 INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - Autowired annotation is not supported on static fields: private static java.lang.String zw.co.cassavasmartech.ecocashchatbotcore.sms.SmsNotificationReceiverImpl.basicAuth 
+.04:14:27.763 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+.04:14:29.453 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+.04:14:29.507 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+.04:14:29.574 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
+.04:14:29.666 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/ecocashbotcore' 
+.04:14:29.671 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.04:14:30.034 INFO  o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#261ea657:0/SimpleConnection@626d2016 [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 51446] 
+.04:14:32.096 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Triggering deferred initialization of Spring Data repositories… 
+.04:14:32.633 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Spring Data repositories initialized! 
+.04:14:32.672 INFO  z.c.c.e.EcocashChatbotCoreApplication - Started EcocashChatbotCoreApplication in 11.674 seconds (JVM running for 12.162) 
+.04:14:38.937 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
+.04:14:38.937 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
+.04:14:38.940 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms 
+.04:14:39.126 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=c85ca75b-3960-4d1d-b329-469494c0aa60-b9889856, queryResult=QueryResult(queryText=hi, action=input.welcome, parameters={}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_answers, lifespanCount=0, parameters=null), OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0})], intent=Intent(name=projects/ecocash-onuv/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3, displayName=Welcome), intentDetectionConfidence=1.0, languageCode=en, sentimentAnalysisResult=SentimentAnalysisResult(queryTextSentiment=Sentiment(score=0.3, magnitude=0.3))), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={chat={type=private, id=1610924700}, from={id=1.6109247E9, last_name=Macheyo, language_code=en, first_name=Kudzai}, text=hi, date=1.630462497E9, message_id=4733.0}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
+.04:14:39.130 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: Welcome 
+.04:14:50.424 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=b4321841-9d8f-4c60-9e6f-dc2981b36440-b9889856, queryResult=QueryResult(queryText=can you reset my pin, action=null, parameters={}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_pinreset_enrollment_confirmation, lifespanCount=1, parameters=null), OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0})], intent=Intent(name=projects/ecocash-onuv/agent/intents/cbd27331-6c49-4632-8f75-a3398cb8b7d2, displayName=usecase.pinreset), intentDetectionConfidence=0.8183289, languageCode=en, sentimentAnalysisResult=SentimentAnalysisResult(queryTextSentiment=Sentiment(score=-0.4, magnitude=0.4))), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={chat={id=1610924700, type=private}, text=can you reset my pin, date=1.630462508E9, message_id=4735.0, from={id=1.6109247E9, language_code=en, first_name=Kudzai, last_name=Macheyo}}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
+.04:14:50.425 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pinreset 
+.04:14:56.196 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=2cbdd7b1-d2a2-4110-af0a-8a803923324a-b9889856, queryResult=QueryResult(queryText=yes, action=null, parameters={}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_answers, lifespanCount=1, parameters=null), OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_pinreset_enrollment_confirmation, lifespanCount=0, parameters=null), OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0})], intent=Intent(name=projects/ecocash-onuv/agent/intents/799768aa-ff3f-4b08-9975-b5a572df8b66, displayName=usecase.pinreset.security.questions.affirmative), intentDetectionConfidence=1.0, languageCode=en, sentimentAnalysisResult=SentimentAnalysisResult(queryTextSentiment=Sentiment(score=0.6, magnitude=0.6))), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={date=1.630462514E9, text=yes, message_id=4737.0, chat={id=1610924700, type=private}, from={last_name=Macheyo, first_name=Kudzai, id=1.6109247E9, language_code=en}}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
+.04:14:56.196 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pinreset.security.questions.affirmative 
+.04:15:10.308 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=6613c3c8-c301-4fc5-871b-7cbc650f9f42-b9889856, queryResult=QueryResult(queryText=soccer,chitekete, action=null, parameters={any=[soccer,chitekete]}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_answers, lifespanCount=0, parameters={any=[soccer,chitekete], any.original=[soccer,chitekete]}), OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0, any=[soccer,chitekete], any.original=[soccer,chitekete]})], intent=Intent(name=projects/ecocash-onuv/agent/intents/e3b607ca-bdcf-480e-9a59-ceb3098f0c67, displayName=usecase.pinreset.security.questions.first.answer), intentDetectionConfidence=1.0, languageCode=en, sentimentAnalysisResult=null), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={date=1.630462528E9, chat={type=private, id=1610924700}, from={id=1.6109247E9, last_name=Macheyo, first_name=Kudzai, language_code=en}, message_id=4739.0, text=soccer,chitekete}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
+.04:15:10.308 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pinreset.security.questions.first.answer 
+.04:37:15.391 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Waiting for workers to finish. 
+.04:37:15.456 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Successfully waited for workers to finish. 
+.04:37:15.705 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default' 
+.04:37:15.710 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated... 
+.04:37:15.744 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed. 
+.04:37:26.312 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final 
+.04:37:26.458 INFO  z.c.c.e.EcocashChatbotCoreApplication - Starting EcocashChatbotCoreApplication using Java 1.8.0_271 on LAPTOP-1JQH6S1S with PID 24504 (C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core\target\classes started by Kudzai Macheyo in C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core) 
+.04:37:26.460 INFO  z.c.c.e.EcocashChatbotCoreApplication - The following profiles are active: dev 
+.04:37:29.497 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFERRED mode. 
+.04:37:29.753 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 248 ms. Found 5 JPA repository interfaces. 
+.04:37:32.067 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http) 
+.04:37:32.090 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
+.04:37:32.090 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
+.04:37:32.090 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.50] 
+.04:37:32.365 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring embedded WebApplicationContext 
+.04:37:32.365 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 5631 ms 
+.04:37:33.337 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default] 
+.04:37:33.573 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final 
+.04:37:34.603 INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+.04:37:34.774 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting... 
+.04:37:35.135 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed. 
+.04:37:35.347 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect 
+.04:37:35.745 INFO  o.h.e.b.internal.EnversServiceImpl - Envers integration enabled? : true 
+.04:37:38.733 INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - Autowired annotation is not supported on static fields: private static java.lang.String zw.co.cassavasmartech.ecocashchatbotcore.sms.SmsNotificationReceiverImpl.basicAuth 
+.04:37:38.839 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+.04:37:40.279 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+.04:37:40.325 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+.04:37:40.417 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
+.04:37:40.525 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/ecocashbotcore' 
+.04:37:40.531 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.04:37:41.056 INFO  o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#658255aa:0/SimpleConnection@4f116ca2 [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 51347] 
+.04:37:41.303 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
+.04:37:41.303 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
+.04:37:41.306 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms 
+.04:37:41.909 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=27014c43-11ae-4a42-bf37-acf343a8e729-b9889856, queryResult=QueryResult(queryText=hello, action=input.welcome, parameters={}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0})], intent=Intent(name=projects/ecocash-onuv/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3, displayName=Welcome), intentDetectionConfidence=1.0, languageCode=en, sentimentAnalysisResult=SentimentAnalysisResult(queryTextSentiment=Sentiment(score=0.2, magnitude=0.2))), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={from={language_code=en, id=1.6109247E9, first_name=Kudzai, last_name=Macheyo}, message_id=4741.0, chat={id=1610924700, type=private}, date=1.630463878E9, text=hello}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
+.04:37:41.910 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: Welcome 
+.04:37:43.433 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Triggering deferred initialization of Spring Data repositories… 
+.04:37:43.919 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Spring Data repositories initialized! 
+.04:37:43.968 INFO  z.c.c.e.EcocashChatbotCoreApplication - Started EcocashChatbotCoreApplication in 18.673 seconds (JVM running for 20.888) 
+.04:37:57.154 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=92cd214f-93b9-4fac-96af-b02cd0c19146-b9889856, queryResult=QueryResult(queryText=i want you to reset my pin, action=null, parameters={}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_pinreset_enrollment_confirmation, lifespanCount=1, parameters=null), OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0})], intent=Intent(name=projects/ecocash-onuv/agent/intents/cbd27331-6c49-4632-8f75-a3398cb8b7d2, displayName=usecase.pinreset), intentDetectionConfidence=0.814681, languageCode=en, sentimentAnalysisResult=SentimentAnalysisResult(queryTextSentiment=Sentiment(score=-0.6, magnitude=0.6))), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={message_id=4743.0, text=i want you to reset my pin, from={id=1.6109247E9, first_name=Kudzai, language_code=en, last_name=Macheyo}, chat={id=1610924700, type=private}, date=1.630463895E9}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
+.04:37:57.154 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pinreset 
+.04:38:03.597 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=88365a58-c344-4222-b25e-d343d829b7d6-b9889856, queryResult=QueryResult(queryText=yes, action=null, parameters={}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_answers, lifespanCount=1, parameters=null), OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_pinreset_enrollment_confirmation, lifespanCount=0, parameters=null), OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0})], intent=Intent(name=projects/ecocash-onuv/agent/intents/799768aa-ff3f-4b08-9975-b5a572df8b66, displayName=usecase.pinreset.security.questions.affirmative), intentDetectionConfidence=1.0, languageCode=en, sentimentAnalysisResult=SentimentAnalysisResult(queryTextSentiment=Sentiment(score=0.6, magnitude=0.6))), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={from={first_name=Kudzai, language_code=en, last_name=Macheyo, id=1.6109247E9}, date=1.630463901E9, message_id=4745.0, text=yes, chat={type=private, id=1610924700}}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
+.04:38:03.597 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pinreset.security.questions.affirmative 
+.04:38:16.409 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=940cbeff-cdd8-4895-ae81-2f920b05b95f-b9889856, queryResult=QueryResult(queryText=soccer,chitekete, action=null, parameters={any=[soccer,chitekete]}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_answers, lifespanCount=0, parameters={any=[soccer,chitekete], any.original=[soccer,chitekete]}), OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0, any=[soccer,chitekete], any.original=[soccer,chitekete]})], intent=Intent(name=projects/ecocash-onuv/agent/intents/e3b607ca-bdcf-480e-9a59-ceb3098f0c67, displayName=usecase.pinreset.security.questions.first.answer), intentDetectionConfidence=1.0, languageCode=en, sentimentAnalysisResult=null), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={chat={id=1610924700, type=private}, from={id=1.6109247E9, last_name=Macheyo, first_name=Kudzai, language_code=en}, text=soccer,chitekete, date=1.630463914E9, message_id=4747.0}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
+.04:38:16.410 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pinreset.security.questions.first.answer 
+.04:38:16.500 ERROR z.c.c.e.cpg.CheckSumGeneratorImpl - Exception on generating checksum  
+java.io.FileNotFoundException: class path resource [cassavasmartech.jks] cannot be opened because it does not exist
+	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:187)
+	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.CheckSumGeneratorImpl.generateCheckSum(CheckSumGeneratorImpl.java:42)
+	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.RequestBuilder.build(RequestBuilder.java:97)
+	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessorImpl.getPinResetRequest(PaymentGatewayProcessorImpl.java:312)
+	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessorImpl.pinReset(PaymentGatewayProcessorImpl.java:66)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.pinresetUsecaseSecurityQuestionsFirstAnswer(DialogFlowServiceImpl.java:64)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:43)
 	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:22)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -99,62 +143,122 @@ java.lang.UnsupportedClassVersionError: emoji4j/EmojiUtils has been compiled by 
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.lang.Thread.run(Thread.java:748)
-.03:36:43.207 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Waiting for workers to finish. 
-.03:36:43.766 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Successfully waited for workers to finish. 
-.03:36:44.027 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default' 
-.03:36:44.029 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated... 
-.03:36:44.046 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed. 
-.03:36:48.169 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final 
-.03:36:48.181 INFO  z.c.c.e.EcocashChatbotCoreApplication - Starting EcocashChatbotCoreApplication using Java 1.8.0_271 on LAPTOP-1JQH6S1S with PID 20048 (C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core\target\classes started by Kudzai Macheyo in C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core) 
-.03:36:48.181 INFO  z.c.c.e.EcocashChatbotCoreApplication - The following profiles are active: dev 
-.03:36:49.020 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFERRED mode. 
-.03:36:49.144 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 115 ms. Found 5 JPA repository interfaces. 
-.03:36:50.019 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http) 
-.03:36:50.032 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
-.03:36:50.032 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
-.03:36:50.032 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.50] 
-.03:36:50.138 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring embedded WebApplicationContext 
-.03:36:50.138 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1910 ms 
-.03:36:50.305 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default] 
-.03:36:50.361 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final 
-.03:36:50.508 INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
-.03:36:50.629 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting... 
-.03:36:50.815 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed. 
-.03:36:50.846 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect 
-.03:36:50.905 INFO  o.h.e.b.internal.EnversServiceImpl - Envers integration enabled? : true 
-.03:36:51.638 INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - Autowired annotation is not supported on static fields: private static java.lang.String zw.co.cassavasmartech.ecocashchatbotcore.sms.SmsNotificationReceiverImpl.basicAuth 
-.03:36:51.708 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
-.03:36:52.038 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
-.03:36:52.048 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default' 
-.03:36:52.116 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
-.03:36:52.136 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/ecocashbotcore' 
-.03:36:52.137 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.03:36:52.338 INFO  o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#4649d70a:0/SimpleConnection@58f2466c [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 60581] 
-.03:36:53.735 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Triggering deferred initialization of Spring Data repositories… 
-.03:36:54.344 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Spring Data repositories initialized! 
-.03:36:54.365 INFO  z.c.c.e.EcocashChatbotCoreApplication - Started EcocashChatbotCoreApplication in 6.567 seconds (JVM running for 7.06) 
-.03:36:59.483 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
-.03:36:59.483 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
-.03:36:59.483 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms 
-.03:36:59.700 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=51e4210e-d7a9-489d-b816-152eba817d54-b9889856, queryResult=QueryResult(queryText=hi, action=input.welcome, parameters={}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0})], intent=Intent(name=projects/ecocash-onuv/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3, displayName=Welcome), intentDetectionConfidence=1.0, languageCode=en, sentimentAnalysisResult=SentimentAnalysisResult(queryTextSentiment=Sentiment(score=0.3, magnitude=0.3))), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={from={id=1.6109247E9, first_name=Kudzai, last_name=Macheyo, language_code=en}, chat={type=private, id=1610924700}, text=hi, date=1.630460237E9, message_id=4696.0}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
-.03:36:59.700 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: Welcome 
-.03:38:11.518 WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occured (Exception message: Connection reset) 
-.03:38:11.730 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@5a1dddba: tags=[[amq.ctag-Qix-8RDa4XFyNsmRmuLXKg]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,10), conn: Proxy@3caafa67 Shared Rabbit Connection: SimpleConnection@58f2466c [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 60581], acknowledgeMode=AUTO local queue size=0 
-.03:38:11.730 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@59018eed: tags=[[amq.ctag-jWqCbXYAHG6UkO97hphv9w]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,1), conn: Proxy@3caafa67 Shared Rabbit Connection: SimpleConnection@58f2466c [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 60581], acknowledgeMode=AUTO local queue size=0 
-.03:38:11.730 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@2eda2062: tags=[[amq.ctag-AWCiLjTTffC9wGirZxzYLQ]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,8), conn: Proxy@3caafa67 Shared Rabbit Connection: SimpleConnection@58f2466c [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 60581], acknowledgeMode=AUTO local queue size=0 
-.03:38:11.730 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@1625789b: tags=[[amq.ctag-2OYFAV2kDVfaH_yhDwix9w]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,3), conn: Proxy@3caafa67 Shared Rabbit Connection: SimpleConnection@58f2466c [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 60581], acknowledgeMode=AUTO local queue size=0 
-.03:38:11.731 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.03:38:11.899 INFO  o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#4649d70a:1/SimpleConnection@7799910e [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 49313] 
-.03:38:12.370 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@13866329: tags=[[amq.ctag-SlIVw_rNdiW-Z7lIleYlVg]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,7), conn: Proxy@3caafa67 Shared Rabbit Connection: SimpleConnection@7799910e [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 49313], acknowledgeMode=AUTO local queue size=0 
-.03:38:12.370 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@24876a7e: tags=[[amq.ctag-TYcV2P_4cvKogIEinn5stQ]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,4), conn: Proxy@3caafa67 Shared Rabbit Connection: SimpleConnection@7799910e [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 49313], acknowledgeMode=AUTO local queue size=0 
-.03:38:12.370 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@76973a6: tags=[[amq.ctag-yEzQaG2KBUQNJky5_VpAxQ]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,6), conn: Proxy@3caafa67 Shared Rabbit Connection: SimpleConnection@7799910e [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 49313], acknowledgeMode=AUTO local queue size=0 
-.03:38:12.370 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@71a4f441: tags=[[amq.ctag-QfcoTYNnMKtVeMpgd7yBiA]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,9), conn: Proxy@3caafa67 Shared Rabbit Connection: SimpleConnection@7799910e [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 49313], acknowledgeMode=AUTO local queue size=0 
-.03:38:12.370 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@2ee39e73: tags=[[amq.ctag-xv5viy5QtvIvUpVq4jKFQw]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,2), conn: Proxy@3caafa67 Shared Rabbit Connection: SimpleConnection@7799910e [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 49313], acknowledgeMode=AUTO local queue size=0 
-.03:38:12.370 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@c4d2c44: tags=[[amq.ctag-eOt88SexIyysJgVx_cC5MQ]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,5), conn: Proxy@3caafa67 Shared Rabbit Connection: SimpleConnection@7799910e [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 49313], acknowledgeMode=AUTO local queue size=0 
-.03:48:41.870 WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occured (Exception message: Connection reset) 
-.03:48:42.305 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@7f1fe004: tags=[[amq.ctag-K_4M0RSNw7ZK12Baw8fYaw]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,8), conn: Proxy@3caafa67 Shared Rabbit Connection: SimpleConnection@7799910e [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 49313], acknowledgeMode=AUTO local queue size=0 
-.03:48:42.306 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.03:48:42.308 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
+.04:38:16.500 INFO  z.c.c.e.cpg.RequestBuilder - request: TransactionRequest(field1=SASAISTAG, field2=8b2c493a5cc3b0c0bc1c4aecefb32a0bb18650aa1f0a70e2a92de335452b5000, field3=772222726, field4=null, field5=null, field6=null, field7=ECO0007, field8=ecocashzw, field9=http://217.15.118.15/ecocashbotcore/customer/ticket/cpg/callback, field10=772222726210901043816499, field11=null, field12=null, field13=null, field14=null, field15=null, field16=null, field17=null, field18=null, field19=null, field20=null, field21=null, field22=null, field23=null) 
+.04:38:20.656 INFO  z.c.c.e.c.PaymentGatewayInvokerImpl - Cpg transaction response PostTransactionResponse(transactionResponse=TransactionResponse(field1=, field2=You do not have permissions to access requested service, field3=null, field4=null, field5=null, field6=null, field7=null, field8=null, field9=null, field10=null, field11=null, field12=null, field13=null, field14=null, field15=null, field16=null, field17=null, field18=null, field19=null, field20=null, field21=null, field22=null, field23=null)) 
+.04:40:04.030 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Waiting for workers to finish. 
+.04:40:04.240 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Successfully waited for workers to finish. 
+.04:40:04.540 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default' 
+.04:40:04.542 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated... 
+.04:40:04.558 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed. 
+.04:40:13.438 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final 
+.04:40:13.449 INFO  z.c.c.e.EcocashChatbotCoreApplication - Starting EcocashChatbotCoreApplication using Java 1.8.0_271 on LAPTOP-1JQH6S1S with PID 24952 (C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core\target\classes started by Kudzai Macheyo in C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core) 
+.04:40:13.451 INFO  z.c.c.e.EcocashChatbotCoreApplication - The following profiles are active: dev 
+.04:40:16.828 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFERRED mode. 
+.04:40:17.068 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 214 ms. Found 5 JPA repository interfaces. 
+.04:40:18.621 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http) 
+.04:40:18.649 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
+.04:40:18.650 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
+.04:40:18.651 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.50] 
+.04:40:18.933 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring embedded WebApplicationContext 
+.04:40:18.933 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 5134 ms 
+.04:40:19.381 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default] 
+.04:40:19.531 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final 
+.04:40:19.870 INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+.04:40:20.148 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting... 
+.04:40:20.582 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed. 
+.04:40:20.668 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect 
+.04:40:20.860 INFO  o.h.e.b.internal.EnversServiceImpl - Envers integration enabled? : true 
+.04:40:22.055 INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - Autowired annotation is not supported on static fields: private static java.lang.String zw.co.cassavasmartech.ecocashchatbotcore.sms.SmsNotificationReceiverImpl.basicAuth 
+.04:40:22.448 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+.04:40:23.233 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+.04:40:23.254 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+.04:40:23.386 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
+.04:40:23.437 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/ecocashbotcore' 
+.04:40:23.440 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.04:40:23.772 INFO  o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#35c12c7a:0/SimpleConnection@19489b27 [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 60549] 
+.04:40:25.399 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Triggering deferred initialization of Spring Data repositories… 
+.04:40:25.929 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Spring Data repositories initialized! 
+.04:40:25.947 INFO  z.c.c.e.EcocashChatbotCoreApplication - Started EcocashChatbotCoreApplication in 12.886 seconds (JVM running for 14.682) 
+.04:44:23.305 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
+.04:44:23.305 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
+.04:44:23.308 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms 
+.04:44:23.498 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=5b79e288-4950-46f6-92c1-ec1f846bf6bb-b9889856, queryResult=QueryResult(queryText=hi, action=input.welcome, parameters={}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0})], intent=Intent(name=projects/ecocash-onuv/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3, displayName=Welcome), intentDetectionConfidence=1.0, languageCode=en, sentimentAnalysisResult=SentimentAnalysisResult(queryTextSentiment=Sentiment(score=0.3, magnitude=0.3))), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={chat={id=1610924700, type=private}, message_id=4749.0, date=1.630464281E9, from={last_name=Macheyo, language_code=en, id=1.6109247E9, first_name=Kudzai}, text=hi}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
+.04:44:23.498 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: Welcome 
+.04:44:36.597 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=f4831c3c-4a85-45a9-b857-0cadbffd63eb-b9889856, queryResult=QueryResult(queryText=can you reset my password, action=null, parameters={}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_pinreset_enrollment_confirmation, lifespanCount=1, parameters=null), OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0})], intent=Intent(name=projects/ecocash-onuv/agent/intents/cbd27331-6c49-4632-8f75-a3398cb8b7d2, displayName=usecase.pinreset), intentDetectionConfidence=0.7290329, languageCode=en, sentimentAnalysisResult=SentimentAnalysisResult(queryTextSentiment=Sentiment(score=-0.5, magnitude=0.5))), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={message_id=4751.0, chat={type=private, id=1610924700}, from={language_code=en, first_name=Kudzai, id=1.6109247E9, last_name=Macheyo}, text=can you reset my password, date=1.630464294E9}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
+.04:44:36.597 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pinreset 
+.04:44:43.318 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=3741d473-4804-444f-b314-e20743e6e8aa-b9889856, queryResult=QueryResult(queryText=yes, action=null, parameters={}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_answers, lifespanCount=1, parameters=null), OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_pinreset_enrollment_confirmation, lifespanCount=0, parameters=null), OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0})], intent=Intent(name=projects/ecocash-onuv/agent/intents/799768aa-ff3f-4b08-9975-b5a572df8b66, displayName=usecase.pinreset.security.questions.affirmative), intentDetectionConfidence=1.0, languageCode=en, sentimentAnalysisResult=SentimentAnalysisResult(queryTextSentiment=Sentiment(score=0.6, magnitude=0.6))), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={chat={id=1610924700, type=private}, text=yes, message_id=4753.0, date=1.630464301E9, from={language_code=en, id=1.6109247E9, last_name=Macheyo, first_name=Kudzai}}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
+.04:44:43.319 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pinreset.security.questions.affirmative 
+.04:44:52.368 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=235adc78-6a09-4485-a8c2-afe6ece2ce36-b9889856, queryResult=QueryResult(queryText=soccer,chitekete, action=null, parameters={any=[soccer,chitekete]}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_answers, lifespanCount=0, parameters={any=[soccer,chitekete], any.original=[soccer,chitekete]}), OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0, any=[soccer,chitekete], any.original=[soccer,chitekete]})], intent=Intent(name=projects/ecocash-onuv/agent/intents/e3b607ca-bdcf-480e-9a59-ceb3098f0c67, displayName=usecase.pinreset.security.questions.first.answer), intentDetectionConfidence=1.0, languageCode=en, sentimentAnalysisResult=null), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={from={last_name=Macheyo, first_name=Kudzai, id=1.6109247E9, language_code=en}, message_id=4755.0, chat={type=private, id=1610924700}, date=1.63046431E9, text=soccer,chitekete}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
+.04:44:52.369 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pinreset.security.questions.first.answer 
+.04:44:52.509 ERROR z.c.c.e.cpg.CheckSumGeneratorImpl - Exception on generating checksum  
+java.io.FileNotFoundException: class path resource [cassavasmartech.jks] cannot be opened because it does not exist
+	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:187)
+	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.CheckSumGeneratorImpl.generateCheckSum(CheckSumGeneratorImpl.java:42)
+	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.RequestBuilder.build(RequestBuilder.java:97)
+	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessorImpl.getPinResetRequest(PaymentGatewayProcessorImpl.java:312)
+	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessorImpl.pinReset(PaymentGatewayProcessorImpl.java:66)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.pinresetUsecaseSecurityQuestionsFirstAnswer(DialogFlowServiceImpl.java:64)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:43)
+	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:22)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1064)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:681)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:228)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1723)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+.04:44:52.509 INFO  z.c.c.e.cpg.RequestBuilder - request: TransactionRequest(field1=SASAISTAG, field2=8b2c493a5cc3b0c0bc1c4aecefb32a0bb18650aa1f0a70e2a92de335452b5000, field3=772222726, field4=null, field5=null, field6=null, field7=ECO0007, field8=ecocashzw, field9=http://217.15.118.15/ecocashbotcore/customer/ticket/cpg/callback, field10=772222726210901044452502, field11=null, field12=null, field13=null, field14=null, field15=null, field16=null, field17=null, field18=null, field19=null, field20=null, field21=null, field22=null, field23=null) 
+.04:44:52.753 INFO  z.c.c.e.c.PaymentGatewayInvokerImpl - Cpg transaction response PostTransactionResponse(transactionResponse=TransactionResponse(field1=, field2=You do not have permissions to access requested service, field3=null, field4=null, field5=null, field6=null, field7=null, field8=null, field9=null, field10=null, field11=null, field12=null, field13=null, field14=null, field15=null, field16=null, field17=null, field18=null, field19=null, field20=null, field21=null, field22=null, field23=null)) 
+.04:54:56.409 WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occured (Exception message: Connection reset) 
+.04:54:56.731 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@6c3f1658: tags=[[amq.ctag-B35ffQrUWV738rzXBmgeSA]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,8), conn: Proxy@20801cbb Shared Rabbit Connection: SimpleConnection@19489b27 [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 60549], acknowledgeMode=AUTO local queue size=0 
+.04:54:56.731 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@110e9982: tags=[[amq.ctag-NRVrXd0TC9FWyt5U4ga3Iw]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,4), conn: Proxy@20801cbb Shared Rabbit Connection: SimpleConnection@19489b27 [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 60549], acknowledgeMode=AUTO local queue size=0 
+.04:54:56.731 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@5eb0a686: tags=[[amq.ctag-xCmh6yKmM1kAF4MH3h89Tg]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,9), conn: Proxy@20801cbb Shared Rabbit Connection: SimpleConnection@19489b27 [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 60549], acknowledgeMode=AUTO local queue size=0 
+.04:54:56.731 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@67f9cb52: tags=[[amq.ctag-dDa2WRjYFc8hvu4-Y-zJ3Q]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,5), conn: Proxy@20801cbb Shared Rabbit Connection: SimpleConnection@19489b27 [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 60549], acknowledgeMode=AUTO local queue size=0 
+.04:54:56.873 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.04:54:57.085 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
 org.springframework.amqp.AmqpIOException: java.net.SocketException: Permission denied: connect
 	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:602)
@@ -190,12 +294,9 @@ Caused by: java.net.SocketException: Permission denied: connect
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:615)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:565)
 	... 16 common frames omitted
-.03:48:42.312 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.03:48:42.457 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@2bb3aafc: tags=[[amq.ctag-cTfNvPztO3ygcTAwpJWI3A]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,2), conn: Proxy@3caafa67 Shared Rabbit Connection: null, acknowledgeMode=AUTO local queue size=0 
-.03:48:42.457 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@7bb04b45: tags=[[amq.ctag-30w7rJBi43TJFhLsOdIrjQ]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,9), conn: Proxy@3caafa67 Shared Rabbit Connection: null, acknowledgeMode=AUTO local queue size=0 
-.03:48:42.458 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@2936d406: tags=[[amq.ctag-8HoNS859ZITbw70VXRetmw]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,1), conn: Proxy@3caafa67 Shared Rabbit Connection: null, acknowledgeMode=AUTO local queue size=0 
-.03:48:42.459 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.03:48:42.460 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
+.04:54:57.087 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.04:54:57.090 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.04:54:57.092 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
 org.springframework.amqp.AmqpIOException: java.net.SocketException: Permission denied: connect
 	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:602)
@@ -227,9 +328,9 @@ Caused by: java.net.SocketException: Permission denied: connect
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:615)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:565)
 	... 12 common frames omitted
-.03:48:42.460 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.03:48:42.462 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.03:48:42.463 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
+.04:54:57.093 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.04:54:57.107 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.04:54:57.109 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
 org.springframework.amqp.AmqpIOException: java.net.SocketException: Permission denied: connect
 	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:602)
@@ -261,9 +362,9 @@ Caused by: java.net.SocketException: Permission denied: connect
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:615)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:565)
 	... 12 common frames omitted
-.03:48:42.463 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.03:48:42.465 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.03:48:42.466 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
+.04:54:57.111 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.04:54:57.112 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.04:54:57.114 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
 org.springframework.amqp.AmqpIOException: java.net.SocketException: Permission denied: connect
 	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:602)
@@ -295,13 +396,12 @@ Caused by: java.net.SocketException: Permission denied: connect
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:615)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:565)
 	... 12 common frames omitted
-.03:48:42.466 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.03:48:42.534 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@327459cc: tags=[[amq.ctag-SjPlyEkChV81BR0qgD-2gA]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,4), conn: Proxy@3caafa67 Shared Rabbit Connection: null, acknowledgeMode=AUTO local queue size=0 
-.03:48:42.534 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@41e2a537: tags=[[amq.ctag-bS2XOuNDYb_47Uw8bc5wHA]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,3), conn: Proxy@3caafa67 Shared Rabbit Connection: null, acknowledgeMode=AUTO local queue size=0 
-.03:48:42.534 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@74b85a6f: tags=[[amq.ctag-wKxzVfe8XhsGLMPV4_4o0w]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,6), conn: Proxy@3caafa67 Shared Rabbit Connection: null, acknowledgeMode=AUTO local queue size=0 
-.03:48:42.534 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@7fecf56c: tags=[[amq.ctag-gKMLyXAxb4J61oKcBN2flQ]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,5), conn: Proxy@3caafa67 Shared Rabbit Connection: null, acknowledgeMode=AUTO local queue size=0 
-.03:48:42.535 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.03:48:42.537 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
+.04:54:57.115 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.04:54:57.219 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@480cbe2e: tags=[[amq.ctag-lLOORKWEoBgYAusVAZ7MLQ]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,10), conn: Proxy@20801cbb Shared Rabbit Connection: null, acknowledgeMode=AUTO local queue size=0 
+.04:54:57.220 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@2de9ca6: tags=[[amq.ctag-p4HIojz2mNDAl03Q2holxQ]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,7), conn: Proxy@20801cbb Shared Rabbit Connection: null, acknowledgeMode=AUTO local queue size=0 
+.04:54:57.350 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@7f5614f9: tags=[[amq.ctag-2ri-tE0SUDsNqH26tbSeNQ]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,1), conn: Proxy@20801cbb Shared Rabbit Connection: null, acknowledgeMode=AUTO local queue size=0 
+.04:54:57.356 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.04:54:57.361 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
 org.springframework.amqp.AmqpIOException: java.net.SocketException: Permission denied: connect
 	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:602)
@@ -333,9 +433,12 @@ Caused by: java.net.SocketException: Permission denied: connect
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:615)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:565)
 	... 12 common frames omitted
-.03:48:42.537 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.03:48:42.538 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.03:48:42.538 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
+.04:54:57.363 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.04:54:57.394 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@73608eb0: tags=[[amq.ctag-CEYPujSob-TuXPYO-uVzyw]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,2), conn: Proxy@20801cbb Shared Rabbit Connection: null, acknowledgeMode=AUTO local queue size=0 
+.04:54:57.394 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@3b78c683: tags=[[amq.ctag-Gw5vwfDDRL_xrxjxieqbng]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,6), conn: Proxy@20801cbb Shared Rabbit Connection: null, acknowledgeMode=AUTO local queue size=0 
+.04:54:57.394 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@59018eed: tags=[[amq.ctag-_aHJkaG3uGdIJ808hy_eSA]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,3), conn: Proxy@20801cbb Shared Rabbit Connection: null, acknowledgeMode=AUTO local queue size=0 
+.04:54:57.445 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.04:54:57.446 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
 org.springframework.amqp.AmqpIOException: java.net.SocketException: Permission denied: connect
 	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:602)
@@ -367,9 +470,9 @@ Caused by: java.net.SocketException: Permission denied: connect
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:615)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:565)
 	... 12 common frames omitted
-.03:48:42.539 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.03:48:42.540 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.03:48:42.541 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
+.04:54:57.446 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.04:54:57.447 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.04:54:57.448 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
 org.springframework.amqp.AmqpIOException: java.net.SocketException: Permission denied: connect
 	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:602)
@@ -401,9 +504,9 @@ Caused by: java.net.SocketException: Permission denied: connect
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:615)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:565)
 	... 12 common frames omitted
-.03:48:42.542 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.03:48:42.544 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.03:48:42.545 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
+.04:54:57.448 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.04:54:57.452 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.04:54:57.453 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
 org.springframework.amqp.AmqpIOException: java.net.SocketException: Permission denied: connect
 	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:602)
@@ -435,10 +538,9 @@ Caused by: java.net.SocketException: Permission denied: connect
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:615)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:565)
 	... 12 common frames omitted
-.03:48:42.545 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.03:48:42.555 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@37370402: tags=[[amq.ctag-X_T-yNF5TnwBhlpDyyULHQ]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,7), conn: Proxy@3caafa67 Shared Rabbit Connection: null, acknowledgeMode=AUTO local queue size=0 
-.03:48:42.556 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.03:48:42.573 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
+.04:54:57.453 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.04:54:57.463 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.04:54:57.464 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
 org.springframework.amqp.AmqpIOException: java.net.SocketException: Permission denied: connect
 	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:602)
@@ -470,10 +572,9 @@ Caused by: java.net.SocketException: Permission denied: connect
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:615)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:565)
 	... 12 common frames omitted
-.03:48:42.574 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.03:48:42.658 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@5e48493d: tags=[[amq.ctag-7vWfwWI_7ELsJJu79MNg4w]], channel=Cached Rabbit Channel: AMQChannel(amqp://developer@192.168.84.99:5672/ecocash-self-service,10), conn: Proxy@3caafa67 Shared Rabbit Connection: null, acknowledgeMode=AUTO local queue size=0 
-.03:48:42.659 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.03:48:42.660 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
+.04:54:57.464 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.04:54:57.464 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.04:54:57.465 ERROR o.s.a.r.l.SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s). 
 org.springframework.amqp.AmqpIOException: java.net.SocketException: Permission denied: connect
 	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:602)
@@ -505,63 +606,16 @@ Caused by: java.net.SocketException: Permission denied: connect
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:615)
 	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:565)
 	... 12 common frames omitted
-.03:48:42.660 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.03:48:47.518 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@7a3f04f1: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
-.03:48:47.519 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.03:48:47.581 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@30dc74c3: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
-.03:48:47.582 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@41cb791e: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
-.03:48:47.605 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@1ee8998a: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
-.03:48:47.621 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@3e3c70c: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
-.03:48:47.675 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@65cae711: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
-.03:48:47.675 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@6a9e1bc8: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
-.03:48:47.734 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@1212e8b3: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
-.03:48:47.734 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@dc0fc16: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
-.03:48:47.782 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@5ada8497: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
-.03:48:48.697 INFO  o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#4649d70a:22/SimpleConnection@1afb722d [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 55919] 
-.03:50:57.418 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=d1b6cbcf-09e6-4b5b-b820-be82368cc329-b9889856, queryResult=QueryResult(queryText=hello, action=input.welcome, parameters={}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0})], intent=Intent(name=projects/ecocash-onuv/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3, displayName=Welcome), intentDetectionConfidence=1.0, languageCode=en, sentimentAnalysisResult=SentimentAnalysisResult(queryTextSentiment=Sentiment(score=0.2, magnitude=0.2))), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={from={id=1.6109247E9, last_name=Macheyo, language_code=en, first_name=Kudzai}, message_id=4698.0, date=1.630461075E9, chat={id=1610924700, type=private}, text=hello}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
-.03:50:57.418 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: Welcome 
-.03:51:01.866 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Waiting for workers to finish. 
-.03:51:02.424 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Successfully waited for workers to finish. 
-.03:51:02.835 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default' 
-.03:51:02.840 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated... 
-.03:51:02.854 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed. 
-.03:51:13.909 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final 
-.03:51:13.919 INFO  z.c.c.e.EcocashChatbotCoreApplication - Starting EcocashChatbotCoreApplication using Java 1.8.0_271 on LAPTOP-1JQH6S1S with PID 26996 (C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core\target\classes started by Kudzai Macheyo in C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core) 
-.03:51:13.919 INFO  z.c.c.e.EcocashChatbotCoreApplication - The following profiles are active: dev 
-.03:51:16.125 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFERRED mode. 
-.03:51:16.477 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 334 ms. Found 5 JPA repository interfaces. 
-.03:51:18.760 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http) 
-.03:51:18.781 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
-.03:51:18.782 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
-.03:51:18.782 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.50] 
-.03:51:19.083 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring embedded WebApplicationContext 
-.03:51:19.083 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 5113 ms 
-.03:51:19.538 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default] 
-.03:51:19.690 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final 
-.03:51:20.068 INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
-.03:51:20.380 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting... 
-.03:51:20.819 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed. 
-.03:51:20.907 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect 
-.03:51:21.098 INFO  o.h.e.b.internal.EnversServiceImpl - Envers integration enabled? : true 
-.03:51:22.591 INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - Autowired annotation is not supported on static fields: private static java.lang.String zw.co.cassavasmartech.ecocashchatbotcore.sms.SmsNotificationReceiverImpl.basicAuth 
-.03:51:22.772 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
-.03:51:23.466 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
-.03:51:23.485 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default' 
-.03:51:23.609 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
-.03:51:23.654 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/ecocashbotcore' 
-.03:51:23.657 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
-.03:51:23.953 INFO  o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#261ea657:0/SimpleConnection@4d705112 [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 50093] 
-.03:51:25.599 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Triggering deferred initialization of Spring Data repositories… 
-.03:51:26.119 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Spring Data repositories initialized! 
-.03:51:26.135 INFO  z.c.c.e.EcocashChatbotCoreApplication - Started EcocashChatbotCoreApplication in 12.649 seconds (JVM running for 13.191) 
-.03:52:52.839 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
-.03:52:52.839 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
-.03:52:52.839 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms 
-.03:52:53.050 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=7d48f9f3-15d1-4e9c-816d-e9df56a3b843-b9889856, queryResult=QueryResult(queryText=hello, action=input.welcome, parameters={}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0})], intent=Intent(name=projects/ecocash-onuv/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3, displayName=Welcome), intentDetectionConfidence=1.0, languageCode=en, sentimentAnalysisResult=SentimentAnalysisResult(queryTextSentiment=Sentiment(score=0.2, magnitude=0.2))), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={message_id=4700.0, text=hello, chat={type=private, id=1610924700}, from={id=1.6109247E9, language_code=en, last_name=Macheyo, first_name=Kudzai}, date=1.63046119E9}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
-.03:52:53.050 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: Welcome 
-.03:53:03.517 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=a839cc71-40eb-47aa-9310-69d01ab81f92-b9889856, queryResult=QueryResult(queryText=i want a pin reset, action=null, parameters={}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/awaiting_pinreset_enrollment_confirmation, lifespanCount=1, parameters=null), OutputContext(name=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0})], intent=Intent(name=projects/ecocash-onuv/agent/intents/cbd27331-6c49-4632-8f75-a3398cb8b7d2, displayName=usecase.pinreset), intentDetectionConfidence=1.0, languageCode=en, sentimentAnalysisResult=SentimentAnalysisResult(queryTextSentiment=Sentiment(score=-0.5, magnitude=0.5))), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={from={id=1.6109247E9, first_name=Kudzai, language_code=en, last_name=Macheyo}, chat={id=1610924700, type=private}, message_id=4702.0, text=i want a pin reset, date=1.630461201E9}}), session=projects/ecocash-onuv/agent/sessions/ee71440f-7c82-3d98-b5f7-2def6a7b555f) 
-.03:53:03.518 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pinreset 
-.03:53:20.846 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=b9625bea-badb-4652-bc67-2d9e13a49b7c-b9889856, queryResult=QueryResult(queryText=hello, action=input.welcome, parameters={}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/f9c46fe0-84a7-3857-bd5c-126e9f679d03/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0})], intent=Intent(name=projects/ecocash-onuv/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3, displayName=Welcome), intentDetectionConfidence=1.0, languageCode=en, sentimentAnalysisResult=SentimentAnalysisResult(queryTextSentiment=Sentiment(score=0.2, magnitude=0.2))), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={text=hello, from={id=1.932718235E9, last_name=Macheyo, first_name=Shingai, language_code=en}, date=1.630461219E9, message_id=4704.0, chat={type=private, id=1932718235}}}), session=projects/ecocash-onuv/agent/sessions/f9c46fe0-84a7-3857-bd5c-126e9f679d03) 
-.03:53:20.846 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: Welcome 
-.03:53:34.763 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request WebhookRequest(responseId=26286e24-4b1f-4669-a542-7a8a86f0a980-b9889856, queryResult=QueryResult(queryText=i want to reset my pin, action=null, parameters={}, allRequiredParamsPresent=true, outputContexts=[OutputContext(name=projects/ecocash-onuv/agent/sessions/f9c46fe0-84a7-3857-bd5c-126e9f679d03/contexts/awaiting_pinreset_enrollment_confirmation, lifespanCount=1, parameters=null), OutputContext(name=projects/ecocash-onuv/agent/sessions/f9c46fe0-84a7-3857-bd5c-126e9f679d03/contexts/__system_counters__, lifespanCount=0, parameters={no-input=0.0, no-match=0.0})], intent=Intent(name=projects/ecocash-onuv/agent/intents/cbd27331-6c49-4632-8f75-a3398cb8b7d2, displayName=usecase.pinreset), intentDetectionConfidence=0.814681, languageCode=en, sentimentAnalysisResult=SentimentAnalysisResult(queryTextSentiment=Sentiment(score=-0.5, magnitude=0.5))), originalDetectIntentRequest=OriginalDetectIntentRequest(source=telegram, version=null, payload={data={from={last_name=Macheyo, language_code=en, id=1.932718235E9, first_name=Shingai}, text=i want to reset my pin, date=1.630461233E9, message_id=4706.0, chat={type=private, id=1932718235}}}), session=projects/ecocash-onuv/agent/sessions/f9c46fe0-84a7-3857-bd5c-126e9f679d03) 
-.03:53:34.763 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow intent: usecase.pinreset 
+.04:54:57.465 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.04:55:02.158 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@4f581b2d: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
+.04:55:02.158 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@366174a0: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
+.04:55:02.159 INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [192.168.84.99:5672] 
+.04:55:02.187 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@5170f8c5: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
+.04:55:02.191 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@668ffd98: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
+.04:55:02.360 INFO  o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#35c12c7a:21/SimpleConnection@65b1a7dd [delegate=amqp://developer@192.168.84.99:5672/ecocash-self-service, localPort= 54875] 
+.04:55:02.483 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@1c04a2e1: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
+.04:55:02.498 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@683e1a2d: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
+.04:55:02.498 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@46c7c6d: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
+.04:55:02.544 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@d02ee7e: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
+.04:55:02.551 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@fa74bf2: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 
+.04:55:02.551 INFO  o.s.a.r.l.SimpleMessageListenerContainer - Restarting Consumer@5122797c: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0 

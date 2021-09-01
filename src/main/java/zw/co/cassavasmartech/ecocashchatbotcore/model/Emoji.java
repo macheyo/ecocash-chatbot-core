@@ -447,6 +447,7 @@ public enum Emoji {
     MailboxWithMail("\uD83D\uDCEC"),
     MailboxWithNoMail("\uD83D\uDCED"),
     Man("\uD83D\uDC68", Characteristic.Person),
+    ManFacePalming("\u1F926", Characteristic.Person),
     ManWithGuaPiMao("\uD83D\uDC72", Characteristic.Person),
     ManWithTurban("\uD83D\uDC73", Characteristic.Person),
     MansShoe("\uD83D\uDC5E"),
