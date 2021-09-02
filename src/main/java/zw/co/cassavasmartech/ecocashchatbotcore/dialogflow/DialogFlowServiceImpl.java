@@ -64,6 +64,10 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                 return payBillerUsecaseGetBillerConfirmationAffirmative(webhookRequest);
             case "usecase.pay.biller.get.biller.confirmation.negative":
                 return payBillerUsecaseGetBillerConfirmationNegative(webhookRequest);
+            case "usecase.send.money.scenario1":
+                return sendMoneyOne(webhookRequest);
+            case "usecase.send.money.get.beneficiary.msisdn":
+                return sendMoneyUsecaseGetBeneficiaryMsisdn(webhookRequest);
         }
         return null;
     }
@@ -142,6 +146,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         String prompt = "I can help you do that"+Emoji.Smiley+"\nWhat is the biller code or Name of the organisation you want to pay?";
         return getWebhookResponse(webhookRequest,prompt,createTicket(webhookRequest,Usecase.BILL_PAYMENT));
     }
+
 
     private WebhookResponse pinresetUsecaseSecurityQuestionsFirstAnswer(WebhookRequest webhookRequest) {
         log.info("Processing dialogflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
@@ -225,6 +230,22 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                 .build();
         log.info("Sending response to dialogFlow: {}\n", webhookResponse);
         return webhookResponse;
+    }
+
+    //send money scenario 1
+
+    private WebhookResponse sendMoneyOne(WebhookRequest webhookRequest){
+        log.info("Processing dialogflow send money 1: {}",webhookRequest.getQueryResult().getIntent().getDisplayName());
+        Optional<Customer> customer = isNewCustomer(webhookRequest);
+        String prompt;
+            prompt = String.format("Ok %s. What is the Ecocash number of the person you want to send to?", customer.get().getFirstName());
+        return getWebhookResponse(webhookRequest,prompt,createTicket(webhookRequest,Usecase.SEND_MONEY));
+    }
+
+    private WebhookResponse sendMoneyUsecaseGetBeneficiaryMsisdn(WebhookRequest webhookRequest){
+        log.info("Processing : {}",webhookRequest.getQueryResult().getIntent().getDisplayName());
+        String prompt = "How much do you want to send?";
+        return getWebhookResponse(webhookRequest,prompt,null);
     }
 
     private Optional<Customer> isNewCustomer(WebhookRequest webhookRequest){
