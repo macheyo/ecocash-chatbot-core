@@ -11,6 +11,10 @@ import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.TicketParameter;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.OutputContext;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookResponse;
+import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.EipTransaction;
+import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.Merchant;
+import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.MerchantRepository;
+import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.SubscriberToMerchantRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.ProfileNotFoundException;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.CustomerRepository;
@@ -44,6 +48,8 @@ public class DialogFlowServiceImpl implements DialogFlowService {
     CustomerService customerService;
     @Autowired
     StatementServiceConfigurationProperties statementServiceConfigurationProperties;
+    @Autowired
+    MerchantRepository merchantRepository;
 
     @Override
     public WebhookResponse processWebhookCall(WebhookRequest webhookRequest) throws ParseException {
@@ -81,9 +87,112 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                 return statementUsecaseEndDateHandler(webhookRequest);
             case "usecase.statement.start.date":
                 return statementUsecaseStartDateHandler(webhookRequest);
+            case "usecase.pay.merchant.scenario1":
+                return payMerchantUsecaseScenario1Handler(webhookRequest);
+            case "usecase.pay.merchant.scenario2":
+                return payMerchantUsecaseScenario2Handler(webhookRequest);
+            case "usecase.pay.merchant.get.msisdn":
+                return payMerchantUsecaseGetMsisdnOrNameHandler(webhookRequest);
+            case "usecase.pay.merchant.get.name":
+                return payMerchantUsecaseGetMsisdnOrNameHandler(webhookRequest);
+            case "usecase.pay.merchant.get.amount":
+                return payMerchantUsecaseGetAmountHandler(webhookRequest);
+            case "usecase.pay.merchant.confirmation.affirmative":
+                return payMerchantUsecaseConfirmationAffirmativeHandler(webhookRequest);
+
 
         }
         return null;
+    }
+
+    private WebhookResponse payMerchantUsecaseConfirmationAffirmativeHandler(WebhookRequest webhookRequest) {
+        log.info("Processing dialogflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
+        List<OutputContext> outputContexts = webhookRequest.getQueryResult().getOutputContexts();
+        ObjectMapper objectMapper = new ObjectMapper();
+        int ticketIndex=0;
+        for(int i = 0;i<outputContexts.size();i++){
+            Map<String,Object> map = objectMapper.convertValue(outputContexts.get(i),Map.class);
+            if(map.get("name").toString().equalsIgnoreCase(webhookRequest.getSession()+"/contexts/ticket")) ticketIndex=i;
+        }
+        Map<String,Object> map = objectMapper.convertValue(outputContexts.get(ticketIndex).getParameters(),Map.class);
+        Optional<Customer> customer = isNewCustomer(webhookRequest);
+        Optional<Merchant> merchant = merchantRepository.findByNameOrMerchantCode(map.get("msisdn.original").toString(),map.get("msisdn.original").toString());
+        String prompt=null;
+        if(customer.isPresent()) {
+            if(merchant.isPresent()) {
+                EipTransaction eipTransaction = customerService.payMerchant(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()),zw.co.cassavasmartech.ecocashchatbotcore.eip.data.SubscriberToMerchantRequest.builder()
+                        .msisdn(customer.get().getMsisdn())
+                        .merchantCode(merchant.get().getMerchantCode())
+                        .amount(BigDecimal.valueOf(Double.parseDouble(map.get("amount").toString())))
+                        .ticketId(Double.valueOf(map.get("id").toString()).longValue())
+                        .build());
+                if (eipTransaction!=null)
+                    prompt = "Great!!" + Emoji.Smiley + "Processing your payment right now.\nYou will receive a prompt on your phone for you to enter your PIN.\n" + Emoji.Exclamation + "You have to enter the correct PIN to complete this transaction";
+                else
+                    prompt = "Oops!!" + Emoji.Pensive + "Something went wrong with the transaction\nWould you like to try this again?";
+            }
+        }
+        else prompt = "Alright " + DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest())+Emoji.Smiley+", but before we pay your bill, what is your Ecocash number?";
+        WebhookResponse webhookResponse = WebhookResponse.builder()
+                .fulfillmentText(prompt)
+                .source("ecocashchatbotcore")
+                .build();
+        log.info("Sending response to dialogFlow: {}\n", webhookResponse);
+        return webhookResponse;
+    }
+
+    private WebhookResponse payMerchantUsecaseGetAmountHandler(WebhookRequest webhookRequest) {
+        log.info("Processing dialogflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
+        List<OutputContext> outputContexts = webhookRequest.getQueryResult().getOutputContexts();
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String,Object> map = objectMapper.convertValue(outputContexts.get(outputContexts.size()-2).getParameters(),Map.class);
+        Optional<Customer> customer = isNewCustomer(webhookRequest);
+        Optional<Merchant> merchant = merchantRepository.findByNameOrMerchantCode(map.get("msisdn").toString(),map.get("msisdn").toString());
+        String prompt = null;
+        if(customer.isPresent()) {
+            if(merchant.isPresent())
+            prompt = "Alright thats fine,"+Emoji.Smiley+"\nSo in summary you want to pay $ZWL"+ map.get("amount").toString() +" to merchant code "+merchant.get().getMerchantCode()+" ("+merchant.get().getName()+")\ncan you confirm this is correct?";
+        }
+        else prompt = "Alright " + DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest())+Emoji.Smiley+", but before we pay your bill, what is your Ecocash number?";
+        WebhookResponse webhookResponse = WebhookResponse.builder()
+                .fulfillmentText(prompt)
+                .source("ecocashchatbotcore")
+                .build();
+        log.info("Sending response to dialogFlow: {}\n", webhookResponse);
+        return webhookResponse;
+    }
+
+    private WebhookResponse payMerchantUsecaseGetMsisdnOrNameHandler(WebhookRequest webhookRequest) {
+        String prompt = "Got it"+Emoji.Smiley+"How much do you want to pay?";
+        return getWebhookResponse(webhookRequest,prompt,null);
+    }
+
+    private WebhookResponse payMerchantUsecaseScenario2Handler(WebhookRequest webhookRequest) {
+        log.info("Processing dialogflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
+        List<OutputContext> outputContexts = webhookRequest.getQueryResult().getOutputContexts();
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String,Object> map = objectMapper.convertValue(outputContexts.get(0).getParameters(),Map.class);
+        Map<String,Object> payment = objectMapper.convertValue(map.get("payment"),Map.class);
+        Optional<Customer> customer = isNewCustomer(webhookRequest);
+        Optional<Merchant> merchant = merchantRepository.findByNameOrMerchantCode(map.get("msisdn").toString(),map.get("msisdn").toString());
+        String prompt = null;
+        if(customer.isPresent()) {
+            if(merchant.isPresent())
+                prompt = "Alright thats fine,"+Emoji.Smiley+"\nSo in summary you want to pay $ZWL"+ payment.get("amount").toString() +" to merchant code "+merchant.get().getMerchantCode()+" ("+merchant.get().getName()+")\ncan you confirm this is correct?";
+        }
+        else prompt = "Alright " + DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest())+Emoji.Smiley+", but before we pay your bill, what is your Ecocash number?";
+        WebhookResponse webhookResponse = WebhookResponse.builder()
+                .fulfillmentText(prompt)
+                .source("ecocashchatbotcore")
+                .outputContexts(createTicket(webhookRequest,Usecase.MERCHANT_PAYMENT))
+                .build();
+        log.info("Sending response to dialogFlow: {}\n", webhookResponse);
+        return webhookResponse;
+    }
+
+    private WebhookResponse payMerchantUsecaseScenario1Handler(WebhookRequest webhookRequest) {
+        String prompt = "Alright, lets quickly do that"+Emoji.Smiley+" what is the Merchant code or Name of the Merchant you want to pay?";
+        return getWebhookResponse(webhookRequest,prompt,createTicket(webhookRequest,Usecase.MERCHANT_PAYMENT));
     }
 
     private WebhookResponse statementUsecaseStartDateHandler(WebhookRequest webhookRequest) {
@@ -200,7 +309,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
             TransactionResponse transactionResponse = paymentGatewayProcessor.subscriberToBiller(SubscriberToBillerRequest.builder()
                     .msisdn(customer.get().getMsisdn())
                     .billerCode(map.get("biller.original").toString())
-                    .amount(BigDecimal.valueOf(Double.parseDouble(map.get("amount.original").toString())) )
+                    .amount(BigDecimal.valueOf(Double.parseDouble(map.get("amount").toString())) )
                     .msisdn2(map.get("number.original").toString())
                     .ticketId(Double.valueOf(map.get("id").toString()).longValue())
                     .build());
@@ -238,7 +347,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         Optional<Customer> customer = isNewCustomer(webhookRequest);
         String prompt;
         if(customer.isPresent()) {
-            prompt = "Alright thats fine,"+Emoji.Smiley+"\nSo in summary you want to pay $ZWL"+ map.get("amount.original").toString() +" to biller code "+map.get("biller.original").toString()+" ("+transactionResponse.getField6()+") for account "+map.get("number.original").toString()+"\ncan you confirm this is correct?";
+            prompt = "Alright thats fine,"+Emoji.Smiley+"\nSo in summary you want to pay $ZWL"+ map.get("amount").toString() +" to biller code "+map.get("biller.original").toString()+" ("+transactionResponse.getField6()+") for account "+map.get("number.original").toString()+"\ncan you confirm this is correct?";
         }
         else prompt = "Alright " + DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest())+Emoji.Smiley+", but before we pay your bill, what is your Ecocash number?";
         WebhookResponse webhookResponse = WebhookResponse.builder()
@@ -361,7 +470,9 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         Ticket ticket = new Ticket();
         ticket.setProfile(profileRepository.getByChatId(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest())).orElseThrow(()->new ProfileNotFoundException(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()))));
         ticket.setStatus(Status.OPEN);
+        if(webhookRequest.getQueryResult().getSentimentAnalysisResult()!=null)
         ticket.setSentimentStart(webhookRequest.getQueryResult().getSentimentAnalysisResult().getQueryTextSentiment().getScore());
+        else ticket.setSentimentStart(0.0);
         ticket.setOriginalQueryText(webhookRequest.getQueryResult().getQueryText());
         ticket.setUsecase(usecase);
         ticketRepository.save(ticket);

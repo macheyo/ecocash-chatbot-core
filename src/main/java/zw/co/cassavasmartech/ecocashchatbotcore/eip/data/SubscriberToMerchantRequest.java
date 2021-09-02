@@ -1,11 +1,13 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.eip.data;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 @Data
-public class SubscriberToMerchant {
+@Builder
+public class SubscriberToMerchantRequest {
     private String msisdn;
     private String merchantName;
     private String merchantCode;

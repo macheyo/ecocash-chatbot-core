@@ -1,7 +1,6 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -11,7 +10,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiConstants;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.EipTransaction;
-import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.SubscriberToMerchant;
+import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.SubscriberToMerchantRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.CustomerNotFoundException;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.modelAssembler.CustomerModelAssembler;
@@ -131,17 +130,17 @@ public class CustomerController {
     }
 
     @PostMapping("/paymerchant/{chatId}")
-    public ApiResponse<EipTransaction> payMerchant(@PathVariable String chatId, @Valid @RequestBody SubscriberToMerchant subscriberToMerchant){
+    public ApiResponse<EipTransaction> payMerchant(@PathVariable String chatId, @Valid @RequestBody SubscriberToMerchantRequest subscriberToMerchantRequest){
         return new ApiResponse<>(HttpStatus.OK.value(),
                 ApiConstants.SUCCESS_MESSAGE,
-                customerService.payMerchant(chatId, subscriberToMerchant));
+                customerService.payMerchant(chatId, subscriberToMerchantRequest));
     }
 
     @PostMapping("/paymerchant2/{chatId}")
-    public ApiResponse<EipTransaction> payMerchant2(@PathVariable String chatId, @Valid @RequestBody SubscriberToMerchant subscriberToMerchant){
+    public ApiResponse<EipTransaction> payMerchant2(@PathVariable String chatId, @Valid @RequestBody SubscriberToMerchantRequest subscriberToMerchantRequest){
         return new ApiResponse<>(HttpStatus.OK.value(),
                 ApiConstants.SUCCESS_MESSAGE,
-                customerService.payMerchant2(chatId, subscriberToMerchant));
+                customerService.payMerchant2(chatId, subscriberToMerchantRequest));
     }
 
     @PostMapping("/airtime/{chatId}")

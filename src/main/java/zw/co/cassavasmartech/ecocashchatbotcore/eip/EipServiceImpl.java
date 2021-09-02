@@ -35,8 +35,8 @@ public class EipServiceImpl implements EipService {
     EipConfigurationProperties eipConfigurationProperties;
 
     @Override
-    public EipTransaction postPayment(SubscriberToMerchant subscriberToMerchant) {
-        EipTransaction eipTransaction = getSubscriberToMerchantTransaction(subscriberToMerchant);
+    public EipTransaction postPayment(SubscriberToMerchantRequest subscriberToMerchantRequest) {
+        EipTransaction eipTransaction = getSubscriberToMerchantTransaction(subscriberToMerchantRequest);
         return eipInvoker.invoke(eipTransaction).orElseThrow(()->new BusinessException("EIP returned a null response"));
     }
 
@@ -103,10 +103,10 @@ public class EipServiceImpl implements EipService {
         return false;
     }
 
-    private EipTransaction getSubscriberToMerchantTransaction(SubscriberToMerchant subscriberToMerchant) {
-        Merchant merchant = merchantRepository.findByMerchantCode(subscriberToMerchant.getMerchantCode()).orElseThrow(()->new MerchantNotFoundException(subscriberToMerchant.getMerchantCode()));
-        String reference = Util.generateReference(subscriberToMerchant.getMsisdn());
-        Ticket ticket = ticketRepository.findById(subscriberToMerchant.getTicketId()).orElseThrow(()->new TicketNotFoundException(subscriberToMerchant.getTicketId().toString()));
+    private EipTransaction getSubscriberToMerchantTransaction(SubscriberToMerchantRequest subscriberToMerchantRequest) {
+        Merchant merchant = merchantRepository.findByMerchantCode(subscriberToMerchantRequest.getMerchantCode()).orElseThrow(()->new MerchantNotFoundException(subscriberToMerchantRequest.getMerchantCode()));
+        String reference = Util.generateReference(subscriberToMerchantRequest.getMsisdn());
+        Ticket ticket = ticketRepository.findById(subscriberToMerchantRequest.getTicketId()).orElseThrow(()->new TicketNotFoundException(subscriberToMerchantRequest.getTicketId().toString()));
         ticket.setReference(reference);
         ticketRepository.save(ticket);
         return EipTransaction.builder()
@@ -114,7 +114,7 @@ public class EipServiceImpl implements EipService {
                 .notifyUrl(eipConfigurationProperties.getNotifyUrl())
                 .referenceCode(reference)
                 .tranType("MER")
-                .endUserId(subscriberToMerchant.getMsisdn())
+                .endUserId(subscriberToMerchantRequest.getMsisdn())
                 .remarks(merchant.getRemarks())
                 .transactionOperationStatus("Charged")
                 .merchantCode(merchant.getMerchantCode())
@@ -138,7 +138,7 @@ public class EipServiceImpl implements EipService {
                             .charginginformation(
                                     Charginginformation.builder()
                                             .currency("ZWL")
-                                            .amount(subscriberToMerchant.getAmount())
+                                            .amount(subscriberToMerchantRequest.getAmount())
                                             .description("Escrow Online Payment")
                                             .build())
                             .build()

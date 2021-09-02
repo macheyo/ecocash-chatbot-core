@@ -4,7 +4,7 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.stereotype.Service;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.EipTransaction;
-import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.SubscriberToMerchant;
+import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.SubscriberToMerchantRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +30,7 @@ public interface CustomerService {
 
     TransactionResponse payBiller(String chatId, SubscriberToBillerRequest subscriberToBillerRequest);
 
-    EipTransaction payMerchant(String chatId, SubscriberToMerchant subscriberToMerchant);
+    EipTransaction payMerchant(String chatId, SubscriberToMerchantRequest subscriberToMerchantRequest);
 
     TransactionResponse buyAirtime(String chatId, SubscriberAirtimeRequest subscriberAirtimeRequest);
 
@@ -46,5 +46,5 @@ public interface CustomerService {
 
     TransactionResponse registerCustomer(Registration registration);
 
-    EipTransaction payMerchant2(String chatId, SubscriberToMerchant subscriberToMerchant);
+    EipTransaction payMerchant2(String chatId, SubscriberToMerchantRequest subscriberToMerchantRequest);
 }

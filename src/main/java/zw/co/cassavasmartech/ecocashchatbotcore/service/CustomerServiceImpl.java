@@ -12,7 +12,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.eip.EipService;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.EipTransaction;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.Merchant;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.MerchantRepository;
-import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.SubscriberToMerchant;
+import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.SubscriberToMerchantRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.modelAssembler.CustomerModelAssembler;
@@ -174,10 +174,10 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public EipTransaction payMerchant(String chatId, SubscriberToMerchant subscriberToMerchant) {
+    public EipTransaction payMerchant(String chatId, SubscriberToMerchantRequest subscriberToMerchantRequest) {
         Customer customer = customerRepository.findByProfilesChatId(chatId).orElseThrow(()->new CustomerNotFoundException(chatId));
-        subscriberToMerchant.setMsisdn(customer.getMsisdn());
-        return eipService.postPayment(subscriberToMerchant);
+        subscriberToMerchantRequest.setMsisdn(customer.getMsisdn());
+        return eipService.postPayment(subscriberToMerchantRequest);
     }
 
     @Override
@@ -208,12 +208,12 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public EipTransaction payMerchant2(String chatId, SubscriberToMerchant subscriberToMerchant) {
-        Merchant merchant = merchantRepository.findByName(subscriberToMerchant.getMerchantName()).orElseThrow(()->new MerchantNotFoundException(subscriberToMerchant.getMerchantName()));
+    public EipTransaction payMerchant2(String chatId, SubscriberToMerchantRequest subscriberToMerchantRequest) {
+        Merchant merchant = merchantRepository.findByName(subscriberToMerchantRequest.getMerchantName()).orElseThrow(()->new MerchantNotFoundException(subscriberToMerchantRequest.getMerchantName()));
         Customer customer = customerRepository.findByProfilesChatId(chatId).orElseThrow(()->new CustomerNotFoundException(chatId));
-        subscriberToMerchant.setMsisdn(customer.getMsisdn());
-        subscriberToMerchant.setMerchantCode(merchant.getMerchantCode());
-        return eipService.postPayment(subscriberToMerchant);
+        subscriberToMerchantRequest.setMsisdn(customer.getMsisdn());
+        subscriberToMerchantRequest.setMerchantCode(merchant.getMerchantCode());
+        return eipService.postPayment(subscriberToMerchantRequest);
     }
 
 
