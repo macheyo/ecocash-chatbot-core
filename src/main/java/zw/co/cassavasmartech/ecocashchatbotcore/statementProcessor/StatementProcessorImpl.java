@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.MobileNumberFormater;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.PassThroughUtil;
-import zw.co.cassavasmartech.ecocashchatbotcore.config.StatementServiceConfigurationProperties;
 import zw.co.cassavasmartech.ecocashchatbotcore.invoker.CoreInvoker;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Statement;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.StatementRequest;

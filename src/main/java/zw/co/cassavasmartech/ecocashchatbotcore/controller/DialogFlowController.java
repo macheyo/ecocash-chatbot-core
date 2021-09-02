@@ -10,6 +10,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookResponse;
 
 import javax.validation.Valid;
+import java.text.ParseException;
 
 @RestController
 @RequestMapping("/dialogflow")
@@ -18,7 +19,7 @@ public class DialogFlowController {
     DialogFlowService dialogFlowService;
 
     @PostMapping("/inbound")
-    WebhookResponse inbound(@Valid @RequestBody WebhookRequest webhookRequest){
+    WebhookResponse inbound(@Valid @RequestBody WebhookRequest webhookRequest) throws ParseException {
         return dialogFlowService.processWebhookCall(webhookRequest);
     }
 }

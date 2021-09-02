@@ -1,4 +1,4 @@
-package zw.co.cassavasmartech.ecocashchatbotcore.config;
+package zw.co.cassavasmartech.ecocashchatbotcore.statementProcessor;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,5 +20,7 @@ public class StatementServiceConfigurationProperties {
     private String username;
     @NotEmpty
     private String password;
+    @NotEmpty
+    private String ngrokServiceEndpointUrl;
 
 }

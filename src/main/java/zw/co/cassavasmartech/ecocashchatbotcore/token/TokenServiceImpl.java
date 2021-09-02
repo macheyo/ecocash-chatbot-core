@@ -3,17 +3,14 @@ package zw.co.cassavasmartech.ecocashchatbotcore.token;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
-import zw.co.cassavasmartech.ecocashchatbotcore.config.StatementServiceConfigurationProperties;
+import zw.co.cassavasmartech.ecocashchatbotcore.statementProcessor.StatementServiceConfigurationProperties;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.BusinessException;
 import zw.co.cassavasmartech.ecocashchatbotcore.invoker.CoreInvoker;
 import zw.co.cassavasmartech.ecocashchatbotcore.token.data.TokenRequest;
-
-import java.nio.file.AccessDeniedException;
 
 
 @Service
