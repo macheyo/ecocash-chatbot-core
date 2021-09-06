@@ -51,12 +51,12 @@ public class ProfileController {
                 CollectionModel.of(profiles, linkTo(methodOn(ProfileController.class).allProfiles()).withSelfRel()));
     }
 
-    @GetMapping("/profile/otp/generate/{chatId}")
-    public ApiResponse<Boolean> generateOTP(@PathVariable String chatId){
-        return new ApiResponse<>(HttpStatus.OK.value(),
-                ApiConstants.SUCCESS_MESSAGE,
-                profileService.generateOtp(chatId));
-    }
+//    @GetMapping("/profile/otp/generate/{chatId}")
+//    public ApiResponse<Boolean> generateOTP(@PathVariable String chatId){
+//        return new ApiResponse<>(HttpStatus.OK.value(),
+//                ApiConstants.SUCCESS_MESSAGE,
+//                profileService.generateOtp(chatId));
+//    }
 
     @PostMapping("/profile/otp/verify/{chatId}")
     public ApiResponse<Boolean> verifyCustomer(@PathVariable String chatId, @RequestBody OTP otp){

@@ -2,13 +2,16 @@ package zw.co.cassavasmartech.ecocashchatbotcore.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
+import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.MessagePropertiesService;
+import zw.co.cassavasmartech.ecocashchatbotcore.common.MobileNumberFormater;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.CustomerAlreadyExistsException;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.CustomerNotFoundException;
-import zw.co.cassavasmartech.ecocashchatbotcore.exception.CustomerVerificationFailedException;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.Customer;
+import zw.co.cassavasmartech.ecocashchatbotcore.invoker.CoreInvoker;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.OTP;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Profile;
 import zw.co.cassavasmartech.ecocashchatbotcore.modelAssembler.ProfileModelAssembler;
@@ -16,12 +19,11 @@ import zw.co.cassavasmartech.ecocashchatbotcore.notification.NotificationService
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.CustomerRepository;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.ProfileRepository;
 import zw.co.cassavasmartech.ecocashchatbotcore.sms.Sms;
-import zw.co.cassavasmartech.ecocashchatbotcore.sms.SmsDispatchStrategy;
+import zw.co.cassavasmartech.ecocashchatbotcore.sms.SmsProperties;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 @Service
@@ -42,12 +44,21 @@ public class ProfileServiceImpl implements ProfileService{
     @Autowired
     NotificationService notificationService;
 
+    @Autowired
+    SmsProperties smsProperties;
+
+    @Autowired
+    MobileNumberFormater mobileNumberFormater;
+
+    @Autowired
+    CoreInvoker coreInvoker;
+
     @Override
     public Profile save(String msisdn, Profile profile) {
         if(profileRepository.getByChatId(profile.getChatId()).isPresent()) throw new CustomerAlreadyExistsException(profile.getChatId());
         return customerRepository.findByMsisdn(msisdn).map(customer -> {
             profile.setCustomer(customer);
-            log.info("new profile created {}", profile);
+            log.info("new profile created {}", profile.getChatId());
             return profileRepository.save(profile);
         }).orElseThrow(()->new CustomerNotFoundException(msisdn));
     }
@@ -60,11 +71,11 @@ public class ProfileServiceImpl implements ProfileService{
     }
 
     @Override
-    public Boolean generateOtp(String chatId) {
+    public void generateOtp(String chatId) {
        Profile profile = profileRepository.getByChatId(chatId).orElseThrow(()->new CustomerNotFoundException(chatId));
        profile.setOtp(createOtp());
        profileRepository.save(profile);
-       return sendSms(profile.getCustomer().getMsisdn(),profile.getOtp().getVerificationCode());
+       sendSms(profile.getCustomer().getMsisdn(),profile.getOtp().getVerificationCode());
     }
 
     @Override
@@ -87,11 +98,13 @@ public class ProfileServiceImpl implements ProfileService{
         return otp;
     }
 
-    private Boolean sendSms(String msisdn, String verificationCode) {
+    private void sendSms(String msisdn, String verificationCode) {
         final String notificationMessage = String.format(messagePropertiesService.getByKey("messages.otp"), verificationCode);
-        final Sms sms = new Sms(msisdn, notificationMessage);
-        notificationService.sendSms(sms, SmsDispatchStrategy.DISPATCH_NOW);
-        return true;
+        coreInvoker.invoke(Sms.builder().to(mobileNumberFormater.formatMobileNumberInternational(msisdn)).text(notificationMessage).build(),
+                smsProperties.getEndPointUrl(),
+                HttpMethod.POST,
+                new ParameterizedTypeReference <ApiResponse<Sms>>() {
+                });
     }
 
 }

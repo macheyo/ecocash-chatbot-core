@@ -61,11 +61,11 @@ public class CustomerServiceImpl implements CustomerService{
     public Customer save(Customer customer) {
         Customer validCustomer = isCustomerValid(customer.getMsisdn());
         if(validCustomer != null) {
-            if (customerRepository.findByMsisdn(validCustomer.getMsisdn()).isPresent())throw new CustomerAlreadyExistsException(validCustomer.getMsisdn());
-            return customerRepository.save(modelMapper.map(validCustomer, Customer.class));
+            Optional <Customer> c = customerRepository.findByMsisdn(validCustomer.getMsisdn());
+            if (c.isPresent())return c.get();
+            else return customerRepository.save(modelMapper.map(validCustomer, Customer.class));
         }
-        else throw new CustomerNotValidException(customer.getMsisdn());
-
+        else return validCustomer;
     }
 
     @Override
@@ -215,7 +215,6 @@ public class CustomerServiceImpl implements CustomerService{
         subscriberToMerchantRequest.setMerchantCode(merchant.getMerchantCode());
         return eipService.postPayment(subscriberToMerchantRequest);
     }
-
 
     private Customer isCustomerValid(String msisdn){
         Customer customer = new Customer();

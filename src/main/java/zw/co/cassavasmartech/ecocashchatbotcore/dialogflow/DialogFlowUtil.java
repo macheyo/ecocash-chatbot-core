@@ -46,4 +46,9 @@ public class DialogFlowUtil {
         }
         return null;
     }
+
+    public static Platform getPlatform(OriginalDetectIntentRequest originalDetectIntentRequest){
+        if(originalDetectIntentRequest.getSource().equalsIgnoreCase(Platform.TELEGRAM.toString()))return Platform.TELEGRAM;
+        else return Platform.WHATSAPP;
+    }
 }

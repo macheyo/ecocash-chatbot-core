@@ -1,0 +1,11 @@
+package zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data;
+
+import lombok.Builder;
+import lombok.Data;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.Usecase;
+
+@Builder
+@Data
+public class UnverifiedCustomerParameter {
+    private Usecase usecase;
+}
