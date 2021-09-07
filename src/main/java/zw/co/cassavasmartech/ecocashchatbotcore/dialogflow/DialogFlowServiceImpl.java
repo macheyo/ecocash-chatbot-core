@@ -194,6 +194,8 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                 return verifyUsecaseGetMsisdnHandler(webhookRequest);
             case "usecase.verify.get.otp":
                 return verifyUsecaseGetOtpHandler(webhookRequest);
+            case "usecase.send.money.get.beneficiary.msisdn.fallback":
+                return sendMoneyUsecaseMsisdnFallbackHandler(webhookRequest);
 
 
         }
@@ -457,6 +459,11 @@ public class DialogFlowServiceImpl implements DialogFlowService {
     private WebhookResponse sendAirtimeUsecaseMyselfFallbackHandler(WebhookRequest webhookRequest) {
         String prompt = "Do you mean you want to buy airtime for yourself?"+Emoji.Confused;
         return getWebhookResponse(webhookRequest,prompt,null,Usecase.BUY_AIRTIME);
+    }
+
+    private WebhookResponse sendMoneyUsecaseMsisdnFallbackHandler(WebhookRequest webhookRequest){
+        String prompt = "You seem to have provided an invalid Econet Number, please try a number of this format: 0774222689";
+        return getWebhookResponse(webhookRequest,prompt,null,Usecase.SEND_MONEY);
     }
 
     private WebhookResponse sendAirtimeUsecaseScenario2Handler(WebhookRequest webhookRequest) {
