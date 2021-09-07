@@ -108,7 +108,7 @@ public class SecurityConfig{
                     .antMatchers("/api/auth/**", "/eip/**","/v2/api-docs",
                             "/customer/ticket/eip/callback",
                             "/customer/ticket/cpg/callback",
-                            "",
+                            "/customer/statement/downloadFile/**",
                             "/v2/api-docs",
                             "/configuration/ui",
                             "/swagger-resources/**",

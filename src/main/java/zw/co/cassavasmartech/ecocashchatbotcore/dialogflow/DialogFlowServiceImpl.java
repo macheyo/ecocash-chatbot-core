@@ -112,6 +112,16 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                 return statementUsecaseEndDateHandler(webhookRequest);
             case "usecase.statement.start.date":
                 return statementUsecaseStartDateHandler(webhookRequest);
+            case "usecase.statement.start.date.fallback":
+                return statementUsecaseStartDateFallbackHandler(webhookRequest);
+            case "usecase.statement.end.date.fallback":
+                return statementUsecaseEndDateFallbackHandler(webhookRequest);
+            case "usecase.statement.more.affirmative":
+                return statementUsecaseMoreAffirmativeHandler(webhookRequest);
+            case "usecase.statement.more.negative":
+                return statementUsecaseMoreNegativeHandler(webhookRequest);
+            case "usecase.statement.more.fallback":
+                return statementUsecaseMoreFallbackHandler(webhookRequest);
             case "usecase.pay.merchant.scenario1":
                 return payMerchantUsecaseScenario1Handler(webhookRequest);
             case "usecase.pay.merchant.scenario2":
@@ -635,6 +645,16 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         return getWebhookResponse(webhookRequest,prompt,null,Usecase.SUBSCRIBER_STATEMENT);
     }
 
+    private WebhookResponse statementUsecaseStartDateFallbackHandler(WebhookRequest webhookRequest) {
+        String prompt = "Please type in a valid start date, for example 1 January?"+Emoji.PointUp;
+        return getWebhookResponse(webhookRequest,prompt,null,Usecase.SUBSCRIBER_STATEMENT);
+    }
+
+    private WebhookResponse statementUsecaseEndDateFallbackHandler(WebhookRequest webhookRequest) {
+        String prompt = "Please type in a valid end date, for example 31 January?"+Emoji.PointUp;
+        return getWebhookResponse(webhookRequest,prompt,null,Usecase.SUBSCRIBER_STATEMENT);
+    }
+
     private WebhookResponse statementUsecaseEndDateHandler(WebhookRequest webhookRequest) throws ParseException {
         log.info("Processing dialogflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
         List<OutputContext> outputContexts = webhookRequest.getQueryResult().getOutputContexts();
@@ -664,6 +684,21 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                 .build();
         log.info("Sending response to dialogFlow: {}\n", webhookResponse);
         return webhookResponse;
+    }
+
+    private WebhookResponse statementUsecaseMoreFallbackHandler(WebhookRequest webhookRequest) {
+        String prompt = "Didn't quite get you, do you still need my help?"+Emoji.Smiley;
+        return getWebhookResponse(webhookRequest,prompt,null,Usecase.SUBSCRIBER_STATEMENT);
+    }
+
+    private WebhookResponse statementUsecaseMoreAffirmativeHandler(WebhookRequest webhookRequest) {
+        String prompt = "Ok Great! What else can I do for you?"+Emoji.Smiley;
+        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest),Usecase.SUBSCRIBER_STATEMENT);
+    }
+
+    private WebhookResponse statementUsecaseMoreNegativeHandler(WebhookRequest webhookRequest) {
+        String prompt = "Ok Great! Enjoy the rest of your day. And remember to continue living your life the ecocash way!"+Emoji.Smiley;
+        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest),Usecase.SUBSCRIBER_STATEMENT);
     }
 
     private WebhookResponse statementUsecaseScenario3Handler(WebhookRequest webhookRequest) throws ParseException {
@@ -754,7 +789,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
 
     private WebhookResponse payBillerUsecaseGetBillerConfirmationNegativeNegHandler(WebhookRequest webhookRequest) {
         String prompt = "Ok "+Emoji.Grimacing+" lets do this one more time. Enter the merchant code "+Emoji.PointDown;
-        return getWebhookResponse(webhookRequest, prompt, null,Usecase.BILL_PAYMENT);
+        return getWebhookResponse(webhookRequest, prompt, closeTicket(webhookRequest),Usecase.BILL_PAYMENT);
     }
 
     private WebhookResponse payBillerUsecaseGetBillerConfirmationAffirmativeHandler(WebhookRequest webhookRequest) {
