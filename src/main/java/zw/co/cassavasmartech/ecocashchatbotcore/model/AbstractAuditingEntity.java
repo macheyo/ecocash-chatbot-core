@@ -22,7 +22,7 @@ public abstract class AbstractAuditingEntity implements Serializable {
     @CreatedBy
     @Column(name = "created_by", nullable = false, length = 50, updatable = false)
     @JsonIgnore
-    private String createdBy = "DEVELOPER";
+    private String createdBy = "system";
 
     @CreatedDate
     @Column(name = "created_date", nullable = false, updatable = false)

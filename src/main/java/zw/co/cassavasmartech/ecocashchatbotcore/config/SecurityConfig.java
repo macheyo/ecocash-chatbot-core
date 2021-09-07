@@ -106,6 +106,9 @@ public class SecurityConfig{
                     .and()
                     .authorizeRequests()
                     .antMatchers("/api/auth/**", "/eip/**","/v2/api-docs",
+                            "/customer/ticket/eip/callback",
+                            "/customer/ticket/cpg/callback",
+                            "",
                             "/v2/api-docs",
                             "/configuration/ui",
                             "/swagger-resources/**",

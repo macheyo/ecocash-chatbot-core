@@ -7,5 +7,5 @@ import lombok.Data;
 @Builder
 public class TicketParameter {
     private Long id;
-    private String msisdn2;
+    private String msisdn;
 }

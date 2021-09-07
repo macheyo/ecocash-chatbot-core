@@ -3,22 +3,37 @@ package zw.co.cassavasmartech.ecocashchatbotcore.dialogflow;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.OriginalDetectIntentRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.Customer;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Platform;
+import zw.co.cassavasmartech.ecocashchatbotcore.repository.CustomerRepository;
 
 import java.util.Calendar;
 import java.util.Map;
+import java.util.Optional;
+
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class DialogFlowUtil {
-    public static String getAlias(OriginalDetectIntentRequest originalDetectIntentRequest) {
-        if(originalDetectIntentRequest.getSource().equalsIgnoreCase(Platform.TELEGRAM.toString())){
-            ObjectMapper objectMapper = new ObjectMapper();
-            Map<String,Object> map = objectMapper.convertValue(originalDetectIntentRequest.getPayload(),Map.class);
-            Map<String,Object> data = objectMapper.convertValue(map.get("data"),Map.class);
-            Map<String,Object> from = objectMapper.convertValue(data.get("from"),Map.class);
-            return from.get("first_name").toString();
+
+    public static String getAlias(OriginalDetectIntentRequest originalDetectIntentRequest,  Optional<Customer> customer) {
+        if(customer.isPresent()){
+            return customer.get().getFirstName();
         }
-        else return "valued customer";
+        else{
+            if (getPlatform(originalDetectIntentRequest).equals(Platform.TELEGRAM)) {
+                ObjectMapper objectMapper = new ObjectMapper();
+                Map<String, Object> map = objectMapper.convertValue(originalDetectIntentRequest.getPayload(), Map.class);
+                Map<String, Object> data = objectMapper.convertValue(map.get("data"), Map.class);
+                Map<String, Object> from = objectMapper.convertValue(data.get("from"), Map.class);
+                return from.get("first_name").toString();
+            } else {
+                ObjectMapper objectMapper = new ObjectMapper();
+                Map<String, Object> map = objectMapper.convertValue(originalDetectIntentRequest.getPayload(), Map.class);
+                return map.get("ProfileName").toString();
+            }
+        }
     }
 
     public static String getTimeOfDay() {
@@ -37,18 +52,26 @@ public class DialogFlowUtil {
     }
 
     public static String getChatId(OriginalDetectIntentRequest originalDetectIntentRequest){
-        if(originalDetectIntentRequest.getSource().equalsIgnoreCase(Platform.TELEGRAM.toString())){
+
+        if(getPlatform(originalDetectIntentRequest).equals(Platform.TELEGRAM)){
             ObjectMapper objectMapper = new ObjectMapper();
             Map<String,Object> map = objectMapper.convertValue(originalDetectIntentRequest.getPayload(),Map.class);
             Map<String,Object> data = objectMapper.convertValue(map.get("data"),Map.class);
             Map<String,Object> chat = objectMapper.convertValue(data.get("chat"),Map.class);
             return chat.get("id").toString();
+        }else{
+            ObjectMapper objectMapper = new ObjectMapper();
+            Map<String,Object> map = objectMapper.convertValue(originalDetectIntentRequest.getPayload(),Map.class);
+            return map.get("From").toString();
         }
-        return null;
+
     }
 
     public static Platform getPlatform(OriginalDetectIntentRequest originalDetectIntentRequest){
-        if(originalDetectIntentRequest.getSource().equalsIgnoreCase(Platform.TELEGRAM.toString()))return Platform.TELEGRAM;
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String,Object> map = objectMapper.convertValue(originalDetectIntentRequest,Map.class);
+        if(map.get("source")!=null)return Platform.TELEGRAM;
         else return Platform.WHATSAPP;
     }
+
 }

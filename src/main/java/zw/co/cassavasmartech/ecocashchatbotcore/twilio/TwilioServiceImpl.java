@@ -13,6 +13,6 @@ public class TwilioServiceImpl implements TwilioService{
     @Override
     public Message sendMessage(String chatId, String text) {
         Twilio.init(twilioConfigurationProperties.getSid(),twilioConfigurationProperties.getToken());
-        return Message.creator(new PhoneNumber("whatsapp:"+chatId),new PhoneNumber(twilioConfigurationProperties.getNumber()),text).create();
+        return Message.creator(new PhoneNumber(chatId),new PhoneNumber(twilioConfigurationProperties.getNumber()),text).create();
     }
 }
