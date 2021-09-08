@@ -3,6 +3,7 @@ package zw.co.cassavasmartech.ecocashchatbotcore.dialogflow;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.MobileNumberFormater;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessor;
@@ -57,6 +58,8 @@ public class DialogFlowServiceImpl implements DialogFlowService {
     MerchantRepository merchantRepository;
     @Autowired
     MobileNumberFormater mobileNumberFormater;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @Override
     public WebhookResponse processWebhookCall(WebhookRequest webhookRequest) throws ParseException {
@@ -68,6 +71,8 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                 return pinresetUsecaseHandler(webhookRequest);
             case "usecase.pinreset.security.questions.affirmative":
                 return pinresetUsecaseSecurityQuestionsAffirmativeHandler(webhookRequest);
+            case "usecase.pinreset.security.questions.fallback":
+                return pinresetUsecaseSecurityQuestionsFallbackHandler(webhookRequest);
             case "usecase.pinreset.security.questions.first.answer":
                 return pinresetUsecaseSecurityQuestionsFirstAnswerHandler(webhookRequest);
             case "usecase.pinreset.security.questions.more.negative":
@@ -1046,6 +1051,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         Map<String,Object> map = objectMapper.convertValue(outputContexts.get(ticketIndex).getParameters(),Map.class);
         Optional<Customer> customer = isNewCustomer(webhookRequest);
         String customerAnswer = webhookRequest.getQueryResult().getQueryText();
+        customerAnswer = passwordEncoder.encode(customerAnswer);
         String prompt=null;
         OutputContext outputContext=null;
         OutputContext outputContext1=null;
@@ -1071,15 +1077,27 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                             .name(webhookRequest.getSession() + "/contexts/awaiting_answers")
                             .build();
                 }else{
-                    prompt="well done"+Emoji.ThumbsUp+"I have reset your PIN. You will receive an SMS on your phone with your new temporary PIN. You will be prompted to change this when you dial *151#. \nAnything else I can do for you"+Emoji.Smiley;
-                    outputContext = OutputContext.builder()
-                            .lifespanCount(50)
-                            .name(webhookRequest.getSession() + "/contexts/ticket")
-                            .build();
-                    outputContext1 = OutputContext.builder()
-                            .lifespanCount(1)
-                            .name(webhookRequest.getSession() + "/contexts/awaiting_pinreset_more")
-                            .build();
+                    if(customerService.pinReset(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()))) {
+                        prompt = "well done" + Emoji.ThumbsUp + "I have reset your PIN. You will receive an SMS on your phone with your new temporary PIN. You will be prompted to change this when you dial *151#. \nAnything else I can do for you" + Emoji.Smiley;
+                        outputContext = OutputContext.builder()
+                                .lifespanCount(50)
+                                .name(webhookRequest.getSession() + "/contexts/ticket")
+                                .build();
+                        outputContext1 = OutputContext.builder()
+                                .lifespanCount(1)
+                                .name(webhookRequest.getSession() + "/contexts/awaiting_pinreset_more")
+                                .build();
+                    }else {
+                        prompt = "Oops" + Emoji.Pensive + "An error occured processing your request please try again later";
+                        outputContext = OutputContext.builder()
+                                .lifespanCount(50)
+                                .name(webhookRequest.getSession() + "/contexts/ticket")
+                                .build();
+                        outputContext1 = OutputContext.builder()
+                                .lifespanCount(1)
+                                .name(webhookRequest.getSession() + "/contexts/awaiting_pinreset_more")
+                                .build();
+                    }
                 }
             } else {
                 prompt = "Your answer is wrong. An agent will be in touch shortly to verify your identity";
@@ -1179,6 +1197,13 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         String prompt = "Ok great. Have a nice day and remember to continue living life the Ecocash way"+Emoji.Smiley;
         return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest),Usecase.PIN_RESET);
     }
+
+
+    private WebhookResponse pinresetUsecaseSecurityQuestionsFallbackHandler(WebhookRequest webhookRequest) {
+        String prompt = "Do you mean you want to answer your security questions?."+Emoji.Confused;
+        return getWebhookResponse(webhookRequest,prompt,null,Usecase.PIN_RESET);
+    }
+
 
     private WebhookResponse pinresetUsecaseSecurityQuestionsMoreFallbackHandler(WebhookRequest webhookRequest) {
         String prompt = "Do you mean you still need me to help you?."+Emoji.Smiley;
