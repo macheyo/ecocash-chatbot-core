@@ -204,6 +204,8 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                 return sendMoneyUsecaseMsisdnFallbackHandler(webhookRequest);
             case "usecase.send.money.get.beneficiary.amount.fallback":
                 return sendMoneyUsecaseAmountFallbackHandler(webhookRequest);
+            case"intentSendMoneyTariff":
+                return sendMoneyTarrifUsecaseHandler(webhookRequest);
 
 
         }
@@ -632,6 +634,36 @@ public class DialogFlowServiceImpl implements DialogFlowService {
     private WebhookResponse payMerchantUsecaseConfirmationNegativeHandler(WebhookRequest webhookRequest) {
         String prompt = "That's ok"+ Emoji.Weary+" . Would you want to re-try?";
         return getWebhookResponse(webhookRequest, prompt, null,Usecase.MERCHANT_PAYMENT);
+    }
+
+//    private WebhookResponse pinResetUsecaseConfirmationAffirmativeHandler(WebhookRequest webhookRequest){
+//        String prompt = "Is this to mean you want to continue and answer your security questions?";
+//        return getWebhookResponse(webhookRequest,prompt,null,Usecase.PIN_RESET);
+//    }
+//
+//    private WebhookResponse pinResetUsecaseConfirmationNegativeHandler(WebhookRequest webhookRequest){
+//        String prompt = "Ok great. Do you have anything else that I can assist you with?";
+//        return getWebhookResponse(webhookRequest, prompt,null,Usecase.PIN_RESET);
+//    }
+    //send money tariff
+    private WebhookResponse sendMoneyTarrifUsecaseHandler(WebhookRequest webhookRequest){
+        log.info("Processing dflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
+        String prompt = "Ok to send that amount you need ...";
+        return getWebhookResponse(webhookRequest,prompt,null,Usecase.SEND_MONEY_TARIFF);
+    }
+
+    //bill payment tariff
+    private WebhookResponse payBillerTariffUsecaseHandler(WebhookRequest webhookRequest){
+        log.info("Processing Dflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
+        String prompt = "To send this to biller you need to have this .......placeholder";
+        return getWebhookResponse(webhookRequest,prompt,null,Usecase.BILLER_TARIFF);
+    }
+
+    //merchant payment tariff
+    private WebhookResponse payMerchantTariffUsecaseHandler(WebhookRequest webhookRequest){
+        log.info("Processing Dflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
+        String prompt = "to pay ths merchant u need....";
+        return getWebhookResponse(webhookRequest,prompt,createTicket(webhookRequest,Usecase.MERCHANT_TARIFF),Usecase.MERCHANT_TARIFF);
     }
 
     private WebhookResponse payMerchantUsecaseScenario2Handler(WebhookRequest webhookRequest) {
