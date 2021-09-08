@@ -70,6 +70,12 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                 return pinresetUsecaseSecurityQuestionsAffirmativeHandler(webhookRequest);
             case "usecase.pinreset.security.questions.first.answer":
                 return pinresetUsecaseSecurityQuestionsFirstAnswerHandler(webhookRequest);
+            case "usecase.pinreset.security.questions.more.negative":
+                return pinresetUsecaseSecurityQuestionsMoreNegativeHandler(webhookRequest);
+            case "usecase.pinreset.security.questions.more.affirmative":
+                return pinresetUsecaseSecurityQuestionsMoreAffirmativeHandler(webhookRequest);
+            case "usecase.pinreset.security.questions.more.fallback":
+                return pinresetUsecaseSecurityQuestionsMoreFallbackHandler(webhookRequest);
             case "usecase.pay.biller.scenario1":
                 return payBillerUsecaseScenario1Handler(webhookRequest);
             case "usecase.pay.biller.scenario2":
@@ -982,25 +988,59 @@ public class DialogFlowServiceImpl implements DialogFlowService {
 
     private WebhookResponse pinresetUsecaseSecurityQuestionsFirstAnswerHandler(WebhookRequest webhookRequest) {
         log.info("Processing dialogflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
+        List<OutputContext> outputContexts = webhookRequest.getQueryResult().getOutputContexts();
+        ObjectMapper objectMapper = new ObjectMapper();
+        int ticketIndex=0;
+        for(int i = 0;i<outputContexts.size();i++){
+            Map<String,Object> map = objectMapper.convertValue(outputContexts.get(i),Map.class);
+            if(map.get("name").toString().equalsIgnoreCase(webhookRequest.getSession()+"/contexts/ticket")) ticketIndex=i;
+        }
+        Map<String,Object> map = objectMapper.convertValue(outputContexts.get(ticketIndex).getParameters(),Map.class);
         Optional<Customer> customer = isNewCustomer(webhookRequest);
-        String[] customerAnswers = webhookRequest.getQueryResult().getQueryText().split(",");
-        String prompt;
+        String customerAnswer = webhookRequest.getQueryResult().getQueryText();
+        String prompt=null;
+        OutputContext outputContext=null;
+        OutputContext outputContext1=null;
         if(customer.isPresent()) {
             List<Answer> answers = selfServiceCoreProcessor.getAnswerByMsisdnAndAnswerStatus(customer.get().getMsisdn());
-            boolean isCorrect = true;
-            int count=0;
-            for(Answer answer:answers){
-                if(!answer.getAnswer().equalsIgnoreCase(customerAnswers[count]))isCorrect=false;
-                count++;
+            Double i = (Double) map.get("question");
+            Answer answer = answers.get(i.intValue()-1);
+            if(customerAnswer.equalsIgnoreCase(answer.getAnswer())){
+                if(i.intValue()<answers.size()) {
+                    Answer newAnswer = answers.get(i.intValue());
+                    prompt = newAnswer.getQuestion().getText();
+                    TicketParameter ticketParameter = TicketParameter.builder()
+                            .id(Double.valueOf(map.get("id").toString()).longValue())
+                            .question(i.intValue()+1)
+                            .build();
+                    outputContext = OutputContext.builder()
+                            .lifespanCount(50)
+                            .name(webhookRequest.getSession() + "/contexts/ticket")
+                            .parameters(ticketParameter)
+                            .build();
+                    outputContext1 = OutputContext.builder()
+                            .lifespanCount(1)
+                            .name(webhookRequest.getSession() + "/contexts/awaiting_answers")
+                            .build();
+                }else{
+                    prompt="well done"+Emoji.ThumbsUp+"I have reset your PIN. You will receive an SMS on your phone with your new temporary PIN. You will be prompted to change this when you dial *151#. \nAnything else I can do for you"+Emoji.Smiley;
+                    outputContext = OutputContext.builder()
+                            .lifespanCount(50)
+                            .name(webhookRequest.getSession() + "/contexts/ticket")
+                            .build();
+                    outputContext1 = OutputContext.builder()
+                            .lifespanCount(1)
+                            .name(webhookRequest.getSession() + "/contexts/awaiting_pinreset_more")
+                            .build();
+                }
+            } else {
+                prompt = "Your answer is wrong. An agent will be in touch shortly to verify your identity";
             }
-            if(isCorrect){
-                if(paymentGatewayProcessor.pinReset(customer.get().getMsisdn()).getField1().equalsIgnoreCase("200"))prompt = "Correct! "+Emoji.ThumbsUp+"I have reset your PIN. You will receive an SMS on your phone with your new temporary PIN. You will be prompted to change this when you dial *151#. Good day";
-                else prompt = "Oops!! "+Emoji.Pensive+" i can not help you at this moment, the service seems not to be available. Please call this toll-free number **** for immediate assistance or check with me again in a few minutes.";
-            }else prompt = "Your answers are wrong. An agent will be in touch shortly to verify your identity";
         }
         else prompt = "Alright " + DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest(),customer)+Emoji.Smiley+", but before we reset your PIN, what is your Ecocash number?";
         WebhookResponse webhookResponse = WebhookResponse.builder()
                 .fulfillmentText(prompt)
+                .outputContexts(new Object[]{outputContext,outputContext1})
                 .source("ecocashchatbotcore")
                 .build();
         log.info("Sending response to dialogFlow: {}\n", webhookResponse);
@@ -1009,21 +1049,54 @@ public class DialogFlowServiceImpl implements DialogFlowService {
 
     private WebhookResponse pinresetUsecaseSecurityQuestionsAffirmativeHandler(WebhookRequest webhookRequest) {
         log.info("Processing dialogflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
+        List<OutputContext> outputContexts = webhookRequest.getQueryResult().getOutputContexts();
+        ObjectMapper objectMapper = new ObjectMapper();
+        int ticketIndex=0;
+        for(int i = 0;i<outputContexts.size();i++){
+            Map<String,Object> map = objectMapper.convertValue(outputContexts.get(i),Map.class);
+            if(map.get("name").toString().equalsIgnoreCase(webhookRequest.getSession()+"/contexts/ticket")) ticketIndex=i;
+        }
+        Map<String,Object> map = objectMapper.convertValue(outputContexts.get(ticketIndex).getParameters(),Map.class);
         Optional<Customer> customer = isNewCustomer(webhookRequest);
-        StringBuilder prompt= new StringBuilder();
+        OutputContext outputContext=null;
+        String prompt;
         if(customer.isPresent()) {
             List<Answer> answers = selfServiceCoreProcessor.getAnswerByMsisdnAndAnswerStatus(customer.get().getMsisdn());
-            int count=0;
-            for(Answer answer:answers){
-                count++;
-                prompt.append(count).append(". ").append(answer.getQuestion().getText()).append("\n");
+            if(map.containsKey("question")){
+                Double i = (Double) map.get("question");
+                if(i.intValue()<answers.size()-1) {
+                    Answer answer = answers.get(i.intValue());
+                    prompt = answer.getQuestion().getText();
+                    TicketParameter ticketParameter = TicketParameter.builder()
+                            .id(Double.valueOf(map.get("id").toString()).longValue())
+                            .question(i.intValue()+1)
+                            .build();
+                    outputContext = OutputContext.builder()
+                            .lifespanCount(50)
+                            .name(webhookRequest.getSession() + "/contexts/ticket")
+                            .parameters(ticketParameter)
+                            .build();
+                }else{
+                    prompt="well done";
+                }
+            }else{
+                prompt = answers.get(0).getQuestion().getText();
+                TicketParameter ticketParameter = TicketParameter.builder()
+                        .id(Double.valueOf(map.get("id").toString()).longValue())
+                        .question(1)
+                        .build();
+                outputContext = OutputContext.builder()
+                        .lifespanCount(50)
+                        .name(webhookRequest.getSession() + "/contexts/ticket")
+                        .parameters(ticketParameter)
+                        .build();
             }
-            prompt.append(Emoji.Exclamation + "Answer the above security questions in the order given. Separate your answers by a comma e.g. soccer,patati patata,moyo");
         }
-        else prompt = new StringBuilder("Alright " + DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest(),customer) + Emoji.Smiley + ", but before we reset your PIN, what is your Ecocash number?");
+        else prompt = "Alright " + DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest(),customer)+Emoji.Smiley+", but before we reset your PIN, what is your Ecocash number?";
         WebhookResponse webhookResponse = WebhookResponse.builder()
                 .fulfillmentText(prompt.toString())
                 .source("ecocashchatbotcore")
+                .outputContexts(new Object[]{outputContext} )
                 .build();
         log.info("Sending response to dialogFlow: {}\n", webhookResponse);
         return webhookResponse;
@@ -1047,6 +1120,21 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                 .build();
         log.info("Sending response to dialogFlow: {}\n", webhookResponse);
         return webhookResponse;
+    }
+
+    private WebhookResponse pinresetUsecaseSecurityQuestionsMoreAffirmativeHandler(WebhookRequest webhookRequest) {
+        String prompt = "Ok great. What else can I help you do?"+Emoji.Smiley;
+        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest),Usecase.PIN_RESET);
+    }
+
+    private WebhookResponse pinresetUsecaseSecurityQuestionsMoreNegativeHandler(WebhookRequest webhookRequest) {
+        String prompt = "Ok great. Have a nice day and remember to continue living life the Ecocash way"+Emoji.Smiley;
+        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest),Usecase.PIN_RESET);
+    }
+
+    private WebhookResponse pinresetUsecaseSecurityQuestionsMoreFallbackHandler(WebhookRequest webhookRequest) {
+        String prompt = "Do you mean you still need me to help you?."+Emoji.Smiley;
+        return getWebhookResponse(webhookRequest,prompt,null,Usecase.PIN_RESET);
     }
 
     private WebhookResponse welcomeHandler(WebhookRequest webhookRequest){

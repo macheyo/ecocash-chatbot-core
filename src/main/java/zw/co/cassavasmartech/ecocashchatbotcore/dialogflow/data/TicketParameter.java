@@ -8,4 +8,5 @@ import lombok.Data;
 public class TicketParameter {
     private Long id;
     private String msisdn;
+    private int question;
 }
