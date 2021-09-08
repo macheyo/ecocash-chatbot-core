@@ -200,6 +200,10 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                 return verifyUsecaseGetMsisdnHandler(webhookRequest);
             case "usecase.verify.get.otp":
                 return verifyUsecaseGetOtpHandler(webhookRequest);
+            case "usecase.send.money.get.beneficiary.msisdn.fallback":
+                return sendMoneyUsecaseMsisdnFallbackHandler(webhookRequest);
+            case "usecase.send.money.get.beneficiary.amount.fallback":
+                return sendMoneyUsecaseAmountFallbackHandler(webhookRequest);
 
 
         }
@@ -465,6 +469,19 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         return getWebhookResponse(webhookRequest,prompt,null,Usecase.BUY_AIRTIME);
     }
 
+    //send money fallbacks
+    private WebhookResponse sendMoneyUsecaseMsisdnFallbackHandler(WebhookRequest webhookRequest){
+        String prompt = "You seem to have provided an invalid Econet Number, please try a number of this format: 0774222689";
+        return getWebhookResponse(webhookRequest,prompt,null,Usecase.SEND_MONEY);
+    }
+
+    private WebhookResponse sendMoneyUsecaseAmountFallbackHandler(WebhookRequest webhookRequest){
+        String prompt = "The amount you entered is not supported. Use format like $300";
+        return getWebhookResponse(webhookRequest,prompt,null,Usecase.SEND_MONEY);
+    }
+
+
+
     private WebhookResponse sendAirtimeUsecaseScenario2Handler(WebhookRequest webhookRequest) {
         log.info("Processing dialogflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
         List<OutputContext> outputContexts = webhookRequest.getQueryResult().getOutputContexts();
@@ -488,7 +505,6 @@ public class DialogFlowServiceImpl implements DialogFlowService {
     }
 
     private WebhookResponse sendAirtimeUsecaseScenario1Handler(WebhookRequest webhookRequest) {
-
         String prompt = "Alright, lets quickly do that"+Emoji.Smiley+" are you buying airtime for yourself?";
         return getWebhookResponse(webhookRequest,prompt,createTicket(webhookRequest,Usecase.BUY_AIRTIME),Usecase.BUY_AIRTIME);
     }
