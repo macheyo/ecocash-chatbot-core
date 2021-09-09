@@ -15,8 +15,11 @@ import zw.co.cassavasmartech.ecocashchatbotcore.model.Answer;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.AnswerStatus;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.EnrollmentResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.SubscriberDto;
+import zw.co.cassavasmartech.ecocashchatbotcore.selfServiceCore.data.EcocashTransaction;
+import zw.co.cassavasmartech.ecocashchatbotcore.selfServiceCore.data.ReversalDto;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -57,5 +60,42 @@ public class SelfServiceCoreProcessorImpl implements SelfServiceCoreProcessor{
                 selfServiceConfigurationProperties.getSelfServiceEndPointUrl() + "/subscriber/" + mobileNumberFormater.formatMsisdnMinimum(msisdn),
                 HttpMethod.GET,
                 new ParameterizedTypeReference<ApiResponse<SubscriberDto>>() {});
+    }
+
+    @Override
+    public HttpEntity<ApiResponse<Optional<EcocashTransaction>>> validateReversal(String msisdn, String reference) {
+        String minimumMsisdn = mobileNumberFormater.formatMsisdnMinimum(msisdn);
+        log.debug("Processing validation of reversal {} to url {}", msisdn, selfServiceConfigurationProperties.getSelfServiceEndPointUrl());
+        HttpHeaders headers = new HttpHeaders();
+        headers.set(HttpHeaders.ACCEPT, MediaType.ALL_VALUE);
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(selfServiceConfigurationProperties.getSelfServiceEndPointUrl()+ "/reversal/validate/"+minimumMsisdn+"/"+reference);
+        final HttpEntity<?> requestEntity = new HttpEntity<>(headers);
+        final HttpEntity<ApiResponse<Optional<EcocashTransaction>>> responseEntity = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, requestEntity, new ParameterizedTypeReference<ApiResponse<Optional<EcocashTransaction>>>() {});
+        return responseEntity;
+
+    }
+
+    @Override
+    public HttpEntity<ApiResponse<Optional<ReversalDto>>> initiateReversal(String msisdn, String reference) {
+        String minimumMsisdn = mobileNumberFormater.formatMsisdnMinimum(msisdn);
+        log.debug("Processing initiation of reversal {} to url {}", msisdn, selfServiceConfigurationProperties.getSelfServiceEndPointUrl());
+        HttpHeaders headers = new HttpHeaders();
+        headers.set(HttpHeaders.ACCEPT, MediaType.ALL_VALUE);
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(selfServiceConfigurationProperties.getSelfServiceEndPointUrl()+ "/reversal/initiate/"+minimumMsisdn+"/"+reference);
+        final HttpEntity<?> requestEntity = new HttpEntity<>(headers);
+        final HttpEntity<ApiResponse<Optional<ReversalDto>>> responseEntity = restTemplate.exchange(builder.toUriString(), HttpMethod.POST, requestEntity, new ParameterizedTypeReference<ApiResponse<Optional<ReversalDto>>>() {});
+        return responseEntity;
+    }
+
+    @Override
+    public HttpEntity<ApiResponse<List<ReversalDto>>> pendingReversals(String msisdn) {
+        String minimumMsisdn = mobileNumberFormater.formatMsisdnMinimum(msisdn);
+        log.debug("Processing validation of reversal {} to url {}", msisdn, selfServiceConfigurationProperties.getSelfServiceEndPointUrl());
+        HttpHeaders headers = new HttpHeaders();
+        headers.set(HttpHeaders.ACCEPT, MediaType.ALL_VALUE);
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(selfServiceConfigurationProperties.getSelfServiceEndPointUrl()+ "/recipientPending/"+minimumMsisdn);
+        final HttpEntity<?> requestEntity = new HttpEntity<>(headers);
+        final HttpEntity<ApiResponse<List<ReversalDto>>> responseEntity = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, requestEntity, new ParameterizedTypeReference<ApiResponse<List<ReversalDto>>>() {});
+        return responseEntity;
     }
 }

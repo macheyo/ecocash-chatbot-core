@@ -9,13 +9,13 @@ import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
 
 @ControllerAdvice
 public class BusinessAdvice {
-    @ResponseBody
-    @ExceptionHandler(BusinessException.class)
-    @ResponseStatus(HttpStatus.OK)
-    ApiResponse<?> businessExceptionHandler(BusinessException ex) {
-        ApiResponse<?> response = new ApiResponse();
-        response.setMessage(ex.getMessage());
-        response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        return response;
-    }
+//    @ResponseBody
+//    @ExceptionHandler(BusinessException.class)
+//    @ResponseStatus(HttpStatus.OK)
+//    ApiResponse<?> businessExceptionHandler(BusinessException ex) {
+//        ApiResponse<?> response = new ApiResponse();
+//        response.setMessage(ex.getMessage());
+//        response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+//        return response;
+//    }
 }

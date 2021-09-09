@@ -3,8 +3,11 @@ package zw.co.cassavasmartech.ecocashchatbotcore.dialogflow;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.MobileNumberFormater;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessor;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.BillerLookupRequest;
@@ -20,7 +23,9 @@ import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.CustomerRepository;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.ProfileRepository;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.TicketRepository;
+import zw.co.cassavasmartech.ecocashchatbotcore.selfServiceCore.data.EcocashTransaction;
 import zw.co.cassavasmartech.ecocashchatbotcore.selfServiceCore.SelfServiceCoreProcessor;
+import zw.co.cassavasmartech.ecocashchatbotcore.selfServiceCore.data.ReversalDto;
 import zw.co.cassavasmartech.ecocashchatbotcore.service.CustomerService;
 import zw.co.cassavasmartech.ecocashchatbotcore.service.ProfileService;
 import zw.co.cassavasmartech.ecocashchatbotcore.service.TicketService;
@@ -211,10 +216,177 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                 return sendMoneyUsecaseAmountFallbackHandler(webhookRequest);
             case"intentSendMoneyTariff":
                 return sendMoneyTarrifUsecaseHandler(webhookRequest);
+            case "usecase.transaction.reversal.intent":
+                return transactionReversalUsecaseHandler(webhookRequest);
+            case "usecase.transaction.reversal.reverse":
+                return transactionReversalUsecaseReverseHandler(webhookRequest);
+            case "usecase.transaction.reversal.reverse.reference":
+                return transactionReversalUsecaseReverseReferenceHandler(webhookRequest);
+            case "usecase.transaction.reversal.reverse.affirmative":
+                return transactionReversalReverseAffirmativeHandler(webhookRequest);
+            case "usecase.transaction.reversal.approve":
+                return transactionReversalApproveHandler(webhookRequest);
+//            case "usecase.transaction.reversal.approval.affirmative":
+//                return transactionReversalUsecaseApprovalAffirmativeHandler(webhookRequest);
+//            case "usecase.transaction.reversal.approval.confirmation.fallback":
+//                return transactionReversalUsecaseApprovalConfirmationFallbackHandler(webhookRequest);
+//            case "usecase.transaction.reversal.approval.negative":
+//                return transactionReversalUsecaseApprovalNegativeHandler(webhookRequest);
+//            case "usecase.transaction.reversal.approval.reference":
+//                return transactionReversalUsecaseApprovalReferenceHandler(webhookRequest);
+//            case "usecase.transaction.reversal.approval.reference.fallback":
+//                return transactionReversalUsecaseApprovalReferenceFallbackHandler(webhookRequest);
+
+//            case "usecase.transaction.reversal.approve.reference":
+//                return transactionReversalUsecaseApproveReferenceHandler(webhookRequest);
+//            case "usecase.transaction.reversal.fallback":
+//                return transactionReversalUsecaseFallbackHandler(webhookRequest);
+//            case "usecase.transaction.reversal.more.affirmative":
+//                return transactionReversalUsecaseMoreAffirmativeHandler(webhookRequest);
+//            case "usecase.transaction.reversal.more.fallback":
+//                return transactionReversalUsecaseMoreFallbackHandler(webhookRequest);
+//            case "usecase.transaction.reversal.more.negative":
+//                return transactionReversalUsecaseMoreNegativeHandler(webhookRequest);
+//
+
+//            case "usecase.transaction.reversal.reverse.confirmation.fallback":
+//                return transactionReversalReversalReverseConfirmationHandler(webhookRequest);
+//            case "usecase.transaction.reversal.reverse.negative":
+//                return transactionReversalReverseNegativeHandler(webhookRequest);
+//            case "usecase.transaction.reversal.reverse.reference":
+//                return transactionReversalUsecaseReverseReferenceHandler(webhookRequest);
+//            case "usecase.transaction.reversal.reverse.reference.fallback":
+//                return transactionReversalUsecaseReverseReferenceFallbackHandler(webhookRequest);
 
 
         }
         return null;
+    }
+
+    private WebhookResponse transactionReversalApproveHandler(WebhookRequest webhookRequest) {
+        log.info("Processing dialogflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
+        List<OutputContext> outputContexts = webhookRequest.getQueryResult().getOutputContexts();
+        ObjectMapper objectMapper = new ObjectMapper();
+        int ticketIndex=0;
+        for(int i = 0;i<outputContexts.size();i++){
+            Map<String,Object> map = objectMapper.convertValue(outputContexts.get(i),Map.class);
+            if(map.get("name").toString().equalsIgnoreCase(webhookRequest.getSession()+"/contexts/ticket")) ticketIndex=i;
+        }
+        Map<String,Object> map = objectMapper.convertValue(outputContexts.get(ticketIndex).getParameters(),Map.class);
+        Optional<Customer> customer = isNewCustomer(webhookRequest);
+        String prompt;
+        if(customer.isPresent()) {
+            prompt = "";
+            HttpEntity<ApiResponse<List<ReversalDto>>> reversals  = selfServiceCoreProcessor.pendingReversals(customer.get().getMsisdn());
+            if(reversals.getBody().getStatus()!= HttpStatus.OK.value())prompt="Ooops"+Emoji.Pensive+reversals.getBody().getMessage();
+            else {
+                int count = 0;
+                prompt=Emoji.PointDown+" These are reversals waiting for your approval:";
+                for(ReversalDto reversal:reversals.getBody().getBody()){
+                    count++;
+                    TransactionResponse transactionResponse = customerService.customerLookup(SubscriberDto.builder().msisdn(reversal.getOriginalSenderMobileNumber()).build());
+                    prompt+="\n"+count+". "
+                            +reversal.getReference()+" "
+                            +reversal.getOriginalSenderMobileNumber()+" "
+                            +"("+transactionResponse.getField6()+" "+transactionResponse.getField9()+")"
+                            +" of $ZWL"+reversal.getAmount();
+                }
+                prompt+="\nwhat is the reference of the transaction you want to approve reversal for?";
+            }
+        }
+        else prompt = "Alright " + DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest(),customer)+Emoji.Smiley+", but before we reverse, what is your Ecocash number?";
+        WebhookResponse webhookResponse = WebhookResponse.builder()
+                .fulfillmentText(prompt)
+                .source("ecocashchatbotcore")
+                .build();
+        log.info("Sending response to dialogFlow: {}\n", webhookResponse);
+        return webhookResponse;
+    }
+
+    private WebhookResponse transactionReversalReverseAffirmativeHandler(WebhookRequest webhookRequest) {
+        log.info("Processing dialogflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
+        List<OutputContext> outputContexts = webhookRequest.getQueryResult().getOutputContexts();
+        ObjectMapper objectMapper = new ObjectMapper();
+        int ticketIndex=0;
+        for(int i = 0;i<outputContexts.size();i++){
+            Map<String,Object> map = objectMapper.convertValue(outputContexts.get(i),Map.class);
+            if(map.get("name").toString().equalsIgnoreCase(webhookRequest.getSession()+"/contexts/ticket")) ticketIndex=i;
+        }
+        Map<String,Object> map = objectMapper.convertValue(outputContexts.get(ticketIndex).getParameters(),Map.class);
+        Optional<Customer> customer = isNewCustomer(webhookRequest);
+        String prompt;
+        if(customer.isPresent()) {
+            prompt = "";
+            HttpEntity<ApiResponse<Optional<ReversalDto>>> response  = selfServiceCoreProcessor.initiateReversal(customer.get().getMsisdn(),map.get("ecocashReference").toString());
+            if(response.getBody().getStatus()!= HttpStatus.OK.value()) {
+                prompt = "Ooops" + Emoji.Pensive + response.getBody().getMessage() + "\nAnything else I can do for you?";
+            }
+            else {
+                TransactionResponse transactionResponse = customerService.customerLookup(SubscriberDto.builder().msisdn(response.getBody().getBody().get().getOriginalRecipientMobileNumber()).build());
+                prompt = "Done!!" + Emoji.Smiley + "\nreversal of transaction "
+                        + response.getBody().getBody().get().getReference()
+                        + " to "
+                        + response.getBody().getBody().get().getOriginalRecipientMobileNumber()
+                        +"("+transactionResponse.getField6()+" "+transactionResponse.getField9()+")"
+                        +" for $ZWL"+response.getBody().getBody().get().getAmount()
+                        +"\nhas been initiated"+Emoji.ThumbsUp+". A notification has been sent to "+transactionResponse.getField6()+" for approval. Anything else I can do for you?";
+            }
+        }
+        else prompt = "Alright " + DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest(),customer)+Emoji.Smiley+", but before we reverse, what is your Ecocash number?";
+        WebhookResponse webhookResponse = WebhookResponse.builder()
+                .fulfillmentText(prompt)
+                .source("ecocashchatbotcore")
+                .build();
+        log.info("Sending response to dialogFlow: {}\n", webhookResponse);
+        return webhookResponse;
+    }
+
+    private WebhookResponse transactionReversalUsecaseReverseReferenceHandler(WebhookRequest webhookRequest) {
+        log.info("Processing dialogflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
+        List<OutputContext> outputContexts = webhookRequest.getQueryResult().getOutputContexts();
+        ObjectMapper objectMapper = new ObjectMapper();
+        int ticketIndex=0;
+        for(int i = 0;i<outputContexts.size();i++){
+            Map<String,Object> map = objectMapper.convertValue(outputContexts.get(i),Map.class);
+            if(map.get("name").toString().equalsIgnoreCase(webhookRequest.getSession()+"/contexts/ticket")) ticketIndex=i;
+        }
+        Map<String,Object> map = objectMapper.convertValue(outputContexts.get(ticketIndex).getParameters(),Map.class);
+        Optional<Customer> customer = isNewCustomer(webhookRequest);
+        String prompt;
+        if(customer.isPresent()) {
+            prompt = "";
+            HttpEntity<ApiResponse<Optional<EcocashTransaction>>> response  = selfServiceCoreProcessor.validateReversal(customer.get().getMsisdn(),map.get("ecocashReference").toString());
+            if(response.getBody().getStatus()!= HttpStatus.OK.value())prompt="Ooops"+Emoji.Pensive+response.getBody().getMessage();
+            else {
+                TransactionResponse transactionResponse = customerService.customerLookup(SubscriberDto.builder().msisdn(response.getBody().getBody().get().getRecipientMobileNumber()).build());
+                prompt = "Got it!!" + Emoji.Smiley + "\ncan you confirm you want to reverse transaction "
+                        + response.getBody().getBody().get().getTransactionReference()
+                        + " done on "
+                        + response.getBody().getBody().get().getTransactionDate()
+                        + " to "
+                        + response.getBody().getBody().get().getRecipientMobileNumber()
+                        +"("+transactionResponse.getField6()+" "+transactionResponse.getField9()+")"
+                        +" for $ZWL"+response.getBody().getBody().get().getAmount()
+                        +"\nis this "+Emoji.PointUp+" correct?";
+            }
+        }
+        else prompt = "Alright " + DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest(),customer)+Emoji.Smiley+", but before we reverse, what is your Ecocash number?";
+        WebhookResponse webhookResponse = WebhookResponse.builder()
+                .fulfillmentText(prompt)
+                .source("ecocashchatbotcore")
+                .build();
+        log.info("Sending response to dialogFlow: {}\n", webhookResponse);
+        return webhookResponse;
+    }
+
+    private WebhookResponse transactionReversalUsecaseReverseHandler(WebhookRequest webhookRequest) {
+        String prompt = "Great!!"+Emoji.Smiley+" \nWhat is the transaction reference of the transaction you want to reverse?";
+        return getWebhookResponse(webhookRequest,prompt,null,Usecase.TRANSACTION_REVERSAL);
+    }
+
+    private WebhookResponse transactionReversalUsecaseHandler(WebhookRequest webhookRequest) {
+        String prompt = "Alright, lets quickly do that"+Emoji.Smiley+" \nDo you want to reverse a transaction or approve a reversal?";
+        return getWebhookResponse(webhookRequest,prompt,createTicket(webhookRequest,Usecase.TRANSACTION_REVERSAL),Usecase.TRANSACTION_REVERSAL);
     }
 
     private WebhookResponse sendMoneyUsecaseConfimationAffirmativeHandler(WebhookRequest webhookRequest) {
