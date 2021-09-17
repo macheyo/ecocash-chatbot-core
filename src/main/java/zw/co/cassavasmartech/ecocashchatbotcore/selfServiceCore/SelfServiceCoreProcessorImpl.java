@@ -11,7 +11,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.MobileNumberFormater;
 import zw.co.cassavasmartech.ecocashchatbotcore.invoker.CoreInvoker;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.Answer;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.AnswerStatus;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.EnrollmentResponse;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.SubscriberDto;
 import zw.co.cassavasmartech.ecocashchatbotcore.selfServiceCore.data.EcocashTransaction;
 import zw.co.cassavasmartech.ecocashchatbotcore.selfServiceCore.data.ReversalDto;
 
@@ -45,7 +48,6 @@ public class SelfServiceCoreProcessorImpl implements SelfServiceCoreProcessor{
 
     @Override
     public List<Answer> getAnswerByMsisdnAndAnswerStatus(String msisdn) {
-        TransactionRequest transactionRequest = TransactionRequest.builder().build();
         return coreInvoker.invoke(null,
                 selfServiceConfigurationProperties.getSelfServiceEndPointUrl()+"/answer/findAnswersByMsisdnAndAnswerStatus/"+mobileNumberFormater.formatMsisdnMinimum(msisdn)+"/"+ AnswerStatus.ACTIVE,
                 HttpMethod.GET,
@@ -91,7 +93,7 @@ public class SelfServiceCoreProcessorImpl implements SelfServiceCoreProcessor{
         log.debug("Processing validation of reversal {} to url {}", msisdn, selfServiceConfigurationProperties.getSelfServiceEndPointUrl());
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.ACCEPT, MediaType.ALL_VALUE);
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(selfServiceConfigurationProperties.getSelfServiceEndPointUrl()+ "/reversal/recipientPending/"+minimumMsisdn);
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(selfServiceConfigurationProperties.getSelfServiceEndPointUrl()+ "/recipientPending/"+minimumMsisdn);
         final HttpEntity<?> requestEntity = new HttpEntity<>(headers);
         final HttpEntity<ApiResponse<List<ReversalDto>>> responseEntity = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, requestEntity, new ParameterizedTypeReference<ApiResponse<List<ReversalDto>>>() {});
         return responseEntity;

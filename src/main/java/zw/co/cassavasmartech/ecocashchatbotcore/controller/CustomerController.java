@@ -72,9 +72,6 @@ public class CustomerController {
                 customerService.isEnrolled(chatId));
     }
 
-//    @GetMapping("/send-money-tariff/{amount}")
-//    public ApiResponse<>
-
     @GetMapping("/security/question/list/{chatId}")
     public ApiResponse<CollectionModel<Answer>> getAnswer(@PathVariable String chatId){
         return new ApiResponse<>(HttpStatus.OK.value(),
@@ -131,8 +128,6 @@ public class CustomerController {
                 ApiConstants.SUCCESS_MESSAGE,
                 customerService.billerLookup(billerLookupRequest));
     }
-
-
 
     @PostMapping("/paymerchant/{chatId}")
     public ApiResponse<EipTransaction> payMerchant(@PathVariable String chatId, @Valid @RequestBody SubscriberToMerchantRequest subscriberToMerchantRequest){
