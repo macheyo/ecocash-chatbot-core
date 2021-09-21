@@ -1,8 +1,8 @@
-package zw.co.cassavasmartech.ecocashchatbotcore.functions;
+package zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.OriginalDetectIntentRequest;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.FunctionAdapter;
+import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function.FunctionAdapter;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Platform;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.PromptObject;
 
@@ -11,8 +11,8 @@ import java.util.Map;
 public class GetCustomerLastName extends FunctionAdapter {
     @Override
     public String process(PromptObject... args) {
-        if(args[0].getCustomer().isPresent()){
-            return args[0].getCustomer().get().getLastName();
+        if(args[0].getCustomer()!=null){
+            return args[0].getCustomer().getLastName();
         }
         else{
             if (getPlatform(args[0].getWebhookRequest().getOriginalDetectIntentRequest()).equals(Platform.TELEGRAM)) {

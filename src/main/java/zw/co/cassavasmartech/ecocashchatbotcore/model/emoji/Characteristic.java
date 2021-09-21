@@ -1,4 +1,4 @@
-package zw.co.cassavasmartech.ecocashchatbotcore.model;
+package zw.co.cassavasmartech.ecocashchatbotcore.model.emoji;
 
 public enum Characteristic {
     Animal,

@@ -80,6 +80,11 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
+    public Optional<Customer> findByMsisdn(String msisdn) {
+        return customerRepository.findByMsisdn(msisdn);
+    }
+
+    @Override
     public List<EntityModel<Customer>> findAll() {
         return customerRepository.findAll().stream()
                 .map(assembler::toModel)

@@ -12,7 +12,6 @@ import zw.co.cassavasmartech.ecocashchatbotcore.exception.TicketNotFoundExceptio
 import zw.co.cassavasmartech.ecocashchatbotcore.model.PostTransaction;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Profile;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Ticket;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.TransactionRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.modelAssembler.TicketModelAssembler;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.ProfileRepository;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.TicketRepository;
@@ -54,7 +53,7 @@ public class TicketServiceImpl implements TicketService{
         return ticketRepository.findById(ticketId).map(ticketUpdate -> {
             ticketUpdate.setSentimentEnd(ticket.getSentimentEnd());
             ticketUpdate.setStage(ticket.getStage());
-            ticketUpdate.setStatus(ticket.getStatus());
+            ticketUpdate.setTicketStatus(ticket.getTicketStatus());
             return ticketRepository.save(ticketUpdate);
         }).orElseThrow(() -> new TicketNotFoundException(ticketId.toString()));
 

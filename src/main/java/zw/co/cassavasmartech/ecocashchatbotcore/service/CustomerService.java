@@ -16,12 +16,21 @@ import java.util.Optional;
 @Service
 public interface CustomerService {
     Customer save(Customer customer);
+
     List<EntityModel<Customer>> findAll();
+
     Customer getByChatId(String chatId);
+
     EnrollmentResponse isEnrolled(String id);
+
     Optional<Customer> findById(Long id);
+
+    Optional<Customer> findByMsisdn(String msisdn);
+
     List<Answer> getAnswers(String chatId);
+
     SubscriberDto getAlternative(String chatId);
+
     Boolean pinReset(String id);
 
     Statement getStatement(String id, StatementRequest statementRequest) throws ParseException;

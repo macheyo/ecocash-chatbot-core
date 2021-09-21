@@ -1,9 +1,9 @@
-package zw.co.cassavasmartech.ecocashchatbotcore.model;
+package zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function;
 
-import zw.co.cassavasmartech.ecocashchatbotcore.functions.GetCustomerAlias;
-import zw.co.cassavasmartech.ecocashchatbotcore.functions.GetCustomerFirstName;
-import zw.co.cassavasmartech.ecocashchatbotcore.functions.GetCustomerLastName;
-import zw.co.cassavasmartech.ecocashchatbotcore.functions.GetTimeOfDay;
+import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function.handler.GetCustomerAlias;
+import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function.handler.GetCustomerFirstName;
+import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function.handler.GetCustomerLastName;
+import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function.handler.GetTimeOfDay;
 
 public enum Function {
     GETTIMEOFDAY (new GetTimeOfDay()),

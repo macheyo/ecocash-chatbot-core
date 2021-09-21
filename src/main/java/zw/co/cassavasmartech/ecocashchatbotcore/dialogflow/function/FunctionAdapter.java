@@ -1,6 +1,6 @@
-package zw.co.cassavasmartech.ecocashchatbotcore.model;
+package zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function;
 
-import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.PromptObject;
 
 public abstract class FunctionAdapter {
     public boolean hasArgs() { return true; }

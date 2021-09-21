@@ -17,6 +17,7 @@ import java.util.Set;
 public class Profile extends BaseEntity{
     private String alias;
     private Platform platform;
+    private boolean verified;
     @Column(unique = true)
     private String chatId;
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

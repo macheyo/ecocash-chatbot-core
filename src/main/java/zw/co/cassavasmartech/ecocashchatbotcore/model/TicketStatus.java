@@ -1,5 +1,5 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.model;
 
-public enum Status {
+public enum TicketStatus {
     OPEN,CLOSED,ESCALATED
 }

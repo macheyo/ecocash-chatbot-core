@@ -1,9 +1,13 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.model;
 
 import lombok.Data;
-import org.springframework.scheduling.annotation.EnableAsync;
+import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function.Function;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import java.util.List;
 
 @Data
 @Entity
@@ -13,4 +17,7 @@ public class Prompt extends BaseEntity{
     private String description;
     private int stage;
     private String text;
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(targetClass = Function.class)
+    private List<Function> functions;
 }

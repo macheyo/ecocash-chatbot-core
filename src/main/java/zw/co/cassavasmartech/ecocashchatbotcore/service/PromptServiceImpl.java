@@ -2,12 +2,9 @@ package zw.co.cassavasmartech.ecocashchatbotcore.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import zw.co.cassavasmartech.ecocashchatbotcore.exception.CustomerNotFoundException;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.PromptNotFoundException;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Prompt;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.State;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Usecase;
-import zw.co.cassavasmartech.ecocashchatbotcore.repository.ProfileRepository;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.PromptRepository;
 
 import java.util.List;
@@ -18,7 +15,7 @@ public class PromptServiceImpl implements PromptService{
     PromptRepository promptRepository;
     @Override
     public Prompt findByIntentAndStage(String intent, int stage) {
-        return promptRepository.findByIntentAndStage(intent,stage).orElseThrow(()->new PromptNotFoundException(intent));
+        return promptRepository.findByIntentAndStage(intent,stage).orElseThrow(()->new PromptNotFoundException());
     }
 
     @Override
@@ -28,7 +25,7 @@ public class PromptServiceImpl implements PromptService{
 
     @Override
     public Prompt findById(Long id) {
-        return promptRepository.findById(id).orElseThrow(()->new PromptNotFoundException(id.toString()));
+        return promptRepository.findById(id).orElseThrow(()->new PromptNotFoundException());
     }
 
     @Override
@@ -38,7 +35,22 @@ public class PromptServiceImpl implements PromptService{
             p.setLastModifiedDate(prompt.getLastModifiedDate());
             p.setLastModifiedBy(prompt.getLastModifiedBy());
             return promptRepository.save(p);
-        }).orElseThrow(()->new PromptNotFoundException(id.toString()));
+        }).orElseThrow(()->new PromptNotFoundException());
+    }
+
+    @Override
+    public Prompt upgrade(Long id, Prompt prompt) {
+        return promptRepository.findById(id).map(p->{
+            p.setText(prompt.getText());
+            p.setLastModifiedDate(prompt.getLastModifiedDate());
+            p.setLastModifiedBy(prompt.getLastModifiedBy());
+            p.setFunctions(prompt.getFunctions());
+            p.setDescription(prompt.getDescription());
+            p.setIntent(prompt.getIntent());
+            p.setStage(prompt.getStage());
+            p.setUsecase(prompt.getUsecase());
+            return promptRepository.save(p);
+        }).orElseThrow(()->new PromptNotFoundException());
     }
 
     @Override

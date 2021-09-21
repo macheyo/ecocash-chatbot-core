@@ -1,0 +1,1621 @@
+.00:18:05.643 INFO  z.c.c.e.EcocashChatbotCoreApplication - Starting EcocashChatbotCoreApplication using Java 1.8.0_271 on LAPTOP-1JQH6S1S with PID 4760 (C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core\target\classes started by Kudzai Macheyo in C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core) 
+.00:18:05.617 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final 
+.00:18:05.646 INFO  z.c.c.e.EcocashChatbotCoreApplication - The following profiles are active: dev 
+.00:18:08.966 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode! 
+.00:18:08.977 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFERRED mode. 
+.00:18:09.179 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 186 ms. Found 9 JPA repository interfaces. 
+.00:18:09.757 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@7351a16e' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 
+.00:18:09.767 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 
+.00:18:11.333 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http) 
+.00:18:11.343 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
+.00:18:11.343 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
+.00:18:11.343 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.50] 
+.00:18:11.444 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring embedded WebApplicationContext 
+.00:18:11.444 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 5552 ms 
+.00:18:11.905 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default] 
+.00:18:12.278 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final 
+.00:18:12.644 INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+.00:18:12.750 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting... 
+.00:18:12.888 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed. 
+.00:18:12.912 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect 
+.00:18:12.956 INFO  o.h.e.b.internal.EnversServiceImpl - Envers integration enabled? : true 
+.00:18:18.392 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+.00:18:18.398 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+.00:18:18.476 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+.00:18:18.847 INFO  o.s.s.l.DefaultSpringSecurityContextSource -  URL 'ldap://192.168.101.47:389', root DN is '' 
+.00:18:21.570 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/dialogflow/**'] with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@289cf7db, org.springframework.security.web.context.SecurityContextPersistenceFilter@2aac87ab, org.springframework.security.web.header.HeaderWriterFilter@7ffc4195, org.springframework.security.web.authentication.logout.LogoutFilter@4840ec68, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@435a2c7d, zw.co.cassavasmartech.ecocashchatbotcore.security.CustomFilter@7c523bdd, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@72c5064f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5d9d8ecf, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3741071d, org.springframework.security.web.session.SessionManagementFilter@5b74bb75, org.springframework.security.web.access.ExceptionTranslationFilter@69356aca, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@44e0c3d] 
+.00:18:21.570 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2de07c57, org.springframework.security.web.context.SecurityContextPersistenceFilter@4b4228cf, org.springframework.security.web.header.HeaderWriterFilter@110318a7, org.springframework.security.web.authentication.logout.LogoutFilter@7c50709a, zw.co.cassavasmartech.ecocashchatbotcore.security.JWTFilter@76cbee13, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7d216ee8, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@74ee97cb, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@59d09ff3, org.springframework.security.web.session.SessionManagementFilter@42ac309, org.springframework.security.web.access.ExceptionTranslationFilter@f472245, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7bc6b117] 
+.00:18:23.505 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
+.00:18:23.614 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/ecocashbotcore' 
+.00:18:23.618 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Triggering deferred initialization of Spring Data repositories… 
+.00:18:24.816 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Spring Data repositories initialized! 
+.00:18:24.852 INFO  z.c.c.e.EcocashChatbotCoreApplication - Started EcocashChatbotCoreApplication in 20.037 seconds (JVM running for 21.454) 
+.00:18:35.932 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
+.00:18:35.936 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
+.00:18:35.940 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms 
+.00:18:36.246 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.00:18:36.980 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "f946a5e1-53e8-409c-94cc-0d5be50e2855-dacfd3fa",
+  "queryResult": {
+    "queryText": "pin reset",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/awaiting_pinreset_enrollment_confirmation",
+        "lifespanCount": 1
+      },
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/cbd27331-6c49-4632-8f75-a3398cb8b7d2",
+      "displayName": "usecase_pinreset"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": -0.6,
+        "magnitude": 0.6
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "WaId": "263783324671",
+      "MessageSid": "SM2573ef30a7495b08ecca7af5cbf8dca6",
+      "NumSegments": "1",
+      "From": "whatsapp:+263783324671",
+      "Body": "pin reset",
+      "NumMedia": "0",
+      "ApiVersion": "2010-04-01",
+      "ProfileName": "justicemacheyo",
+      "SmsStatus": "received",
+      "SmsSid": "SM2573ef30a7495b08ecca7af5cbf8dca6",
+      "SmsMessageSid": "SM2573ef30a7495b08ecca7af5cbf8dca6",
+      "AccountSid": "ACfa0a8d3546de35dd06e07580f418191c",
+      "To": "whatsapp:+14155238886"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671"
+}
+ 
+.00:18:37.005 INFO  z.c.c.e.m.i.h.PinresetUsecaseHandler - Processing dialogflow intent: usecase_pinreset 
+.06:55:43.501 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5h30m59s961ms514µs400ns). 
+.15:15:01.653 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3h30m24s782ms719µs700ns). 
+.21:03:01.192 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h1m36s754ms177µs600ns). 
+.22:55:25.530 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.22:55:25.747 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "8d5a410f-459a-4e4c-8f40-ce187387c98a-48f56f2f",
+  "queryResult": {
+    "queryText": "hi",
+    "action": "input.welcome",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0,
+          "person": {
+            "name": "ho"
+          },
+          "person.original": "ho",
+          "phone-number": "",
+          "phone-number.original": "",
+          "nationalId": "",
+          "nationalId.original": ""
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3",
+      "displayName": "Default Welcome Intent"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.3,
+        "magnitude": 0.3
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "WaId": "263783324671",
+      "AccountSid": "ACfa0a8d3546de35dd06e07580f418191c",
+      "SmsMessageSid": "SMa5f1fd73c64b2ec67dc7a65f91710ab5",
+      "ProfileName": "justicemacheyo",
+      "ApiVersion": "2010-04-01",
+      "NumSegments": "1",
+      "SmsStatus": "received",
+      "MessageSid": "SMa5f1fd73c64b2ec67dc7a65f91710ab5",
+      "From": "whatsapp:+263783324671",
+      "To": "whatsapp:+14155238886",
+      "NumMedia": "0",
+      "SmsSid": "SMa5f1fd73c64b2ec67dc7a65f91710ab5",
+      "Body": "hi"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671"
+}
+ 
+.22:56:17.469 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default' 
+.22:56:17.478 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated... 
+.22:56:17.484 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed. 
+.22:56:24.480 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final 
+.22:56:24.485 INFO  z.c.c.e.EcocashChatbotCoreApplication - Starting EcocashChatbotCoreApplication using Java 1.8.0_271 on LAPTOP-1JQH6S1S with PID 25064 (C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core\target\classes started by Kudzai Macheyo in C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core) 
+.22:56:24.487 INFO  z.c.c.e.EcocashChatbotCoreApplication - The following profiles are active: dev 
+.22:56:25.506 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode! 
+.22:56:25.511 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFERRED mode. 
+.22:56:26.283 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 746 ms. Found 9 JPA repository interfaces. 
+.22:56:28.018 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@3d36dff4' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 
+.22:56:28.055 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 
+.22:56:30.837 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http) 
+.22:56:30.859 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
+.22:56:30.865 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
+.22:56:30.865 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.50] 
+.22:56:30.999 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring embedded WebApplicationContext 
+.22:56:30.999 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 6459 ms 
+.22:56:31.806 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default] 
+.22:56:32.015 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final 
+.22:56:32.185 INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+.22:56:32.290 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting... 
+.22:56:32.814 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed. 
+.22:56:32.949 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect 
+.22:56:33.296 INFO  o.h.e.b.internal.EnversServiceImpl - Envers integration enabled? : true 
+.22:56:36.937 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+.22:56:36.944 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+.22:56:37.193 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+.22:56:38.067 INFO  o.s.s.l.DefaultSpringSecurityContextSource -  URL 'ldap://192.168.101.47:389', root DN is '' 
+.22:56:42.208 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/dialogflow/**'] with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3741071d, org.springframework.security.web.context.SecurityContextPersistenceFilter@72c5064f, org.springframework.security.web.header.HeaderWriterFilter@3e4636c3, org.springframework.security.web.authentication.logout.LogoutFilter@210e2f2f, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@40416321, zw.co.cassavasmartech.ecocashchatbotcore.security.CustomFilter@351d726c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@453439e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@758311ed, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7af0693b, org.springframework.security.web.session.SessionManagementFilter@2aac87ab, org.springframework.security.web.access.ExceptionTranslationFilter@7ffc4195, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5ce41f1f] 
+.22:56:42.233 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@59d09ff3, org.springframework.security.web.context.SecurityContextPersistenceFilter@74ee97cb, org.springframework.security.web.header.HeaderWriterFilter@4b4228cf, org.springframework.security.web.authentication.logout.LogoutFilter@a20898c, zw.co.cassavasmartech.ecocashchatbotcore.security.JWTFilter@17d0d3d7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@268e30d4, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7c50709a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@39fc17be, org.springframework.security.web.session.SessionManagementFilter@7d216ee8, org.springframework.security.web.access.ExceptionTranslationFilter@42ac309, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@76cbee13] 
+.22:56:44.072 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
+.22:56:44.139 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/ecocashbotcore' 
+.22:56:44.143 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Triggering deferred initialization of Spring Data repositories… 
+.22:56:47.701 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Spring Data repositories initialized! 
+.22:56:47.738 INFO  z.c.c.e.EcocashChatbotCoreApplication - Started EcocashChatbotCoreApplication in 23.655 seconds (JVM running for 24.155) 
+.22:56:58.309 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
+.22:56:58.309 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
+.22:56:58.309 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms 
+.22:56:58.525 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.22:56:59.055 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "91e21652-2b75-40ab-bc40-08ef7f7b0175-48f56f2f",
+  "queryResult": {
+    "queryText": "hello",
+    "action": "input.welcome",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3",
+      "displayName": "Default Welcome Intent"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.2,
+        "magnitude": 0.2
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "To": "whatsapp:+14155238886",
+      "SmsSid": "SMf5aa453d49bf90a9b6342952e4532eeb",
+      "MessageSid": "SMf5aa453d49bf90a9b6342952e4532eeb",
+      "WaId": "263783324671",
+      "Body": "hello",
+      "AccountSid": "ACfa0a8d3546de35dd06e07580f418191c",
+      "ProfileName": "justicemacheyo",
+      "SmsMessageSid": "SMf5aa453d49bf90a9b6342952e4532eeb",
+      "From": "whatsapp:+263783324671",
+      "SmsStatus": "received",
+      "NumSegments": "1",
+      "NumMedia": "0",
+      "ApiVersion": "2010-04-01"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671"
+}
+ 
+.22:57:58.412 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.22:57:58.579 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "c884eefa-df3b-4da0-8970-4277e0914122-48f56f2f",
+  "queryResult": {
+    "queryText": "hello there",
+    "action": "input.welcome",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3",
+      "displayName": "usecase_welcome"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.2,
+        "magnitude": 0.2
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "ApiVersion": "2010-04-01",
+      "SmsSid": "SM316747e526bbc01612588728dd0b6fa3",
+      "ProfileName": "justicemacheyo",
+      "To": "whatsapp:+14155238886",
+      "WaId": "263783324671",
+      "AccountSid": "ACfa0a8d3546de35dd06e07580f418191c",
+      "SmsStatus": "received",
+      "SmsMessageSid": "SM316747e526bbc01612588728dd0b6fa3",
+      "MessageSid": "SM316747e526bbc01612588728dd0b6fa3",
+      "NumSegments": "1",
+      "NumMedia": "0",
+      "Body": "hello there",
+      "From": "whatsapp:+263783324671"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671"
+}
+ 
+.22:57:58.588 INFO  z.c.c.e.d.i.h.WelcomeIntentHandler - Processing dialogflow intent: usecase_welcome 
+.22:57:58.752 ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [/ecocashbotcore] threw exception [Request processing failed; nested exception is java.util.NoSuchElementException: No value present] with root cause 
+java.util.NoSuchElementException: No value present
+	at java.util.Optional.get(Optional.java:135)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.promptProcessor(DialogFlowUtil.java:160)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.WelcomeIntentHandler.getWebhookResponse(WelcomeIntentHandler.java:20)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
+	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1064)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:681)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:228)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:327)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:115)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:121)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:115)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:105)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at zw.co.cassavasmartech.ecocashchatbotcore.security.CustomFilter.doFilter(CustomFilter.java:15)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:178)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:110)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:80)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1723)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+.23:03:50.382 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default' 
+.23:03:50.388 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated... 
+.23:03:50.402 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed. 
+.23:03:57.756 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final 
+.23:03:57.760 INFO  z.c.c.e.EcocashChatbotCoreApplication - Starting EcocashChatbotCoreApplication using Java 1.8.0_271 on LAPTOP-1JQH6S1S with PID 24552 (C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core\target\classes started by Kudzai Macheyo in C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core) 
+.23:03:57.760 INFO  z.c.c.e.EcocashChatbotCoreApplication - The following profiles are active: dev 
+.23:04:02.260 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode! 
+.23:04:02.271 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFERRED mode. 
+.23:04:03.308 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 999 ms. Found 9 JPA repository interfaces. 
+.23:04:05.331 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@562457e1' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 
+.23:04:05.342 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 
+.23:04:08.443 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http) 
+.23:04:08.487 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
+.23:04:08.490 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
+.23:04:08.490 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.50] 
+.23:04:08.903 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring embedded WebApplicationContext 
+.23:04:08.904 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 10966 ms 
+.23:04:09.959 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default] 
+.23:04:10.231 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final 
+.23:04:10.802 INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+.23:04:11.841 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting... 
+.23:04:12.153 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed. 
+.23:04:12.441 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect 
+.23:04:12.815 INFO  o.h.e.b.internal.EnversServiceImpl - Envers integration enabled? : true 
+.23:04:23.496 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+.23:04:23.529 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+.23:04:23.930 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+.23:04:24.508 INFO  o.s.s.l.DefaultSpringSecurityContextSource -  URL 'ldap://192.168.101.47:389', root DN is '' 
+.23:04:30.865 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/dialogflow/**'] with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@46c9ee28, org.springframework.security.web.context.SecurityContextPersistenceFilter@152dbf8e, org.springframework.security.web.header.HeaderWriterFilter@6bd28e4a, org.springframework.security.web.authentication.logout.LogoutFilter@36c45149, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@7fe0ca60, zw.co.cassavasmartech.ecocashchatbotcore.security.CustomFilter@31f5ffb9, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4bcf08ae, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@77972964, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@19b3d3a4, org.springframework.security.web.session.SessionManagementFilter@acea29e, org.springframework.security.web.access.ExceptionTranslationFilter@eabecf5, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6e22d6bf] 
+.23:04:30.878 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2fc0ad21, org.springframework.security.web.context.SecurityContextPersistenceFilter@7fb9a83c, org.springframework.security.web.header.HeaderWriterFilter@3dc7c5fd, org.springframework.security.web.authentication.logout.LogoutFilter@3aa8c337, zw.co.cassavasmartech.ecocashchatbotcore.security.JWTFilter@639cb0c8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@517d9cd5, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5216532a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@65d2d3cc, org.springframework.security.web.session.SessionManagementFilter@62871522, org.springframework.security.web.access.ExceptionTranslationFilter@2ba0b95f, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2a7392a3] 
+.23:04:31.858 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
+.23:04:31.876 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/ecocashbotcore' 
+.23:04:31.877 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Triggering deferred initialization of Spring Data repositories… 
+.23:04:34.730 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Spring Data repositories initialized! 
+.23:04:34.782 INFO  z.c.c.e.EcocashChatbotCoreApplication - Started EcocashChatbotCoreApplication in 37.423 seconds (JVM running for 37.921) 
+.23:04:49.749 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
+.23:04:49.749 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
+.23:04:49.750 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms 
+.23:04:49.820 ERROR z.c.c.e.security.JwtTokenProvider - Invalid JWT token 
+.23:04:50.000 INFO  z.c.c.e.security.AuthApi - Generate Token Request.... 
+.23:04:50.311 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.23:05:12.652 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default' 
+.23:05:12.659 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated... 
+.23:05:12.673 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed. 
+.23:05:15.261 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final 
+.23:05:15.265 INFO  z.c.c.e.EcocashChatbotCoreApplication - Starting EcocashChatbotCoreApplication using Java 1.8.0_271 on LAPTOP-1JQH6S1S with PID 19008 (C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core\target\classes started by Kudzai Macheyo in C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core) 
+.23:05:15.267 INFO  z.c.c.e.EcocashChatbotCoreApplication - The following profiles are active: dev 
+.23:05:17.219 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode! 
+.23:05:17.228 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFERRED mode. 
+.23:05:17.655 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 409 ms. Found 9 JPA repository interfaces. 
+.23:05:18.619 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@3ac04654' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 
+.23:05:18.640 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 
+.23:05:20.648 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http) 
+.23:05:20.729 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
+.23:05:20.732 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
+.23:05:20.737 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.50] 
+.23:05:21.414 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring embedded WebApplicationContext 
+.23:05:21.415 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 6078 ms 
+.23:05:22.419 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default] 
+.23:05:22.535 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final 
+.23:05:22.803 INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+.23:05:23.069 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting... 
+.23:05:23.986 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed. 
+.23:05:24.144 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect 
+.23:05:24.242 INFO  o.h.e.b.internal.EnversServiceImpl - Envers integration enabled? : true 
+.23:05:28.211 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+.23:05:28.216 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+.23:05:28.547 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+.23:05:29.292 INFO  o.s.s.l.DefaultSpringSecurityContextSource -  URL 'ldap://192.168.101.47:389', root DN is '' 
+.23:05:30.336 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/dialogflow/**'] with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4d9cf71d, org.springframework.security.web.context.SecurityContextPersistenceFilter@20a116a0, org.springframework.security.web.header.HeaderWriterFilter@7cc3a7f7, org.springframework.security.web.authentication.logout.LogoutFilter@42a7e7e1, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@59d09ff3, zw.co.cassavasmartech.ecocashchatbotcore.security.CustomFilter@5c43cb12, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@a238a8e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@23b087c3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5db66c3, org.springframework.security.web.session.SessionManagementFilter@7a13ad55, org.springframework.security.web.access.ExceptionTranslationFilter@15a0f9, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@28100232] 
+.23:05:30.338 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@46c9ee28, org.springframework.security.web.context.SecurityContextPersistenceFilter@3e1c5e0d, org.springframework.security.web.header.HeaderWriterFilter@5eae392d, org.springframework.security.web.authentication.logout.LogoutFilter@32121140, zw.co.cassavasmartech.ecocashchatbotcore.security.JWTFilter@31f5ffb9, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6f7a65e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@29bf90fc, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@19b3d3a4, org.springframework.security.web.session.SessionManagementFilter@4cd1716d, org.springframework.security.web.access.ExceptionTranslationFilter@eb6ccbc, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3f838072] 
+.23:05:30.724 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
+.23:05:30.748 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/ecocashbotcore' 
+.23:05:30.749 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Triggering deferred initialization of Spring Data repositories… 
+.23:05:33.458 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Spring Data repositories initialized! 
+.23:05:33.469 INFO  z.c.c.e.EcocashChatbotCoreApplication - Started EcocashChatbotCoreApplication in 18.589 seconds (JVM running for 19.08) 
+.23:05:43.285 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
+.23:05:43.286 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
+.23:05:43.287 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms 
+.23:05:49.155 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.23:05:49.511 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "ac41879a-19c1-49d4-b802-1099cc9573a9-48f56f2f",
+  "queryResult": {
+    "queryText": "hello",
+    "action": "input.welcome",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3",
+      "displayName": "usecase_welcome"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.2,
+        "magnitude": 0.2
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "From": "whatsapp:+263783324671",
+      "SmsMessageSid": "SMb9942064b1a04999f04fbae83653cbf7",
+      "MessageSid": "SMb9942064b1a04999f04fbae83653cbf7",
+      "To": "whatsapp:+14155238886",
+      "ApiVersion": "2010-04-01",
+      "NumSegments": "1",
+      "SmsSid": "SMb9942064b1a04999f04fbae83653cbf7",
+      "Body": "hello",
+      "NumMedia": "0",
+      "ProfileName": "justicemacheyo",
+      "AccountSid": "ACfa0a8d3546de35dd06e07580f418191c",
+      "SmsStatus": "received",
+      "WaId": "263783324671"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671"
+}
+ 
+.23:05:49.536 INFO  z.c.c.e.d.i.h.WelcomeIntentHandler - Processing dialogflow intent: usecase_welcome 
+.23:05:49.585 ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [/ecocashbotcore] threw exception [Request processing failed; nested exception is java.util.NoSuchElementException: No value present] with root cause 
+java.util.NoSuchElementException: No value present
+	at java.util.Optional.get(Optional.java:135)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.promptProcessor(DialogFlowUtil.java:160)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.WelcomeIntentHandler.getWebhookResponse(WelcomeIntentHandler.java:20)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
+	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1064)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:681)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:228)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:327)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:115)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:121)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:115)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:105)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at zw.co.cassavasmartech.ecocashchatbotcore.security.CustomFilter.doFilter(CustomFilter.java:15)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:178)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:110)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:80)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1723)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+.23:12:34.285 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default' 
+.23:12:34.289 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated... 
+.23:12:34.303 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed. 
+.23:12:45.449 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final 
+.23:12:45.457 INFO  z.c.c.e.EcocashChatbotCoreApplication - Starting EcocashChatbotCoreApplication using Java 1.8.0_271 on LAPTOP-1JQH6S1S with PID 12232 (C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core\target\classes started by Kudzai Macheyo in C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core) 
+.23:12:45.458 INFO  z.c.c.e.EcocashChatbotCoreApplication - The following profiles are active: dev 
+.23:12:49.065 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode! 
+.23:12:49.097 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFERRED mode. 
+.23:12:49.781 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 545 ms. Found 9 JPA repository interfaces. 
+.23:12:50.142 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@1436a7ab' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 
+.23:12:50.149 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 
+.23:12:51.546 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http) 
+.23:12:51.558 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
+.23:12:51.559 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
+.23:12:51.559 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.50] 
+.23:12:51.995 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring embedded WebApplicationContext 
+.23:12:51.995 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 6462 ms 
+.23:12:52.691 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default] 
+.23:12:52.762 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final 
+.23:12:53.251 INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+.23:12:53.908 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting... 
+.23:12:54.927 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed. 
+.23:12:54.976 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect 
+.23:12:55.054 INFO  o.h.e.b.internal.EnversServiceImpl - Envers integration enabled? : true 
+.23:13:01.175 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+.23:13:01.211 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+.23:13:01.441 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+.23:13:02.204 INFO  o.s.s.l.DefaultSpringSecurityContextSource -  URL 'ldap://192.168.101.47:389', root DN is '' 
+.23:13:06.208 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/dialogflow/**'] with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@106edde4, org.springframework.security.web.context.SecurityContextPersistenceFilter@303db609, org.springframework.security.web.header.HeaderWriterFilter@4840ec68, org.springframework.security.web.authentication.logout.LogoutFilter@334d825c, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@76cbee13, zw.co.cassavasmartech.ecocashchatbotcore.security.CustomFilter@4d9cf71d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6dbdeb69, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6b4a2887, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5c43cb12, org.springframework.security.web.session.SessionManagementFilter@59d29065, org.springframework.security.web.access.ExceptionTranslationFilter@c6a3f47, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@22d47f09] 
+.23:13:06.221 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3f838072, org.springframework.security.web.context.SecurityContextPersistenceFilter@4cd1716d, org.springframework.security.web.header.HeaderWriterFilter@eb6ccbc, org.springframework.security.web.authentication.logout.LogoutFilter@6e22d6bf, zw.co.cassavasmartech.ecocashchatbotcore.security.JWTFilter@46c9ee28, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3e1c5e0d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6f7a65e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@31f5ffb9, org.springframework.security.web.session.SessionManagementFilter@5eae392d, org.springframework.security.web.access.ExceptionTranslationFilter@56b48163, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@63896cf7] 
+.23:13:08.239 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
+.23:13:08.256 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/ecocashbotcore' 
+.23:13:08.259 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Triggering deferred initialization of Spring Data repositories… 
+.23:13:11.497 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Spring Data repositories initialized! 
+.23:13:11.521 INFO  z.c.c.e.EcocashChatbotCoreApplication - Started EcocashChatbotCoreApplication in 26.549 seconds (JVM running for 28.319) 
+.23:13:22.907 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
+.23:13:22.907 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
+.23:13:22.915 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 8 ms 
+.23:13:23.147 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.23:13:23.704 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "0add847f-500d-49d9-85af-ad87b9491e33-48f56f2f",
+  "queryResult": {
+    "queryText": "hello",
+    "action": "input.welcome",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3",
+      "displayName": "usecase_welcome"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.2,
+        "magnitude": 0.2
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "NumMedia": "0",
+      "From": "whatsapp:+263783324671",
+      "Body": "hello",
+      "SmsMessageSid": "SM6909def351fad3c6b8c8c50003e94342",
+      "To": "whatsapp:+14155238886",
+      "SmsStatus": "received",
+      "SmsSid": "SM6909def351fad3c6b8c8c50003e94342",
+      "NumSegments": "1",
+      "MessageSid": "SM6909def351fad3c6b8c8c50003e94342",
+      "WaId": "263783324671",
+      "ApiVersion": "2010-04-01",
+      "AccountSid": "ACfa0a8d3546de35dd06e07580f418191c",
+      "ProfileName": "justicemacheyo"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671"
+}
+ 
+.23:13:23.734 INFO  z.c.c.e.d.i.h.WelcomeIntentHandler - Processing dialogflow intent: usecase_welcome 
+.23:17:46.478 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.23:17:46.653 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "7da83191-21e5-4988-85be-2b5af8216a49-48f56f2f",
+  "queryResult": {
+    "queryText": "hi",
+    "action": "input.welcome",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3",
+      "displayName": "usecase_welcome"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.3,
+        "magnitude": 0.3
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "From": "whatsapp:+263783324671",
+      "NumMedia": "0",
+      "ProfileName": "justicemacheyo",
+      "ApiVersion": "2010-04-01",
+      "SmsSid": "SMe44aebd629c8e2119ef4a0ce567ae43a",
+      "Body": "hi",
+      "NumSegments": "1",
+      "To": "whatsapp:+14155238886",
+      "AccountSid": "ACfa0a8d3546de35dd06e07580f418191c",
+      "MessageSid": "SMe44aebd629c8e2119ef4a0ce567ae43a",
+      "WaId": "263783324671",
+      "SmsMessageSid": "SMe44aebd629c8e2119ef4a0ce567ae43a",
+      "SmsStatus": "received"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671"
+}
+ 
+.23:17:46.662 INFO  z.c.c.e.d.i.h.WelcomeIntentHandler - Processing dialogflow intent: usecase_welcome 
+.23:21:05.342 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.23:21:05.405 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "82b5aadb-e72e-4f4f-aa77-9842cd5ab527-48f56f2f",
+  "queryResult": {
+    "queryText": "hello",
+    "action": "input.welcome",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3",
+      "displayName": "usecase_welcome"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.2,
+        "magnitude": 0.2
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "ApiVersion": "2010-04-01",
+      "To": "whatsapp:+14155238886",
+      "ProfileName": "justicemacheyo",
+      "SmsMessageSid": "SM88fa3ed871448b9a7ba4340b9ddd94ff",
+      "NumMedia": "0",
+      "WaId": "263783324671",
+      "MessageSid": "SM88fa3ed871448b9a7ba4340b9ddd94ff",
+      "SmsStatus": "received",
+      "NumSegments": "1",
+      "AccountSid": "ACfa0a8d3546de35dd06e07580f418191c",
+      "Body": "hello",
+      "From": "whatsapp:+263783324671",
+      "SmsSid": "SM88fa3ed871448b9a7ba4340b9ddd94ff"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671"
+}
+ 
+.23:21:05.408 INFO  z.c.c.e.d.i.h.WelcomeIntentHandler - Processing dialogflow intent: usecase_welcome 
+.23:21:25.057 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.23:21:25.236 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "97c37ed6-1e57-41cb-96f5-054cc22b4893-48f56f2f",
+  "queryResult": {
+    "queryText": "hello",
+    "action": "input.welcome",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/awaiting_verify_msisdn",
+        "lifespanCount": 4,
+        "parameters": {
+          "usecase": "WELCOME"
+        }
+      },
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3",
+      "displayName": "usecase_welcome"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.2,
+        "magnitude": 0.2
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "ApiVersion": "2010-04-01",
+      "From": "whatsapp:+263783324671",
+      "NumSegments": "1",
+      "NumMedia": "0",
+      "WaId": "263783324671",
+      "MessageSid": "SM7a483dcc1441ccb9d00bdb71a4373603",
+      "To": "whatsapp:+14155238886",
+      "SmsMessageSid": "SM7a483dcc1441ccb9d00bdb71a4373603",
+      "SmsStatus": "received",
+      "SmsSid": "SM7a483dcc1441ccb9d00bdb71a4373603",
+      "ProfileName": "justicemacheyo",
+      "AccountSid": "ACfa0a8d3546de35dd06e07580f418191c",
+      "Body": "hello"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671"
+}
+ 
+.23:21:25.244 INFO  z.c.c.e.d.i.h.WelcomeIntentHandler - Processing dialogflow intent: usecase_welcome 
+.23:23:21.287 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.23:23:21.480 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "0b5b1ce0-f367-4281-bb98-bc54668ce9f3-48f56f2f",
+  "queryResult": {
+    "queryText": "sadza",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/awaiting_verify_msisdn",
+        "lifespanCount": 1,
+        "parameters": {
+          "usecase": "WELCOME"
+        }
+      },
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/__system_counters__",
+        "lifespanCount": 1,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 1.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/b9258bd0-42b7-496b-9bbe-e80c0192bd6e",
+      "displayName": "usecase.verify.get.msisdn.fallback"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.3,
+        "magnitude": 0.3
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "SmsMessageSid": "SM25dff7408c070c1bad5d54450b89e619",
+      "WaId": "263783324671",
+      "Body": "sadza",
+      "To": "whatsapp:+14155238886",
+      "NumMedia": "0",
+      "AccountSid": "ACfa0a8d3546de35dd06e07580f418191c",
+      "From": "whatsapp:+263783324671",
+      "ProfileName": "justicemacheyo",
+      "NumSegments": "1",
+      "SmsStatus": "received",
+      "SmsSid": "SM25dff7408c070c1bad5d54450b89e619",
+      "MessageSid": "SM25dff7408c070c1bad5d54450b89e619",
+      "ApiVersion": "2010-04-01"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671"
+}
+ 
+.23:23:28.569 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.23:23:28.749 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "869e5c43-8586-4428-9c1e-9bd9fd07b29d-48f56f2f",
+  "queryResult": {
+    "queryText": "sasssa",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/awaiting_verify_msisdn",
+        "lifespanCount": 1,
+        "parameters": {
+          "usecase": "WELCOME"
+        }
+      },
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/__system_counters__",
+        "lifespanCount": 1,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 2.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/b9258bd0-42b7-496b-9bbe-e80c0192bd6e",
+      "displayName": "usecase.verify.get.msisdn.fallback"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.3,
+        "magnitude": 0.3
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "WaId": "263783324671",
+      "ApiVersion": "2010-04-01",
+      "From": "whatsapp:+263783324671",
+      "Body": "sasssa",
+      "NumSegments": "1",
+      "To": "whatsapp:+14155238886",
+      "MessageSid": "SM2b41e6768ae6c24647845e58de831f03",
+      "AccountSid": "ACfa0a8d3546de35dd06e07580f418191c",
+      "SmsSid": "SM2b41e6768ae6c24647845e58de831f03",
+      "NumMedia": "0",
+      "SmsStatus": "received",
+      "SmsMessageSid": "SM2b41e6768ae6c24647845e58de831f03",
+      "ProfileName": "justicemacheyo"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671"
+}
+ 
+.23:24:27.720 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.23:24:27.786 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "c106c915-21a0-455e-a26b-a2bb53ea282c-48f56f2f",
+  "queryResult": {
+    "queryText": "hi",
+    "action": "input.welcome",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/awaiting_verify_msisdn",
+        "lifespanCount": 0,
+        "parameters": {
+          "usecase": "WELCOME"
+        }
+      },
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/__system_counters__",
+        "lifespanCount": 1,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3",
+      "displayName": "usecase_welcome"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.3,
+        "magnitude": 0.3
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "NumMedia": "0",
+      "SmsStatus": "received",
+      "AccountSid": "ACfa0a8d3546de35dd06e07580f418191c",
+      "To": "whatsapp:+14155238886",
+      "Body": "hi",
+      "MessageSid": "SM450ca24b082455a96098d21a0d0a8fcc",
+      "ApiVersion": "2010-04-01",
+      "SmsMessageSid": "SM450ca24b082455a96098d21a0d0a8fcc",
+      "NumSegments": "1",
+      "ProfileName": "justicemacheyo",
+      "SmsSid": "SM450ca24b082455a96098d21a0d0a8fcc",
+      "From": "whatsapp:+263783324671",
+      "WaId": "263783324671"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671"
+}
+ 
+.23:24:27.787 INFO  z.c.c.e.d.i.h.WelcomeIntentHandler - Processing dialogflow intent: usecase_welcome 
+.23:27:30.024 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default' 
+.23:27:30.025 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated... 
+.23:27:30.032 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed. 
+.23:27:38.771 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final 
+.23:27:38.801 INFO  z.c.c.e.EcocashChatbotCoreApplication - Starting EcocashChatbotCoreApplication using Java 1.8.0_271 on LAPTOP-1JQH6S1S with PID 9396 (C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core\target\classes started by Kudzai Macheyo in C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core) 
+.23:27:38.801 INFO  z.c.c.e.EcocashChatbotCoreApplication - The following profiles are active: dev 
+.23:27:40.477 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode! 
+.23:27:40.480 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFERRED mode. 
+.23:27:40.816 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 323 ms. Found 9 JPA repository interfaces. 
+.23:27:41.746 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@336365bc' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 
+.23:27:41.767 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 
+.23:27:43.092 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http) 
+.23:27:43.112 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
+.23:27:43.112 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
+.23:27:43.112 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.50] 
+.23:27:43.414 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring embedded WebApplicationContext 
+.23:27:43.414 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4286 ms 
+.23:27:43.863 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default] 
+.23:27:43.980 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final 
+.23:27:44.317 INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+.23:27:44.601 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting... 
+.23:27:44.953 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed. 
+.23:27:45.003 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect 
+.23:27:45.175 INFO  o.h.e.b.internal.EnversServiceImpl - Envers integration enabled? : true 
+.23:27:49.840 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+.23:27:49.858 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+.23:27:50.059 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+.23:27:50.356 INFO  o.s.s.l.DefaultSpringSecurityContextSource -  URL 'ldap://192.168.101.47:389', root DN is '' 
+.23:27:51.665 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/dialogflow/**'] with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2de07c57, org.springframework.security.web.context.SecurityContextPersistenceFilter@22c0344e, org.springframework.security.web.header.HeaderWriterFilter@40199d5e, org.springframework.security.web.authentication.logout.LogoutFilter@417b3642, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@7164e28a, zw.co.cassavasmartech.ecocashchatbotcore.security.CustomFilter@76cbee13, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@745c8a04, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6dbdeb69, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@59d09ff3, org.springframework.security.web.session.SessionManagementFilter@c31419f, org.springframework.security.web.access.ExceptionTranslationFilter@608c2042, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@268e30d4] 
+.23:27:51.666 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6ad0cd43, org.springframework.security.web.context.SecurityContextPersistenceFilter@b6b746b, org.springframework.security.web.header.HeaderWriterFilter@633c0a61, org.springframework.security.web.authentication.logout.LogoutFilter@5eae392d, zw.co.cassavasmartech.ecocashchatbotcore.security.JWTFilter@7de43652, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@55d8f6bb, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@56b48163, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7fe0ca60, org.springframework.security.web.session.SessionManagementFilter@49322d04, org.springframework.security.web.access.ExceptionTranslationFilter@5db66c3, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@f8fe81e] 
+.23:27:52.040 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
+.23:27:52.068 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/ecocashbotcore' 
+.23:27:52.068 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Triggering deferred initialization of Spring Data repositories… 
+.23:27:52.618 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Spring Data repositories initialized! 
+.23:27:52.625 INFO  z.c.c.e.EcocashChatbotCoreApplication - Started EcocashChatbotCoreApplication in 15.107 seconds (JVM running for 17.425) 
+.23:28:04.178 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
+.23:28:04.178 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
+.23:28:04.184 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 6 ms 
+.23:28:04.403 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.23:28:04.951 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "880a535a-6657-4466-ab66-7d190fdccf8a-48f56f2f",
+  "queryResult": {
+    "queryText": "hi",
+    "action": "input.welcome",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/awaiting_verify_msisdn",
+        "lifespanCount": 4,
+        "parameters": {
+          "usecase": "WELCOME"
+        }
+      },
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3",
+      "displayName": "usecase_welcome"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.3,
+        "magnitude": 0.3
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "AccountSid": "ACfa0a8d3546de35dd06e07580f418191c",
+      "NumSegments": "1",
+      "NumMedia": "0",
+      "Body": "hi",
+      "SmsStatus": "received",
+      "From": "whatsapp:+263783324671",
+      "ProfileName": "justicemacheyo",
+      "To": "whatsapp:+14155238886",
+      "WaId": "263783324671",
+      "SmsSid": "SMc6ed92388aca8974efe9b83e31e87a10",
+      "MessageSid": "SMc6ed92388aca8974efe9b83e31e87a10",
+      "SmsMessageSid": "SMc6ed92388aca8974efe9b83e31e87a10",
+      "ApiVersion": "2010-04-01"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671"
+}
+ 
+.23:28:04.979 INFO  z.c.c.e.d.i.h.WelcomeIntentHandler - Processing dialogflow intent: usecase_welcome 
+.23:28:05.170 INFO  z.c.c.e.dialogflow.DialogFlowUtil - Processing response to dialogflow: {
+  "fulfillmentText": " Hi there 😃👋 and good night to you justicemacheyo ! Welcome to Ecocash. My name is ***, your Ecocash Digital Assistant. To start, tell me what you need or just ask me a question, and I’ll be happy to assist you right away!",
+  "source": "ecocashchatbotcore",
+  "outputContexts": [
+    {
+      "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/awaiting_verify_msisdn",
+      "lifespanCount": 5,
+      "parameters": {
+        "usecase": "WELCOME"
+      }
+    }
+  ]
+} 
+.23:30:32.783 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default' 
+.23:30:32.784 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated... 
+.23:30:32.797 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed. 
+.23:30:44.163 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final 
+.23:30:44.240 INFO  z.c.c.e.EcocashChatbotCoreApplication - Starting EcocashChatbotCoreApplication using Java 1.8.0_271 on LAPTOP-1JQH6S1S with PID 26556 (C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core\target\classes started by Kudzai Macheyo in C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core) 
+.23:30:44.240 INFO  z.c.c.e.EcocashChatbotCoreApplication - The following profiles are active: dev 
+.23:30:50.178 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode! 
+.23:30:50.181 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFERRED mode. 
+.23:30:51.132 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 921 ms. Found 9 JPA repository interfaces. 
+.23:30:52.999 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@6e91893' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 
+.23:30:53.029 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 
+.23:30:54.850 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http) 
+.23:30:54.870 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
+.23:30:54.871 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
+.23:30:54.871 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.50] 
+.23:30:55.099 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring embedded WebApplicationContext 
+.23:30:55.099 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 10472 ms 
+.23:30:56.051 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default] 
+.23:30:56.258 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final 
+.23:30:57.133 INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+.23:30:57.392 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting... 
+.23:30:57.545 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed. 
+.23:30:57.579 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect 
+.23:30:57.647 INFO  o.h.e.b.internal.EnversServiceImpl - Envers integration enabled? : true 
+.23:31:04.355 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+.23:31:04.394 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+.23:31:04.806 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+.23:31:05.319 INFO  o.s.s.l.DefaultSpringSecurityContextSource -  URL 'ldap://192.168.101.47:389', root DN is '' 
+.23:31:09.100 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/dialogflow/**'] with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7164e28a, org.springframework.security.web.context.SecurityContextPersistenceFilter@7cc3a7f7, org.springframework.security.web.header.HeaderWriterFilter@e460ca1, org.springframework.security.web.authentication.logout.LogoutFilter@1c3a64b6, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@281963c, zw.co.cassavasmartech.ecocashchatbotcore.security.CustomFilter@1b881f1f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@c31419f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@59d29065, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@51efdb72, org.springframework.security.web.session.SessionManagementFilter@15a0f9, org.springframework.security.web.access.ExceptionTranslationFilter@680937c9, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@42ac309] 
+.23:31:09.100 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@394b9e22, org.springframework.security.web.context.SecurityContextPersistenceFilter@5c43cb12, org.springframework.security.web.header.HeaderWriterFilter@106edde4, org.springframework.security.web.authentication.logout.LogoutFilter@b6b746b, zw.co.cassavasmartech.ecocashchatbotcore.security.JWTFilter@6e0f259e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5db66c3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@633c0a61, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4fe9adfb, org.springframework.security.web.session.SessionManagementFilter@4d9cf71d, org.springframework.security.web.access.ExceptionTranslationFilter@39fc17be, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6b756a62] 
+.23:31:10.470 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
+.23:31:10.512 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/ecocashbotcore' 
+.23:31:10.520 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Triggering deferred initialization of Spring Data repositories… 
+.23:31:12.936 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Spring Data repositories initialized! 
+.23:31:12.956 INFO  z.c.c.e.EcocashChatbotCoreApplication - Started EcocashChatbotCoreApplication in 30.5 seconds (JVM running for 31.379) 
+.23:31:36.782 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
+.23:31:36.782 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
+.23:31:36.782 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms 
+.23:31:40.049 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.23:31:40.614 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "7afc1299-50d5-4b17-b732-9280977f8639-48f56f2f",
+  "queryResult": {
+    "queryText": "hi",
+    "action": "input.welcome",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/awaiting_verify_msisdn",
+        "lifespanCount": 4,
+        "parameters": {
+          "usecase": "WELCOME"
+        }
+      },
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3",
+      "displayName": "usecase_welcome"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.3,
+        "magnitude": 0.3
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "MessageSid": "SMa82358daa8ee221cb5491ec1144ecc01",
+      "NumMedia": "0",
+      "To": "whatsapp:+14155238886",
+      "SmsStatus": "received",
+      "WaId": "263783324671",
+      "Body": "hi",
+      "From": "whatsapp:+263783324671",
+      "AccountSid": "ACfa0a8d3546de35dd06e07580f418191c",
+      "ProfileName": "justicemacheyo",
+      "SmsSid": "SMa82358daa8ee221cb5491ec1144ecc01",
+      "NumSegments": "1",
+      "SmsMessageSid": "SMa82358daa8ee221cb5491ec1144ecc01",
+      "ApiVersion": "2010-04-01"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671"
+}
+ 
+.23:31:40.641 INFO  z.c.c.e.d.i.h.WelcomeIntentHandler - Processing dialogflow intent: usecase_welcome 
+.23:31:40.897 INFO  z.c.c.e.dialogflow.DialogFlowUtil - Processing response to dialogflow: {
+  "fulfillmentText": " Hi there 😃👋 and good night to you justicemacheyo ! Welcome to Ecocash. My name is ***, your Ecocash Digital Assistant. To start, tell me what you need or just ask me a question, and I’ll be happy to assist you right away!",
+  "source": "ecocashchatbotcore"
+} 
+.23:32:25.686 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.23:32:25.835 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "5ee7214f-ff04-4270-9ed6-994f329bc7e9-48f56f2f",
+  "queryResult": {
+    "queryText": "sadza",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/awaiting_verify_msisdn",
+        "lifespanCount": 1,
+        "parameters": {
+          "usecase": "WELCOME"
+        }
+      },
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/__system_counters__",
+        "lifespanCount": 1,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 1.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/b9258bd0-42b7-496b-9bbe-e80c0192bd6e",
+      "displayName": "usecase.verify.get.msisdn.fallback"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.3,
+        "magnitude": 0.3
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "NumSegments": "1",
+      "ApiVersion": "2010-04-01",
+      "NumMedia": "0",
+      "WaId": "263783324671",
+      "SmsMessageSid": "SMe075ab941e5d34e719ab46a3b008ce28",
+      "Body": "sadza",
+      "MessageSid": "SMe075ab941e5d34e719ab46a3b008ce28",
+      "AccountSid": "ACfa0a8d3546de35dd06e07580f418191c",
+      "ProfileName": "justicemacheyo",
+      "SmsStatus": "received",
+      "SmsSid": "SMe075ab941e5d34e719ab46a3b008ce28",
+      "To": "whatsapp:+14155238886",
+      "From": "whatsapp:+263783324671"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671"
+}
+ 
+.23:33:10.658 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.23:33:10.760 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "a61fde41-c82b-4502-9b83-685c104345b4-48f56f2f",
+  "queryResult": {
+    "queryText": "sadza",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/awaiting_verify_msisdn",
+        "lifespanCount": 1,
+        "parameters": {
+          "usecase": "WELCOME"
+        }
+      },
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/__system_counters__",
+        "lifespanCount": 1,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 2.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/b9258bd0-42b7-496b-9bbe-e80c0192bd6e",
+      "displayName": "usecase.verify.get.msisdn.fallback"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.3,
+        "magnitude": 0.3
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "NumMedia": "0",
+      "ApiVersion": "2010-04-01",
+      "MessageSid": "SM3cf5984d4ec4a4adf3c9e604b22f363e",
+      "Body": "sadza",
+      "AccountSid": "ACfa0a8d3546de35dd06e07580f418191c",
+      "WaId": "263783324671",
+      "SmsSid": "SM3cf5984d4ec4a4adf3c9e604b22f363e",
+      "ProfileName": "justicemacheyo",
+      "To": "whatsapp:+14155238886",
+      "NumSegments": "1",
+      "From": "whatsapp:+263783324671",
+      "SmsMessageSid": "SM3cf5984d4ec4a4adf3c9e604b22f363e",
+      "SmsStatus": "received"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671"
+}
+ 
+.23:33:48.740 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.23:33:48.915 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "6aeb93c9-c828-4ae0-8bf8-7fae12cde314-48f56f2f",
+  "queryResult": {
+    "queryText": "pin reset",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/awaiting_pinreset_enrollment_confirmation",
+        "lifespanCount": 1
+      },
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/awaiting_verify_msisdn",
+        "lifespanCount": 0,
+        "parameters": {
+          "usecase": "WELCOME"
+        }
+      },
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/__system_counters__",
+        "lifespanCount": 1,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/cbd27331-6c49-4632-8f75-a3398cb8b7d2",
+      "displayName": "usecase_pinreset"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": -0.6,
+        "magnitude": 0.6
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "MessageSid": "SM2429c5a477b6c160c81e0e9abda4d1d6",
+      "SmsSid": "SM2429c5a477b6c160c81e0e9abda4d1d6",
+      "ApiVersion": "2010-04-01",
+      "Body": "pin reset",
+      "To": "whatsapp:+14155238886",
+      "SmsMessageSid": "SM2429c5a477b6c160c81e0e9abda4d1d6",
+      "AccountSid": "ACfa0a8d3546de35dd06e07580f418191c",
+      "NumSegments": "1",
+      "SmsStatus": "received",
+      "ProfileName": "justicemacheyo",
+      "WaId": "263783324671",
+      "From": "whatsapp:+263783324671",
+      "NumMedia": "0"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671"
+}
+ 
+.23:33:48.923 INFO  z.c.c.e.d.i.h.PinresetIntentHandler - Processing dialogflow intent: usecase_pinreset 
+.23:33:48.937 INFO  z.c.c.e.dialogflow.DialogFlowUtil - Processing response to dialogflow: {
+  "fulfillmentText": " Alright 😊, but before we reset your PIN, what is your EcoCash number?",
+  "source": "ecocashchatbotcore",
+  "outputContexts": [
+    {
+      "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/awaiting_verify_msisdn",
+      "lifespanCount": 5,
+      "parameters": {
+        "usecase": "PIN_RESET"
+      }
+    }
+  ]
+} 
+.23:34:01.135 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.23:34:01.240 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "80d087b6-f8fc-470c-ae51-f08f348c4ce8-48f56f2f",
+  "queryResult": {
+    "queryText": "hi",
+    "action": "input.welcome",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/awaiting_verify_msisdn",
+        "lifespanCount": 4,
+        "parameters": {
+          "usecase": "PIN_RESET"
+        }
+      },
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      },
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/awaiting_pinreset_enrollment_confirmation",
+        "lifespanCount": 0
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3",
+      "displayName": "usecase_welcome"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.3,
+        "magnitude": 0.3
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "NumSegments": "1",
+      "SmsStatus": "received",
+      "Body": "hi",
+      "AccountSid": "ACfa0a8d3546de35dd06e07580f418191c",
+      "ProfileName": "justicemacheyo",
+      "WaId": "263783324671",
+      "To": "whatsapp:+14155238886",
+      "SmsMessageSid": "SM0a33f631f273cd6fcb364e82e9717597",
+      "SmsSid": "SM0a33f631f273cd6fcb364e82e9717597",
+      "NumMedia": "0",
+      "From": "whatsapp:+263783324671",
+      "ApiVersion": "2010-04-01",
+      "MessageSid": "SM0a33f631f273cd6fcb364e82e9717597"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671"
+}
+ 
+.23:34:01.241 INFO  z.c.c.e.d.i.h.WelcomeIntentHandler - Processing dialogflow intent: usecase_welcome 
+.23:34:01.249 INFO  z.c.c.e.dialogflow.DialogFlowUtil - Processing response to dialogflow: {
+  "fulfillmentText": " Hi there 😃👋 and good night to you justicemacheyo ! Welcome to Ecocash. My name is ***, your Ecocash Digital Assistant. To start, tell me what you need or just ask me a question, and I’ll be happy to assist you right away!",
+  "source": "ecocashchatbotcore"
+} 
+.23:35:35.626 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.23:35:35.722 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "8ddf810b-b683-47cb-8a1c-f7d9f9a1d371-48f56f2f",
+  "queryResult": {
+    "queryText": "pin reset",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/awaiting_pinreset_enrollment_confirmation",
+        "lifespanCount": 1
+      },
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/awaiting_verify_msisdn",
+        "lifespanCount": 3,
+        "parameters": {
+          "usecase": "PIN_RESET"
+        }
+      },
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/cbd27331-6c49-4632-8f75-a3398cb8b7d2",
+      "displayName": "usecase_pinreset"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": -0.6,
+        "magnitude": 0.6
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "AccountSid": "ACfa0a8d3546de35dd06e07580f418191c",
+      "From": "whatsapp:+263783324671",
+      "Body": "pin reset",
+      "NumMedia": "0",
+      "MessageSid": "SM65114ae94cf05c9a1034aca64c871b4c",
+      "SmsStatus": "received",
+      "ProfileName": "justicemacheyo",
+      "To": "whatsapp:+14155238886",
+      "ApiVersion": "2010-04-01",
+      "SmsSid": "SM65114ae94cf05c9a1034aca64c871b4c",
+      "NumSegments": "1",
+      "SmsMessageSid": "SM65114ae94cf05c9a1034aca64c871b4c",
+      "WaId": "263783324671"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671"
+}
+ 
+.23:35:35.722 INFO  z.c.c.e.d.i.h.PinresetIntentHandler - Processing dialogflow intent: usecase_pinreset 
+.23:35:35.741 INFO  z.c.c.e.dialogflow.DialogFlowUtil - Processing response to dialogflow: {
+  "fulfillmentText": " Alright 😊, but before we reset your PIN, what is your EcoCash number?",
+  "source": "ecocashchatbotcore",
+  "outputContexts": [
+    {
+      "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/awaiting_verify_msisdn",
+      "lifespanCount": 5,
+      "parameters": {
+        "usecase": "PIN_RESET"
+      }
+    }
+  ]
+} 
+.23:38:41.509 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default' 
+.23:38:41.520 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated... 
+.23:38:41.591 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed. 
+.23:39:07.361 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final 
+.23:39:07.365 INFO  z.c.c.e.EcocashChatbotCoreApplication - Starting EcocashChatbotCoreApplication using Java 1.8.0_271 on LAPTOP-1JQH6S1S with PID 23696 (C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core\target\classes started by Kudzai Macheyo in C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core) 
+.23:39:07.366 INFO  z.c.c.e.EcocashChatbotCoreApplication - The following profiles are active: dev 
+.23:39:10.387 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode! 
+.23:39:10.397 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFERRED mode. 
+.23:39:11.091 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 665 ms. Found 9 JPA repository interfaces. 
+.23:39:12.625 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@4074023c' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 
+.23:39:12.652 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 
+.23:39:14.690 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http) 
+.23:39:14.736 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
+.23:39:14.739 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
+.23:39:14.740 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.50] 
+.23:39:15.387 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring embedded WebApplicationContext 
+.23:39:15.387 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 7939 ms 
+.23:39:16.162 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default] 
+.23:39:16.417 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final 
+.23:39:16.875 INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+.23:39:17.308 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting... 
+.23:39:17.809 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed. 
+.23:39:17.930 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect 
+.23:39:18.184 INFO  o.h.e.b.internal.EnversServiceImpl - Envers integration enabled? : true 
+.23:39:22.642 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+.23:39:22.648 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+.23:39:22.952 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+.23:39:23.542 INFO  o.s.s.l.DefaultSpringSecurityContextSource -  URL 'ldap://192.168.101.47:389', root DN is '' 
+.23:39:26.757 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/dialogflow/**'] with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7164e28a, org.springframework.security.web.context.SecurityContextPersistenceFilter@7cc3a7f7, org.springframework.security.web.header.HeaderWriterFilter@e460ca1, org.springframework.security.web.authentication.logout.LogoutFilter@1c3a64b6, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@281963c, zw.co.cassavasmartech.ecocashchatbotcore.security.CustomFilter@1b881f1f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@c31419f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@59d29065, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@51efdb72, org.springframework.security.web.session.SessionManagementFilter@15a0f9, org.springframework.security.web.access.ExceptionTranslationFilter@680937c9, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@42ac309] 
+.23:39:26.772 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@394b9e22, org.springframework.security.web.context.SecurityContextPersistenceFilter@5c43cb12, org.springframework.security.web.header.HeaderWriterFilter@106edde4, org.springframework.security.web.authentication.logout.LogoutFilter@b6b746b, zw.co.cassavasmartech.ecocashchatbotcore.security.JWTFilter@6e0f259e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5db66c3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@633c0a61, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4fe9adfb, org.springframework.security.web.session.SessionManagementFilter@4d9cf71d, org.springframework.security.web.access.ExceptionTranslationFilter@39fc17be, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6b756a62] 
+.23:39:27.620 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
+.23:39:27.642 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/ecocashbotcore' 
+.23:39:27.643 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Triggering deferred initialization of Spring Data repositories… 
+.23:39:29.329 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Spring Data repositories initialized! 
+.23:39:29.351 INFO  z.c.c.e.EcocashChatbotCoreApplication - Started EcocashChatbotCoreApplication in 23.324 seconds (JVM running for 26.992) 

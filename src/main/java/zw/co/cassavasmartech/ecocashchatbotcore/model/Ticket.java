@@ -1,9 +1,7 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -20,7 +18,7 @@ public class Ticket extends BaseEntity{
     private int stage;
     private Double sentimentStart;
     private Double sentimentEnd;
-    private Status status;
+    private TicketStatus ticketStatus;
     private String reference;
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

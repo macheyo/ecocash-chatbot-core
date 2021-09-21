@@ -1,13 +1,9 @@
-package zw.co.cassavasmartech.ecocashchatbotcore.functions;
+package zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function.handler;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookRequest;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.FunctionAdapter;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.Platform;
+import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function.FunctionAdapter;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.PromptObject;
 
 import java.util.Calendar;
-import java.util.Map;
 
 public class GetTimeOfDay extends FunctionAdapter {
     public boolean hasArgs() { return false; }

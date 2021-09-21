@@ -1,4 +1,4 @@
-package zw.co.cassavasmartech.ecocashchatbotcore.model;
+package zw.co.cassavasmartech.ecocashchatbotcore.model.emoji;
 
 public enum Emoji {
     A("\uD83C\uDD70"),
@@ -852,7 +852,7 @@ public enum Emoji {
 
     private final Characteristic[] characteristics;
 
-    private Emoji(String codePoint, Characteristic ... characteristics) {
+    private Emoji(String codePoint, Characteristic... characteristics) {
         this.codePoint = codePoint;
         this.characteristics = characteristics;
     }

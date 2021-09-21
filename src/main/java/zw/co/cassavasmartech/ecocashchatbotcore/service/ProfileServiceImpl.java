@@ -16,6 +16,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.sms.SmsService;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 @Service
@@ -62,6 +63,11 @@ public class ProfileServiceImpl implements ProfileService{
     public Boolean verifyCustomer(String chatId, String verificationCode) {
         Profile profile = profileRepository.getByChatId(chatId).orElseThrow(()->new CustomerNotFoundException(chatId));
         return isCorrect(profile,verificationCode);
+    }
+
+    @Override
+    public Optional<Profile> getByChatId(String chatId) {
+        return profileRepository.getByChatId(chatId);
     }
 
     private Boolean isCorrect(Profile profile,String verification){

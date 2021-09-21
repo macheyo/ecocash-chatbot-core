@@ -10,5 +10,5 @@ import java.util.Optional;
 @Builder
 public class PromptObject {
     private WebhookRequest webhookRequest;
-    private Optional<Customer> customer;
+    private Customer customer;
 }

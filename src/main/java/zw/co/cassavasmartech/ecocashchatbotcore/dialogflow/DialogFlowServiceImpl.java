@@ -20,6 +20,12 @@ import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.Merchant;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.MerchantRepository;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.ProfileNotFoundException;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.emoji.Emoji;
+import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function.Function;
+import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function.FunctionAdapter;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.Usecase;
+import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.Intent;
+import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.IntentHandlerAdapter;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.CustomerRepository;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.ProfileRepository;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.TicketRepository;
@@ -28,6 +34,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.selfServiceCore.SelfServiceCoreP
 import zw.co.cassavasmartech.ecocashchatbotcore.selfServiceCore.data.ReversalDto;
 import zw.co.cassavasmartech.ecocashchatbotcore.service.CustomerService;
 import zw.co.cassavasmartech.ecocashchatbotcore.service.ProfileService;
+import zw.co.cassavasmartech.ecocashchatbotcore.service.PromptService;
 import zw.co.cassavasmartech.ecocashchatbotcore.service.TicketService;
 import zw.co.cassavasmartech.ecocashchatbotcore.statementProcessor.StatementServiceConfigurationProperties;
 
@@ -65,202 +72,250 @@ public class DialogFlowServiceImpl implements DialogFlowService {
     MobileNumberFormater mobileNumberFormater;
     @Autowired
     PasswordEncoder passwordEncoder;
+    @Autowired
+    PromptService promptService;
 
     @Override
     public WebhookResponse processWebhookCall(WebhookRequest webhookRequest) throws ParseException {
         log.info("Processing dialogflow transaction request {}\n", webhookRequest);
-        switch (webhookRequest.getQueryResult().getIntent().getDisplayName()) {
-            case "Default Welcome Intent":
-                return welcomeHandler(webhookRequest);
-            case "usecase.pinreset":
-                return pinresetUsecaseHandler(webhookRequest);
-            case "usecase.pinreset.security.questions.affirmative":
-                return pinresetUsecaseSecurityQuestionsAffirmativeHandler(webhookRequest);
-            case "usecase.pinreset.security.questions.fallback":
-                return pinresetUsecaseSecurityQuestionsFallbackHandler(webhookRequest);
-            case "usecase.pinreset.security.questions.first.answer":
-                return pinresetUsecaseSecurityQuestionsFirstAnswerHandler(webhookRequest);
-            case "usecase.pinreset.security.questions.more.negative":
-                return pinresetUsecaseSecurityQuestionsMoreNegativeHandler(webhookRequest);
-            case "usecase.pinreset.security.questions.more.affirmative":
-                return pinresetUsecaseSecurityQuestionsMoreAffirmativeHandler(webhookRequest);
-            case "usecase.pinreset.security.questions.more.fallback":
-                return pinresetUsecaseSecurityQuestionsMoreFallbackHandler(webhookRequest);
-            case "usecase.pay.biller.scenario1":
-                return payBillerUsecaseScenario1Handler(webhookRequest);
-            case "usecase.pay.biller.scenario2":
-                return payBillerUsecaseScenario2Handler(webhookRequest);
-            case "usecase.pay.biller.get.biller.amount":
-                return payBillerUsecaseGetBillerAmountHandler(webhookRequest);
-            case "usecase.pay.biller.get.biller.amount.fallback":
-                return payBillerUsecaseGetBillerAmountFallbackHandler(webhookRequest);
-            case "usecase.pay.biller.get.biller.code":
-                return payBillerUsecaseGetBillerCodeHandler(webhookRequest);
-            case "usecase.pay.biller.get.biller.code.fallback":
-                return payBillerUsecaseGetBillerCodeFallbackHandler(webhookRequest);
-            case "usecase.pay.biller.get.account.intent":
-                return payBillerUsecaseGetBillerAccountHandler(webhookRequest);
-            case "usecase.pay.biller.get.account.intent.fallback":
-                return payBillerUsecaseGetBillerAccountFallbackHandler(webhookRequest);
-            case "usecase.pay.biller.get.biller.confirmation.affirmative":
-                return payBillerUsecaseGetBillerConfirmationAffirmativeHandler(webhookRequest);
-            case "usecase.pay.biller.get.biller.confirmation.negative":
-                return payBillerUsecaseGetBillerConfirmationNegativeHandler(webhookRequest);
-            case "usecase.pay.biller.get.biller.confirmation.fallback":
-                return payBillerUsecaseGetBillerConfirmationFallbackHandler(webhookRequest);
-            case "usecase.pay.biller.confirmation.negative - yes":
-                return payBillerUsecaseGetBillerConfirmationNegativeAffirmHandler(webhookRequest);
-            case "usecase.pay.biller.confirmation.negative - no":
-                return payBillerUsecaseGetBillerConfirmationNegativeNegHandler(webhookRequest);
-            case "usecase.pay.biller.more.affirmative":
-                return payBillerUsecaseMoreAffirmativeHandler(webhookRequest);
-            case "usecase.pay.biller.more.negative":
-                return payBillerUsecaseMoreNegativeHandler(webhookRequest);
-            case "usecase.pay.biller.more.fallback":
-                return payBillerUsecaseMoreFallbackHandler(webhookRequest);
-            case "usecase.statement.scenario.1":
-                return statementUsecaseScenario1Handler(webhookRequest);
-            case "usecase.statement.scenario.2":
-                return statementUsecaseScenario2Handler(webhookRequest);
-            case "usecase.statement.scenario.3":
-                return statementUsecaseScenario3Handler(webhookRequest);
-            case "usecase.statement.end.date":
-                return statementUsecaseEndDateHandler(webhookRequest);
-            case "usecase.statement.start.date":
-                return statementUsecaseStartDateHandler(webhookRequest);
-            case "usecase.statement.start.date.fallback":
-                return statementUsecaseStartDateFallbackHandler(webhookRequest);
-            case "usecase.statement.end.date.fallback":
-                return statementUsecaseEndDateFallbackHandler(webhookRequest);
-            case "usecase.statement.more.affirmative":
-                return statementUsecaseMoreAffirmativeHandler(webhookRequest);
-            case "usecase.statement.more.negative":
-                return statementUsecaseMoreNegativeHandler(webhookRequest);
-            case "usecase.statement.more.fallback":
-                return statementUsecaseMoreFallbackHandler(webhookRequest);
-            case "usecase.pay.merchant.scenario1":
-                return payMerchantUsecaseScenario1Handler(webhookRequest);
-            case "usecase.pay.merchant.scenario2":
-                return payMerchantUsecaseScenario2Handler(webhookRequest);
-            case "usecase.pay.merchant.get.msisdn":
-                return payMerchantUsecaseGetMsisdnOrNameHandler(webhookRequest);
-            case "usecase.pay.merchant.get.msisdn.fallback":
-                return payMerchantUsecaseGetMsisdnOrNameFallbackHandler(webhookRequest);
-            case "usecase.pay.merchant.get.name":
-                return payMerchantUsecaseGetMsisdnOrNameHandler(webhookRequest);
-            case "usecase.pay.merchant.get.amount":
-                return payMerchantUsecaseGetAmountHandler(webhookRequest);
-            case "usecase.pay.merchant.get.amount.fallback":
-                return payMerchantUsecaseGetAmountFallbackHandler(webhookRequest);
-            case "usecase.pay.merchant.confirmation.affirmative":
-                return payMerchantUsecaseConfirmationAffirmativeHandler(webhookRequest);
-            case "usecase.pay.merchant.confirmation.fallback":
-                return payMerchantUsecaseConfirmationFallbackHandler(webhookRequest);
-            case "usecase.pay.merchant.confirmation.negative":
-                return payMerchantUsecaseConfirmationNegativeHandler(webhookRequest);
-            case "usecase.pay.merchant.confirmation.negative - yes":
-                return payMerchantUsecaseConfirmationNegativeAffirmHandler(webhookRequest);
-            case "usecase.pay.merchant.confirmation.negative - no":
-                return payMerchantUsecaseConfirmationNegativeNegHandler(webhookRequest);
-            case "usecase.pay.merchant.more.affirmative":
-                return payMerchantUsecaseMoreAffirmativeHandler(webhookRequest);
-            case "usecase.pay.merchant.more.negative":
-                return payMerchantUsecaseMoreNegativeHandler(webhookRequest);
-            case "usecase.pay.merchant.more.fallback":
-                return payMerchantUsecaseMoreFallbackHandler(webhookRequest);
-            case "usecase.send.airtime.scenario1":
-                return sendAirtimeUsecaseScenario1Handler(webhookRequest);
-            case "usecase.send.airtime.scenario2":
-                return sendAirtimeUsecaseScenario2Handler(webhookRequest);
-            case "usecase.send.airtime.myself":
-                return sendAirtimeUsecaseMyselfHandler(webhookRequest);
-            case "usecase.send.airtime.myself.fallback":
-                return sendAirtimeUsecaseMyselfFallbackHandler(webhookRequest);
-            case "usecase.send.airtime.myself.negative":
-                return sendAirtimeUsecaseMyselfNegativeHandler(webhookRequest);
-            case "usecase.send.airtime.get.beneficiary.msisdn":
-                return sendAirtimeUsecaseGetBeneficiaryHandler(webhookRequest);
-            case "usecase.send.airtime.get.beneficiary.msisdn.fallback":
-                return sendAirtimeUsecaseGetBeneficiaryFallbackHandler(webhookRequest);
-            case "usecase.send.airtime.get.beneficiary.amount":
-                return sendAirtimeUsecaseGetAmountHandler(webhookRequest);
-            case "usecase.send.airtime.get.beneficiary.amount.fallback":
-                return sendAirtimeUsecaseGetAmountFallbackHandler(webhookRequest);
-            case "usecase.send.airtime.confirmation.affirmative":
-                return sendAirtimeUsecaseConfirmationAffirmativeHandler(webhookRequest);
-            case "usecase.send.airtime.confirmation.fallback":
-                return sendAirtimeUsecaseConfirmationFallbackHandler(webhookRequest);
-            case "usecase.send.airtime.more.affirmative":
-                return sendAirtimeUsecaseMoreAffirmativeHandler(webhookRequest);
-            case "usecase.send.airtime.more.negative":
-                return sendAirtimeUsecaseMoreNegativeHandler(webhookRequest);
-            case "usecase.send.airtime.more.fallback":
-                return sendAirtimeUsecaseMoreFallbackHandler(webhookRequest);
-            case "usecase.send.money.scenario1":
-                return sendMoneyUsecaseScenario1Handler(webhookRequest);
-            case "usecase.send.money.scenario2":
-                return sendMoneyUsecaseScenario2Handler(webhookRequest);
-            case "usecase.send.money.get.beneficiary.msisdn":
-                return sendMoneyUsecaseGetBeneficiaryMsisdnHandler(webhookRequest);
-            case "usecase.send.money.get.beneficiary.amount":
-                return sendMoneyUsecaseGetBeneficiaryAmountHandler(webhookRequest);
-            case "usecase.send.money.confirmation.affirmative":
-                return sendMoneyUsecaseConfimationAffirmativeHandler(webhookRequest);
-            case "usecase.verify.get.msisdn":
-                return verifyUsecaseGetMsisdnHandler(webhookRequest);
-            case "usecase.verify.get.otp":
-                return verifyUsecaseGetOtpHandler(webhookRequest);
-            case "usecase.send.money.get.beneficiary.msisdn.fallback":
-                return sendMoneyUsecaseMsisdnFallbackHandler(webhookRequest);
-            case "usecase.send.money.get.beneficiary.amount.fallback":
-                return sendMoneyUsecaseAmountFallbackHandler(webhookRequest);
-            case"intentSendMoneyTariff":
-                return sendMoneyTarrifUsecaseHandler(webhookRequest);
-            case "usecase.transaction.reversal.intent":
-                return transactionReversalUsecaseHandler(webhookRequest);
-            case "usecase.transaction.reversal.reverse":
-                return transactionReversalUsecaseReverseHandler(webhookRequest);
-            case "usecase.transaction.reversal.reverse.reference":
-                return transactionReversalUsecaseReverseReferenceHandler(webhookRequest);
-            case "usecase.transaction.reversal.reverse.affirmative":
-                return transactionReversalReverseAffirmativeHandler(webhookRequest);
-            case "usecase.transaction.reversal.approve":
-                return transactionReversalApproveHandler(webhookRequest);
-//            case "usecase.transaction.reversal.approval.affirmative":
-//                return transactionReversalUsecaseApprovalAffirmativeHandler(webhookRequest);
-//            case "usecase.transaction.reversal.approval.confirmation.fallback":
-//                return transactionReversalUsecaseApprovalConfirmationFallbackHandler(webhookRequest);
-//            case "usecase.transaction.reversal.approval.negative":
-//                return transactionReversalUsecaseApprovalNegativeHandler(webhookRequest);
-//            case "usecase.transaction.reversal.approval.reference":
-//                return transactionReversalUsecaseApprovalReferenceHandler(webhookRequest);
-//            case "usecase.transaction.reversal.approval.reference.fallback":
-//                return transactionReversalUsecaseApprovalReferenceFallbackHandler(webhookRequest);
+        IntentHandlerAdapter intentHandlerAdapter = Intent.lookup(webhookRequest.getQueryResult().getIntent().getDisplayName());
+            if(intentHandlerAdapter!=null)
+                return intentHandlerAdapter.getWebhookResponse(webhookRequest);
+            else return null;
 
-//            case "usecase.transaction.reversal.approve.reference":
-//                return transactionReversalUsecaseApproveReferenceHandler(webhookRequest);
-//            case "usecase.transaction.reversal.fallback":
-//                return transactionReversalUsecaseFallbackHandler(webhookRequest);
-//            case "usecase.transaction.reversal.more.affirmative":
-//                return transactionReversalUsecaseMoreAffirmativeHandler(webhookRequest);
-//            case "usecase.transaction.reversal.more.fallback":
-//                return transactionReversalUsecaseMoreFallbackHandler(webhookRequest);
-//            case "usecase.transaction.reversal.more.negative":
-//                return transactionReversalUsecaseMoreNegativeHandler(webhookRequest);
-//
 
-//            case "usecase.transaction.reversal.reverse.confirmation.fallback":
-//                return transactionReversalReversalReverseConfirmationHandler(webhookRequest);
-//            case "usecase.transaction.reversal.reverse.negative":
-//                return transactionReversalReverseNegativeHandler(webhookRequest);
+
+//        log.info("Processing dialogflow transaction request {}\n", webhookRequest);
+//        switch (webhookRequest.getQueryResult().getIntent().getDisplayName()) {
+//            case "Default Welcome Intent":
+//                return welcomeHandler(webhookRequest);
+//            case "usecase.pinreset":
+//                return pinresetUsecaseHandler(webhookRequest);
+//            case "usecase.pinreset.security.questions.affirmative":
+//                return pinresetUsecaseSecurityQuestionsAffirmativeHandler(webhookRequest);
+//            case "usecase.pinreset.security.questions.fallback":
+//                return pinresetUsecaseSecurityQuestionsFallbackHandler(webhookRequest);
+//            case "usecase.pinreset.security.questions.first.answer":
+//                return pinresetUsecaseSecurityQuestionsFirstAnswerHandler(webhookRequest);
+//            case "usecase.pinreset.security.questions.more.negative":
+//                return pinresetUsecaseSecurityQuestionsMoreNegativeHandler(webhookRequest);
+//            case "usecase.pinreset.security.questions.more.affirmative":
+//                return pinresetUsecaseSecurityQuestionsMoreAffirmativeHandler(webhookRequest);
+//            case "usecase.pinreset.security.questions.more.fallback":
+//                return pinresetUsecaseSecurityQuestionsMoreFallbackHandler(webhookRequest);
+//            case "usecase.pay.biller.scenario1":
+//                return payBillerUsecaseScenario1Handler(webhookRequest);
+//            case "usecase.pay.biller.scenario2":
+//                return payBillerUsecaseScenario2Handler(webhookRequest);
+//            case "usecase.pay.biller.get.biller.amount":
+//                return payBillerUsecaseGetBillerAmountHandler(webhookRequest);
+//            case "usecase.pay.biller.get.biller.amount.fallback":
+//                return payBillerUsecaseGetBillerAmountFallbackHandler(webhookRequest);
+//            case "usecase.pay.biller.get.biller.code":
+//                return payBillerUsecaseGetBillerCodeHandler(webhookRequest);
+//            case "usecase.pay.biller.get.biller.code.fallback":
+//                return payBillerUsecaseGetBillerCodeFallbackHandler(webhookRequest);
+//            case "usecase.pay.biller.get.account.intent":
+//                return payBillerUsecaseGetBillerAccountHandler(webhookRequest);
+//            case "usecase.pay.biller.get.account.intent.fallback":
+//                return payBillerUsecaseGetBillerAccountFallbackHandler(webhookRequest);
+//            case "usecase.pay.biller.get.biller.confirmation.affirmative":
+//                return payBillerUsecaseGetBillerConfirmationAffirmativeHandler(webhookRequest);
+//            case "usecase.pay.biller.get.biller.confirmation.negative":
+//                return payBillerUsecaseGetBillerConfirmationNegativeHandler(webhookRequest);
+//            case "usecase.pay.biller.get.biller.confirmation.fallback":
+//                return payBillerUsecaseGetBillerConfirmationFallbackHandler(webhookRequest);
+//            case "usecase.pay.biller.confirmation.negative - yes":
+//                return payBillerUsecaseGetBillerConfirmationNegativeAffirmHandler(webhookRequest);
+//            case "usecase.pay.biller.confirmation.negative - no":
+//                return payBillerUsecaseGetBillerConfirmationNegativeNegHandler(webhookRequest);
+//            case "usecase.pay.biller.more.affirmative":
+//                return payBillerUsecaseMoreAffirmativeHandler(webhookRequest);
+//            case "usecase.pay.biller.more.negative":
+//                return payBillerUsecaseMoreNegativeHandler(webhookRequest);
+//            case "usecase.pay.biller.more.fallback":
+//                return payBillerUsecaseMoreFallbackHandler(webhookRequest);
+//            case "usecase.statement.scenario.1":
+//                return statementUsecaseScenario1Handler(webhookRequest);
+//            case "usecase.statement.scenario.2":
+//                return statementUsecaseScenario2Handler(webhookRequest);
+//            case "usecase.statement.scenario.3":
+//                return statementUsecaseScenario3Handler(webhookRequest);
+//            case "usecase.statement.end.date":
+//                return statementUsecaseEndDateHandler(webhookRequest);
+//            case "usecase.statement.start.date":
+//                return statementUsecaseStartDateHandler(webhookRequest);
+//            case "usecase.statement.start.date.fallback":
+//                return statementUsecaseStartDateFallbackHandler(webhookRequest);
+//            case "usecase.statement.end.date.fallback":
+//                return statementUsecaseEndDateFallbackHandler(webhookRequest);
+//            case "usecase.statement.more.affirmative":
+//                return statementUsecaseMoreAffirmativeHandler(webhookRequest);
+//            case "usecase.statement.more.negative":
+//                return statementUsecaseMoreNegativeHandler(webhookRequest);
+//            case "usecase.statement.more.fallback":
+//                return statementUsecaseMoreFallbackHandler(webhookRequest);
+//            case "usecase.pay.merchant.scenario1":
+//                return payMerchantUsecaseScenario1Handler(webhookRequest);
+//            case "usecase.pay.merchant.scenario2":
+//                return payMerchantUsecaseScenario2Handler(webhookRequest);
+//            case "usecase.pay.merchant.get.msisdn":
+//                return payMerchantUsecaseGetMsisdnOrNameHandler(webhookRequest);
+//            case "usecase.pay.merchant.get.msisdn.fallback":
+//                return payMerchantUsecaseGetMsisdnOrNameFallbackHandler(webhookRequest);
+//            case "usecase.pay.merchant.get.name":
+//                return payMerchantUsecaseGetMsisdnOrNameHandler(webhookRequest);
+//            case "usecase.pay.merchant.get.amount":
+//                return payMerchantUsecaseGetAmountHandler(webhookRequest);
+//            case "usecase.pay.merchant.get.amount.fallback":
+//                return payMerchantUsecaseGetAmountFallbackHandler(webhookRequest);
+//            case "usecase.pay.merchant.confirmation.affirmative":
+//                return payMerchantUsecaseConfirmationAffirmativeHandler(webhookRequest);
+//            case "usecase.pay.merchant.confirmation.fallback":
+//                return payMerchantUsecaseConfirmationFallbackHandler(webhookRequest);
+//            case "usecase.pay.merchant.confirmation.negative":
+//                return payMerchantUsecaseConfirmationNegativeHandler(webhookRequest);
+//            case "usecase.pay.merchant.confirmation.negative - yes":
+//                return payMerchantUsecaseConfirmationNegativeAffirmHandler(webhookRequest);
+//            case "usecase.pay.merchant.confirmation.negative - no":
+//                return payMerchantUsecaseConfirmationNegativeNegHandler(webhookRequest);
+//            case "usecase.pay.merchant.more.affirmative":
+//                return payMerchantUsecaseMoreAffirmativeHandler(webhookRequest);
+//            case "usecase.pay.merchant.more.negative":
+//                return payMerchantUsecaseMoreNegativeHandler(webhookRequest);
+//            case "usecase.pay.merchant.more.fallback":
+//                return payMerchantUsecaseMoreFallbackHandler(webhookRequest);
+//            case "usecase.send.airtime.scenario1":
+//                return sendAirtimeUsecaseScenario1Handler(webhookRequest);
+//            case "usecase.send.airtime.scenario2":
+//                return sendAirtimeUsecaseScenario2Handler(webhookRequest);
+//            case "usecase.send.airtime.myself":
+//                return sendAirtimeUsecaseMyselfHandler(webhookRequest);
+//            case "usecase.send.airtime.myself.fallback":
+//                return sendAirtimeUsecaseMyselfFallbackHandler(webhookRequest);
+//            case "usecase.send.airtime.myself.negative":
+//                return sendAirtimeUsecaseMyselfNegativeHandler(webhookRequest);
+//            case "usecase.send.airtime.get.beneficiary.msisdn":
+//                return sendAirtimeUsecaseGetBeneficiaryHandler(webhookRequest);
+//            case "usecase.send.airtime.get.beneficiary.msisdn.fallback":
+//                return sendAirtimeUsecaseGetBeneficiaryFallbackHandler(webhookRequest);
+//            case "usecase.send.airtime.get.beneficiary.amount":
+//                return sendAirtimeUsecaseGetAmountHandler(webhookRequest);
+//            case "usecase.send.airtime.get.beneficiary.amount.fallback":
+//                return sendAirtimeUsecaseGetAmountFallbackHandler(webhookRequest);
+//            case "usecase.send.airtime.confirmation.affirmative":
+//                return sendAirtimeUsecaseConfirmationAffirmativeHandler(webhookRequest);
+//            case "usecase.send.airtime.confirmation.fallback":
+//                return sendAirtimeUsecaseConfirmationFallbackHandler(webhookRequest);
+//            case "usecase.send.airtime.more.affirmative":
+//                return sendAirtimeUsecaseMoreAffirmativeHandler(webhookRequest);
+//            case "usecase.send.airtime.more.negative":
+//                return sendAirtimeUsecaseMoreNegativeHandler(webhookRequest);
+//            case "usecase.send.airtime.more.fallback":
+//                return sendAirtimeUsecaseMoreFallbackHandler(webhookRequest);
+//            case "usecase.send.money.scenario1":
+//                return sendMoneyUsecaseScenario1Handler(webhookRequest);
+//            case "usecase.send.money.scenario2":
+//                return sendMoneyUsecaseScenario2Handler(webhookRequest);
+//            case "usecase.send.money.get.beneficiary.msisdn":
+//                return sendMoneyUsecaseGetBeneficiaryMsisdnHandler(webhookRequest);
+//            case "usecase.send.money.get.beneficiary.amount":
+//                return sendMoneyUsecaseGetBeneficiaryAmountHandler(webhookRequest);
+//            case "usecase.send.money.confirmation.affirmative":
+//                return sendMoneyUsecaseConfimationAffirmativeHandler(webhookRequest);
+//            case "usecase.verify.get.msisdn":
+//                return verifyUsecaseGetMsisdnHandler(webhookRequest);
+//            case "usecase.verify.get.otp":
+//                return verifyUsecaseGetOtpHandler(webhookRequest);
+//            case "usecase.send.money.get.beneficiary.msisdn.fallback":
+//                return sendMoneyUsecaseMsisdnFallbackHandler(webhookRequest);
+//            case "usecase.send.money.get.beneficiary.amount.fallback":
+//                return sendMoneyUsecaseAmountFallbackHandler(webhookRequest);
+//            case"intentSendMoneyTariff":
+//                return sendMoneyTarrifUsecaseHandler(webhookRequest);
+//            case "usecase.transaction.reversal.intent":
+//                return transactionReversalUsecaseHandler(webhookRequest);
+//            case "usecase.transaction.reversal.reverse":
+//                return transactionReversalUsecaseReverseHandler(webhookRequest);
 //            case "usecase.transaction.reversal.reverse.reference":
 //                return transactionReversalUsecaseReverseReferenceHandler(webhookRequest);
-//            case "usecase.transaction.reversal.reverse.reference.fallback":
-//                return transactionReversalUsecaseReverseReferenceFallbackHandler(webhookRequest);
+//            case "usecase.transaction.reversal.reverse.affirmative":
+//                return transactionReversalReverseAffirmativeHandler(webhookRequest);
+//            case "usecase.transaction.reversal.approve":
+//                return transactionReversalApproveHandler(webhookRequest);
+//            case "usecase.transaction.reversal.approve.reference":
+//                return transactionReversalUsecaseApproveReferenceHandler(webhookRequest);
+//
+////            case "usecase.transaction.reversal.approval.affirmative":
+////                return transactionReversalUsecaseApprovalAffirmativeHandler(webhookRequest);
+////            case "usecase.transaction.reversal.approval.confirmation.fallback":
+////                return transactionReversalUsecaseApprovalConfirmationFallbackHandler(webhookRequest);
+////            case "usecase.transaction.reversal.approval.negative":
+////                return transactionReversalUsecaseApprovalNegativeHandler(webhookRequest);
+////            case "usecase.transaction.reversal.approval.reference":
+////                return transactionReversalUsecaseApprovalReferenceHandler(webhookRequest);
+////            case "usecase.transaction.reversal.approval.reference.fallback":
+////                return transactionReversalUsecaseApprovalReferenceFallbackHandler(webhookRequest);
+//
+////            case "usecase.transaction.reversal.fallback":
+////                return transactionReversalUsecaseFallbackHandler(webhookRequest);
+////            case "usecase.transaction.reversal.more.affirmative":
+////                return transactionReversalUsecaseMoreAffirmativeHandler(webhookRequest);
+////            case "usecase.transaction.reversal.more.fallback":
+////                return transactionReversalUsecaseMoreFallbackHandler(webhookRequest);
+////            case "usecase.transaction.reversal.more.negative":
+////                return transactionReversalUsecaseMoreNegativeHandler(webhookRequest);
+////
+//
+////            case "usecase.transaction.reversal.reverse.confirmation.fallback":
+////                return transactionReversalReversalReverseConfirmationHandler(webhookRequest);
+////            case "usecase.transaction.reversal.reverse.negative":
+////                return transactionReversalReverseNegativeHandler(webhookRequest);
+////            case "usecase.transaction.reversal.reverse.reference":
+////                return transactionReversalUsecaseReverseReferenceHandler(webhookRequest);
+////            case "usecase.transaction.reversal.reverse.reference.fallback":
+////                return transactionReversalUsecaseReverseReferenceFallbackHandler(webhookRequest);
+//
+//
+//        }
+//        return null;
+    }
 
-
+    private WebhookResponse transactionReversalUsecaseApproveReferenceHandler(WebhookRequest webhookRequest) {
+        log.info("Processing dialogflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
+        List<OutputContext> outputContexts = webhookRequest.getQueryResult().getOutputContexts();
+        ObjectMapper objectMapper = new ObjectMapper();
+        int ticketIndex=0;
+        for(int i = 0;i<outputContexts.size();i++){
+            Map<String,Object> map = objectMapper.convertValue(outputContexts.get(i),Map.class);
+            if(map.get("name").toString().equalsIgnoreCase(webhookRequest.getSession()+"/contexts/ticket")) ticketIndex=i;
         }
-        return null;
+        Map<String,Object> map = objectMapper.convertValue(outputContexts.get(ticketIndex).getParameters(),Map.class);
+        Optional<Customer> customer = isNewCustomer(webhookRequest);
+        String prompt;
+        if(customer.isPresent()) {
+            HttpEntity<ApiResponse<Optional<EcocashTransaction>>> response  = selfServiceCoreProcessor.validateReversal(customer.get().getMsisdn(),map.get("ecocashReference").toString());
+            if(response.getBody().getStatus()!= HttpStatus.OK.value())prompt="Ooops"+ Emoji.Pensive+response.getBody().getMessage();
+            else {
+                TransactionResponse transactionResponse = customerService.customerLookup(SubscriberDto.builder().msisdn(response.getBody().getBody().get().getRecipientMobileNumber()).build());
+                prompt = "Got it!!" + Emoji.Smiley + "\ncan you confirm you want to approve reversal for transaction "
+                        + response.getBody().getBody().get().getTransactionReference()
+                        + " done on "
+                        + response.getBody().getBody().get().getTransactionDate()
+                        + " to "
+                        + response.getBody().getBody().get().getRecipientMobileNumber()
+                        +"("+transactionResponse.getField6()+" "+transactionResponse.getField9()+")"
+                        +" for $ZWL"+response.getBody().getBody().get().getAmount()
+                        +"\nis this "+Emoji.PointUp+" correct?";
+            }
+        }
+        else prompt = "Alright " + DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest(),customer)+Emoji.Smiley+", but before we reverse, what is your Ecocash number?";
+        WebhookResponse webhookResponse = WebhookResponse.builder()
+                .fulfillmentText(prompt)
+                .source("ecocashchatbotcore")
+                .build();
+        log.info("Sending response to dialogFlow: {}\n", webhookResponse);
+        return webhookResponse;
     }
 
     private WebhookResponse transactionReversalApproveHandler(WebhookRequest webhookRequest) {
@@ -276,22 +331,24 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         Optional<Customer> customer = isNewCustomer(webhookRequest);
         String prompt;
         if(customer.isPresent()) {
-            prompt = "";
             HttpEntity<ApiResponse<List<ReversalDto>>> reversals  = selfServiceCoreProcessor.pendingReversals(customer.get().getMsisdn());
             if(reversals.getBody().getStatus()!= HttpStatus.OK.value())prompt="Ooops"+Emoji.Pensive+reversals.getBody().getMessage();
             else {
                 int count = 0;
-                prompt=Emoji.PointDown+" These are reversals waiting for your approval:";
-                for(ReversalDto reversal:reversals.getBody().getBody()){
-                    count++;
-                    TransactionResponse transactionResponse = customerService.customerLookup(SubscriberDto.builder().msisdn(reversal.getOriginalSenderMobileNumber()).build());
-                    prompt+="\n"+count+". "
-                            +reversal.getReference()+" "
-                            +reversal.getOriginalSenderMobileNumber()+" "
-                            +"("+transactionResponse.getField6()+" "+transactionResponse.getField9()+")"
-                            +" of $ZWL"+reversal.getAmount();
-                }
-                prompt+="\nwhat is the reference of the transaction you want to approve reversal for?";
+                if(reversals.getBody().getBody().size()>0)
+                {
+                    prompt = Emoji.PointDown + " These are reversals waiting for your approval:";
+                    for (ReversalDto reversal : reversals.getBody().getBody()) {
+                        count++;
+                        TransactionResponse transactionResponse = customerService.customerLookup(SubscriberDto.builder().msisdn(reversal.getOriginalSenderMobileNumber()).build());
+                        prompt += "\n" + count + ". "
+                                + reversal.getReference() + " "
+                                + reversal.getOriginalSenderMobileNumber() + " "
+                                + "(" + transactionResponse.getField6() + " " + transactionResponse.getField9() + ")"
+                                + " of $ZWL" + reversal.getAmount();
+                    }
+                    prompt += "\nwhat is the reference of the transaction you want to approve reversal for?";
+                }else prompt = "You have no pending reversals. Anything else I can do for you?";
             }
         }
         else prompt = "Alright " + DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest(),customer)+Emoji.Smiley+", but before we reverse, what is your Ecocash number?";
@@ -316,7 +373,6 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         Optional<Customer> customer = isNewCustomer(webhookRequest);
         String prompt;
         if(customer.isPresent()) {
-            prompt = "";
             HttpEntity<ApiResponse<Optional<ReversalDto>>> response  = selfServiceCoreProcessor.initiateReversal(customer.get().getMsisdn(),map.get("ecocashReference").toString());
             if(response.getBody().getStatus()!= HttpStatus.OK.value()) {
                 prompt = "Ooops" + Emoji.Pensive + response.getBody().getMessage() + "\nAnything else I can do for you?";
@@ -354,7 +410,6 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         Optional<Customer> customer = isNewCustomer(webhookRequest);
         String prompt;
         if(customer.isPresent()) {
-            prompt = "";
             HttpEntity<ApiResponse<Optional<EcocashTransaction>>> response  = selfServiceCoreProcessor.validateReversal(customer.get().getMsisdn(),map.get("ecocashReference").toString());
             if(response.getBody().getStatus()!= HttpStatus.OK.value())prompt="Ooops"+Emoji.Pensive+response.getBody().getMessage();
             else {
@@ -476,25 +531,20 @@ public class DialogFlowServiceImpl implements DialogFlowService {
 
     private WebhookResponse sendMoneyUsecaseScenario1Handler(WebhookRequest webhookRequest) {
         String prompt = "Alright, lets quickly do that"+Emoji.Smiley+" what is the Ecocash number you want to send money to?";
-        return getWebhookResponse(webhookRequest,prompt,createTicket(webhookRequest,Usecase.SEND_MONEY),Usecase.SEND_MONEY);
+        return getWebhookResponse(webhookRequest,prompt,createTicket(webhookRequest,Usecase.SEND_MONEY), Usecase.SEND_MONEY);
     }
 
     private WebhookResponse verifyUsecaseGetOtpHandler(WebhookRequest webhookRequest) {
         log.info("Processing dialogflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
-        Optional<Customer> customer = isNewCustomer(webhookRequest);
-        String prompt;
-        if(customer.isPresent()) {
-            if(profileService.verifyCustomer(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()),webhookRequest.getQueryResult().getQueryText()))
-                prompt = "Great! you have been verified"+Emoji.ThumbsUp+Emoji.Grin+"Now that we have that out of the way...";
-            else prompt = "Unfortunately I have failed to verify you. The verification code you entered is either expired or invalid...";
+        if(profileService.verifyCustomer(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()),webhookRequest.getQueryResult().getQueryText())) {
+            return resumeConversation(webhookRequest);
         }
-        else prompt = "Alright " + DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest(),customer)+Emoji.Smiley+", but before we buy your airtime, what is your Ecocash number?";
-        WebhookResponse webhookResponse = WebhookResponse.builder()
-                .fulfillmentText(prompt)
-                .source("ecocashchatbotcore")
-                .build();
-        log.info("Sending response to dialogFlow: {}\n", webhookResponse);
-        return webhookResponse;
+        else {
+            return WebhookResponse.builder()
+                    .fulfillmentText("Unfortunately I have failed to verify you. The verification code you entered is either expired or invalid...")
+                    .source("ecocashchatbotcore")
+                    .build();
+        }
 
     }
 
@@ -502,19 +552,25 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         log.info("Processing dialogflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
         Customer customer = new Customer();
         customer.setMsisdn(mobileNumberFormater.formatMsisdnMinimum(webhookRequest.getQueryResult().getQueryText()));
-        Customer newCustomer = customerService.save(customer);
-        String prompt="Oops!"+Emoji.Pensive+" Something went wrong, please try again later";
+        Optional<Customer> c = customerRepository.findByMsisdn(mobileNumberFormater.formatMsisdnMinimum(webhookRequest.getQueryResult().getQueryText()));
+        if(!c.isPresent()) {
+            customerService.save(customer);
+        }
+        String prompt;
         if(customerService.customerLookup(SubscriberDto.builder().msisdn(mobileNumberFormater.formatMsisdnMinimum(webhookRequest.getQueryResult().getQueryText())).build()).getField1().equalsIgnoreCase("200")){
-            if (newCustomer != null) {
+            Optional<Customer> newCustomer = customerRepository.findByMsisdn(mobileNumberFormater.formatMsisdnMinimum(webhookRequest.getQueryResult().getQueryText()));
+            if(!profileRepository.getByChatId(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest())).isPresent()) {
                 Profile profile = new Profile();
-                profile.setAlias(DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest(), Optional.of(newCustomer)));
+                profile.setAlias(DialogFlowUtil.getPlatformName(webhookRequest.getOriginalDetectIntentRequest(), newCustomer));
                 profile.setChatId(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()));
                 profile.setPlatform(DialogFlowUtil.getPlatform(webhookRequest.getOriginalDetectIntentRequest()));
-                Profile newProfile = profileService.save(newCustomer.getMsisdn(), profile);
-                if (newProfile != null) {
-                    prompt = "Great! got it" + Emoji.ThumbsUp + "\nI have sent a verification code via sms to your Ecocash number, enter that code here to verify your identity. \nThe code is only valid for 2 minutes" + Emoji.Exclamation;
-                    profileService.generateOtp(newProfile.getChatId());
-                }
+                profileService.save(newCustomer.get().getMsisdn(), profile);
+                prompt = "Great! got it" + Emoji.ThumbsUp + "\nI have sent a verification code via sms to your Ecocash number, enter that code here to verify your identity. \nThe code is only valid for 2 minutes" + Emoji.Exclamation;
+                profileService.generateOtp(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()));
+
+            }else{
+                prompt = "Great! got it" + Emoji.ThumbsUp + "\nI have sent a verification code via sms to your Ecocash number, enter that code here to verify your identity. \nThe code is only valid for 2 minutes" + Emoji.Exclamation;
+                profileService.generateOtp(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()));
             }
         }else prompt = "Unfortunately, this number "+Emoji.PointUp+"is not registered on Ecocash "+Emoji.Disappointed+" \nCheck again, is the number "+webhookRequest.getQueryResult().getQueryText()+" correct?";
         WebhookResponse webhookResponse = WebhookResponse.builder()
@@ -527,12 +583,12 @@ public class DialogFlowServiceImpl implements DialogFlowService {
 
     private WebhookResponse sendAirtimeUsecaseMoreAffirmativeHandler(WebhookRequest webhookRequest) {
         String prompt = "Ok great. What else can I help you do?"+Emoji.Smiley;
-        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest),Usecase.BUY_AIRTIME);
+        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED),Usecase.BUY_AIRTIME);
     }
 
     private WebhookResponse sendAirtimeUsecaseMoreNegativeHandler(WebhookRequest webhookRequest) {
         String prompt = "Ok great. Have a nice day and remember to continue living life the Ecocash way"+Emoji.Smiley;
-        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest),Usecase.BUY_AIRTIME);
+        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED),Usecase.BUY_AIRTIME);
     }
 
     private WebhookResponse sendAirtimeUsecaseMoreFallbackHandler(WebhookRequest webhookRequest) {
@@ -790,17 +846,17 @@ public class DialogFlowServiceImpl implements DialogFlowService {
 
     private WebhookResponse payMerchantUsecaseMoreNegativeHandler(WebhookRequest webhookRequest) {
         String prompt = "Ok great. Have a nice day and remember to continue living life the Ecocash way"+Emoji.Smiley;
-        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest),Usecase.MERCHANT_PAYMENT);
+        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED),Usecase.MERCHANT_PAYMENT);
     }
 
     private WebhookResponse payMerchantUsecaseMoreAffirmativeHandler(WebhookRequest webhookRequest) {
         String prompt = "Ok great. What else can I help you do?"+Emoji.Smiley;
-        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest),Usecase.MERCHANT_PAYMENT);
+        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED),Usecase.MERCHANT_PAYMENT);
     }
 
     private WebhookResponse payMerchantUsecaseConfirmationNegativeNegHandler(WebhookRequest webhookRequest) {
         String prompt = "Ok great. Have a nice day and remember to continue living life the Ecocash way"+Emoji.Smiley;
-        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest),Usecase.MERCHANT_PAYMENT);
+        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED),Usecase.MERCHANT_PAYMENT);
     }
 
     private WebhookResponse payMerchantUsecaseConfirmationNegativeAffirmHandler(WebhookRequest webhookRequest) {
@@ -924,12 +980,12 @@ public class DialogFlowServiceImpl implements DialogFlowService {
 
     private WebhookResponse statementUsecaseMoreAffirmativeHandler(WebhookRequest webhookRequest) {
         String prompt = "Ok Great! What else can I do for you?"+Emoji.Smiley;
-        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest),Usecase.SUBSCRIBER_STATEMENT);
+        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED),Usecase.SUBSCRIBER_STATEMENT);
     }
 
     private WebhookResponse statementUsecaseMoreNegativeHandler(WebhookRequest webhookRequest) {
         String prompt = "Ok Great! Enjoy the rest of your day. And remember to continue living your life the ecocash way!"+Emoji.Smiley;
-        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest),Usecase.SUBSCRIBER_STATEMENT);
+        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED),Usecase.SUBSCRIBER_STATEMENT);
     }
 
     private WebhookResponse statementUsecaseScenario3Handler(WebhookRequest webhookRequest) throws ParseException {
@@ -1020,7 +1076,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
 
     private WebhookResponse payBillerUsecaseGetBillerConfirmationNegativeNegHandler(WebhookRequest webhookRequest) {
         String prompt = "Ok "+Emoji.Grimacing+" lets do this one more time. Enter the merchant code "+Emoji.PointDown;
-        return getWebhookResponse(webhookRequest, prompt, closeTicket(webhookRequest),Usecase.BILL_PAYMENT);
+        return getWebhookResponse(webhookRequest, prompt, closeTicket(webhookRequest, TicketStatus.CLOSED),Usecase.BILL_PAYMENT);
     }
 
     private WebhookResponse payBillerUsecaseGetBillerConfirmationAffirmativeHandler(WebhookRequest webhookRequest) {
@@ -1162,7 +1218,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                         .build();
                 Ticket ticket = new Ticket();
                 ticket.setProfile(profileRepository.getByChatId(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest())).orElseThrow(() -> new ProfileNotFoundException(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()))));
-                ticket.setStatus(Status.OPEN);
+                ticket.setTicketStatus(TicketStatus.OPEN);
                 if (webhookRequest.getQueryResult().getSentimentAnalysisResult() != null)
                     ticket.setSentimentStart(webhookRequest.getQueryResult().getSentimentAnalysisResult().getQueryTextSentiment().getScore());
                 else ticket.setSentimentStart(0.0);
@@ -1198,12 +1254,12 @@ public class DialogFlowServiceImpl implements DialogFlowService {
 
     private WebhookResponse payBillerUsecaseMoreAffirmativeHandler(WebhookRequest webhookRequest) {
         String prompt = "Ok great. What else can I help you do?"+Emoji.Smiley;
-        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest),Usecase.BILL_PAYMENT);
+        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED),Usecase.BILL_PAYMENT);
     }
 
     private WebhookResponse payBillerUsecaseMoreNegativeHandler(WebhookRequest webhookRequest) {
         String prompt = "Ok great. Have a nice day and remember to continue living life the Ecocash way"+Emoji.Smiley;
-        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest),Usecase.BILL_PAYMENT);
+        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED),Usecase.BILL_PAYMENT);
     }
 
     private WebhookResponse payBillerUsecaseMoreFallbackHandler(WebhookRequest webhookRequest) {
@@ -1211,6 +1267,10 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         return getWebhookResponse(webhookRequest,prompt,null,Usecase.BILL_PAYMENT);
     }
 
+    /*
+    *PIN Reset Usecase
+    *
+     */
     private WebhookResponse pinresetUsecaseSecurityQuestionsFirstAnswerHandler(WebhookRequest webhookRequest) {
         log.info("Processing dialogflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
         List<OutputContext> outputContexts = webhookRequest.getQueryResult().getOutputContexts();
@@ -1223,7 +1283,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         Map<String,Object> map = objectMapper.convertValue(outputContexts.get(ticketIndex).getParameters(),Map.class);
         Optional<Customer> customer = isNewCustomer(webhookRequest);
         String customerAnswer = webhookRequest.getQueryResult().getQueryText();
-        customerAnswer = passwordEncoder.encode(customerAnswer);
+        //customerAnswer = passwordEncoder.encode(customerAnswer);
         String prompt=null;
         OutputContext outputContext=null;
         OutputContext outputContext1=null;
@@ -1231,7 +1291,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
             List<Answer> answers = selfServiceCoreProcessor.getAnswerByMsisdnAndAnswerStatus(customer.get().getMsisdn());
             Double i = (Double) map.get("question");
             Answer answer = answers.get(i.intValue()-1);
-            if(customerAnswer.equalsIgnoreCase(answer.getAnswer())){
+            if(passwordEncoder.matches(customerAnswer,answer.getAnswer())){
                 if(i.intValue()<answers.size()) {
                     Answer newAnswer = answers.get(i.intValue());
                     prompt = newAnswer.getQuestion().getText();
@@ -1259,23 +1319,40 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                                 .lifespanCount(1)
                                 .name(webhookRequest.getSession() + "/contexts/awaiting_pinreset_more")
                                 .build();
+                        return WebhookResponse.builder()
+                                .fulfillmentText(prompt)
+                                .outputContexts(new Object[]{outputContext,outputContext1})
+                                .source("ecocashchatbotcore")
+                                .build();
                     }else {
                         prompt = "Oops" + Emoji.Pensive + "An error occured processing your request please try again later";
-                        outputContext = OutputContext.builder()
-                                .lifespanCount(50)
-                                .name(webhookRequest.getSession() + "/contexts/ticket")
-                                .build();
-                        outputContext1 = OutputContext.builder()
-                                .lifespanCount(1)
-                                .name(webhookRequest.getSession() + "/contexts/awaiting_pinreset_more")
+                        return WebhookResponse.builder()
+                                .fulfillmentText(prompt)
+                                .source("ecocashchatbotcore")
                                 .build();
                     }
                 }
             } else {
                 prompt = "Your answer is wrong. An agent will be in touch shortly to verify your identity";
+                return WebhookResponse.builder()
+                        .fulfillmentText(prompt)
+                        .source("ecocashchatbotcore")
+                        .outputContexts(closeTicket(webhookRequest, TicketStatus.ESCALATED))
+                        .build();
             }
         }
-        else prompt = "Alright " + DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest(),customer)+Emoji.Smiley+", but before we reset your PIN, what is your Ecocash number?";
+        else {
+            prompt = "Alright " + DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest(), customer) + Emoji.Smiley + ", but before we reset your PIN, what is your Ecocash number?";
+            OutputContext goForVerification = OutputContext.builder()
+                    .lifespanCount(5)
+                    .name(webhookRequest.getSession()+"/contexts/awaiting_verify_msisdn")
+                    .build();
+            return WebhookResponse.builder()
+                    .fulfillmentText(prompt)
+                    .outputContexts(new Object[]{goForVerification})
+                    .source("ecocashchatbotcore")
+                    .build();
+        }
         WebhookResponse webhookResponse = WebhookResponse.builder()
                 .fulfillmentText(prompt)
                 .outputContexts(new Object[]{outputContext,outputContext1})
@@ -1362,12 +1439,12 @@ public class DialogFlowServiceImpl implements DialogFlowService {
 
     private WebhookResponse pinresetUsecaseSecurityQuestionsMoreAffirmativeHandler(WebhookRequest webhookRequest) {
         String prompt = "Ok great. What else can I help you do?"+Emoji.Smiley;
-        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest),Usecase.PIN_RESET);
+        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED),Usecase.PIN_RESET);
     }
 
     private WebhookResponse pinresetUsecaseSecurityQuestionsMoreNegativeHandler(WebhookRequest webhookRequest) {
         String prompt = "Ok great. Have a nice day and remember to continue living life the Ecocash way"+Emoji.Smiley;
-        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest),Usecase.PIN_RESET);
+        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED),Usecase.PIN_RESET);
     }
 
 
@@ -1387,8 +1464,8 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         Optional<Customer> customer = isNewCustomer(webhookRequest);
         String prompt;
         if(customer.isPresent())
-            prompt = String.format("Welcome back %s%s%s hope you are having a beautiful %s so far. What can I do for you today?", customer.get().getFirstName(),Emoji.Smiley,Emoji.Wave,DialogFlowUtil.getTimeOfDay());
-        else prompt = String.format("Hi there %s%s and good %s to you %s! Welcome to Ecocash. My name is ***, your Ecocash Digital Assistant. I can help you to register for Ecocash and Self-Services,send money, get your statement, reset your pin, make payments, buy airtime, resolve queries and much much more via chat. To start, tell me what you need or just ask me a question, and I’ll be happy to assist you right away!",Emoji.Smiley,Emoji.Wave,DialogFlowUtil.getTimeOfDay(),DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest(),customer));
+            prompt = promptProcessor(promptService.findByIntentAndStage("Default Welcome Intent",1).getText(),webhookRequest,customer);
+        else prompt = promptProcessor(promptService.findByIntentAndStage("Default Welcome Intent",2).getText(),webhookRequest,customer);
         WebhookResponse webhookResponse = WebhookResponse.builder()
                 .fulfillmentText(prompt)
                 .source("ecocashchatbotcore")
@@ -1398,7 +1475,12 @@ public class DialogFlowServiceImpl implements DialogFlowService {
     }
 
     private Optional<Customer> isNewCustomer(WebhookRequest webhookRequest){
-        return customerRepository.findByProfilesChatId(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()));
+        Optional<Customer> customer;
+        Optional<Profile> profile = profileRepository.getByChatId(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()));
+        if(profile.isPresent()&&profile.get().isVerified()) {
+            customer = customerRepository.findByProfilesChatId(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()));
+        }else customer = customerRepository.findByProfilesChatId("not verified");
+        return customer;
     }
 
     private WebhookResponse getWebhookResponse(WebhookRequest webhookRequest,String prompt,Object[] contexts,Usecase usecase) {
@@ -1406,12 +1488,12 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         Optional<Customer> customer = isNewCustomer(webhookRequest);
         if(!customer.isPresent()) {
             prompt = "Alright " + DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest(),customer) + Emoji.Smiley + ", but before we do that, what is your Ecocash number?";
-            OutputContext outputContext = OutputContext.builder()
+            OutputContext goForVerification = OutputContext.builder()
                     .lifespanCount(5)
                     .name(webhookRequest.getSession()+"/contexts/awaiting_verify_msisdn")
                     .parameters(UnverifiedCustomerParameter.builder().usecase(usecase).build())
                     .build();
-            contexts = new Object[]{outputContext};
+            contexts = new Object[]{goForVerification};
         }
         return WebhookResponse.builder()
                 .fulfillmentText(prompt)
@@ -1420,7 +1502,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                 .build();
     }
 
-    private Object[] closeTicket(WebhookRequest webhookRequest){
+    private Object[] closeTicket(WebhookRequest webhookRequest, TicketStatus ticketStatus){
         List<OutputContext> outputContexts = webhookRequest.getQueryResult().getOutputContexts();
         ObjectMapper objectMapper = new ObjectMapper();
         int ticketIndex=0;
@@ -1435,7 +1517,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
             Ticket ticket = new Ticket();
             ticket.setStage(4);
             ticket.setSentimentEnd(webhookRequest.getQueryResult().getSentimentAnalysisResult().getQueryTextSentiment().getScore());
-            ticket.setStatus(Status.CLOSED);
+            ticket.setTicketStatus(ticketStatus);
             ticketService.update(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()),Double.valueOf(map.get("id").toString()).longValue(),ticket);
             outputContext = OutputContext.builder()
                     .lifespanCount(0)
@@ -1451,7 +1533,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         {
             Ticket ticket = new Ticket();
             ticket.setProfile(profileRepository.getByChatId(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest())).orElseThrow(() -> new ProfileNotFoundException(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()))));
-            ticket.setStatus(Status.OPEN);
+            ticket.setTicketStatus(TicketStatus.OPEN);
             if (webhookRequest.getQueryResult().getSentimentAnalysisResult() != null)
                 ticket.setSentimentStart(webhookRequest.getQueryResult().getSentimentAnalysisResult().getQueryTextSentiment().getScore());
             else ticket.setSentimentStart(0.0);
@@ -1468,6 +1550,75 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                     .build();
             return new Object[]{outputContext};
         }else return null;
+    }
+
+    private WebhookResponse resumeConversation(WebhookRequest webhookRequest) {
+        List<OutputContext> outputContexts = webhookRequest.getQueryResult().getOutputContexts();
+        ObjectMapper objectMapper = new ObjectMapper();
+        int usecaseIndex=0;
+        for(int i = 0;i<outputContexts.size();i++){
+            Map<String,Object> map = objectMapper.convertValue(outputContexts.get(i),Map.class);
+            if(map.get("name").toString().equalsIgnoreCase(webhookRequest.getSession()+"/contexts/awaiting_verify_msisdn")) usecaseIndex=i;
+        }
+        Map<String,Object> map = objectMapper.convertValue(outputContexts.get(usecaseIndex).getParameters(),Map.class);
+        String prompt = "Great! you have been verified" + Emoji.ThumbsUp + Emoji.Grin + "Now that we have that out of the way... ";
+        WebhookResponse webhookResponse;
+        switch (Usecase.valueOf(map.get("usecase").toString()) ){
+            case PIN_RESET:
+                break;
+            case BUY_AIRTIME:
+                break;
+            case SEND_MONEY:
+                break;
+            case MERCHANT_PAYMENT:
+                break;
+            case BILL_PAYMENT:
+                break;
+            case SUBSCRIBER_STATEMENT:
+                prompt += "on what date"+Emoji.Calendar+" do you want the statement to start from?";
+                OutputContext outputContext = OutputContext.builder()
+                        .lifespanCount(1)
+                        .name(webhookRequest.getSession()+"/contexts/awaiting_start_date")
+                        .build();
+                return WebhookResponse.builder()
+                        .fulfillmentText(prompt)
+                        .source("ecocashchatbotcore")
+                        .outputContexts(new Object[]{outputContext,createTicket(webhookRequest,Usecase.SUBSCRIBER_STATEMENT)[0]})
+                        .build();
+            case REGISTRATION:
+                break;
+            case SEND_MONEY_TARIFF:
+                break;
+            case BILLER_TARIFF:
+                break;
+            case MERCHANT_TARIFF:
+                break;
+            case BILLER_LOOKUP:
+                break;
+            case MERCHANT_LOOKUP:
+                break;
+            case TRANSACTION_REVERSAL:
+                break;
+        }
+
+        return null;
+    }
+
+    private String promptProcessor(String unprocessed, WebhookRequest webhookRequest, Optional<Customer> customer){
+        String[] phrase = unprocessed.split("\\s");
+        String processed="";
+        for(String word:phrase){
+            FunctionAdapter fa = Function.lookup(word);
+            if(fa!=null) {
+                if(!fa.hasArgs()) processed +=" "+fa.process();
+                else {
+                    PromptObject args = PromptObject.builder().webhookRequest(webhookRequest).customer(customer.get()).build();
+                    processed +=" "+fa.process(args);
+                }
+            }
+            else processed+=" "+word;
+        }
+        return processed;
     }
 
 
