@@ -1,4 +1,4 @@
-package zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler;
+package zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.welcome;
 
 import lombok.extern.slf4j.Slf4j;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil;
@@ -9,16 +9,15 @@ import zw.co.cassavasmartech.ecocashchatbotcore.model.Customer;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Usecase;
 
 @Slf4j
-public class VerificationGetOTPIntentHandler extends IntentHandlerAdapter {
+public class WelcomeIntentHandler extends IntentHandlerAdapter {
     @Override
     public WebhookResponse getWebhookResponse(WebhookRequest... webhookRequest) {
         log.info("Processing dialogflow intent: {}", webhookRequest[0].getQueryResult().getIntent().getDisplayName());
-        if(DialogFlowUtil.verifyCustomer(DialogFlowUtil.getChatId(webhookRequest[0].getOriginalDetectIntentRequest()),webhookRequest[0].getQueryResult().getQueryText())) {
-            return DialogFlowUtil.resumeConversation(webhookRequest[0]);
-        }
-        else {
-            String prompt = DialogFlowUtil.promptProcessor(4, webhookRequest[0], new Customer());
-            return DialogFlowUtil.getResponse(webhookRequest[0], prompt, null, Usecase.VERIFICATION);
-        }
+        Customer customer = DialogFlowUtil.isNewCustomer(webhookRequest[0]);
+        String prompt;
+        Object[] context = null;
+        if(customer!=null) prompt = DialogFlowUtil.promptProcessor(1, webhookRequest[0], customer);
+        else prompt = DialogFlowUtil.promptProcessor(2, webhookRequest[0], customer);
+        return DialogFlowUtil.getResponse(webhookRequest[0],prompt,context,Usecase.WELCOME);
     }
 }

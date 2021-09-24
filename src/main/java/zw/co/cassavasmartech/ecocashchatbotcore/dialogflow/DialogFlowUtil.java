@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.MobileNumberFormater;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.*;
-import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.PinresetIntentHandler;
+import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.pinreset.PinresetIntentHandler;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.ProfileNotFoundException;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.PromptNotFoundException;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
@@ -212,8 +212,8 @@ public class DialogFlowUtil {
         Customer customer = isNewCustomer(webhookRequest);
         if(customer==null) {
             String contextToBeRemoved="/redundant";
-            switch (DialogFlowUtil.getUsecase(webhookRequest).get("usecase").toString()){
-                case "PIN_RESET":contextToBeRemoved="/awaiting_pinreset_enrollment_confirmation";
+            switch (usecase){
+                case PIN_RESET:contextToBeRemoved="/awaiting_pinreset_enrollment_confirmation";
             }
             OutputContext redundantContext = OutputContext.builder()
                     .lifespanCount(0)
@@ -225,6 +225,7 @@ public class DialogFlowUtil {
                     .parameters(UnverifiedCustomerParameter.builder().usecase(usecase).build())
                     .build();
             if(!usecase.equals(Usecase.WELCOME))contexts = new Object[]{goForVerification,redundantContext};
+            else contexts = new Object[]{};
         }
         WebhookResponse response = WebhookResponse.builder()
                 .fulfillmentText(prompt)

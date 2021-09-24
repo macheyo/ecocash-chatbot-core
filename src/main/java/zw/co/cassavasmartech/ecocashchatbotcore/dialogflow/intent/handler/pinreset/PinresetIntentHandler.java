@@ -1,4 +1,4 @@
-package zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler;
+package zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.pinreset;
 
 import lombok.extern.slf4j.Slf4j;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil;

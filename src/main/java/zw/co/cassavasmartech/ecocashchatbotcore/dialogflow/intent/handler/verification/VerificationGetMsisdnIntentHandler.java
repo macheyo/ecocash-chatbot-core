@@ -1,8 +1,6 @@
-package zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler;
+package zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.verification;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import zw.co.cassavasmartech.ecocashchatbotcore.common.MobileNumberFormater;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookResponse;
@@ -11,14 +9,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.model.Customer;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Profile;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.SubscriberDto;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Usecase;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.emoji.Emoji;
-import zw.co.cassavasmartech.ecocashchatbotcore.repository.CustomerRepository;
-import zw.co.cassavasmartech.ecocashchatbotcore.repository.ProfileRepository;
-import zw.co.cassavasmartech.ecocashchatbotcore.service.CustomerService;
-import zw.co.cassavasmartech.ecocashchatbotcore.service.ProfileService;
 
-import javax.annotation.PostConstruct;
-import java.util.Map;
 import java.util.Optional;
 @Slf4j
 public class VerificationGetMsisdnIntentHandler extends IntentHandlerAdapter {

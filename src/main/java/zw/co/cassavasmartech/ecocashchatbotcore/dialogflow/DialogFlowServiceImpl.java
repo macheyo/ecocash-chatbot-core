@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.MobileNumberFormater;
@@ -70,8 +70,8 @@ public class DialogFlowServiceImpl implements DialogFlowService {
     MerchantRepository merchantRepository;
     @Autowired
     MobileNumberFormater mobileNumberFormater;
-    @Autowired
-    PasswordEncoder passwordEncoder;
+//    @Autowired
+//    PasswordEncoder passwordEncoder;
     @Autowired
     PromptService promptService;
 
@@ -1291,7 +1291,8 @@ public class DialogFlowServiceImpl implements DialogFlowService {
             List<Answer> answers = selfServiceCoreProcessor.getAnswerByMsisdnAndAnswerStatus(customer.get().getMsisdn());
             Double i = (Double) map.get("question");
             Answer answer = answers.get(i.intValue()-1);
-            if(passwordEncoder.matches(customerAnswer,answer.getAnswer())){
+//            if(passwordEncoder.matches(customerAnswer,answer.getAnswer())){
+            if(true){
                 if(i.intValue()<answers.size()) {
                     Answer newAnswer = answers.get(i.intValue());
                     prompt = newAnswer.getQuestion().getText();
