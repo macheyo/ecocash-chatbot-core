@@ -1,0 +1,76 @@
+.10:52:53.356 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final 
+.10:52:53.363 INFO  z.c.c.e.EcocashChatbotCoreApplication - Starting EcocashChatbotCoreApplication using Java 1.8.0_271 on LAPTOP-1JQH6S1S with PID 30032 (C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core\target\classes started by Kudzai Macheyo in C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core) 
+.10:52:53.364 INFO  z.c.c.e.EcocashChatbotCoreApplication - The following profiles are active: dev 
+.10:52:54.294 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode! 
+.10:52:54.297 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFERRED mode. 
+.10:52:54.463 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 157 ms. Found 9 JPA repository interfaces. 
+.10:52:54.893 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@7abe27bf' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 
+.10:52:54.901 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 
+.10:52:55.433 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http) 
+.10:52:55.444 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
+.10:52:55.444 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
+.10:52:55.445 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.50] 
+.10:52:55.573 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring embedded WebApplicationContext 
+.10:52:55.573 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2153 ms 
+.10:52:55.793 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default] 
+.10:52:55.853 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final 
+.10:52:56.013 INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+.10:52:56.129 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting... 
+.10:52:56.284 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed. 
+.10:52:56.318 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect 
+.10:52:56.375 INFO  o.h.e.b.internal.EnversServiceImpl - Envers integration enabled? : true 
+.10:52:58.487 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+.10:52:58.495 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+.10:52:58.569 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+.10:52:58.689 INFO  o.s.s.l.DefaultSpringSecurityContextSource -  URL 'ldap://192.168.101.47:389', root DN is '' 
+.10:53:00.665 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/dialogflow/**'] with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4d9bccfe, org.springframework.security.web.context.SecurityContextPersistenceFilter@7ce760af, org.springframework.security.web.header.HeaderWriterFilter@12811f95, org.springframework.security.web.authentication.logout.LogoutFilter@e460ca1, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@2259d54f, zw.co.cassavasmartech.ecocashchatbotcore.security.CustomFilter@412440c1, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7b6b466a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5b74bb75, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@36c45149, org.springframework.security.web.session.SessionManagementFilter@7a17ffee, org.springframework.security.web.access.ExceptionTranslationFilter@6ac83e67, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@77972964] 
+.10:53:00.668 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@32c8d67, org.springframework.security.web.context.SecurityContextPersistenceFilter@3741071d, org.springframework.security.web.header.HeaderWriterFilter@289cf7db, org.springframework.security.web.authentication.logout.LogoutFilter@28d7bd6b, zw.co.cassavasmartech.ecocashchatbotcore.security.JWTFilter@281963c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@351d726c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7af0693b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2a2815cc, org.springframework.security.web.session.SessionManagementFilter@7c523bdd, org.springframework.security.web.access.ExceptionTranslationFilter@3ab70d34, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@26728255] 
+.10:53:01.089 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
+.10:53:01.111 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/ecocashbotcore' 
+.10:53:01.111 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Triggering deferred initialization of Spring Data repositories… 
+.10:53:02.611 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Spring Data repositories initialized! 
+.10:53:02.617 INFO  z.c.c.e.EcocashChatbotCoreApplication - Started EcocashChatbotCoreApplication in 9.638 seconds (JVM running for 10.153) 
+.10:53:11.225 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
+.10:53:11.225 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
+.10:53:11.227 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms 
+.10:54:12.089 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default' 
+.10:54:12.090 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated... 
+.10:54:12.098 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed. 
+.10:54:15.786 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final 
+.10:54:15.803 INFO  z.c.c.e.EcocashChatbotCoreApplication - Starting EcocashChatbotCoreApplication using Java 1.8.0_271 on LAPTOP-1JQH6S1S with PID 14080 (C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core\target\classes started by Kudzai Macheyo in C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core) 
+.10:54:15.804 INFO  z.c.c.e.EcocashChatbotCoreApplication - The following profiles are active: dev 
+.10:54:18.071 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode! 
+.10:54:18.076 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFERRED mode. 
+.10:54:18.478 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 381 ms. Found 9 JPA repository interfaces. 
+.10:54:19.448 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@7abe27bf' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 
+.10:54:19.467 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 
+.10:54:20.678 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http) 
+.10:54:20.691 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
+.10:54:20.691 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
+.10:54:20.691 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.50] 
+.10:54:20.910 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring embedded WebApplicationContext 
+.10:54:20.910 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4969 ms 
+.10:54:21.267 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default] 
+.10:54:21.377 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final 
+.10:54:21.692 INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+.10:54:21.957 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting... 
+.10:54:22.230 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed. 
+.10:54:22.260 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect 
+.10:54:22.324 INFO  o.h.e.b.internal.EnversServiceImpl - Envers integration enabled? : true 
+.10:54:26.348 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+.10:54:26.364 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+.10:54:26.502 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+.10:54:26.832 INFO  o.s.s.l.DefaultSpringSecurityContextSource -  URL 'ldap://192.168.101.47:389', root DN is '' 
+.10:54:29.412 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/dialogflow/**'] with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@633c0a61, org.springframework.security.web.context.SecurityContextPersistenceFilter@5773f83d, org.springframework.security.web.header.HeaderWriterFilter@43dddfdd, org.springframework.security.web.authentication.logout.LogoutFilter@acea29e, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@106edde4, zw.co.cassavasmartech.ecocashchatbotcore.security.CustomFilter@49322d04, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7d2baa56, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3911fec8, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@b6b746b, org.springframework.security.web.session.SessionManagementFilter@6dbdeb69, org.springframework.security.web.access.ExceptionTranslationFilter@210e2f2f, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@281963c] 
+.10:54:29.421 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3a9040f0, org.springframework.security.web.context.SecurityContextPersistenceFilter@6e22d6bf, org.springframework.security.web.header.HeaderWriterFilter@6f7a65e, org.springframework.security.web.authentication.logout.LogoutFilter@24ee6faa, zw.co.cassavasmartech.ecocashchatbotcore.security.JWTFilter@33214124, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@32121140, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@96c840a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2d3768ce, org.springframework.security.web.session.SessionManagementFilter@29bf90fc, org.springframework.security.web.access.ExceptionTranslationFilter@3e1c5e0d, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@19b3d3a4] 
+.10:54:30.093 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
+.10:54:30.122 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/ecocashbotcore' 
+.10:54:30.124 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Triggering deferred initialization of Spring Data repositories… 
+.10:54:31.706 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Spring Data repositories initialized! 
+.10:54:31.725 INFO  z.c.c.e.EcocashChatbotCoreApplication - Started EcocashChatbotCoreApplication in 16.357 seconds (JVM running for 16.864) 
+.10:54:44.553 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
+.10:54:44.553 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
+.10:54:44.555 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms 
+.11:26:12.141 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m49s771ms155µs900ns). 
+.18:01:35.784 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2h8m51s284ms25µs200ns). 
+.21:44:55.985 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3h1m20s118ms155µs200ns). 

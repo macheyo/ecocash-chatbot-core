@@ -1,15 +1,15 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function;
 
-import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function.handler.GetCustomerAlias;
-import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function.handler.GetCustomerFirstName;
-import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function.handler.GetCustomerLastName;
-import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function.handler.GetTimeOfDay;
+import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function.handler.*;
 
 public enum Function {
     GETTIMEOFDAY (new GetTimeOfDay()),
     GETCUSTOMERALIAS (new GetCustomerAlias()),
     GETCUSTOMERFIRSTNAME(new GetCustomerFirstName()),
     GETCUSTOMERLASTNAME(new GetCustomerLastName()),
+    GETAMOUNT(new GetAmount()),
+    GETBILLER(new GetBillProvider()),
+    GETBILLACCOUNT(new GetBillAccount())
     ;
 
     private final FunctionAdapter fa;

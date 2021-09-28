@@ -71,11 +71,16 @@ public class ProfileServiceImpl implements ProfileService{
     }
 
     private Boolean isCorrect(Profile profile,String verification){
-        if(profile.getOtp().equals(verification)) {
+        if(profile.getOtp().getVerificationCode().equals(verification)) {
             LocalDateTime localDateTime = LocalDateTime.now();
             Duration duration = Duration.between(profile.getOtp().getCreatedDate(), localDateTime);
             Long minute = duration.toMinutes();
-            if (minute > 2L) return true;
+            log.info("time difference: {}",minute);
+            if (minute < 2L) {
+                profile.setVerified(true);
+                profileRepository.save(profile);
+                return true;
+            }
         }
         return false;
     }

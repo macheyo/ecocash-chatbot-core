@@ -760,7 +760,7 @@ zw.co.cassavasmartech.ecocashchatbotcore.exception.PromptNotFoundException: Coul
 .13:49:23.262 ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [/ecocashbotcore] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause 
 java.lang.NullPointerException: null
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.isNewCustomer(DialogFlowUtil.java:99)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.PinresetIntentHandler.getWebhookResponse(PinresetUsecaseHandler.java:18)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.pinreset.PinResetIntentHandler.getWebhookResponse(PinresetUsecaseHandler.java:18)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
 	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -949,7 +949,7 @@ java.lang.NullPointerException: null
 .13:49:56.153 ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [/ecocashbotcore] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause 
 java.lang.NullPointerException: null
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.isNewCustomer(DialogFlowUtil.java:99)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.PinresetIntentHandler.getWebhookResponse(PinresetUsecaseHandler.java:18)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.pinreset.PinResetIntentHandler.getWebhookResponse(PinresetUsecaseHandler.java:18)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
 	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -1319,7 +1319,7 @@ java.lang.NullPointerException: null
 .14:30:17.259 ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [/ecocashbotcore] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause 
 java.lang.NullPointerException: null
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.isNewCustomer(DialogFlowUtil.java:114)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.PinresetIntentHandler.getWebhookResponse(PinresetUsecaseHandler.java:18)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.pinreset.PinResetIntentHandler.getWebhookResponse(PinresetUsecaseHandler.java:18)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
 	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -1511,7 +1511,7 @@ java.lang.NullPointerException: null
 .14:32:50.957 ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [/ecocashbotcore] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause 
 java.lang.NullPointerException: null
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.isNewCustomer(DialogFlowUtil.java:116)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.PinresetIntentHandler.getWebhookResponse(PinresetUsecaseHandler.java:18)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.pinreset.PinResetIntentHandler.getWebhookResponse(PinresetUsecaseHandler.java:18)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
 	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -1702,7 +1702,7 @@ java.lang.NullPointerException: null
 .14:35:18.050 INFO  z.c.c.e.m.i.h.PinresetUsecaseHandler - Processing dialogflow intent: usecase_pinreset 
 .14:35:18.239 ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [/ecocashbotcore] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause 
 java.lang.NullPointerException: null
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.PinresetIntentHandler.getWebhookResponse(PinresetUsecaseHandler.java:20)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.pinreset.PinResetIntentHandler.getWebhookResponse(PinresetUsecaseHandler.java:20)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
 	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -1894,7 +1894,7 @@ java.lang.NullPointerException: null
 .14:40:49.303 ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [/ecocashbotcore] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause 
 java.lang.NullPointerException: null
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.isNewCustomer(DialogFlowUtil.java:116)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.PinresetIntentHandler.getWebhookResponse(PinresetUsecaseHandler.java:18)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.pinreset.PinResetIntentHandler.getWebhookResponse(PinresetUsecaseHandler.java:18)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
 	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -2124,7 +2124,7 @@ java.lang.NullPointerException: null
 .14:50:20.633 ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [/ecocashbotcore] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause 
 java.lang.NullPointerException: null
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.isNewCustomer(DialogFlowUtil.java:115)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.PinresetIntentHandler.getWebhookResponse(PinresetUsecaseHandler.java:18)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.pinreset.PinResetIntentHandler.getWebhookResponse(PinresetUsecaseHandler.java:18)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
 	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)

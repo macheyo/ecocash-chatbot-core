@@ -13,6 +13,7 @@ import java.util.List;
 @Entity
 public class Prompt extends BaseEntity{
     private String intent;
+    private int position;
     private Usecase usecase;
     private String description;
     private int stage;

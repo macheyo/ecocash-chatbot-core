@@ -7,28 +7,30 @@ import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.pinres
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.sendMoney.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.statement.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.transactionalReversal.*;
-import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.verification.VerificationGetMsisdnFallbackIntentHandler;
-import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.verification.VerificationGetMsisdnIntentHandler;
-import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.verification.VerificationGetOTPIntentHandler;
+import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.verification.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.welcome.WelcomeIntentHandler;
 
 public enum Intent {
     usecase_welcome (new WelcomeIntentHandler()),
-    usecase_pinreset (new PinresetIntentHandler()),
-    usecase_pinreset_security_questions_affirmative_intent (new PinresetSecurityQuestionsAffirmativeHandler()),
     usecase_verify_get_msisdn (new VerificationGetMsisdnIntentHandler()),
     usecase_verify_get_msisdn_fallback (new VerificationGetMsisdnFallbackIntentHandler()),
+    usecase_verify_unregistered_msisdn_confirmation_affirmative(new UnregisteredMsisdnConfirmationAffirmativeIntentHandler()),
+    usecase_verify_unregistered_msisdn_confirmation_negative(new UnregisteredMsisdnConfirmationNegativeIntentHandler()),
+    usecase_verify_register_confirmation_negative(new RegisterConfirmationNegativeIntentHandler()),//TODO create intent in dialogflow
+    usecase_verify_register_confirmation_affirmative(new RegisterConfirmationAffirmativeIntentHandler()),//TODO create intent in dialogflow
     usecase_verify_get_otp (new VerificationGetOTPIntentHandler()),
-    usecase_pinreset_security_questions_fallback(new PinresetSecurityQuestionsFallbackIntentHandler()),
-    usecase_pinreset_security_questions_answer(new PinresetSecurityQuestionsAnswer()),
-    usecase_pinreset_security_questions_more_negative(new PinresetSecurityQuestionsMoreNegativeIntentHandler()),
+    usecase_pinreset (new PinResetIntentHandler()),
+    usecase_pinreset_security_questions_affirmative_intent (new PinResetSecurityQuestionsAffirmativeHandler()),
+    usecase_pinreset_security_questions_fallback(new PinResetSecurityQuestionsFallbackIntentHandler()),
+    usecase_pinreset_security_questions_answer(new PinResetSecurityQuestionsAnswer()),
+    usecase_pinreset_security_questions_more_negative(new PinResetSecurityQuestionsMoreNegativeIntentHandler()),
     usecase_pinreset_security_questions_more_affirmative(new PinresetSecurityQuestionsMoreAffirmativeIntentHandler()),
-    usecase_pinreset_security_questions_more_fallback(new PinresetSecurityQuestionsMoreFallbackIntentHandler()),
-    usecase_pay_biller_scenario1(new PayBillerScenario1IntentHandler()),
+    usecase_pinreset_security_questions_more_fallback(new PinResetSecurityQuestionsMoreFallbackIntentHandler()),
+    usecase_pay_biller_scenario1(new PayBillScenario1IntentHandler()),
     usecase_pay_biller_scenario2(new PayBillerScenario2IntentHandler()),
     usecase_pay_biller_get_biller_amount(new PayBillerGetBillerAmountIntentHandler()),
     usecase_pay_biller_get_biller_amount_fallback(new PayBillerGetBillerAmountFallbackIntentHandler()),
-    usecase_pay_biller_get_biller_code(new PayBillerGetBillerCodeIntentHandler()),
+    usecase_pay_biller_get_biller_code(new PayBillGetBillCodeIntentHandler()),
     usecase_pay_biller_get_biller_code_fallback(new PayBillerGetBillerCodeFallbackIntentHandler()),
     usecase_pay_biller_get_account_intent(new PayBillerGetAccountIntentIntentHandler()),
     usecase_pay_biller_get_account_intent_fallback(new PayBillerGetAccountIntentFallbackIntentHandler()),

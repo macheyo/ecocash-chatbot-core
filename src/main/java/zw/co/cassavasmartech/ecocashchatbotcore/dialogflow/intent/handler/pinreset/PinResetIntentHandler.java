@@ -9,7 +9,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.model.Usecase;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.IntentHandlerAdapter;
 
 @Slf4j
-public class PinresetIntentHandler extends IntentHandlerAdapter {
+public class PinResetIntentHandler extends IntentHandlerAdapter {
     @Override
     public WebhookResponse getWebhookResponse(WebhookRequest... webhookRequest) {
         log.info("Processing dialogflow intent: {}", webhookRequest[0].getQueryResult().getIntent().getDisplayName());
@@ -23,7 +23,7 @@ public class PinresetIntentHandler extends IntentHandlerAdapter {
             }
             else prompt = DialogFlowUtil.promptProcessor(2,webhookRequest[0],customer);
         }
-        else prompt = DialogFlowUtil.promptProcessor(3, webhookRequest[0], customer);
+        else prompt = DialogFlowUtil.promptProcessor(3, webhookRequest[0], null);
         return DialogFlowUtil.getResponse(webhookRequest[0],prompt,context,Usecase.PIN_RESET);
     }
 }

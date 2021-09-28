@@ -5,10 +5,14 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.MobileNumberFormater;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessor;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.BillerLookupRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToBillerRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.*;
-import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.pinreset.PinresetIntentHandler;
+import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.pinreset.PinResetIntentHandler;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.ProfileNotFoundException;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.PromptNotFoundException;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
@@ -22,8 +26,10 @@ import zw.co.cassavasmartech.ecocashchatbotcore.repository.TicketRepository;
 import zw.co.cassavasmartech.ecocashchatbotcore.selfServiceCore.SelfServiceCoreProcessor;
 import zw.co.cassavasmartech.ecocashchatbotcore.service.CustomerService;
 import zw.co.cassavasmartech.ecocashchatbotcore.service.ProfileService;
+import zw.co.cassavasmartech.ecocashchatbotcore.service.TicketService;
 
 import javax.annotation.PostConstruct;
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -47,6 +53,10 @@ public class DialogFlowUtil {
     private static TicketRepository ticketRepository;
 
     @Autowired
+    TicketService ticketServ;
+    private static TicketService ticketService;
+
+    @Autowired
     SelfServiceCoreProcessor selfServiceCore;
     private static SelfServiceCoreProcessor selfServiceCoreProcessor;
 
@@ -66,6 +76,10 @@ public class DialogFlowUtil {
     ProfileService profileServ;
     private static ProfileService profileService;
 
+    @Autowired
+    PaymentGatewayProcessor paymentGatewayProc;
+    private static PaymentGatewayProcessor paymentGatewayProcessor;
+
     @PostConstruct
     public void init() {
         this.profileRepository = profileRepo;
@@ -76,6 +90,8 @@ public class DialogFlowUtil {
         this.mobileNumberFormater = mobNumberFormater;
         this.customerService = customerServ;
         this.profileService = profileServ;
+        this.paymentGatewayProcessor = paymentGatewayProc;
+        this.ticketService = ticketServ;
     }
 
     public static String getAlias(OriginalDetectIntentRequest originalDetectIntentRequest,  Optional<Customer> customer) {
@@ -169,9 +185,56 @@ public class DialogFlowUtil {
         return objectMapper.convertValue(outputContexts.get(usecaseIndex).getParameters(),Map.class);
     }
 
+    public static String getBillProviderName(String billerCode){
+        BillerLookupRequest billerLookupRequest = new BillerLookupRequest();
+        billerLookupRequest.setBiller(billerCode);
+        return paymentGatewayProcessor.lookupBiller(billerLookupRequest).getField6();
+
+    }
+
+    public static String payBill(WebhookRequest  webhookRequest){
+        Customer customer = isNewCustomer(webhookRequest);
+        Map<String, Object> ticket = getTicket(webhookRequest);
+        return paymentGatewayProcessor.subscriberToBiller(SubscriberToBillerRequest.builder()
+                .msisdn(customer.getMsisdn())
+                .billerCode(ticket.get("biller.original").toString())
+                .amount(BigDecimal.valueOf(Double.parseDouble(ticket.get("amount").toString())) )
+                .msisdn2(ticket.get("number.original").toString())
+                .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
+                .build()).getField1();
+
+    }
+
+    public static Object[] closeTicket(WebhookRequest webhookRequest, TicketStatus ticketStatus){
+        List<OutputContext> outputContexts = webhookRequest.getQueryResult().getOutputContexts();
+        ObjectMapper objectMapper = new ObjectMapper();
+        int ticketIndex=0;
+        for(int i = 0;i<outputContexts.size();i++){
+            Map<String,Object> map = objectMapper.convertValue(outputContexts.get(i),Map.class);
+            if(map.get("name").toString().equalsIgnoreCase(webhookRequest.getSession()+"/contexts/ticket")) ticketIndex=i;
+        }
+        OutputContext outputContext=null;
+        Map<String,Object> map = objectMapper.convertValue(outputContexts.get(ticketIndex).getParameters(),Map.class);
+        Customer customer = isNewCustomer(webhookRequest);
+        if(customer!=null) {
+            Ticket ticket = new Ticket();
+            ticket.setStage(4);
+            ticket.setSentimentEnd(webhookRequest.getQueryResult().getSentimentAnalysisResult().getQueryTextSentiment().getScore());
+            ticket.setTicketStatus(ticketStatus);
+            ticketService.update(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()),Double.valueOf(map.get("id").toString()).longValue(),ticket);
+            outputContext = OutputContext.builder()
+                    .lifespanCount(0)
+                    .name(webhookRequest.getSession() + "/contexts/ticket")
+                    .build();
+        }
+        return new Object[]{outputContext};
+    }
+
     public static Object[] createTicket(WebhookRequest webhookRequest, Usecase usecase) {
         Ticket ticket = new Ticket();
-        ticket.setProfile(profileRepository.getByChatId(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest())).orElseThrow(() -> new ProfileNotFoundException(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()))));
+        Optional<Profile> profile = profileRepository.getByChatId(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()));
+        if(profile.isPresent()&&profile.get().isVerified()==true) ticket.setProfile(profile.get());
+        else return null;
         ticket.setTicketStatus(TicketStatus.OPEN);
         if (webhookRequest.getQueryResult().getSentimentAnalysisResult() != null)
             ticket.setSentimentStart(webhookRequest.getQueryResult().getSentimentAnalysisResult().getQueryTextSentiment().getScore());
@@ -181,6 +244,7 @@ public class DialogFlowUtil {
         ticketRepository.save(ticket);
         TicketParameter ticketParameter = TicketParameter.builder()
                 .id(ticket.getId())
+                .usecase(usecase)
                 .build();
         OutputContext outputContext = OutputContext.builder()
                 .lifespanCount(50)
@@ -214,6 +278,9 @@ public class DialogFlowUtil {
             String contextToBeRemoved="/redundant";
             switch (usecase){
                 case PIN_RESET:contextToBeRemoved="/awaiting_pinreset_enrollment_confirmation";
+                break;
+                case BILL_PAYMENT:contextToBeRemoved="/awaiting_biller_code";
+                break;
             }
             OutputContext redundantContext = OutputContext.builder()
                     .lifespanCount(0)
@@ -224,7 +291,9 @@ public class DialogFlowUtil {
                     .name(webhookRequest.getSession()+"/contexts/awaiting_verify_msisdn")
                     .parameters(UnverifiedCustomerParameter.builder().usecase(usecase).build())
                     .build();
-            if(!usecase.equals(Usecase.WELCOME))contexts = new Object[]{goForVerification,redundantContext};
+            if(!usecase.equals(Usecase.WELCOME)) {
+                if(contexts==null) contexts = new Object[]{goForVerification, redundantContext};
+            }
             else contexts = new Object[]{};
         }
         WebhookResponse response = WebhookResponse.builder()
@@ -236,6 +305,27 @@ public class DialogFlowUtil {
         return response;
     }
 
+    public static boolean isBillerCodeValid(WebhookRequest webhookRequest){
+        BillerLookupRequest billerLookupRequest = new BillerLookupRequest();
+        billerLookupRequest.setBiller(webhookRequest.getQueryResult().getQueryText());
+        String response = paymentGatewayProcessor.lookupBiller(billerLookupRequest).getField1();
+        if(response.equalsIgnoreCase("200"))return true;
+        else return false;
+    }
+
+
+
+    public static WebhookResponse defaultUnknownCustomerResponse(WebhookRequest webhookRequest){
+        return WebhookResponse.builder()
+                .fulfillmentText("Before we proceed I need to verify your identity...What is your EcoCash number?")
+                .source("ecocashchatbot")
+                .outputContexts(new Object[]{OutputContext.builder()
+                        .lifespanCount(1)
+                        .name(webhookRequest.getSession()+"/contexts/awaiting_verify_msisdn")
+                        .build()})
+                .build();
+    }
+
     public static WebhookResponse resumeConversation(WebhookRequest webhookRequest) {
         List<OutputContext> outputContexts = webhookRequest.getQueryResult().getOutputContexts();
         ObjectMapper objectMapper = new ObjectMapper();
@@ -245,19 +335,21 @@ public class DialogFlowUtil {
             if(map.get("name").toString().equalsIgnoreCase(webhookRequest.getSession()+"/contexts/awaiting_verify_msisdn")) usecaseIndex=i;
         }
         Map<String,Object> map = objectMapper.convertValue(outputContexts.get(usecaseIndex).getParameters(),Map.class);
-        String prompt = "Great! you have been verified" + Emoji.ThumbsUp + Emoji.Grin + "Now that we have that out of the way... ";
-        WebhookResponse webhookResponse;
+        String prompt = "Great! you have been verified" + Emoji.ThumbsUp + Emoji.Grin + " Now that we have that out of the way...\n";
         switch (Usecase.valueOf(map.get("usecase").toString()) ){
             case PIN_RESET:
-                new PinresetIntentHandler();
+                if (isEnrolled(customerService.getByChatId(getChatId(webhookRequest.getOriginalDetectIntentRequest())))) {
+                    prompt+= "I can see you are enrolled on our self service platform \uD83D\uDE01 may I go on to ask your security questions to verify your identity?";
+                }
+                else prompt+= "You are currently not enrolled on our self service platform  \uD83D\uDE27. An agent is going to call you in a few minutes to verify your identity and reset your PIN";
                 OutputContext pinresetOutputContext = OutputContext.builder()
                         .lifespanCount(1)
                         .name(webhookRequest.getSession()+"/contexts/awaiting_pinreset_enrollment_confirmation")
                         .build();
                 return WebhookResponse.builder()
-                        .fulfillmentText("")
+                        .fulfillmentText(prompt)
                         .source("ecocashchatbotcore")
-                        .outputContexts(new Object[]{pinresetOutputContext,createTicket(webhookRequest,Usecase.PIN_RESET)})
+                        .outputContexts(new Object[]{pinresetOutputContext,createTicket(webhookRequest,Usecase.PIN_RESET)[0]})
                         .build();
             case BUY_AIRTIME:
                 break;
@@ -266,7 +358,16 @@ public class DialogFlowUtil {
             case MERCHANT_PAYMENT:
                 break;
             case BILL_PAYMENT:
-                break;
+                prompt+= "What is the biller code that you want pay?";
+                OutputContext billpaymentOutputContext = OutputContext.builder()
+                        .lifespanCount(1)
+                        .name(webhookRequest.getSession()+"/contexts/awaiting_biller_code")
+                        .build();
+                return WebhookResponse.builder()
+                        .fulfillmentText(prompt)
+                        .source("ecocashchatbotcore")
+                        .outputContexts(new Object[]{billpaymentOutputContext,createTicket(webhookRequest,Usecase.BILL_PAYMENT)[0]})
+                        .build();
             case SUBSCRIBER_STATEMENT:
                 prompt += "on what date"+Emoji.Calendar+" do you want the statement to start from?";
                 OutputContext outputContext = OutputContext.builder()
@@ -291,6 +392,10 @@ public class DialogFlowUtil {
             case MERCHANT_LOOKUP:
                 break;
             case TRANSACTION_REVERSAL:
+                break;
+            case WELCOME:
+                break;
+            case VERIFICATION:
                 break;
         }
 

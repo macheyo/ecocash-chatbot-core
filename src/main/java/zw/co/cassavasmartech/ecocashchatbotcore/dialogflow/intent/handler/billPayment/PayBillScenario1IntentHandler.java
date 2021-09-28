@@ -8,16 +8,17 @@ import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.IntentHandlerA
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Customer;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Usecase;
 @Slf4j
-public class PayBillerScenario2IntentHandler extends IntentHandlerAdapter {
+public class PayBillScenario1IntentHandler extends IntentHandlerAdapter {
     @Override
     public WebhookResponse getWebhookResponse(WebhookRequest... webhookRequest) {
         log.info("Processing dialogflow intent: {}", webhookRequest[0].getQueryResult().getIntent().getDisplayName());
         Customer customer = DialogFlowUtil.isNewCustomer(webhookRequest[0]);
-        return DialogFlowUtil.getResponse(
-                webhookRequest[0],
-                DialogFlowUtil.promptProcessor(1,webhookRequest[0],customer),
-                new Object[]{},
-                Usecase.BILL_PAYMENT
-        );
+        String prompt;
+        if(customer!=null) prompt = DialogFlowUtil.promptProcessor(1, webhookRequest[0], customer);
+        else prompt = DialogFlowUtil.promptProcessor(2,webhookRequest[0], null);
+        return DialogFlowUtil.getResponse(webhookRequest[0],
+                prompt,
+                DialogFlowUtil.createTicket(webhookRequest[0],Usecase.BILL_PAYMENT),
+                Usecase.BILL_PAYMENT);
     }
 }

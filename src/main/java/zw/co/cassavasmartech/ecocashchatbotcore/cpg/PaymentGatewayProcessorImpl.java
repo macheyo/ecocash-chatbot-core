@@ -115,9 +115,9 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
         Profile profile = ticketService.findByReference(postTransaction.getTransactionRequest().getField3());
         Boolean isNotified = false;
         String notification;
-        notification = "Done, "
-                +postTransaction.getTransactionRequest().getField2()+
-                ". Is there anything else you would like me to do for you?";
+        if(postTransaction.getTransactionRequest().getField1().equalsIgnoreCase("200"))
+        notification = "Done, your transaction was successfull. Is there anything else you would like me to do for you?";
+        else notification = "Ooops!!! Your transaction failed. Is there anything else you would like me to do for you?";
         isNotified =sendNotificationToPlatform(profile,notification);
         return isNotified;
     }

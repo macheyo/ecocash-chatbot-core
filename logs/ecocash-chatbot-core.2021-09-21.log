@@ -350,7 +350,7 @@
 .00:17:47.069 INFO  z.c.c.e.d.i.h.VerificationGetMsisdnIntentHandler - Processing dialogflow intent: usecase_verify_get_msisdn 
 .00:17:47.077 ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [/ecocashbotcore] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause 
 java.lang.NullPointerException: null
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.VerificationGetMsisdnIntentHandler.getWebhookResponse(VerificationGetMsisdnIntentHandler.java:60)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.verification.VerificationGetMsisdnIntentHandler.getWebhookResponse(VerificationGetMsisdnIntentHandler.java:60)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
 	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -640,7 +640,7 @@ java.io.FileNotFoundException: class path resource [cassavasmartech.jks] cannot 
 	at zw.co.cassavasmartech.ecocashchatbotcore.service.CustomerServiceImpl.isCustomerValid(CustomerServiceImpl.java:226)
 	at zw.co.cassavasmartech.ecocashchatbotcore.service.CustomerServiceImpl.save(CustomerServiceImpl.java:62)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.saveCustomer(DialogFlowUtil.java:226)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.VerificationGetMsisdnIntentHandler.getWebhookResponse(VerificationGetMsisdnIntentHandler.java:33)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.verification.VerificationGetMsisdnIntentHandler.getWebhookResponse(VerificationGetMsisdnIntentHandler.java:33)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
 	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -745,7 +745,7 @@ java.io.FileNotFoundException: class path resource [cassavasmartech.jks] cannot 
 	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessorImpl.lookupCustomer(PaymentGatewayProcessorImpl.java:73)
 	at zw.co.cassavasmartech.ecocashchatbotcore.service.CustomerServiceImpl.customerLookup(CustomerServiceImpl.java:159)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.customerLookup(DialogFlowUtil.java:230)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.VerificationGetMsisdnIntentHandler.getWebhookResponse(VerificationGetMsisdnIntentHandler.java:34)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.verification.VerificationGetMsisdnIntentHandler.getWebhookResponse(VerificationGetMsisdnIntentHandler.java:34)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
 	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -1030,7 +1030,7 @@ java.io.FileNotFoundException: class path resource [cassavasmartech.jks] cannot 
 	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessorImpl.lookupCustomer(PaymentGatewayProcessorImpl.java:73)
 	at zw.co.cassavasmartech.ecocashchatbotcore.service.CustomerServiceImpl.customerLookup(CustomerServiceImpl.java:159)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.customerLookup(DialogFlowUtil.java:230)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.VerificationGetMsisdnIntentHandler.getWebhookResponse(VerificationGetMsisdnIntentHandler.java:34)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.verification.VerificationGetMsisdnIntentHandler.getWebhookResponse(VerificationGetMsisdnIntentHandler.java:34)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
 	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -1423,7 +1423,7 @@ java.io.FileNotFoundException: class path resource [cassavasmartech.jks] cannot 
 	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessorImpl.lookupCustomer(PaymentGatewayProcessorImpl.java:73)
 	at zw.co.cassavasmartech.ecocashchatbotcore.service.CustomerServiceImpl.customerLookup(CustomerServiceImpl.java:159)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.customerLookup(DialogFlowUtil.java:230)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.VerificationGetMsisdnIntentHandler.getWebhookResponse(VerificationGetMsisdnIntentHandler.java:34)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.verification.VerificationGetMsisdnIntentHandler.getWebhookResponse(VerificationGetMsisdnIntentHandler.java:34)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
 	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -2072,7 +2072,7 @@ java.io.FileNotFoundException: class path resource [cassavasmartech.jks] cannot 
 	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessorImpl.lookupCustomer(PaymentGatewayProcessorImpl.java:73)
 	at zw.co.cassavasmartech.ecocashchatbotcore.service.CustomerServiceImpl.customerLookup(CustomerServiceImpl.java:159)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.customerLookup(DialogFlowUtil.java:238)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.VerificationGetMsisdnIntentHandler.getWebhookResponse(VerificationGetMsisdnIntentHandler.java:34)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.verification.VerificationGetMsisdnIntentHandler.getWebhookResponse(VerificationGetMsisdnIntentHandler.java:34)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
 	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -3074,7 +3074,7 @@ java.io.FileNotFoundException: class path resource [cassavasmartech.jks] cannot 
 	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessorImpl.lookupCustomer(PaymentGatewayProcessorImpl.java:73)
 	at zw.co.cassavasmartech.ecocashchatbotcore.service.CustomerServiceImpl.customerLookup(CustomerServiceImpl.java:159)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.customerLookup(DialogFlowUtil.java:249)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.VerificationGetMsisdnIntentHandler.getWebhookResponse(VerificationGetMsisdnIntentHandler.java:34)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.verification.VerificationGetMsisdnIntentHandler.getWebhookResponse(VerificationGetMsisdnIntentHandler.java:34)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
 	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -3865,7 +3865,7 @@ java.io.FileNotFoundException: class path resource [cassavasmartech.jks] cannot 
 	at zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessorImpl.lookupCustomer(PaymentGatewayProcessorImpl.java:73)
 	at zw.co.cassavasmartech.ecocashchatbotcore.service.CustomerServiceImpl.customerLookup(CustomerServiceImpl.java:159)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.customerLookup(DialogFlowUtil.java:249)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.VerificationGetMsisdnIntentHandler.getWebhookResponse(VerificationGetMsisdnIntentHandler.java:34)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.verification.VerificationGetMsisdnIntentHandler.getWebhookResponse(VerificationGetMsisdnIntentHandler.java:34)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
 	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -4080,7 +4080,7 @@ Caused by: com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot
 .08:56:13.588 ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [/ecocashbotcore] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause 
 java.lang.NullPointerException: null
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.getResponse(DialogFlowUtil.java:213)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.PinresetIntentHandler.getWebhookResponse(PinresetIntentHandler.java:27)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.pinreset.PinResetIntentHandler.getWebhookResponse(PinresetIntentHandler.java:27)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
 	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -4231,7 +4231,7 @@ java.lang.NullPointerException: null
 .08:57:53.862 ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [/ecocashbotcore] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause 
 java.lang.NullPointerException: null
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.getResponse(DialogFlowUtil.java:213)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.PinresetIntentHandler.getWebhookResponse(PinresetIntentHandler.java:27)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.pinreset.PinResetIntentHandler.getWebhookResponse(PinresetIntentHandler.java:27)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
 	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -4383,7 +4383,7 @@ java.lang.NullPointerException: null
 .08:58:02.423 ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [/ecocashbotcore] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause 
 java.lang.NullPointerException: null
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.getResponse(DialogFlowUtil.java:213)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.WelcomeIntentHandler.getWebhookResponse(WelcomeIntentHandler.java:21)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.welcome.WelcomeIntentHandler.getWebhookResponse(WelcomeIntentHandler.java:21)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
 	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -5308,7 +5308,7 @@ java.lang.NullPointerException: null
 .09:03:10.276 ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [/ecocashbotcore] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause 
 java.lang.NullPointerException: null
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.getResponse(DialogFlowUtil.java:215)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.WelcomeIntentHandler.getWebhookResponse(WelcomeIntentHandler.java:21)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.welcome.WelcomeIntentHandler.getWebhookResponse(WelcomeIntentHandler.java:21)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
 	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -5567,7 +5567,7 @@ Caused by: java.io.IOException: An established connection was aborted by the sof
 .09:05:35.386 ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [/ecocashbotcore] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause 
 java.lang.NullPointerException: null
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.getResponse(DialogFlowUtil.java:215)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.WelcomeIntentHandler.getWebhookResponse(WelcomeIntentHandler.java:21)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.welcome.WelcomeIntentHandler.getWebhookResponse(WelcomeIntentHandler.java:21)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
 	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -5717,7 +5717,7 @@ java.lang.NullPointerException: null
 .09:09:09.708 ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [/ecocashbotcore] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause 
 java.lang.NullPointerException: null
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.getResponse(DialogFlowUtil.java:215)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.WelcomeIntentHandler.getWebhookResponse(WelcomeIntentHandler.java:21)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.welcome.WelcomeIntentHandler.getWebhookResponse(WelcomeIntentHandler.java:21)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
 	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -5976,7 +5976,7 @@ Caused by: java.io.IOException: An established connection was aborted by the sof
 .09:09:58.140 ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [/ecocashbotcore] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause 
 java.lang.NullPointerException: null
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.getResponse(DialogFlowUtil.java:215)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.WelcomeIntentHandler.getWebhookResponse(WelcomeIntentHandler.java:21)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.welcome.WelcomeIntentHandler.getWebhookResponse(WelcomeIntentHandler.java:21)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
 	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -6124,7 +6124,7 @@ java.lang.NullPointerException: null
 .09:10:19.422 ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [/ecocashbotcore] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause 
 java.lang.NullPointerException: null
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.getResponse(DialogFlowUtil.java:215)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.WelcomeIntentHandler.getWebhookResponse(WelcomeIntentHandler.java:21)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.welcome.WelcomeIntentHandler.getWebhookResponse(WelcomeIntentHandler.java:21)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
 	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)

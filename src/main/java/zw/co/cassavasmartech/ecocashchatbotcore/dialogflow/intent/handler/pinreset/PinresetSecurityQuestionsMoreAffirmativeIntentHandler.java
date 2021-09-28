@@ -1,4 +1,4 @@
-package zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.billPayment;
+package zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.pinreset;
 
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookResponse;
