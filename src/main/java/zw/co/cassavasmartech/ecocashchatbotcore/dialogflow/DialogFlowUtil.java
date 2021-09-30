@@ -10,9 +10,13 @@ import org.springframework.stereotype.Component;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.MobileNumberFormater;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessor;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.BillerLookupRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.MerchantLookupRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToBillerRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.pinreset.PinResetIntentHandler;
+import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.Merchant;
+import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.MerchantRepository;
+import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.SubscriberToMerchantRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.ProfileNotFoundException;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.PromptNotFoundException;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
@@ -80,6 +84,11 @@ public class DialogFlowUtil {
     PaymentGatewayProcessor paymentGatewayProc;
     private static PaymentGatewayProcessor paymentGatewayProcessor;
 
+    @Autowired
+    MerchantRepository merchantRepo;
+    private static MerchantRepository merchantRepository;
+
+
     @PostConstruct
     public void init() {
         this.profileRepository = profileRepo;
@@ -92,6 +101,7 @@ public class DialogFlowUtil {
         this.profileService = profileServ;
         this.paymentGatewayProcessor = paymentGatewayProc;
         this.ticketService = ticketServ;
+        this.merchantRepository = merchantRepo;
     }
 
     public static String getAlias(OriginalDetectIntentRequest originalDetectIntentRequest,  Optional<Customer> customer) {
@@ -205,6 +215,19 @@ public class DialogFlowUtil {
 
     }
 
+
+//    public static String payMerchant(WebhookRequest webhookRequest){
+//        Customer customer = isNewCustomer(webhookRequest);
+//        Map<String, Object> ticket = getTicket(webhookRequest);
+//        return paymentGatewayProcessor.subscriberToMerchant(SubscriberToMerchantRequest.builder()
+//            .msisdn(customer.getMsisdn())
+//            .merchantName(ticket.get("merchant.original").toString())
+//            .merchantCode(ticket.get("merchant.original").toString())
+//            .amount(BigDecimal.valueOf(Double.parseDouble(ticket.get("amount").toString())))
+//            .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
+//            .build()).getField1();
+//    }
+
     public static Object[] closeTicket(WebhookRequest webhookRequest, TicketStatus ticketStatus){
         List<OutputContext> outputContexts = webhookRequest.getQueryResult().getOutputContexts();
         ObjectMapper objectMapper = new ObjectMapper();
@@ -311,6 +334,27 @@ public class DialogFlowUtil {
         String response = paymentGatewayProcessor.lookupBiller(billerLookupRequest).getField1();
         if(response.equalsIgnoreCase("200"))return true;
         else return false;
+    }
+
+    //merchant code validity
+    public static boolean isMerchantCodeValid(WebhookRequest webhookRequest){
+    Optional<Merchant> merchant = merchantRepository.findByMerchantCode(webhookRequest.getQueryResult().getQueryText());
+    if(merchant.isPresent()){
+        return true;
+    }else{
+        return false;
+    }
+
+    }
+
+    //merchant name validity
+    public static boolean isMerchantNameValid(WebhookRequest webhookRequest){
+        Optional<Merchant> merchant = merchantRepository.findByName(webhookRequest.getQueryResult().getQueryText());
+        if(merchant.isPresent()){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 
