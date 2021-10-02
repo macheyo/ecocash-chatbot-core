@@ -23,7 +23,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.emoji.Emoji;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function.Function;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function.FunctionAdapter;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.Usecase;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.UseCase;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.Intent;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.IntentHandlerAdapter;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.CustomerRepository;
@@ -436,12 +436,12 @@ public class DialogFlowServiceImpl implements DialogFlowService {
 
     private WebhookResponse transactionReversalUsecaseReverseHandler(WebhookRequest webhookRequest) {
         String prompt = "Great!!"+Emoji.Smiley+" \nWhat is the transaction reference of the transaction you want to reverse?";
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.TRANSACTION_REVERSAL);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.TRANSACTION_REVERSAL);
     }
 
     private WebhookResponse transactionReversalUsecaseHandler(WebhookRequest webhookRequest) {
         String prompt = "Alright, lets quickly do that"+Emoji.Smiley+" \nDo you want to reverse a transaction or approve a reversal?";
-        return getWebhookResponse(webhookRequest,prompt,createTicket(webhookRequest,Usecase.TRANSACTION_REVERSAL),Usecase.TRANSACTION_REVERSAL);
+        return getWebhookResponse(webhookRequest,prompt,createTicket(webhookRequest, UseCase.TRANSACTION_REVERSAL), UseCase.TRANSACTION_REVERSAL);
     }
 
     private WebhookResponse sendMoneyUsecaseConfimationAffirmativeHandler(WebhookRequest webhookRequest) {
@@ -504,7 +504,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
 
     private WebhookResponse sendMoneyUsecaseGetBeneficiaryMsisdnHandler(WebhookRequest webhookRequest) {
         String prompt = "Got it"+Emoji.Smiley+"How much do you want to send?";
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.SEND_MONEY);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.SEND_MONEY);
     }
 
     private WebhookResponse sendMoneyUsecaseScenario2Handler(WebhookRequest webhookRequest) {
@@ -523,7 +523,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         WebhookResponse webhookResponse = WebhookResponse.builder()
                 .fulfillmentText(prompt)
                 .source("ecocashchatbotcore")
-                .outputContexts(createTicket(webhookRequest,Usecase.SEND_MONEY))
+                .outputContexts(createTicket(webhookRequest, UseCase.SEND_MONEY))
                 .build();
         log.info("Sending response to dialogFlow: {}\n", webhookResponse);
         return webhookResponse;
@@ -531,7 +531,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
 
     private WebhookResponse sendMoneyUsecaseScenario1Handler(WebhookRequest webhookRequest) {
         String prompt = "Alright, lets quickly do that"+Emoji.Smiley+" what is the Ecocash number you want to send money to?";
-        return getWebhookResponse(webhookRequest,prompt,createTicket(webhookRequest,Usecase.SEND_MONEY), Usecase.SEND_MONEY);
+        return getWebhookResponse(webhookRequest,prompt,createTicket(webhookRequest, UseCase.SEND_MONEY), UseCase.SEND_MONEY);
     }
 
     private WebhookResponse verifyUsecaseGetOtpHandler(WebhookRequest webhookRequest) {
@@ -583,17 +583,17 @@ public class DialogFlowServiceImpl implements DialogFlowService {
 
     private WebhookResponse sendAirtimeUsecaseMoreAffirmativeHandler(WebhookRequest webhookRequest) {
         String prompt = "Ok great. What else can I help you do?"+Emoji.Smiley;
-        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED),Usecase.BUY_AIRTIME);
+        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED), UseCase.BUY_AIRTIME);
     }
 
     private WebhookResponse sendAirtimeUsecaseMoreNegativeHandler(WebhookRequest webhookRequest) {
         String prompt = "Ok great. Have a nice day and remember to continue living life the Ecocash way"+Emoji.Smiley;
-        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED),Usecase.BUY_AIRTIME);
+        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED), UseCase.BUY_AIRTIME);
     }
 
     private WebhookResponse sendAirtimeUsecaseMoreFallbackHandler(WebhookRequest webhookRequest) {
         String prompt = "Do you mean you still need me to help you?."+Emoji.Smiley;
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.BUY_AIRTIME);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.BUY_AIRTIME);
     }
 
     private WebhookResponse sendAirtimeUsecaseConfirmationAffirmativeHandler(WebhookRequest webhookRequest) {
@@ -631,7 +631,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
 
     private WebhookResponse sendAirtimeUsecaseConfirmationFallbackHandler(WebhookRequest webhookRequest) {
         String prompt = "Does this mean you want to proceed with this transaction"+Emoji.Confused;
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.BUY_AIRTIME);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.BUY_AIRTIME);
     }
 
     private WebhookResponse sendAirtimeUsecaseGetAmountHandler(WebhookRequest webhookRequest) {
@@ -661,22 +661,22 @@ public class DialogFlowServiceImpl implements DialogFlowService {
 
     private WebhookResponse sendAirtimeUsecaseGetAmountFallbackHandler(WebhookRequest webhookRequest) {
         String prompt = "Oops that wo'nt work"+Emoji.Pensive+"Enter the amount as a currency e.g., $200";
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.BUY_AIRTIME);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.BUY_AIRTIME);
     }
 
     private WebhookResponse sendAirtimeUsecaseGetBeneficiaryHandler(WebhookRequest webhookRequest) {
         String prompt = "Got it"+Emoji.Smiley+"How much airtime do you want to buy?";
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.BUY_AIRTIME);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.BUY_AIRTIME);
     }
 
     private WebhookResponse sendAirtimeUsecaseGetBeneficiaryFallbackHandler(WebhookRequest webhookRequest) {
         String prompt = "Oops that wo'nt work"+Emoji.Pensive+"Enter the econet number like 0774087642";
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.BUY_AIRTIME);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.BUY_AIRTIME);
     }
 
     private WebhookResponse sendAirtimeUsecaseMyselfNegativeHandler(WebhookRequest webhookRequest) {
         String prompt = "what is the Econet number you want to buy airtime for?";
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.BUY_AIRTIME);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.BUY_AIRTIME);
     }
 
     private WebhookResponse sendAirtimeUsecaseMyselfHandler(WebhookRequest webhookRequest) {
@@ -695,24 +695,24 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                 .lifespanCount(50)
                 .name(webhookRequest.getSession()+"/contexts/ticket")
                 .parameters(TicketParameter.builder().id(Double.valueOf(map.get("id").toString()).longValue()).msisdn(customer.get().getMsisdn()).build())
-                .build()},Usecase.BUY_AIRTIME);
-        else return getWebhookResponse(webhookRequest,prompt,null,Usecase.BUY_AIRTIME);
+                .build()}, UseCase.BUY_AIRTIME);
+        else return getWebhookResponse(webhookRequest,prompt,null, UseCase.BUY_AIRTIME);
     }
 
     private WebhookResponse sendAirtimeUsecaseMyselfFallbackHandler(WebhookRequest webhookRequest) {
         String prompt = "Do you mean you want to buy airtime for yourself?"+Emoji.Confused;
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.BUY_AIRTIME);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.BUY_AIRTIME);
     }
 
     //send money fallbacks
     private WebhookResponse sendMoneyUsecaseMsisdnFallbackHandler(WebhookRequest webhookRequest){
         String prompt = "You seem to have provided an invalid Econet Number, please try a number of this format: 0774222689";
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.SEND_MONEY);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.SEND_MONEY);
     }
 
     private WebhookResponse sendMoneyUsecaseAmountFallbackHandler(WebhookRequest webhookRequest){
         String prompt = "The amount you entered is not supported. Use format like $300";
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.SEND_MONEY);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.SEND_MONEY);
     }
 
 
@@ -733,7 +733,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         WebhookResponse webhookResponse = WebhookResponse.builder()
                 .fulfillmentText(prompt)
                 .source("ecocashchatbotcore")
-                .outputContexts(createTicket(webhookRequest,Usecase.BUY_AIRTIME))
+                .outputContexts(createTicket(webhookRequest, UseCase.BUY_AIRTIME))
                 .build();
         log.info("Sending response to dialogFlow: {}\n", webhookResponse);
         return webhookResponse;
@@ -741,7 +741,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
 
     private WebhookResponse sendAirtimeUsecaseScenario1Handler(WebhookRequest webhookRequest) {
         String prompt = "Alright, lets quickly do that"+Emoji.Smiley+" are you buying airtime for yourself?";
-        return getWebhookResponse(webhookRequest,prompt,createTicket(webhookRequest,Usecase.BUY_AIRTIME),Usecase.BUY_AIRTIME);
+        return getWebhookResponse(webhookRequest,prompt,createTicket(webhookRequest, UseCase.BUY_AIRTIME), UseCase.BUY_AIRTIME);
     }
 
     private WebhookResponse payMerchantUsecaseConfirmationAffirmativeHandler(WebhookRequest webhookRequest) {
@@ -782,7 +782,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
 
     private WebhookResponse payMerchantUsecaseConfirmationFallbackHandler(WebhookRequest webhookRequest) {
         String prompt = "So does that mean you want to proceed with the payment?"+Emoji.Confused;
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.MERCHANT_PAYMENT);}
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.MERCHANT_PAYMENT);}
 
     private WebhookResponse payMerchantUsecaseGetAmountHandler(WebhookRequest webhookRequest) {
         log.info("Processing dialogflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
@@ -826,47 +826,47 @@ public class DialogFlowServiceImpl implements DialogFlowService {
 
     private WebhookResponse payMerchantUsecaseGetAmountFallbackHandler(WebhookRequest webhookRequest) {
         String prompt = "Sorry that won't work"+Emoji.Pensive+" type the amount you want to pay as a currency e.g $4257 or 2345 ";
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.MERCHANT_PAYMENT);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.MERCHANT_PAYMENT);
     }
 
     private WebhookResponse payMerchantUsecaseGetMsisdnOrNameHandler(WebhookRequest webhookRequest) {
         String prompt = "Got it"+Emoji.Smiley+"How much do you want to pay?";
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.MERCHANT_PAYMENT);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.MERCHANT_PAYMENT);
     }
 
     private WebhookResponse payMerchantUsecaseGetMsisdnOrNameFallbackHandler(WebhookRequest webhookRequest) {
         String prompt = "Sorry that won't work"+Emoji.Pensive+" type the merchant code as a number e.g 42578 or merchant name e.g. Escrow";
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.MERCHANT_PAYMENT);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.MERCHANT_PAYMENT);
     }
 
     private WebhookResponse payMerchantUsecaseMoreFallbackHandler(WebhookRequest webhookRequest) {
         String prompt = "Do you mean you still need me to help you?."+Emoji.Smiley;
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.MERCHANT_PAYMENT);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.MERCHANT_PAYMENT);
     }
 
     private WebhookResponse payMerchantUsecaseMoreNegativeHandler(WebhookRequest webhookRequest) {
         String prompt = "Ok great. Have a nice day and remember to continue living life the Ecocash way"+Emoji.Smiley;
-        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED),Usecase.MERCHANT_PAYMENT);
+        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED), UseCase.MERCHANT_PAYMENT);
     }
 
     private WebhookResponse payMerchantUsecaseMoreAffirmativeHandler(WebhookRequest webhookRequest) {
         String prompt = "Ok great. What else can I help you do?"+Emoji.Smiley;
-        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED),Usecase.MERCHANT_PAYMENT);
+        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED), UseCase.MERCHANT_PAYMENT);
     }
 
     private WebhookResponse payMerchantUsecaseConfirmationNegativeNegHandler(WebhookRequest webhookRequest) {
         String prompt = "Ok great. Have a nice day and remember to continue living life the Ecocash way"+Emoji.Smiley;
-        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED),Usecase.MERCHANT_PAYMENT);
+        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED), UseCase.MERCHANT_PAYMENT);
     }
 
     private WebhookResponse payMerchantUsecaseConfirmationNegativeAffirmHandler(WebhookRequest webhookRequest) {
         String prompt = "Ok "+Emoji.Grimacing+" lets do this one more time. Enter the merchant code "+Emoji.PointDown;
-        return getWebhookResponse(webhookRequest, prompt, null,Usecase.MERCHANT_PAYMENT);
+        return getWebhookResponse(webhookRequest, prompt, null, UseCase.MERCHANT_PAYMENT);
     }
 
     private WebhookResponse payMerchantUsecaseConfirmationNegativeHandler(WebhookRequest webhookRequest) {
         String prompt = "That's ok"+ Emoji.Weary+" . Would you want to re-try?";
-        return getWebhookResponse(webhookRequest, prompt, null,Usecase.MERCHANT_PAYMENT);
+        return getWebhookResponse(webhookRequest, prompt, null, UseCase.MERCHANT_PAYMENT);
     }
 
 //    private WebhookResponse pinResetUsecaseConfirmationAffirmativeHandler(WebhookRequest webhookRequest){
@@ -882,21 +882,21 @@ public class DialogFlowServiceImpl implements DialogFlowService {
     private WebhookResponse sendMoneyTarrifUsecaseHandler(WebhookRequest webhookRequest){
         log.info("Processing dflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
         String prompt = "Ok to send that amount you need ...";
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.SEND_MONEY_TARIFF);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.SEND_MONEY_TARIFF);
     }
 
     //bill payment tariff
     private WebhookResponse payBillerTariffUsecaseHandler(WebhookRequest webhookRequest){
         log.info("Processing Dflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
         String prompt = "To send this to biller you need to have this .......placeholder";
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.BILLER_TARIFF);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.BILL_TARIFF);
     }
 
     //merchant payment tariff
     private WebhookResponse payMerchantTariffUsecaseHandler(WebhookRequest webhookRequest){
         log.info("Processing Dflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
         String prompt = "to pay ths merchant u need....";
-        return getWebhookResponse(webhookRequest,prompt,createTicket(webhookRequest,Usecase.MERCHANT_TARIFF),Usecase.MERCHANT_TARIFF);
+        return getWebhookResponse(webhookRequest,prompt,createTicket(webhookRequest, UseCase.MERCHANT_TARIFF), UseCase.MERCHANT_TARIFF);
     }
 
     private WebhookResponse payMerchantUsecaseScenario2Handler(WebhookRequest webhookRequest) {
@@ -916,7 +916,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         WebhookResponse webhookResponse = WebhookResponse.builder()
                 .fulfillmentText(prompt)
                 .source("ecocashchatbotcore")
-                .outputContexts(createTicket(webhookRequest,Usecase.MERCHANT_PAYMENT))
+                .outputContexts(createTicket(webhookRequest, UseCase.MERCHANT_PAYMENT))
                 .build();
         log.info("Sending response to dialogFlow: {}\n", webhookResponse);
         return webhookResponse;
@@ -924,22 +924,22 @@ public class DialogFlowServiceImpl implements DialogFlowService {
 
     private WebhookResponse payMerchantUsecaseScenario1Handler(WebhookRequest webhookRequest) {
         String prompt = "Alright, lets quickly do that"+Emoji.Smiley+" what is the Merchant code or Name of the Merchant you want to pay?";
-        return getWebhookResponse(webhookRequest,prompt,createTicket(webhookRequest,Usecase.MERCHANT_PAYMENT),Usecase.MERCHANT_PAYMENT);
+        return getWebhookResponse(webhookRequest,prompt,createTicket(webhookRequest, UseCase.MERCHANT_PAYMENT), UseCase.MERCHANT_PAYMENT);
     }
 
     private WebhookResponse statementUsecaseStartDateHandler(WebhookRequest webhookRequest) {
         String prompt = "Ok to which date would you want the statement to be generated "+Emoji.Date+"?";
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.SUBSCRIBER_STATEMENT);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.SUBSCRIBER_STATEMENT);
     }
 
     private WebhookResponse statementUsecaseStartDateFallbackHandler(WebhookRequest webhookRequest) {
         String prompt = "Please type in a valid start date, for example 1 January?"+Emoji.PointUp;
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.SUBSCRIBER_STATEMENT);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.SUBSCRIBER_STATEMENT);
     }
 
     private WebhookResponse statementUsecaseEndDateFallbackHandler(WebhookRequest webhookRequest) {
         String prompt = "Please type in a valid end date, for example 31 January?"+Emoji.PointUp;
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.SUBSCRIBER_STATEMENT);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.SUBSCRIBER_STATEMENT);
     }
 
     private WebhookResponse statementUsecaseEndDateHandler(WebhookRequest webhookRequest) throws ParseException {
@@ -975,17 +975,17 @@ public class DialogFlowServiceImpl implements DialogFlowService {
 
     private WebhookResponse statementUsecaseMoreFallbackHandler(WebhookRequest webhookRequest) {
         String prompt = "Didn't quite get you, do you still need my help?"+Emoji.Smiley;
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.SUBSCRIBER_STATEMENT);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.SUBSCRIBER_STATEMENT);
     }
 
     private WebhookResponse statementUsecaseMoreAffirmativeHandler(WebhookRequest webhookRequest) {
         String prompt = "Ok Great! What else can I do for you?"+Emoji.Smiley;
-        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED),Usecase.SUBSCRIBER_STATEMENT);
+        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED), UseCase.SUBSCRIBER_STATEMENT);
     }
 
     private WebhookResponse statementUsecaseMoreNegativeHandler(WebhookRequest webhookRequest) {
         String prompt = "Ok Great! Enjoy the rest of your day. And remember to continue living your life the ecocash way!"+Emoji.Smiley;
-        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED),Usecase.SUBSCRIBER_STATEMENT);
+        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED), UseCase.SUBSCRIBER_STATEMENT);
     }
 
     private WebhookResponse statementUsecaseScenario3Handler(WebhookRequest webhookRequest) throws ParseException {
@@ -1003,7 +1003,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         Object[] context=null;
         String prompt;
         if(customer.isPresent()) {
-            context = createTicket(webhookRequest, Usecase.SUBSCRIBER_STATEMENT);
+            context = createTicket(webhookRequest, UseCase.SUBSCRIBER_STATEMENT);
             Statement statement = customerService.getStatement(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()), StatementRequest.builder()
                     .endDate(datePeriod.get("startDate").toString())
                     .startDate(datePeriod.get("endDate").toString())
@@ -1038,7 +1038,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         Object[] context=null;
         String prompt;
         if(customer.isPresent()) {
-            context = createTicket(webhookRequest, Usecase.SUBSCRIBER_STATEMENT);
+            context = createTicket(webhookRequest, UseCase.SUBSCRIBER_STATEMENT);
             Statement statement = customerService.getStatement(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()), StatementRequest.builder()
                     .endDate(map.get("startdate").toString())
                     .startDate(map.get("enddate").toString())
@@ -1061,22 +1061,22 @@ public class DialogFlowServiceImpl implements DialogFlowService {
 
     private WebhookResponse statementUsecaseScenario1Handler(WebhookRequest webhookRequest) {
         String prompt = "Alright, lets quickly do that"+Emoji.Smiley+" from which date "+Emoji.Date+" would you want the statement to be generated?";
-        return getWebhookResponse(webhookRequest,prompt,createTicket(webhookRequest,Usecase.SUBSCRIBER_STATEMENT),Usecase.SUBSCRIBER_STATEMENT);
+        return getWebhookResponse(webhookRequest,prompt,createTicket(webhookRequest, UseCase.SUBSCRIBER_STATEMENT), UseCase.SUBSCRIBER_STATEMENT);
     }
 
     private WebhookResponse payBillerUsecaseGetBillerConfirmationNegativeHandler(WebhookRequest webhookRequest) {
         String prompt = "That's ok"+ Emoji.Weary+" . Would you want to re-try?";
-        return getWebhookResponse(webhookRequest, prompt, null,Usecase.BILL_PAYMENT);
+        return getWebhookResponse(webhookRequest, prompt, null, UseCase.BILL_PAYMENT);
     }
 
     private WebhookResponse payBillerUsecaseGetBillerConfirmationNegativeAffirmHandler(WebhookRequest webhookRequest) {
         String prompt = "Wonderful "+Emoji.Smiley+" is there anything else I can do for you?";
-        return getWebhookResponse(webhookRequest, prompt, null,Usecase.BILL_PAYMENT);
+        return getWebhookResponse(webhookRequest, prompt, null, UseCase.BILL_PAYMENT);
     }
 
     private WebhookResponse payBillerUsecaseGetBillerConfirmationNegativeNegHandler(WebhookRequest webhookRequest) {
         String prompt = "Ok "+Emoji.Grimacing+" lets do this one more time. Enter the merchant code "+Emoji.PointDown;
-        return getWebhookResponse(webhookRequest, prompt, closeTicket(webhookRequest, TicketStatus.CLOSED),Usecase.BILL_PAYMENT);
+        return getWebhookResponse(webhookRequest, prompt, closeTicket(webhookRequest, TicketStatus.CLOSED), UseCase.BILL_PAYMENT);
     }
 
     private WebhookResponse payBillerUsecaseGetBillerConfirmationAffirmativeHandler(WebhookRequest webhookRequest) {
@@ -1114,27 +1114,27 @@ public class DialogFlowServiceImpl implements DialogFlowService {
 
     private WebhookResponse payBillerUsecaseGetBillerConfirmationFallbackHandler(WebhookRequest webhookRequest) {
         String prompt = "Does this mean you confirm the details of the transaction above?"+Emoji.PointUp;
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.BILL_PAYMENT);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.BILL_PAYMENT);
     }
 
     private WebhookResponse payBillerUsecaseGetBillerAccountHandler(WebhookRequest webhookRequest) {
         String prompt = "Alrighty"+Emoji.Smiley+" How much do you want to pay?";
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.BILL_PAYMENT);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.BILL_PAYMENT);
     }
 
     private WebhookResponse payBillerUsecaseGetBillerAccountFallbackHandler(WebhookRequest webhookRequest) {
         String prompt = "Sorry that won't work"+Emoji.Pensive+" type the biller account as a number e.g 1234";
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.BILL_PAYMENT);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.BILL_PAYMENT);
     }
 
     private WebhookResponse payBillerUsecaseGetBillerCodeHandler(WebhookRequest webhookRequest) {
         String  prompt = "Got it"+Emoji.Smiley+" What is your Account Number?";
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.BILL_PAYMENT);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.BILL_PAYMENT);
     }
 
     private WebhookResponse payBillerUsecaseGetBillerCodeFallbackHandler(WebhookRequest webhookRequest) {
         String prompt = "I can't work with that"+Emoji.Pensive+"enter the biller code as a number e.g., 181818";
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.BILL_PAYMENT);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.BILL_PAYMENT);
     }
 
     private WebhookResponse payBillerUsecaseGetBillerAmountHandler(WebhookRequest webhookRequest) {
@@ -1182,7 +1182,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
 
     private WebhookResponse payBillerUsecaseGetBillerAmountFallbackHandler(WebhookRequest webhookRequest) {
         String prompt = "Oops, that wo'nt work"+Emoji.Pensive+"Type the amount you want to pay e.g., 20 dollars/ $20";
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.BILL_PAYMENT);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.BILL_PAYMENT);
     }
 
     private WebhookResponse payBillerUsecaseScenario2Handler(WebhookRequest webhookRequest) {
@@ -1204,7 +1204,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                         + map.get("biller.original").toString() + " ("
                         + transactionResponse.getField6() + ") for account "
                         + map.get("number.original").toString() + "\ncan you confirm this is correct?";
-                contexts = createTicket(webhookRequest,Usecase.BILL_PAYMENT);
+                contexts = createTicket(webhookRequest, UseCase.BILL_PAYMENT);
             }
             else{
                 prompt = "Ooops,"+Emoji.Pensive+" It seems the Biller you entered "+map.get("biller.original").toString()+" Is not recognised. Please re-check and enter the valid biller code";
@@ -1223,7 +1223,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                     ticket.setSentimentStart(webhookRequest.getQueryResult().getSentimentAnalysisResult().getQueryTextSentiment().getScore());
                 else ticket.setSentimentStart(0.0);
                 ticket.setOriginalQueryText(webhookRequest.getQueryResult().getQueryText());
-                ticket.setUsecase(Usecase.BILL_PAYMENT);
+                ticket.setUsecase(UseCase.BILL_PAYMENT);
                 ticketRepository.save(ticket);
                 TicketParameter ticketParameter = TicketParameter.builder()
                         .id(ticket.getId())
@@ -1249,22 +1249,22 @@ public class DialogFlowServiceImpl implements DialogFlowService {
 
     private WebhookResponse payBillerUsecaseScenario1Handler(WebhookRequest webhookRequest) {
         String prompt = "I can help you do that"+Emoji.Smiley+"\nWhat is the biller code or Name of the organisation you want to pay?";
-        return getWebhookResponse(webhookRequest,prompt,createTicket(webhookRequest,Usecase.BILL_PAYMENT),Usecase.BILL_PAYMENT);
+        return getWebhookResponse(webhookRequest,prompt,createTicket(webhookRequest, UseCase.BILL_PAYMENT), UseCase.BILL_PAYMENT);
     }
 
     private WebhookResponse payBillerUsecaseMoreAffirmativeHandler(WebhookRequest webhookRequest) {
         String prompt = "Ok great. What else can I help you do?"+Emoji.Smiley;
-        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED),Usecase.BILL_PAYMENT);
+        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED), UseCase.BILL_PAYMENT);
     }
 
     private WebhookResponse payBillerUsecaseMoreNegativeHandler(WebhookRequest webhookRequest) {
         String prompt = "Ok great. Have a nice day and remember to continue living life the Ecocash way"+Emoji.Smiley;
-        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED),Usecase.BILL_PAYMENT);
+        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED), UseCase.BILL_PAYMENT);
     }
 
     private WebhookResponse payBillerUsecaseMoreFallbackHandler(WebhookRequest webhookRequest) {
         String prompt = "Do you mean you still need me to help you?."+Emoji.Smiley;
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.BILL_PAYMENT);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.BILL_PAYMENT);
     }
 
     /*
@@ -1432,7 +1432,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         WebhookResponse webhookResponse = WebhookResponse.builder()
                 .fulfillmentText(prompt)
                 .source("ecocashchatbotcore")
-                .outputContexts(createTicket(webhookRequest, Usecase.PIN_RESET))
+                .outputContexts(createTicket(webhookRequest, UseCase.PIN_RESET))
                 .build();
         log.info("Sending response to dialogFlow: {}\n", webhookResponse);
         return webhookResponse;
@@ -1440,24 +1440,24 @@ public class DialogFlowServiceImpl implements DialogFlowService {
 
     private WebhookResponse pinresetUsecaseSecurityQuestionsMoreAffirmativeHandler(WebhookRequest webhookRequest) {
         String prompt = "Ok great. What else can I help you do?"+Emoji.Smiley;
-        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED),Usecase.PIN_RESET);
+        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED), UseCase.PIN_RESET);
     }
 
     private WebhookResponse pinresetUsecaseSecurityQuestionsMoreNegativeHandler(WebhookRequest webhookRequest) {
         String prompt = "Ok great. Have a nice day and remember to continue living life the Ecocash way"+Emoji.Smiley;
-        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED),Usecase.PIN_RESET);
+        return getWebhookResponse(webhookRequest,prompt,closeTicket(webhookRequest, TicketStatus.CLOSED), UseCase.PIN_RESET);
     }
 
 
     private WebhookResponse pinresetUsecaseSecurityQuestionsFallbackHandler(WebhookRequest webhookRequest) {
         String prompt = "Do you mean you want to answer your security questions?."+Emoji.Confused;
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.PIN_RESET);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.PIN_RESET);
     }
 
 
     private WebhookResponse pinresetUsecaseSecurityQuestionsMoreFallbackHandler(WebhookRequest webhookRequest) {
         String prompt = "Do you mean you still need me to help you?."+Emoji.Smiley;
-        return getWebhookResponse(webhookRequest,prompt,null,Usecase.PIN_RESET);
+        return getWebhookResponse(webhookRequest,prompt,null, UseCase.PIN_RESET);
     }
 
     private WebhookResponse welcomeHandler(WebhookRequest webhookRequest){
@@ -1484,7 +1484,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         return customer;
     }
 
-    private WebhookResponse getWebhookResponse(WebhookRequest webhookRequest,String prompt,Object[] contexts,Usecase usecase) {
+    private WebhookResponse getWebhookResponse(WebhookRequest webhookRequest, String prompt, Object[] contexts, UseCase usecase) {
         log.info("Processing dialogflow intent: {}", webhookRequest.getQueryResult().getIntent().getDisplayName());
         Optional<Customer> customer = isNewCustomer(webhookRequest);
         if(!customer.isPresent()) {
@@ -1528,7 +1528,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         return new Object[]{outputContext};
     }
 
-    private Object[] createTicket(WebhookRequest webhookRequest, Usecase usecase) {
+    private Object[] createTicket(WebhookRequest webhookRequest, UseCase usecase) {
         Optional<Customer> customer = isNewCustomer(webhookRequest);
         if(customer.isPresent())
         {
@@ -1564,7 +1564,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         Map<String,Object> map = objectMapper.convertValue(outputContexts.get(usecaseIndex).getParameters(),Map.class);
         String prompt = "Great! you have been verified" + Emoji.ThumbsUp + Emoji.Grin + "Now that we have that out of the way... ";
         WebhookResponse webhookResponse;
-        switch (Usecase.valueOf(map.get("usecase").toString()) ){
+        switch (UseCase.valueOf(map.get("usecase").toString()) ){
             case PIN_RESET:
                 break;
             case BUY_AIRTIME:
@@ -1584,17 +1584,17 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                 return WebhookResponse.builder()
                         .fulfillmentText(prompt)
                         .source("ecocashchatbotcore")
-                        .outputContexts(new Object[]{outputContext,createTicket(webhookRequest,Usecase.SUBSCRIBER_STATEMENT)[0]})
+                        .outputContexts(new Object[]{outputContext,createTicket(webhookRequest, UseCase.SUBSCRIBER_STATEMENT)[0]})
                         .build();
             case REGISTRATION:
                 break;
             case SEND_MONEY_TARIFF:
                 break;
-            case BILLER_TARIFF:
+            case BILL_TARIFF:
                 break;
             case MERCHANT_TARIFF:
                 break;
-            case BILLER_LOOKUP:
+            case BILL_PROVIDER_LOOKUP:
                 break;
             case MERCHANT_LOOKUP:
                 break;

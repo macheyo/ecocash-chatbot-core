@@ -1,0 +1,435 @@
+.04:13:17.668 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5h45m41s291ms531µs800ns). 
+.06:41:10.219 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default' 
+.06:41:10.236 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated... 
+.06:41:10.241 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed. 
+.06:41:51.265 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final 
+.06:41:51.272 INFO  z.c.c.e.EcocashChatbotCoreApplication - Starting EcocashChatbotCoreApplication using Java 1.8.0_271 on LAPTOP-1JQH6S1S with PID 23216 (C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core\target\classes started by Kudzai Macheyo in C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core) 
+.06:41:51.273 INFO  z.c.c.e.EcocashChatbotCoreApplication - The following profiles are active: dev 
+.06:41:53.333 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode! 
+.06:41:53.344 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFERRED mode. 
+.06:41:54.127 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 747 ms. Found 9 JPA repository interfaces. 
+.06:41:55.016 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@2c306a57' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 
+.06:41:55.028 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 
+.06:41:55.742 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http) 
+.06:41:55.753 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
+.06:41:55.753 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
+.06:41:55.753 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.50] 
+.06:41:56.050 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring embedded WebApplicationContext 
+.06:41:56.050 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4725 ms 
+.06:41:56.571 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default] 
+.06:41:56.725 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final 
+.06:41:57.089 INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+.06:41:57.418 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting... 
+.06:41:57.772 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed. 
+.06:41:57.849 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect 
+.06:41:58.008 INFO  o.h.e.b.internal.EnversServiceImpl - Envers integration enabled? : true 
+.06:42:03.082 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+.06:42:03.101 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+.06:42:03.248 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+.06:42:03.513 INFO  o.s.s.l.DefaultSpringSecurityContextSource -  URL 'ldap://192.168.101.47:389', root DN is '' 
+.06:42:05.881 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/dialogflow/**'] with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2184962c, org.springframework.security.web.context.SecurityContextPersistenceFilter@7ffc4195, org.springframework.security.web.header.HeaderWriterFilter@4d91d2da, org.springframework.security.web.authentication.logout.LogoutFilter@77ad2767, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@56820446, zw.co.cassavasmartech.ecocashchatbotcore.security.CustomFilter@4d9bccfe, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3e4636c3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@f252762, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@412440c1, org.springframework.security.web.session.SessionManagementFilter@69356aca, org.springframework.security.web.access.ExceptionTranslationFilter@54780c40, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4946dfde] 
+.06:42:05.885 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@26728255, org.springframework.security.web.context.SecurityContextPersistenceFilter@7c523bdd, org.springframework.security.web.header.HeaderWriterFilter@3ab70d34, org.springframework.security.web.authentication.logout.LogoutFilter@1791396b, zw.co.cassavasmartech.ecocashchatbotcore.security.JWTFilter@32c8d67, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3741071d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@351d726c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@281963c, org.springframework.security.web.session.SessionManagementFilter@289cf7db, org.springframework.security.web.access.ExceptionTranslationFilter@40416321, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@28100232] 
+.06:42:06.759 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
+.06:42:06.784 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/ecocashbotcore' 
+.06:42:06.786 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Triggering deferred initialization of Spring Data repositories… 
+.06:42:08.843 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Spring Data repositories initialized! 
+.06:42:08.880 INFO  z.c.c.e.EcocashChatbotCoreApplication - Started EcocashChatbotCoreApplication in 17.989 seconds (JVM running for 18.525) 
+.06:46:03.929 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
+.06:46:03.929 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
+.06:46:03.935 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 6 ms 
+.06:46:04.169 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.06:46:04.715 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "6f77e16b-f3f9-4d6f-a6ec-abb7fd0c66c6-94f60986",
+  "queryResult": {
+    "queryText": "Hi",
+    "action": "input.welcome",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3",
+      "displayName": "usecase_welcome"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.2,
+        "magnitude": 0.2
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "SmsStatus": "received",
+      "MessageSid": "SM994a3946e8b3326bc068522e0a24870e",
+      "AccountSid": "ACfa0a8d3546de35dd06e07580f418191c",
+      "WaId": "263783324671",
+      "ProfileName": "justicemacheyo",
+      "ApiVersion": "2010-04-01",
+      "SmsSid": "SM994a3946e8b3326bc068522e0a24870e",
+      "SmsMessageSid": "SM994a3946e8b3326bc068522e0a24870e",
+      "Body": "Hi",
+      "To": "whatsapp:+14155238886",
+      "From": "whatsapp:+263783324671",
+      "NumMedia": "0",
+      "NumSegments": "1"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671"
+}
+ 
+.06:46:04.810 INFO  z.c.c.e.d.i.h.w.WelcomeIntentHandler - Processing dialogflow intent: usecase_welcome 
+.06:46:05.077 INFO  z.c.c.e.dialogflow.DialogFlowUtil - Processing response to dialogflow: {
+  "fulfillmentText": " Welcome back Dagl 😃👋 hope you are having a beautiful morning so far. What can I do for you today?",
+  "source": "ecocashchatbotcore"
+} 
+.06:46:19.771 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.06:46:19.987 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "6b669fa5-9595-46dd-a851-2ef1128d3e3e-94f60986",
+  "queryResult": {
+    "queryText": "I want to pay a merchant",
+    "parameters": {
+      "Merchant": "merchant payment"
+    },
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/awaiting_merchant_msisdn",
+        "lifespanCount": 1,
+        "parameters": {
+          "Merchant": "merchant payment",
+          "Merchant.original": "merchant"
+        }
+      },
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0,
+          "Merchant": "merchant payment",
+          "Merchant.original": "merchant"
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/dd9eaa00-93f0-458f-a87f-31958913d588",
+      "displayName": "usecase_pay_merchant_scenario1"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.1,
+        "magnitude": 0.1
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "NumSegments": "1",
+      "SmsMessageSid": "SM14999298db723159da41020075cd970f",
+      "AccountSid": "ACfa0a8d3546de35dd06e07580f418191c",
+      "SmsSid": "SM14999298db723159da41020075cd970f",
+      "Body": "I want to pay a merchant",
+      "ProfileName": "justicemacheyo",
+      "WaId": "263783324671",
+      "MessageSid": "SM14999298db723159da41020075cd970f",
+      "NumMedia": "0",
+      "To": "whatsapp:+14155238886",
+      "From": "whatsapp:+263783324671",
+      "SmsStatus": "received",
+      "ApiVersion": "2010-04-01"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671"
+}
+ 
+.06:46:19.987 INFO  z.c.c.e.d.i.h.m.PayMerchantScenario1IntentHandler - Processing Dialogflow Intent: usecase_pay_merchant_scenario1 
+.06:46:20.147 INFO  z.c.c.e.dialogflow.DialogFlowUtil - Processing response to dialogflow: {
+  "fulfillmentText": " Alright what is the merchant code yu want to pay?",
+  "source": "ecocashchatbotcore",
+  "outputContexts": [
+    {
+      "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/ticket",
+      "lifespanCount": 50,
+      "parameters": {
+        "id": 48,
+        "usecase": "MERCHANT_PAYMENT",
+        "question": 0
+      }
+    }
+  ]
+} 
+.06:46:30.261 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.06:46:30.448 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "9d55a948-b1fe-43cc-8c18-f73b71c134f8-94f60986",
+  "queryResult": {
+    "queryText": "Escrow",
+    "parameters": {
+      "msisdn": "Escrow"
+    },
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/awaiting_merchant_amount",
+        "lifespanCount": 1,
+        "parameters": {
+          "msisdn": "Escrow",
+          "msisdn.original": "Escrow"
+        }
+      },
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/ticket",
+        "lifespanCount": 49,
+        "parameters": {
+          "id": 48.0,
+          "usecase": "MERCHANT_PAYMENT",
+          "msisdn": "Escrow",
+          "question": 0.0,
+          "msisdn.original": "Escrow"
+        }
+      },
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/awaiting_merchant_msisdn",
+        "lifespanCount": 0,
+        "parameters": {
+          "Merchant": "merchant payment",
+          "Merchant.original": "merchant",
+          "msisdn": "Escrow",
+          "msisdn.original": "Escrow"
+        }
+      },
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0,
+          "msisdn": "Escrow",
+          "msisdn.original": "Escrow"
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/132f7817-cb65-427e-9eb4-ca3de7945488",
+      "displayName": "usecase_pay_merchant_get_name"
+    },
+    "intentDetectionConfidence": 0.3,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.3,
+        "magnitude": 0.3
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "AccountSid": "ACfa0a8d3546de35dd06e07580f418191c",
+      "MessageSid": "SM5a97d9d1f3363ce97affe32b5c43fa12",
+      "SmsSid": "SM5a97d9d1f3363ce97affe32b5c43fa12",
+      "To": "whatsapp:+14155238886",
+      "Body": "Escrow",
+      "NumMedia": "0",
+      "SmsMessageSid": "SM5a97d9d1f3363ce97affe32b5c43fa12",
+      "NumSegments": "1",
+      "ProfileName": "justicemacheyo",
+      "ApiVersion": "2010-04-01",
+      "From": "whatsapp:+263783324671",
+      "SmsStatus": "received",
+      "WaId": "263783324671"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671"
+}
+ 
+.06:46:30.448 INFO  z.c.c.e.d.i.h.m.PayMerchantGetNameIntentHandler - Processing Dialogflow Intent: usecase_pay_merchant_get_name 
+.06:46:30.489 INFO  z.c.c.e.dialogflow.DialogFlowUtil - Processing response to dialogflow: {
+  "fulfillmentText": " Alright got it, how much do you want to pay",
+  "source": "ecocashchatbotcore",
+  "outputContexts": []
+} 
+.06:46:37.381 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.06:46:37.522 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "a41c772c-8208-438c-aed3-993e2ec0ade4-94f60986",
+  "queryResult": {
+    "queryText": "500",
+    "parameters": {
+      "amount": 500.0
+    },
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/awaiting_pay_merchant_onfirmation",
+        "lifespanCount": 1,
+        "parameters": {
+          "amount": 500.0,
+          "amount.original": "500"
+        }
+      },
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/awaiting_merchant_amount",
+        "lifespanCount": 0,
+        "parameters": {
+          "msisdn": "Escrow",
+          "msisdn.original": "Escrow",
+          "amount": 500.0,
+          "amount.original": "500"
+        }
+      },
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/ticket",
+        "lifespanCount": 48,
+        "parameters": {
+          "id": 48.0,
+          "usecase": "MERCHANT_PAYMENT",
+          "msisdn": "Escrow",
+          "question": 0.0,
+          "msisdn.original": "Escrow",
+          "amount": 500.0,
+          "amount.original": "500"
+        }
+      },
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0,
+          "amount": 500.0,
+          "amount.original": "500"
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/9ab00f8d-46db-432e-9425-57cef379026e",
+      "displayName": "usecase_pay_merchant_get_amount"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.1,
+        "magnitude": 0.1
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "ApiVersion": "2010-04-01",
+      "SmsSid": "SM11f43ecbaeb7d397bd9a975c625dcef4",
+      "NumMedia": "0",
+      "SmsMessageSid": "SM11f43ecbaeb7d397bd9a975c625dcef4",
+      "To": "whatsapp:+14155238886",
+      "SmsStatus": "received",
+      "NumSegments": "1",
+      "From": "whatsapp:+263783324671",
+      "AccountSid": "ACfa0a8d3546de35dd06e07580f418191c",
+      "MessageSid": "SM11f43ecbaeb7d397bd9a975c625dcef4",
+      "ProfileName": "justicemacheyo",
+      "Body": "500",
+      "WaId": "263783324671"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671"
+}
+ 
+.06:46:37.522 INFO  z.c.c.e.d.i.h.m.PayMerchantGetAmountIntentHandler - Processing Dialogflow intent: usecase_pay_merchant_get_amount 
+.06:46:37.563 INFO  z.c.c.e.dialogflow.DialogFlowUtil - Processing response to dialogflow: {
+  "fulfillmentText": " Alright thats fine Dagl,😃  So in summary you want to pay $ZWL500 to merchant 75586 (ESCROW)   can you confirm this is correct?",
+  "source": "ecocashchatbotcore",
+  "outputContexts": []
+} 
+.06:46:47.257 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.06:46:47.416 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "413dbb9b-f650-4222-ac3d-cf58babac37c-94f60986",
+  "queryResult": {
+    "queryText": "Yes",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/awaiting_merchant_more",
+        "lifespanCount": 1
+      },
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/ticket",
+        "lifespanCount": 47,
+        "parameters": {
+          "id": 48.0,
+          "usecase": "MERCHANT_PAYMENT",
+          "msisdn": "Escrow",
+          "question": 0.0,
+          "msisdn.original": "Escrow",
+          "amount": 500.0,
+          "amount.original": "500"
+        }
+      },
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/awaiting_pay_merchant_onfirmation",
+        "lifespanCount": 0,
+        "parameters": {
+          "amount": 500.0,
+          "amount.original": "500"
+        }
+      },
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/4a3ea71b-d60e-4950-940c-345d9ec47c40",
+      "displayName": "usecase_pay_merchant_confirmation_affirmative"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.5,
+        "magnitude": 0.5
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "Body": "Yes",
+      "SmsSid": "SM7cbd3b814fa488e92280aa70b229e771",
+      "NumMedia": "0",
+      "ApiVersion": "2010-04-01",
+      "From": "whatsapp:+263783324671",
+      "SmsMessageSid": "SM7cbd3b814fa488e92280aa70b229e771",
+      "NumSegments": "1",
+      "ProfileName": "justicemacheyo",
+      "WaId": "263783324671",
+      "To": "whatsapp:+14155238886",
+      "AccountSid": "ACfa0a8d3546de35dd06e07580f418191c",
+      "SmsStatus": "received",
+      "MessageSid": "SM7cbd3b814fa488e92280aa70b229e771"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/whatsapp:+263783324671"
+}
+ 
+.06:46:47.416 INFO  z.c.c.e.d.i.h.m.PayMerchantConfirmationAffirmativeIntentHandler - Processing dialogflow intent: usecase_pay_merchant_confirmation_affirmative 
+.06:46:47.750 INFO  z.c.c.e.eip.EipInvokerImpl - EIP transaction response EipTransaction(clientCorrelator=772222726211002064647464, notifyUrl=https://509a-197-221-253-215.ngrok.io/ecocashbotcore/customer/ticket/eip/callback, referenceCode=772222726211002064647464, tranType=MER, endUserId=772222726, remarks=TEST MERCHANT, transactionOperationStatus=PENDING SUBSCRIBER VALIDATION, paymentAmount=PaymentAmount(charginginformation=Charginginformation(amount=500.0, currency=ZWL, description=Escrow Online Payment), chargeMetaData=ChargeMetaData(channel=WEB, purchaseCategoryCode=Online Payment, onBeHalfOf=ESCROW)), merchantCode=75586, merchantPin=4827, merchantNumber=784850685, currencyCode=ZWL, countryCode=ZW, terminalID=web, location=2ND FLOOR ZB CENTER CNR FIRST AND KWAME HARARE, ecocashReference=null, superMerchantName=ESCROW, merchantName=ESCROW, originalServerReferenceCode=null, originalEcocashReference=null, remark=null, endTime=1633150062735, startTime=1633150062735, serverReferenceCode=772222726211002064742735, responseCode=PAUSED) 
+.06:46:47.759 INFO  z.c.c.e.dialogflow.DialogFlowUtil - Processing response to dialogflow: {
+  "fulfillmentText": " Great!! Processing your payment right now. You will receive a prompt on your phone for you to enter your PIN.",
+  "source": "ecocashchatbotcore",
+  "outputContexts": []
+} 

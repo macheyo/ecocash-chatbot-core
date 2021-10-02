@@ -12009,7 +12009,7 @@ java.io.FileNotFoundException: class path resource [cassavasmartech.jks] cannot 
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.getBillProviderName(DialogFlowUtil.java:183)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function.handler.GetBillProvider.process(GetBillProvider.java:15)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.promptProcessor(DialogFlowUtil.java:221)
-	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.billPayment.PayBillerGetBillerAmountIntentHandler.getWebhookResponse(PayBillerGetBillerAmountIntentHandler.java:30)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.billPayment.PayBillGetBillAmountIntentHandler.getWebhookResponse(PayBillerGetBillerAmountIntentHandler.java:30)
 	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
 	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)

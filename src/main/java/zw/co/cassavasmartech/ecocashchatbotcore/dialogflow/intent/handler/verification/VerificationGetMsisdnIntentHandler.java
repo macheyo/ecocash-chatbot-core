@@ -9,7 +9,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.IntentHandlerA
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Customer;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Profile;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.SubscriberDto;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.Usecase;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.UseCase;
 
 import java.util.Optional;
 @Slf4j
@@ -43,6 +43,6 @@ public class VerificationGetMsisdnIntentHandler extends IntentHandlerAdapter {
                     .build();
             context = new Object[]{outputContext};
         }
-        return DialogFlowUtil.getResponse(webhookRequest[0], prompt, context, Usecase.VERIFICATION);
+        return DialogFlowUtil.getResponse(webhookRequest[0], prompt, context, UseCase.VERIFICATION);
     }
 }

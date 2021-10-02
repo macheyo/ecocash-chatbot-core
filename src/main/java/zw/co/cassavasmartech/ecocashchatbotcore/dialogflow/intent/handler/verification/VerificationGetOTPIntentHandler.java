@@ -6,7 +6,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.IntentHandlerAdapter;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Customer;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.Usecase;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.UseCase;
 
 @Slf4j
 public class VerificationGetOTPIntentHandler extends IntentHandlerAdapter {
@@ -20,9 +20,9 @@ public class VerificationGetOTPIntentHandler extends IntentHandlerAdapter {
         }
         else {
             return DialogFlowUtil.getResponse(webhookRequest[0],
-                    DialogFlowUtil.promptProcessor(4, webhookRequest[0], new Customer()),
+                    DialogFlowUtil.promptProcessor(5, webhookRequest[0], new Customer()),
                     new Object[]{},
-                    Usecase.VERIFICATION);
+                    UseCase.VERIFICATION);
         }
     }
 }

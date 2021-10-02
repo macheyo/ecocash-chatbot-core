@@ -7,7 +7,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.IntentHandlerAdapter;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Customer;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.Usecase;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.UseCase;
 @Slf4j
 public class RegisterConfirmationAffirmativeIntentHandler extends IntentHandlerAdapter {
     @Override
@@ -22,6 +22,6 @@ public class RegisterConfirmationAffirmativeIntentHandler extends IntentHandlerA
                 .name(webhookRequest[0].getSession() + "/contexts/awaiting_registration_confirmation")//TODO put correct context here
                 .build();
         context = new Object[]{outputContext};
-        return DialogFlowUtil.getResponse(webhookRequest[0],prompt,context, Usecase.VERIFICATION);
+        return DialogFlowUtil.getResponse(webhookRequest[0],prompt,context, UseCase.VERIFICATION);
     }
 }
