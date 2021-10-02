@@ -18,7 +18,6 @@ public class PayMerchantMoreFallbackIntentHandler extends IntentHandlerAdapter {
                 DialogFlowUtil.promptProcessor(15,webhookRequest[0],customer),
                 new Object[]{},
                 UseCase.MERCHANT_PAYMENT
-
         );
     }
 }

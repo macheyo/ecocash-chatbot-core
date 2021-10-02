@@ -6,7 +6,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.mercha
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.pinreset.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.sendMoney.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.statement.*;
-import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.transactionalReversal.*;
+import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.transactionReversal.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.verification.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.welcome.WelcomeIntentHandler;
 

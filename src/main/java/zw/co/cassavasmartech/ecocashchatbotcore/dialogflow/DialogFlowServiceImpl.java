@@ -612,7 +612,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                 TransactionResponse transactionResponse = paymentGatewayProcessor.subscriberAirtime(SubscriberAirtimeRequest.builder()
                                 .msisdn1(customer.get().getMsisdn())
                                 .msisdn2(map.get("msisdn").toString())
-                                .amount(map.get("amount").toString())
+                               // .amount(map.get("amount").toString())
                                 .ticketId(Double.valueOf(map.get("id").toString()).longValue()).build());
                 if (transactionResponse.getField1().equalsIgnoreCase("603"))
                     prompt = "Great!!" + Emoji.Smiley + "Processing your payment right now.\nYou will receive a prompt on your phone for you to enter your PIN.\n" + Emoji.Exclamation + "You have to enter the correct PIN to complete this transaction";

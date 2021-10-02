@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.MobileNumberFormater;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessor;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.BillerLookupRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberAirtimeRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToBillerRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.EipService;
@@ -89,6 +90,7 @@ public class DialogFlowUtil {
     @Autowired
     EipService eipServ;
     private static EipService eipService;
+
 
     @PostConstruct
     public void init() {
@@ -197,18 +199,37 @@ public class DialogFlowUtil {
         return objectMapper.convertValue(outputContexts.get(usecaseIndex).getParameters(),Map.class);
     }
 
-    public static String getBillProviderName(String billerCode){
+    public static String getBillProviderDetails(String billerCode){
         BillerLookupRequest billerLookupRequest = new BillerLookupRequest();
         billerLookupRequest.setBiller(billerCode);
         return paymentGatewayProcessor.lookupBiller(billerLookupRequest).getField6();
 
     }
 
-    public static String[] getMerchantName(String msisdn){
+    public static String[] getBeneficiaryDetails(String msisdn){
+        TransactionResponse transactionResponse = customerService.customerLookup(SubscriberDto.builder().msisdn(msisdn).build());
+        if(transactionResponse.getField1().equalsIgnoreCase("200"))
+            return new String[]{transactionResponse.getField6(),transactionResponse.getField9()};
+        return null;
+    }
+
+    public static String[] getMerchantDetails(String msisdn){
         Optional<Merchant> merchant = merchantRepository.findByNameOrMerchantCode(msisdn,msisdn);
         if(merchant.isPresent())
         return new String[]{merchant.get().getName(),merchant.get().getMerchantCode()};
         return null;
+    }
+
+
+    public static String buyAirtime(WebhookRequest webhookRequest) {
+        Customer customer = isNewCustomer(webhookRequest);
+        Map<String, Object> ticket = getTicket(webhookRequest);
+        return paymentGatewayProcessor.subscriberAirtime(SubscriberAirtimeRequest.builder()
+                .msisdn1(customer.getMsisdn())
+                .msisdn2(ticket.get("msisdn").toString())
+                .amount(BigDecimal.valueOf(Double.parseDouble(ticket.get("amount").toString())))
+                .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
+                .build()).getField1();
     }
 
     public static String payBill(WebhookRequest  webhookRequest){
@@ -217,7 +238,7 @@ public class DialogFlowUtil {
         return paymentGatewayProcessor.subscriberToBiller(SubscriberToBillerRequest.builder()
                 .msisdn(customer.getMsisdn())
                 .billerCode(ticket.get("biller.original").toString())
-                .amount(BigDecimal.valueOf(Double.parseDouble(ticket.get("amount").toString())) )
+                .amount(BigDecimal.valueOf(Double.parseDouble(ticket.get("amount").toString())))
                 .msisdn2(ticket.get("number.original").toString())
                 .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
                 .build()).getField1();
@@ -229,7 +250,7 @@ public class DialogFlowUtil {
         Map<String, Object> ticket = getTicket(webhookRequest);
         return eipService.postPayment(SubscriberToMerchantRequest.builder().msisdn(customer.getMsisdn())
                 .msisdn(customer.getMsisdn())
-                .merchantCode(getMerchantName(ticket.get("msisdn.original").toString())[1])
+                .merchantCode(getMerchantDetails(ticket.get("msisdn.original").toString())[1])
                 .amount(BigDecimal.valueOf(Double.parseDouble(ticket.get("amount").toString())))
                 .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
                 .build());
@@ -343,6 +364,11 @@ public class DialogFlowUtil {
         else return false;
     }
 
+    public static boolean isCustomerValid(WebhookRequest webhookRequest) {
+        String response = paymentGatewayProcessor.lookupCustomer(webhookRequest.getQueryResult().getQueryText()).getField1();
+        if(response.equalsIgnoreCase("200"))return true;
+        return false;
+    }
 
     public static boolean isMerchantNameOrCodeValid(WebhookRequest webhookRequest){
         Optional<Merchant> merchant = merchantRepository.findByNameOrMerchantCode(webhookRequest.getQueryResult().getQueryText(),webhookRequest.getQueryResult().getQueryText());

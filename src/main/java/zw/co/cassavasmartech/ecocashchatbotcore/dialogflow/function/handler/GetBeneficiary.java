@@ -6,11 +6,13 @@ import zw.co.cassavasmartech.ecocashchatbotcore.model.PromptObject;
 
 import java.util.Map;
 
-public class GetMerchant extends FunctionAdapter {
+public class GetBeneficiary extends FunctionAdapter {
+    public boolean hasArgs() { return true; }
+
     @Override
     public String process(PromptObject... args) {
         Map<String, Object> ticket = DialogFlowUtil.getTicket(args[0].getWebhookRequest());
-        String[] merchantDetails = DialogFlowUtil.getMerchantDetails(ticket.get("msisdn.original").toString());
-        return merchantDetails[1] +" ("+merchantDetails[0]+")";
+        String[] beneficiary = DialogFlowUtil.getBeneficiaryDetails(ticket.get("msisdn").toString());
+        return ticket.get("msisdn").toString()+" ("+ beneficiary[0]+" "+ beneficiary[1] +")";
     }
 }

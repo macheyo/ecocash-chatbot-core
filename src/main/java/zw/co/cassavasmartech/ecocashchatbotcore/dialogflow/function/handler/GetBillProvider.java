@@ -12,7 +12,7 @@ public class GetBillProvider extends FunctionAdapter {
     @Override
     public String process(PromptObject... args) {
         Map<String, Object> ticket = DialogFlowUtil.getTicket(args[0].getWebhookRequest());
-        return ticket.get("biller.original").toString()+" ("+DialogFlowUtil.getBillProviderName(ticket.get("biller.original").toString())+")";
+        return ticket.get("biller.original").toString()+" ("+DialogFlowUtil.getBillProviderDetails(ticket.get("biller.original").toString())+")";
 
     }
 }

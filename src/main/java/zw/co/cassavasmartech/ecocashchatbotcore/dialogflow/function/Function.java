@@ -11,6 +11,7 @@ public enum Function {
     GETBILLER(new GetBillProvider()),
     GETBILLACCOUNT(new GetBillAccount()),
     GETMERCHANT(new GetMerchant()),
+    GETBENEFICIARY(new GetBeneficiary())
     ;
 
     private final FunctionAdapter fa;

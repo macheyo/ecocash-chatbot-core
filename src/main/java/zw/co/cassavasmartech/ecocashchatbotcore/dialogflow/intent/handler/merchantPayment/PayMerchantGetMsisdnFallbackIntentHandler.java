@@ -12,6 +12,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.model.UseCase;
 public class PayMerchantGetMsisdnFallbackIntentHandler extends IntentHandlerAdapter {
     @Override
     public WebhookResponse getWebhookResponse(WebhookRequest... webhookRequest) {
+        log.info("Processing Dialogflow Intent: {}", webhookRequest[0].getQueryResult().getIntent().getDisplayName());
         Customer customer = DialogFlowUtil.isNewCustomer(webhookRequest[0]);
         return DialogFlowUtil.getResponse(
                 webhookRequest[0],

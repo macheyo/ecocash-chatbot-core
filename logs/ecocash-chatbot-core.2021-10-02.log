@@ -433,3 +433,6 @@
   "source": "ecocashchatbotcore",
   "outputContexts": []
 } 
+.08:56:55.437 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h33m56s861ms995µs899ns). 
+.09:14:43.529 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m47s982ms687µs400ns). 
+.13:55:23.658 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2h29m7s485ms1µs300ns). 

@@ -16,9 +16,9 @@ public class PayMerchantScenario1IntentHandler extends IntentHandlerAdapter {
         Customer customer = DialogFlowUtil.isNewCustomer(webhookRequest[0]);
         String prompt;
         if(customer != null){
-            prompt = DialogFlowUtil.promptProcessor(1,webhookRequest[0],customer);  //TO BE mapped to db
+            prompt = DialogFlowUtil.promptProcessor(1,webhookRequest[0],customer);
         }else{
-            prompt = DialogFlowUtil.promptProcessor(2,webhookRequest[0],null); //TO BE mapped to db
+            prompt = DialogFlowUtil.promptProcessor(2,webhookRequest[0],null);
         }
         return DialogFlowUtil.getResponse(
                 webhookRequest[0],
