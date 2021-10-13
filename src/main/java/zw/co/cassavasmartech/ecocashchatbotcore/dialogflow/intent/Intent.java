@@ -1,5 +1,9 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent;
 
+import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.zesaPurchase.ZesaGetAmountHandler;
+import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.zesaPurchase.ZesaGetEcocashNumberHandler;
+import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.zesaPurchase.ZesaGetMeterNumberHandler;
+import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.zesaPurchase.ZesaUseCaseIntentHandler;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.airtime.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.billPayment.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.merchantPayment.*;
@@ -107,6 +111,11 @@ public enum Intent {
     usecase_transaction_reversal_reverse_confirmation_fallback(new TransactionReversalReverseConfirmationFallbackIntentHandler()),
     usecase_transaction_reversal_reverse_negative(new TransactionReversalReverseNegativeIntentHandler()),
     usecase_transaction_reversal_reverse_reference_fallback(new TransactionReversalReverseReferenceFallbackIntentHandler()),
+    usecase_zesa_token_purchase(new ZesaUseCaseIntentHandler()),
+    usecase_zesa_meter_number(new ZesaGetMeterNumberHandler()),
+    usecase_zesa_get_amount(new ZesaGetAmountHandler()),
+    usecase_zesa_getEcocashNumber(new ZesaGetEcocashNumberHandler())
+
     ;
     private final IntentHandlerAdapter intentHandlerAdapter;
     Intent(IntentHandlerAdapter intentHandlerAdapter) {
