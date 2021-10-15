@@ -27,6 +27,8 @@ public class CpgConfigurationProperties {
     @NotEmpty
     private String cpgEndPointUrl2;
     @NotEmpty
+    private String cpgEndPointUrl3;
+    @NotEmpty
     private String cpgCallBackUrl;
     @NotEmpty
     private String subscriberToMerchantTranType;
@@ -50,5 +52,6 @@ public class CpgConfigurationProperties {
     private String subscriberAirtimeTranType;
     @NotEmpty
     private String registrationTrasType;
+
 
 }

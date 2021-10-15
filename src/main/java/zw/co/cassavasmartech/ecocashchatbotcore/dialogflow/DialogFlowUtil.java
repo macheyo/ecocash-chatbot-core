@@ -161,7 +161,7 @@ public class DialogFlowUtil {
     public static Platform getPlatform(OriginalDetectIntentRequest originalDetectIntentRequest){
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String,Object> map = objectMapper.convertValue(originalDetectIntentRequest,Map.class);
-        if(map.get("source")!=null)return Platform.TELEGRAM;
+        if(map.get("Source")!=null)return Platform.TELEGRAM;
         else return Platform.WHATSAPP;
     }
 
