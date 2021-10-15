@@ -8,9 +8,10 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import zw.co.cassavasmartech.esb.commons.data.Response;
-import zw.co.cassavasmartech.esb.commons.data.TransactionRequest;
-import zw.co.cassavasmartech.esb.commons.data.cpg.ChecksumRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.common.data.cpg.ChecksumRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.TransactionRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.TransactionResponse;
+
 
 import java.net.URI;
 
@@ -53,11 +54,11 @@ public class CpgHelperImpl implements CpgHelper {
         return request;
     }
 
-    public Response invokeApi(TransactionRequest request, String url) throws Exception {
+    public TransactionResponse invokeApi(TransactionRequest request, String url) throws Exception {
         final RequestEntity<TransactionRequest> requestEntity = new RequestEntity<>(request,
                 callbackInvoker.httpHeaders(), HttpMethod.POST, new URI(url));
         log.info("\n\nCpg Request for txn {} is : {}", request.getField10(), requestEntity);
-        final ResponseEntity<Response> responseEntity = restTemplate.exchange(requestEntity, Response.class);
+        final ResponseEntity<TransactionResponse> responseEntity = restTemplate.exchange(requestEntity, TransactionResponse.class);
         log.info("\n\nCpg Response for txn {} is : {}", request.getField10(),responseEntity);
         return responseEntity.getBody();
     }

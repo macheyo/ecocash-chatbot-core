@@ -6,10 +6,10 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import zw.co.cassavasmartech.esb.model.Transaction;
-import zw.co.cassavasmartech.esb.notification.NotificationProcessor;
-import zw.co.cassavasmartech.esb.process.ProcessConstants;
-import zw.co.cassavasmartech.esb.transaction.TransactionService;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.Transaction;
+import zw.co.cassavasmartech.ecocashchatbotcore.notification.NotificationProcessor;
+import zw.co.cassavasmartech.ecocashchatbotcore.process.ProcessConstants;
+import zw.co.cassavasmartech.ecocashchatbotcore.transaction.TransactionService;
 
 import java.util.Optional;
 

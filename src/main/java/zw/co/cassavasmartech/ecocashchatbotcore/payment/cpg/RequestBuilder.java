@@ -2,7 +2,7 @@ package zw.co.cassavasmartech.ecocashchatbotcore.payment.cpg;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import zw.co.cassavasmartech.esb.commons.data.TransactionRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.TransactionRequest;
 
 public class RequestBuilder {
 

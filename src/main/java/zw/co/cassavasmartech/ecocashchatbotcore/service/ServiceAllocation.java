@@ -1,7 +1,8 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.service;
 
-import zw.co.cassavasmartech.esb.model.Transaction;
-import zw.co.cassavasmartech.esb.payment.PaymentResponse;
+
+import zw.co.cassavasmartech.ecocashchatbotcore.model.Transaction;
+import zw.co.cassavasmartech.ecocashchatbotcore.payment.PaymentResponse;
 
 public interface ServiceAllocation {
 

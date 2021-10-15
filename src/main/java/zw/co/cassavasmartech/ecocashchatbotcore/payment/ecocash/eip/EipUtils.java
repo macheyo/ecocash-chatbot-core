@@ -3,10 +3,10 @@ package zw.co.cassavasmartech.ecocashchatbotcore.payment.ecocash.eip;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
-import zw.co.cassavasmartech.esb.commons.enums.ErrorResponse;
-import zw.co.cassavasmartech.esb.commons.enums.TransactionStatus;
-import zw.co.cassavasmartech.esb.payment.PaymentResponse;
-import zw.co.cassavasmartech.esb.payment.ecocash.eip.data.AmountTransaction;
+import zw.co.cassavasmartech.ecocashchatbotcore.common.enums.ErrorResponse;
+import zw.co.cassavasmartech.ecocashchatbotcore.common.enums.TransactionStatus;
+import zw.co.cassavasmartech.ecocashchatbotcore.payment.PaymentResponse;
+import zw.co.cassavasmartech.ecocashchatbotcore.payment.ecocash.eip.data.AmountTransaction;
 
 /**
  * Created by thomas on 8/20/18.

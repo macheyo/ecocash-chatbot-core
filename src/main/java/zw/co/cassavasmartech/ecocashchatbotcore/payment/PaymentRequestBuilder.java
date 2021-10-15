@@ -1,8 +1,9 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.payment;
 
-import zw.co.cassavasmartech.esb.commons.enums.RequestChannel;
-import zw.co.cassavasmartech.esb.model.Currency;
-import zw.co.cassavasmartech.esb.model.PaymentMethod;
+
+import zw.co.cassavasmartech.ecocashchatbotcore.common.enums.RequestChannel;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.Currency;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.PaymentMethod;
 
 import java.math.BigDecimal;
 

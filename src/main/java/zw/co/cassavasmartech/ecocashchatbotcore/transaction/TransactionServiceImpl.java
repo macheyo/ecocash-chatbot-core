@@ -2,8 +2,8 @@ package zw.co.cassavasmartech.ecocashchatbotcore.transaction;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import zw.co.cassavasmartech.esb.model.Partner;
-import zw.co.cassavasmartech.esb.model.Transaction;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.Partner;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.Transaction;
 
 import java.util.Optional;
 

@@ -1,8 +1,9 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.process;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import zw.co.cassavasmartech.esb.model.PaymentMethod;
-import zw.co.cassavasmartech.esb.model.ProcessRegister;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.PaymentMethod;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.ProcessRegister;
+
 
 import java.util.Optional;
 

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
-import zw.co.cassavasmartech.esb.commons.data.TransactionRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.TransactionRequest;
 
 import java.io.InputStream;
 import java.security.KeyStore;

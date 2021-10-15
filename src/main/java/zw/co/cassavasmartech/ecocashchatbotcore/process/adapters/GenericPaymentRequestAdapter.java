@@ -5,11 +5,12 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import zw.co.cassavasmartech.esb.commons.EBSProcess;
-import zw.co.cassavasmartech.esb.payment.PaymentRequest;
-import zw.co.cassavasmartech.esb.payment.PaymentResponse;
-import zw.co.cassavasmartech.esb.payment.PaymentService;
-import zw.co.cassavasmartech.esb.process.ProcessConstants;
+import zw.co.cassavasmartech.ecocashchatbotcore.common.EBSProcess;
+import zw.co.cassavasmartech.ecocashchatbotcore.payment.PaymentRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.payment.PaymentResponse;
+import zw.co.cassavasmartech.ecocashchatbotcore.payment.PaymentService;
+import zw.co.cassavasmartech.ecocashchatbotcore.process.ProcessConstants;
+
 
 @Slf4j
 @Component

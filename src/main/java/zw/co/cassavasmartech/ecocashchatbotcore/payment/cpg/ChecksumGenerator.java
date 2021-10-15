@@ -1,6 +1,6 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.payment.cpg;
 
-import zw.co.cassavasmartech.esb.commons.data.TransactionRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.TransactionRequest;
 
 import java.util.Date;
 

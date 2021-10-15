@@ -1,8 +1,9 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.payment;
 
-import zw.co.cassavasmartech.esb.commons.enums.RequestChannel;
-import zw.co.cassavasmartech.esb.commons.enums.TransactionStatus;
-import zw.co.cassavasmartech.esb.model.*;
+
+import zw.co.cassavasmartech.ecocashchatbotcore.common.enums.RequestChannel;
+import zw.co.cassavasmartech.ecocashchatbotcore.common.enums.TransactionStatus;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 
 import java.math.BigDecimal;
 
@@ -103,15 +104,6 @@ public class TransactionBuilder {
         return this;
     }
 
-    public TransactionBuilder taxCode(String taxCode) {
-        this.transaction.setTaxCode(taxCode);
-        return this;
-    }
-
-    public TransactionBuilder zimraOfficeCode(String zimraOfficeCode) {
-        this.transaction.setZimraOfficeCode(zimraOfficeCode);
-        return this;
-    }
 
     public TransactionBuilder customerEmailAddress(String customerEmailAddress) {
         this.transaction.setCustomerEmailAddress(customerEmailAddress);
@@ -123,33 +115,6 @@ public class TransactionBuilder {
         return this;
     }
 
-    public TransactionBuilder commision(BigDecimal commision) {
-        this.transaction.setCommision(commision);
-        return this;
-    }
-
-
-
-    public TransactionBuilder productId(Integer productId) {
-        this.transaction.setProductId(productId);
-        return this;
-    }
-
-    public TransactionBuilder zolServiceLogin(String zolServiceLogin) {
-        this.transaction.setZolServiceLogin(zolServiceLogin);
-        return this;
-    }
-
-
-    public TransactionBuilder zolServiceName(String zolServiceName) {
-        this.transaction.setZolServiceName(zolServiceName);
-        return this;
-    }
-
-    public TransactionBuilder zolServicePassword(String zolServicePassword) {
-        this.transaction.setZolServicePassword(zolServicePassword);
-        return this;
-    }
 
 
 }

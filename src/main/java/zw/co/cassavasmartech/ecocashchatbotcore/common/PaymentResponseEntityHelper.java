@@ -1,11 +1,12 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.common;
 
 import org.springframework.stereotype.Service;
-import zw.co.cassavasmartech.esb.model.ServiceAllocationRecord;
-import zw.co.cassavasmartech.esb.model.Transaction;
-import zw.co.cassavasmartech.esb.payment.cpo.data.CardPaymentResponse;
-import zw.co.cassavasmartech.esb.payment.ecocash.eip.data.AmountTransaction;
-import zw.co.cassavasmartech.esb.payment.ecocash.eip.data.AmountTransactionRefund;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.ServiceAllocationRecord;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.Transaction;
+import zw.co.cassavasmartech.ecocashchatbotcore.payment.cpo.data.CardPaymentResponse;
+import zw.co.cassavasmartech.ecocashchatbotcore.payment.ecocash.eip.data.AmountTransaction;
+import zw.co.cassavasmartech.ecocashchatbotcore.payment.ecocash.eip.data.AmountTransactionRefund;
+
 
 @Service
 public class PaymentResponseEntityHelper {

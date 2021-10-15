@@ -3,10 +3,10 @@ package zw.co.cassavasmartech.ecocashchatbotcore.payment;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import zw.co.cassavasmartech.esb.commons.enums.TransactionStatus;
-import zw.co.cassavasmartech.esb.model.Transaction;
-import zw.co.cassavasmartech.esb.model.TransactionType;
-import zw.co.cassavasmartech.esb.transaction.TransactionService;
+import zw.co.cassavasmartech.ecocashchatbotcore.common.enums.TransactionStatus;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.Transaction;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.TransactionType;
+import zw.co.cassavasmartech.ecocashchatbotcore.transaction.TransactionService;
 
 import java.util.Optional;
 
@@ -52,15 +52,8 @@ public class PaymentServiceImpl implements PaymentService {
                 .accountNumber(paymentRequest.getAccountNumber())
                 .process(paymentRequest.getProcessRegister())
                 .customerName(paymentRequest.getCustomerName())
-                .taxCode(paymentRequest.getTaxCode())
-                .zimraOfficeCode(paymentRequest.getZimraOfficeCode())
                 .customerEmailAddress(paymentRequest.getCustomerEmailAddress())
                 .customerData(paymentRequest.getCustomerData())
-                .commision(paymentRequest.getCommision())
-                .productId(paymentRequest.getProductId())
-                .zolServiceLogin(paymentRequest.getServiceLogin())
-                .zolServiceName(paymentRequest.getServiceName())
-                .zolServicePassword(paymentRequest.getServicePwd())
                 .build();
         final Optional<Transaction> transactionOptional = transactionService.save(transaction);
         final Transaction savedTransaction = transactionOptional.get();

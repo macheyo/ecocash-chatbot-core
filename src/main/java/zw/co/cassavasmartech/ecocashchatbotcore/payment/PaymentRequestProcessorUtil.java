@@ -3,7 +3,7 @@ package zw.co.cassavasmartech.ecocashchatbotcore.payment;
 import com.econetwireless.common.strategies.service.ServiceLookup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import zw.co.cassavasmartech.esb.model.TransactionType;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.TransactionType;
 
 @Component
 public class PaymentRequestProcessorUtil {

@@ -6,8 +6,8 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import zw.co.cassavasmartech.esb.payment.PaymentResponse;
-import zw.co.cassavasmartech.esb.process.ProcessConstants;
+import zw.co.cassavasmartech.ecocashchatbotcore.payment.PaymentResponse;
+import zw.co.cassavasmartech.ecocashchatbotcore.process.ProcessConstants;
 
 @Component
 @Slf4j

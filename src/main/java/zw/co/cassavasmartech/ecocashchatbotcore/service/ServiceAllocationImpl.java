@@ -3,9 +3,10 @@ package zw.co.cassavasmartech.ecocashchatbotcore.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import zw.co.cassavasmartech.esb.model.ServiceAllocationRecord;
-import zw.co.cassavasmartech.esb.model.Transaction;
-import zw.co.cassavasmartech.esb.payment.PaymentResponse;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.ServiceAllocationRecord;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.Transaction;
+import zw.co.cassavasmartech.ecocashchatbotcore.payment.PaymentResponse;
+
 
 @Service
 @Slf4j

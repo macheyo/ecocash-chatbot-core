@@ -2,7 +2,7 @@ package zw.co.cassavasmartech.ecocashchatbotcore.common;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import zw.co.cassavasmartech.esb.payment.PaymentResponse;
+import zw.co.cassavasmartech.ecocashchatbotcore.payment.PaymentResponse;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.payment;
 
 
-import zw.co.cassavasmartech.esb.model.Transaction;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.Transaction;
 
 public interface PaymentService {
 

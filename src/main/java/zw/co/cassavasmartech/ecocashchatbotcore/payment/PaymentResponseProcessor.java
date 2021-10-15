@@ -1,8 +1,8 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.payment;
 
 import org.springframework.http.HttpStatus;
-import zw.co.cassavasmartech.esb.commons.enums.TransactionStatus;
-import zw.co.cassavasmartech.esb.model.Transaction;
+import zw.co.cassavasmartech.ecocashchatbotcore.common.enums.TransactionStatus;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.Transaction;
 
 public interface PaymentResponseProcessor {
 

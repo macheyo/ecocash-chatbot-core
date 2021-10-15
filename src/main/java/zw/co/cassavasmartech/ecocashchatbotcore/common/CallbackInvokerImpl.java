@@ -9,7 +9,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import zw.co.cassavasmartech.esb.payment.PaymentResponse;
+import zw.co.cassavasmartech.ecocashchatbotcore.payment.PaymentResponse;
 
 @Slf4j
 @Component

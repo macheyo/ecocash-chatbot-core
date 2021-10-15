@@ -1,7 +1,7 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.common.data;
 
 import lombok.Data;
-import zw.co.cassavasmartech.esb.model.TransactionType;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.TransactionType;
 
 @Data
 public class TransactionInvocationContext {

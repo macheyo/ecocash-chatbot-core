@@ -1,8 +1,8 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.transactiontype;
 
 import org.springframework.stereotype.Service;
-import zw.co.cassavasmartech.esb.model.PaymentMethod;
-import zw.co.cassavasmartech.esb.model.TransactionType;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.PaymentMethod;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.TransactionType;
 
 import java.util.Optional;
 

@@ -1,7 +1,8 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.process;
 
-import zw.co.cassavasmartech.esb.model.PaymentMethod;
-import zw.co.cassavasmartech.esb.model.ProcessRegister;
+
+import zw.co.cassavasmartech.ecocashchatbotcore.model.PaymentMethod;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.ProcessRegister;
 
 import java.util.List;
 import java.util.Optional;

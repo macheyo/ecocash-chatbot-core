@@ -2,9 +2,10 @@ package zw.co.cassavasmartech.ecocashchatbotcore.payment.cpo;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import zw.co.cassavasmartech.esb.model.Transaction;
-import zw.co.cassavasmartech.esb.payment.cpo.data.CardPaymentResponse;
-import zw.co.cassavasmartech.esb.payment.cpo.enums.CpoTransactionStatus;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.Transaction;
+import zw.co.cassavasmartech.ecocashchatbotcore.payment.cpo.data.CardPaymentResponse;
+import zw.co.cassavasmartech.ecocashchatbotcore.payment.cpo.enums.CpoTransactionStatus;
+
 
 @Service
 @Slf4j
