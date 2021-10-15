@@ -7,7 +7,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.IntentHandlerAdapter;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Customer;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.Usecase;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.UseCase;
 
 @Slf4j
 public class PayMerchantGetMsisdnIntentHandler extends IntentHandlerAdapter {
@@ -16,32 +16,26 @@ public class PayMerchantGetMsisdnIntentHandler extends IntentHandlerAdapter {
         log.info("Processing Dialogflow Intent: {}", webhookRequest[0].getQueryResult().getIntent().getDisplayName());
         Customer customer = DialogFlowUtil.isNewCustomer(webhookRequest[0]);
         if (customer != null){
-            if(!DialogFlowUtil.isMerchantCodeValid(webhookRequest[0])){
+            if(!DialogFlowUtil.isMerchantNameOrCodeValid(webhookRequest[0])){
                 OutputContext outputContext = OutputContext.builder()
                         .lifespanCount(1)
-                        .name(webhookRequest[0].getSession()+"/contents/awaiting_merchant_msisdn")
+                        .name(webhookRequest[0].getSession()+"/contents/awaiting_merchant_msisdn")//TODO create context on DF
                         .build();
-
                 OutputContext contextToRemove = OutputContext.builder()
                         .lifespanCount(0)
-                        .name(webhookRequest[0].getSession()+"/context/awaiting_merchant_amount")
+                        .name(webhookRequest[0].getSession()+"/context/awaiting_merchant_amount")//TODO create context on DF
                         .build();
                 return DialogFlowUtil.getResponse(webhookRequest[0],
-                    DialogFlowUtil.promptProcessor(1,webhookRequest[0],null),
+                    DialogFlowUtil.promptProcessor(1,webhookRequest[0],customer),
                     new Object[]{outputContext,contextToRemove},
-                    Usecase.MERCHANT_PAYMENT);
-
+                    UseCase.MERCHANT_PAYMENT);
             }
 
             return DialogFlowUtil.getResponse(webhookRequest[0],
-                    DialogFlowUtil.promptProcessor(2,webhookRequest[0],null),
+                    DialogFlowUtil.promptProcessor(2,webhookRequest[0],customer),
                     new Object[]{},
-                    Usecase.MERCHANT_PAYMENT);
-
-
+                    UseCase.MERCHANT_PAYMENT);
         }
         else return DialogFlowUtil.defaultUnknownCustomerResponse(webhookRequest[0]);
-
-
     }
 }

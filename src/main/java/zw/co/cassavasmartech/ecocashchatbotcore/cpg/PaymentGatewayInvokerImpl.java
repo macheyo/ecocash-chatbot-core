@@ -48,4 +48,15 @@ public class PaymentGatewayInvokerImpl implements PaymentGatewayInvoker {
         log.info("Cpg transaction response {}", response);
         return Optional.ofNullable(response);
     }
+
+    @Override
+    public Optional<PostTransactionResponse> invoke3(PostTransaction postTransaction) {
+        log.debug("Processing cpg transaction request {} to url {}", postTransaction, configProperties.getCpgEndPointUrl());
+        final URI uri = UriComponentsBuilder.fromHttpUrl(configProperties.getCpgEndPointUrl3()).buildAndExpand().toUri();
+        final RequestEntity<PostTransaction> requestEntity = new RequestEntity<>(postTransaction, buildJsonHttpHeaders(), HttpMethod.POST, uri);
+        final ResponseEntity<PostTransactionResponse> responseEntity = restTemplate.exchange(requestEntity, PostTransactionResponse.class);
+        final PostTransactionResponse response = responseEntity.getBody();
+        log.info("Cpg transaction response {}", response);
+        return Optional.ofNullable(response);
+    }
 }

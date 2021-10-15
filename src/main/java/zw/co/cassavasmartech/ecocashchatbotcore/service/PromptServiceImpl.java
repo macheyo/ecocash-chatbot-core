@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.PromptNotFoundException;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Prompt;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.Usecase;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.UseCase;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.PromptRepository;
 
 import java.util.List;
@@ -15,11 +15,11 @@ public class PromptServiceImpl implements PromptService{
     PromptRepository promptRepository;
     @Override
     public Prompt findByIntentAndStage(String intent, int stage) {
-        return promptRepository.findByIntentAndStage(intent,stage).orElseThrow(()->new PromptNotFoundException());
+        return promptRepository.findByIntentAndPosition(intent,stage).orElseThrow(()->new PromptNotFoundException());
     }
 
     @Override
-    public List<Prompt> findAllByUsecase(Usecase usecase) {
+    public List<Prompt> findAllByUsecase(UseCase usecase) {
         return promptRepository.findAllByUsecase(usecase);
     }
 
@@ -47,7 +47,7 @@ public class PromptServiceImpl implements PromptService{
             p.setFunctions(prompt.getFunctions());
             p.setDescription(prompt.getDescription());
             p.setIntent(prompt.getIntent());
-            p.setStage(prompt.getStage());
+            p.setPosition(prompt.getPosition());
             p.setUsecase(prompt.getUsecase());
             return promptRepository.save(p);
         }).orElseThrow(()->new PromptNotFoundException());

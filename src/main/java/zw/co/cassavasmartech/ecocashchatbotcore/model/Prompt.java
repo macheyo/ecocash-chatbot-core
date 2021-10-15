@@ -14,9 +14,8 @@ import java.util.List;
 public class Prompt extends BaseEntity{
     private String intent;
     private int position;
-    private Usecase usecase;
+    private UseCase usecase;
     private String description;
-    private int stage;
     private String text;
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = Function.class)

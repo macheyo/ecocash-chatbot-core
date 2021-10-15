@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 @Data
 public class Ticket extends BaseEntity{
     private String originalQueryText;
-    private Usecase usecase;
+    private UseCase usecase;
     private int stage;
     private Double sentimentStart;
     private Double sentimentEnd;

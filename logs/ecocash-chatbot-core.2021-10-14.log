@@ -1,0 +1,692 @@
+.04:03:54.050 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final 
+.04:03:54.054 INFO  z.c.c.e.EcocashChatbotCoreApplication - Starting EcocashChatbotCoreApplication using Java 1.8.0_271 on LAPTOP-1JQH6S1S with PID 8904 (C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core\target\classes started by Kudzai Macheyo in C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core) 
+.04:03:54.055 INFO  z.c.c.e.EcocashChatbotCoreApplication - The following profiles are active: dev 
+.04:03:54.890 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode! 
+.04:03:54.890 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFERRED mode. 
+.04:03:55.050 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 152 ms. Found 9 JPA repository interfaces. 
+.04:03:55.443 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@7351a16e' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 
+.04:03:55.451 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 
+.04:03:55.996 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http) 
+.04:03:56.006 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
+.04:03:56.007 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
+.04:03:56.007 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.50] 
+.04:03:56.116 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring embedded WebApplicationContext 
+.04:03:56.116 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2013 ms 
+.04:03:56.316 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default] 
+.04:03:56.359 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final 
+.04:03:56.461 INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+.04:03:56.566 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting... 
+.04:03:56.711 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed. 
+.04:03:56.736 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect 
+.04:03:56.802 INFO  o.h.e.b.internal.EnversServiceImpl - Envers integration enabled? : true 
+.04:03:59.105 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+.04:03:59.110 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+.04:03:59.197 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+.04:03:59.331 INFO  o.s.s.l.DefaultSpringSecurityContextSource -  URL 'ldap://192.168.101.47:389', root DN is '' 
+.04:04:00.476 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/dialogflow/**'] with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@af007d6, org.springframework.security.web.context.SecurityContextPersistenceFilter@77ad2767, org.springframework.security.web.header.HeaderWriterFilter@779ef5cb, org.springframework.security.web.authentication.logout.LogoutFilter@7d2baa56, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@7d216ee8, zw.co.cassavasmartech.ecocashchatbotcore.security.CustomFilter@a20898c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@411ae0d7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@571c7572, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5dff108c, org.springframework.security.web.session.SessionManagementFilter@60e5eed0, org.springframework.security.web.access.ExceptionTranslationFilter@453439e, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3ab70d34] 
+.04:04:00.484 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4cd1716d, org.springframework.security.web.context.SecurityContextPersistenceFilter@7164e28a, org.springframework.security.web.header.HeaderWriterFilter@18fa5af6, org.springframework.security.web.authentication.logout.LogoutFilter@2de07c57, zw.co.cassavasmartech.ecocashchatbotcore.security.JWTFilter@3e1c5e0d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1b881f1f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@51efdb72, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6f7a65e, org.springframework.security.web.session.SessionManagementFilter@7fdabb3b, org.springframework.security.web.access.ExceptionTranslationFilter@2a2815cc, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5eae392d] 
+.04:04:00.840 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
+.04:04:00.862 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/ecocashbotcore' 
+.04:04:00.863 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Triggering deferred initialization of Spring Data repositories… 
+.04:04:01.476 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Spring Data repositories initialized! 
+.04:04:01.480 INFO  z.c.c.e.EcocashChatbotCoreApplication - Started EcocashChatbotCoreApplication in 7.796 seconds (JVM running for 8.25) 
+.04:04:25.894 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
+.04:04:25.894 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
+.04:04:25.894 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms 
+.04:04:26.139 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.04:04:26.753 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "67b8650d-57b5-4aab-93b5-736d32b6a834-bda801c7",
+  "queryResult": {
+    "queryText": "hi",
+    "action": "input.welcome",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/1234456/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3",
+      "displayName": "usecase_welcome"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.3,
+        "magnitude": 0.3
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {}
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/1234456"
+}
+ 
+.04:04:26.873 INFO  z.c.c.e.d.i.h.w.WelcomeIntentHandler - Processing dialogflow intent: usecase_welcome 
+.04:04:26.937 ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [/ecocashbotcore] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause 
+java.lang.NullPointerException: null
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.getChatId(DialogFlowUtil.java:156)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.isNewCustomer(DialogFlowUtil.java:173)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.welcome.WelcomeIntentHandler.getWebhookResponse(WelcomeIntentHandler.java:16)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
+	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1064)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:681)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:228)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:327)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:115)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:121)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:115)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:105)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at zw.co.cassavasmartech.ecocashchatbotcore.security.CustomFilter.doFilter(CustomFilter.java:15)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:178)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:110)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:80)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1723)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+.04:53:12.003 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.04:53:12.286 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "88efdbbb-501d-47c3-8c6c-45b65dc33c8b-bda801c7",
+  "queryResult": {
+    "queryText": "hi",
+    "action": "input.welcome",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/123456789/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3",
+      "displayName": "usecase_welcome"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.3,
+        "magnitude": 0.3
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "To": "whatsapp:+14155238886",
+      "Body": "Hi",
+      "SmsSid": "SM994a3946e8b3326bc068522e0a24870e",
+      "MessageSid": "SM994a3946e8b3326bc068522e0a24870e",
+      "ProfileName": "justicemacheyo",
+      "From": "whatsapp:+263783324671",
+      "AccountSid": "ACfa0a8d3546de35dd06e07580f418191c",
+      "SmsStatus": "received",
+      "ApiVersion": "2010-04-01",
+      "NumSegments": "1",
+      "WaId": "263783324671",
+      "SmsMessageSid": "SM994a3946e8b3326bc068522e0a24870e",
+      "NumMedia": "0"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/123456789"
+}
+ 
+.04:53:12.293 INFO  z.c.c.e.d.i.h.w.WelcomeIntentHandler - Processing dialogflow intent: usecase_welcome 
+.04:54:08.074 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.04:54:08.146 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "b68052ec-e581-49ae-a6e7-167ce68d9aa7-bda801c7",
+  "queryResult": {
+    "queryText": "hello world",
+    "action": "input.unknown",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/123456789/contexts/__system_counters__",
+        "lifespanCount": 1,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 1.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/8bbc4a74-2a64-4570-9c50-5924acf30fff",
+      "displayName": "Default Fallback Intent"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.3,
+        "magnitude": 0.3
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "Body": "Hi",
+      "NumSegments": "1",
+      "NumMedia": "0",
+      "From": "whatsapp:+263783324671",
+      "ApiVersion": "2010-04-01",
+      "To": "whatsapp:+14155238886",
+      "WaId": "263783324671",
+      "ProfileName": "justicemacheyo",
+      "AccountSid": "ACfa0a8d3546de35dd06e07580f418191c",
+      "SmsStatus": "received",
+      "SmsMessageSid": "SM994a3946e8b3326bc068522e0a24870e",
+      "SmsSid": "SM994a3946e8b3326bc068522e0a24870e",
+      "MessageSid": "SM994a3946e8b3326bc068522e0a24870e"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/123456789"
+}
+ 
+.04:55:30.505 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.04:55:30.678 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "c537d6e5-67e3-4604-b601-b9eab8a3cd67-bda801c7",
+  "queryResult": {
+    "queryText": "hello",
+    "action": "input.welcome",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/123456789/contexts/__system_counters__",
+        "lifespanCount": 1,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3",
+      "displayName": "usecase_welcome"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.2,
+        "magnitude": 0.2
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "NumSegments": "1",
+      "WaId": "263783324671",
+      "SmsSid": "SM994a3946e8b3326bc068522e0a24870e",
+      "Body": "Hi",
+      "SmsStatus": "received",
+      "AccountSid": "ACfa0a8d3546de35dd06e07580f418191c",
+      "ApiVersion": "2010-04-01",
+      "From": "whatsapp:+263783324671",
+      "ProfileName": "justicemacheyo",
+      "SmsMessageSid": "SM994a3946e8b3326bc068522e0a24870e",
+      "MessageSid": "SM994a3946e8b3326bc068522e0a24870e",
+      "NumMedia": "0",
+      "To": "whatsapp:+14155238886"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/123456789"
+}
+ 
+.04:55:30.679 INFO  z.c.c.e.d.i.h.w.WelcomeIntentHandler - Processing dialogflow intent: usecase_welcome 
+.05:48:15.197 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.05:48:15.495 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "c10084a1-7f16-45c8-8160-884ee6b24b80-bda801c7",
+  "queryResult": {
+    "queryText": "hi",
+    "action": "input.welcome",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/ABEGJjeDMkZxAgo-sPqcC6ZnPIcd/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3",
+      "displayName": "usecase_welcome"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.3,
+        "magnitude": 0.3
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "name": "justice"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/ABEGJjeDMkZxAgo-sPqcC6ZnPIcd"
+}
+ 
+.05:48:15.498 INFO  z.c.c.e.d.i.h.w.WelcomeIntentHandler - Processing dialogflow intent: usecase_welcome 
+.05:48:15.523 ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [/ecocashbotcore] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause 
+java.lang.NullPointerException: null
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.getChatId(DialogFlowUtil.java:156)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.isNewCustomer(DialogFlowUtil.java:173)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.welcome.WelcomeIntentHandler.getWebhookResponse(WelcomeIntentHandler.java:16)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
+	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1064)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:681)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:228)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:327)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:115)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:121)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:115)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:105)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at zw.co.cassavasmartech.ecocashchatbotcore.security.CustomFilter.doFilter(CustomFilter.java:15)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:178)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:110)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:80)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1723)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+.06:09:52.263 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.06:09:52.397 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "35eddc87-c795-4550-9157-9a5a414c1c95-bda801c7",
+  "queryResult": {
+    "queryText": "hi",
+    "action": "input.welcome",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/ABEGJjeDMkZxAgo-sPqcC6ZnPIcd/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3",
+      "displayName": "usecase_welcome"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.3,
+        "magnitude": 0.3
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "source": "WHATSAPP",
+      "ProfileName": "justicemacheyo",
+      "from": "263783324671"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/ABEGJjeDMkZxAgo-sPqcC6ZnPIcd"
+}
+ 
+.06:09:52.397 INFO  z.c.c.e.d.i.h.w.WelcomeIntentHandler - Processing dialogflow intent: usecase_welcome 
+.06:09:52.415 ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [/ecocashbotcore] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause 
+java.lang.NullPointerException: null
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.getChatId(DialogFlowUtil.java:156)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil.isNewCustomer(DialogFlowUtil.java:173)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.welcome.WelcomeIntentHandler.getWebhookResponse(WelcomeIntentHandler.java:16)
+	at zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowServiceImpl.processWebhookCall(DialogFlowServiceImpl.java:83)
+	at zw.co.cassavasmartech.ecocashchatbotcore.controller.DialogFlowController.inbound(DialogFlowController.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1064)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:681)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:228)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:327)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:115)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:121)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:115)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:105)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at zw.co.cassavasmartech.ecocashchatbotcore.security.CustomFilter.doFilter(CustomFilter.java:15)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:178)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:110)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:80)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:190)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:163)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1723)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+.06:12:11.184 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default' 
+.06:12:11.200 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated... 
+.06:12:11.206 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed. 
+.06:12:17.887 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final 
+.06:12:17.896 INFO  z.c.c.e.EcocashChatbotCoreApplication - Starting EcocashChatbotCoreApplication using Java 1.8.0_271 on LAPTOP-1JQH6S1S with PID 21164 (C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core\target\classes started by Kudzai Macheyo in C:\Users\Kudzai Macheyo\IdeaProjects\ecocash-chatbot-core) 
+.06:12:17.896 INFO  z.c.c.e.EcocashChatbotCoreApplication - The following profiles are active: dev 
+.06:12:19.179 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode! 
+.06:12:19.181 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFERRED mode. 
+.06:12:19.429 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 238 ms. Found 9 JPA repository interfaces. 
+.06:12:19.941 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@38eb2fb0' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 
+.06:12:19.950 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 
+.06:12:20.672 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http) 
+.06:12:20.686 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"] 
+.06:12:20.687 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
+.06:12:20.687 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.50] 
+.06:12:20.832 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring embedded WebApplicationContext 
+.06:12:20.832 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2870 ms 
+.06:12:21.058 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default] 
+.06:12:21.136 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.32.Final 
+.06:12:21.282 INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+.06:12:21.409 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting... 
+.06:12:21.578 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed. 
+.06:12:21.620 INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect 
+.06:12:21.682 INFO  o.h.e.b.internal.EnversServiceImpl - Envers integration enabled? : true 
+.06:12:24.780 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+.06:12:24.792 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+.06:12:24.964 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+.06:12:25.496 INFO  o.s.s.l.DefaultSpringSecurityContextSource -  URL 'ldap://192.168.101.47:389', root DN is '' 
+.06:12:27.898 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/dialogflow/**'] with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@633c0a61, org.springframework.security.web.context.SecurityContextPersistenceFilter@5773f83d, org.springframework.security.web.header.HeaderWriterFilter@43dddfdd, org.springframework.security.web.authentication.logout.LogoutFilter@acea29e, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@106edde4, zw.co.cassavasmartech.ecocashchatbotcore.security.CustomFilter@49322d04, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7d2baa56, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3911fec8, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@b6b746b, org.springframework.security.web.session.SessionManagementFilter@6dbdeb69, org.springframework.security.web.access.ExceptionTranslationFilter@7e84a52b, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@281963c] 
+.06:12:27.907 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3a9040f0, org.springframework.security.web.context.SecurityContextPersistenceFilter@6e22d6bf, org.springframework.security.web.header.HeaderWriterFilter@6f7a65e, org.springframework.security.web.authentication.logout.LogoutFilter@24ee6faa, zw.co.cassavasmartech.ecocashchatbotcore.security.JWTFilter@33214124, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@32121140, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@96c840a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2d3768ce, org.springframework.security.web.session.SessionManagementFilter@29bf90fc, org.springframework.security.web.access.ExceptionTranslationFilter@3e1c5e0d, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@19b3d3a4] 
+.06:12:28.545 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"] 
+.06:12:28.576 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/ecocashbotcore' 
+.06:12:28.578 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Triggering deferred initialization of Spring Data repositories… 
+.06:12:30.000 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener - Spring Data repositories initialized! 
+.06:12:30.021 INFO  z.c.c.e.EcocashChatbotCoreApplication - Started EcocashChatbotCoreApplication in 12.676 seconds (JVM running for 13.459) 
+.06:17:06.195 INFO  o.a.c.c.C.[.[.[/ecocashbotcore] - Initializing Spring DispatcherServlet 'dispatcherServlet' 
+.06:17:06.195 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet' 
+.06:17:06.201 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 6 ms 
+.06:17:06.457 INFO  o.s.s.l.SpringSecurityLdapTemplate - Ignoring PartialResultException 
+.06:17:07.026 INFO  z.c.c.e.d.DialogFlowServiceImpl - Processing dialogflow transaction request {
+  "responseId": "e92be950-e148-42a8-b621-a13f2b4a47f6-bda801c7",
+  "queryResult": {
+    "queryText": "hi",
+    "action": "input.welcome",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "outputContexts": [
+      {
+        "name": "projects/the-attendant-hgawnh/agent/sessions/ABEGJjeDMkZxAgo-sPqcC6ZnPIcd/contexts/__system_counters__",
+        "lifespanCount": 0,
+        "parameters": {
+          "no-input": 0.0,
+          "no-match": 0.0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/the-attendant-hgawnh/agent/intents/814ad089-d8e8-4b34-af51-753a7d3b27d3",
+      "displayName": "usecase_welcome"
+    },
+    "intentDetectionConfidence": 1.0,
+    "languageCode": "en",
+    "sentimentAnalysisResult": {
+      "queryTextSentiment": {
+        "score": 0.3,
+        "magnitude": 0.3
+      }
+    }
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "Source": "WHATSAPP",
+      "From": "263783324671",
+      "ProfileName": "justicemacheyo"
+    }
+  },
+  "session": "projects/the-attendant-hgawnh/agent/sessions/ABEGJjeDMkZxAgo-sPqcC6ZnPIcd"
+}
+ 
+.06:17:07.122 INFO  z.c.c.e.d.i.h.w.WelcomeIntentHandler - Processing dialogflow intent: usecase_welcome 
+.06:17:07.322 INFO  z.c.c.e.dialogflow.DialogFlowUtil - Processing response to dialogflow: {
+  "fulfillmentText": " Hi there 😃👋 and good morning to you justicemacheyo ! Welcome to Ecocash. My name is ***, your Ecocash Digital Assistant. To start, tell me what you need or just ask me a question, and I’ll be happy to assist you right away!",
+  "source": "ecocashchatbotcore",
+  "outputContexts": []
+} 
+.07:34:58.809 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h14m37s19ms335µs400ns). 
+.07:46:56.895 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m58s46ms262µs900ns). 
+.09:45:03.081 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=25m35s19ms352µs). 
+.12:01:58.337 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=52m24s730ms981µs300ns). 
+.15:25:37.582 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=49m6s827ms331µs800ns). 
+.16:21:45.226 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=38m37s299ms253µs). 

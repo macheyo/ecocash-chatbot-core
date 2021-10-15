@@ -7,4 +7,5 @@ import java.util.Optional;
 public interface PaymentGatewayInvoker {
     Optional<PostTransactionResponse> invoke(PostTransaction postTransaction);
     public Optional<PostTransactionResponse> invoke2(PostTransaction postTransaction);
+    public Optional<PostTransactionResponse> invoke3(PostTransaction postTransaction);
 }

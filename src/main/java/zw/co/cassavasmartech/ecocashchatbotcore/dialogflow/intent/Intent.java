@@ -10,7 +10,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.mercha
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.pinreset.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.sendMoney.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.statement.*;
-import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.transactionalReversal.*;
+import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.transactionReversal.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.verification.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.welcome.WelcomeIntentHandler;
 
@@ -31,21 +31,21 @@ public enum Intent {
     usecase_pinreset_security_questions_more_affirmative(new PinresetSecurityQuestionsMoreAffirmativeIntentHandler()),
     usecase_pinreset_security_questions_more_fallback(new PinResetSecurityQuestionsMoreFallbackIntentHandler()),
     usecase_pay_biller_scenario1(new PayBillScenario1IntentHandler()),
-    usecase_pay_biller_scenario2(new PayBillerScenario2IntentHandler()),
-    usecase_pay_biller_get_biller_amount(new PayBillerGetBillerAmountIntentHandler()),
-    usecase_pay_biller_get_biller_amount_fallback(new PayBillerGetBillerAmountFallbackIntentHandler()),
+    usecase_pay_biller_scenario2(new PayBillScenario2IntentHandler()),
+    usecase_pay_biller_get_biller_amount(new PayBillGetBillAmountIntentHandler()),
+    usecase_pay_biller_get_biller_amount_fallback(new PayBillGetBillAmountFallbackIntentHandler()),
     usecase_pay_biller_get_biller_code(new PayBillGetBillCodeIntentHandler()),
-    usecase_pay_biller_get_biller_code_fallback(new PayBillerGetBillerCodeFallbackIntentHandler()),
-    usecase_pay_biller_get_account_intent(new PayBillerGetAccountIntentIntentHandler()),
-    usecase_pay_biller_get_account_intent_fallback(new PayBillerGetAccountIntentFallbackIntentHandler()),
-    usecase_pay_biller_get_biller_confirmation_affirmative(new PayBillerGetBillerConfirmationAffirmativeIntentHandler()),
-    usecase_pay_biller_get_biller_confirmation_negative(new PayBillerGetBillerConfirmationNegativeIntentHandler()),
-    usecase_pay_biller_get_biller_confirmation_fallback(new PayBillerGetBillerConfirmationFallbackIntentHandler()),
-    usecase_pay_biller_confirmation_negative_yes(new PayBillerConfirmationNegativeYesIntentHandler()),
-    usecase_pay_biller_confirmation_negative_no(new PayBillerConfirmationNegativeNoIntentHandler()),
-    usecase_pay_biller_more_affirmative(new PayBillerMoreAffirmativeIntentHandler()),
-    usecase_pay_biller_more_negative(new PayBillerMoreNegativeIntentHandler()),
-    usecase_pay_biller_more_fallback(new PayBillerMoreFallbackIntentHandler()),
+    usecase_pay_biller_get_biller_code_fallback(new PayBillGetBillCodeFallbackIntentHandler()),
+    usecase_pay_biller_get_account_intent(new PayBillGetAccountIntentIntentHandler()),
+    usecase_pay_biller_get_account_intent_fallback(new PayBillGetAccountIntentFallbackIntentHandler()),
+    usecase_pay_biller_get_biller_confirmation_affirmative(new PayBillConfirmationAffirmativeIntentHandler()),
+    usecase_pay_biller_get_biller_confirmation_negative(new PayBillConfirmationNegativeIntentHandler()),
+    usecase_pay_biller_get_biller_confirmation_fallback(new PayBillConfirmationFallbackIntentHandler()),
+    usecase_pay_biller_confirmation_negative_yes(new PayBillConfirmationNegativeYesIntentHandler()),
+    usecase_pay_biller_confirmation_negative_no(new PayBillConfirmationNegativeNoIntentHandler()),
+    usecase_pay_biller_more_affirmative(new PayBillMoreAffirmativeIntentHandler()),
+    usecase_pay_biller_more_negative(new PayBillMoreNegativeIntentHandler()),
+    usecase_pay_biller_more_fallback(new PayBillMoreFallbackIntentHandler()),
     usecase_statement_scenario_1(new StatementScenario1IntentHandler()),
     usecase_statement_scenario_2(new StatementScenario2IntentHandler()),
     usecase_statement_scenario_3(new StatementScenario3IntentHandler()),
@@ -58,8 +58,8 @@ public enum Intent {
     usecase_statement_more_fallback(new StatementMoreFallbackIntentHandler()),
     usecase_pay_merchant_scenario1(new PayMerchantScenario1IntentHandler()),
     usecase_pay_merchant_scenario2(new PayMerchantScenario2IntentHandler()),
-    usecase_pay_merchant_get_msisdn(new PayMerchantGetMsisdnIntentHandler()),
-    usecase_pay_merchant_get_msisdn_fallback(new PayMerchantGetMsisdnFallbackIntentHandler()),
+    usecase_pay_merchant_get_msisdn(new PayMerchantGetMsisdnIntentHandler()),//TODO purge intent
+    usecase_pay_merchant_get_msisdn_fallback(new PayMerchantGetMsisdnFallbackIntentHandler()),//TODO purge this intent
     usecase_pay_merchant_get_name(new PayMerchantGetNameIntentHandler()),
     usecase_pay_merchant_get_amount(new PayMerchantGetAmountIntentHandler()),
     usecase_pay_merchant_get_amount_fallback(new PayMerchantGetAmountFallbackIntentHandler()),

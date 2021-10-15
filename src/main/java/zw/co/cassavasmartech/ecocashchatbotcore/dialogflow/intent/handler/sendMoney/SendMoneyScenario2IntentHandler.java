@@ -6,7 +6,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.IntentHandlerAdapter;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Customer;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.Usecase;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.UseCase;
 
 @Slf4j
 public class SendMoneyScenario2IntentHandler extends IntentHandlerAdapter {
@@ -17,6 +17,6 @@ public class SendMoneyScenario2IntentHandler extends IntentHandlerAdapter {
         return DialogFlowUtil.getResponse(webhookRequest[0],
                 DialogFlowUtil.promptProcessor(1,webhookRequest[0],customer), //TO BE MAPPED
                 new Object[]{},
-                Usecase.SEND_MONEY);
+                UseCase.SEND_MONEY);
     }
 }

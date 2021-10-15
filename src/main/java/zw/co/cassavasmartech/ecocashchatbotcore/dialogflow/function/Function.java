@@ -9,7 +9,9 @@ public enum Function {
     GETCUSTOMERLASTNAME(new GetCustomerLastName()),
     GETAMOUNT(new GetAmount()),
     GETBILLER(new GetBillProvider()),
-    GETBILLACCOUNT(new GetBillAccount())
+    GETBILLACCOUNT(new GetBillAccount()),
+    GETMERCHANT(new GetMerchant()),
+    GETBENEFICIARY(new GetBeneficiary())
     ;
 
     private final FunctionAdapter fa;

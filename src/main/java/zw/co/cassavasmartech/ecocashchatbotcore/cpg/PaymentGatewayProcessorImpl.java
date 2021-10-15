@@ -72,7 +72,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
     public TransactionResponse lookupCustomer(String msisdn) {
         final TransactionRequest transactionRequest = getLookUpCustomerRequest(msisdn);
         log.debug("Processing Lookup Customer request");
-        return invokeApi2(transactionRequest);
+        return invokeApi3(transactionRequest);
     }
 
     @Override
@@ -147,6 +147,14 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .orElseThrow(() -> new BusinessException("Received null response from payment gateway"));
     }
 
+    private TransactionResponse invokeApi3(TransactionRequest transactionRequest) {
+        final PostTransaction postTransaction = new PostTransaction();
+        postTransaction.setTransactionRequest(transactionRequest);
+        return paymentGatewayInvoker.invoke3(postTransaction)
+                .map(PostTransactionResponse::getTransactionResponse)
+                .orElseThrow(() -> new BusinessException("Received null response from payment gateway"));
+    }
+
 
     private TransactionRequest getLookUpCustomerRequest(String msisdn) {
         return RequestBuilder.newInstance()
@@ -188,7 +196,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .reference(reference)
                 .callbackUrl(cpgConfigProperties.getCpgCallBackUrl())
                 .msisdn2(subscriberAirtimeRequest.getMsisdn2())
-                .amount(subscriberAirtimeRequest.getAmount())
+                .amount(String.valueOf(subscriberAirtimeRequest.getAmount()))
                 .tranType(cpgConfigProperties.getSubscriberAirtimeTranType())
                 .build();
     }

@@ -6,7 +6,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.IntentHandlerAdapter;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Customer;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.Usecase;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.UseCase;
 
 import java.util.Map;
 
@@ -22,12 +22,12 @@ public class PinResetSecurityQuestionsAffirmativeHandler extends IntentHandlerAd
         if(customer!=null) {
             if (DialogFlowUtil.isEnrolled(customer)) {
                 prompt = DialogFlowUtil.promptProcessor(1, webhookRequest[0], customer);
-                context = DialogFlowUtil.createTicket(webhookRequest[0], Usecase.PIN_RESET);
+                context = DialogFlowUtil.createTicket(webhookRequest[0], UseCase.PIN_RESET);
             }
             else prompt = DialogFlowUtil.promptProcessor(2,webhookRequest[0],customer);
         }
         else prompt = DialogFlowUtil.promptProcessor(3, webhookRequest[0], customer);
-        return DialogFlowUtil.getResponse(webhookRequest[0],prompt,context,Usecase.PIN_RESET);
+        return DialogFlowUtil.getResponse(webhookRequest[0],prompt,context, UseCase.PIN_RESET);
 
 
 

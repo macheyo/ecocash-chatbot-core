@@ -9,7 +9,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function.Function;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Prompt;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.StaticFunctionData;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.Usecase;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.UseCase;
 import zw.co.cassavasmartech.ecocashchatbotcore.service.PromptService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +26,7 @@ public class PromptController {
     @Autowired
     PromptService promptService;
     @GetMapping("/list/{usecase}")
-    public ApiResponse<List<Prompt>> findAllByUsecase(@PathVariable Usecase usecase){
+    public ApiResponse<List<Prompt>> findAllByUsecase(@PathVariable UseCase usecase){
         return new ApiResponse<>(
                 HttpStatus.OK.value(),
                 ApiConstants.SUCCESS_MESSAGE,

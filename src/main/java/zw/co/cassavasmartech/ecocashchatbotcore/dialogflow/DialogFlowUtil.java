@@ -5,19 +5,18 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.MobileNumberFormater;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessor;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.BillerLookupRequest;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.MerchantLookupRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberAirtimeRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToBillerRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.*;
-import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.pinreset.PinResetIntentHandler;
+import zw.co.cassavasmartech.ecocashchatbotcore.eip.EipService;
+import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.EipTransaction;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.Merchant;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.MerchantRepository;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.SubscriberToMerchantRequest;
-import zw.co.cassavasmartech.ecocashchatbotcore.exception.ProfileNotFoundException;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.PromptNotFoundException;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function.Function;
@@ -88,6 +87,10 @@ public class DialogFlowUtil {
     MerchantRepository merchantRepo;
     private static MerchantRepository merchantRepository;
 
+    @Autowired
+    EipService eipServ;
+    private static EipService eipService;
+
 
     @PostConstruct
     public void init() {
@@ -102,6 +105,7 @@ public class DialogFlowUtil {
         this.paymentGatewayProcessor = paymentGatewayProc;
         this.ticketService = ticketServ;
         this.merchantRepository = merchantRepo;
+        this.eipService = eipServ;
     }
 
     public static String getAlias(OriginalDetectIntentRequest originalDetectIntentRequest,  Optional<Customer> customer) {
@@ -157,7 +161,7 @@ public class DialogFlowUtil {
     public static Platform getPlatform(OriginalDetectIntentRequest originalDetectIntentRequest){
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String,Object> map = objectMapper.convertValue(originalDetectIntentRequest,Map.class);
-        if(map.get("source")!=null)return Platform.TELEGRAM;
+        if(map.get("Source")!=null)return Platform.TELEGRAM;
         else return Platform.WHATSAPP;
     }
 
@@ -195,11 +199,37 @@ public class DialogFlowUtil {
         return objectMapper.convertValue(outputContexts.get(usecaseIndex).getParameters(),Map.class);
     }
 
-    public static String getBillProviderName(String billerCode){
+    public static String getBillProviderDetails(String billerCode){
         BillerLookupRequest billerLookupRequest = new BillerLookupRequest();
         billerLookupRequest.setBiller(billerCode);
         return paymentGatewayProcessor.lookupBiller(billerLookupRequest).getField6();
 
+    }
+
+    public static String[] getBeneficiaryDetails(String msisdn){
+        TransactionResponse transactionResponse = customerService.customerLookup(SubscriberDto.builder().msisdn(msisdn).build());
+        if(transactionResponse.getField1().equalsIgnoreCase("200"))
+            return new String[]{transactionResponse.getField6(),transactionResponse.getField9()};
+        return null;
+    }
+
+    public static String[] getMerchantDetails(String msisdn){
+        Optional<Merchant> merchant = merchantRepository.findByNameOrMerchantCode(msisdn,msisdn);
+        if(merchant.isPresent())
+        return new String[]{merchant.get().getName(),merchant.get().getMerchantCode()};
+        return null;
+    }
+
+
+    public static String buyAirtime(WebhookRequest webhookRequest) {
+        Customer customer = isNewCustomer(webhookRequest);
+        Map<String, Object> ticket = getTicket(webhookRequest);
+        return paymentGatewayProcessor.subscriberAirtime(SubscriberAirtimeRequest.builder()
+                .msisdn1(customer.getMsisdn())
+                .msisdn2(ticket.get("msisdn").toString())
+                .amount(BigDecimal.valueOf(Double.parseDouble(ticket.get("amount").toString())))
+                .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
+                .build()).getField1();
     }
 
     public static String payBill(WebhookRequest  webhookRequest){
@@ -208,25 +238,23 @@ public class DialogFlowUtil {
         return paymentGatewayProcessor.subscriberToBiller(SubscriberToBillerRequest.builder()
                 .msisdn(customer.getMsisdn())
                 .billerCode(ticket.get("biller.original").toString())
-                .amount(BigDecimal.valueOf(Double.parseDouble(ticket.get("amount").toString())) )
+                .amount(BigDecimal.valueOf(Double.parseDouble(ticket.get("amount").toString())))
                 .msisdn2(ticket.get("number.original").toString())
                 .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
                 .build()).getField1();
 
     }
 
-
-//    public static String payMerchant(WebhookRequest webhookRequest){
-//        Customer customer = isNewCustomer(webhookRequest);
-//        Map<String, Object> ticket = getTicket(webhookRequest);
-//        return paymentGatewayProcessor.subscriberToMerchant(SubscriberToMerchantRequest.builder()
-//            .msisdn(customer.getMsisdn())
-//            .merchantName(ticket.get("merchant.original").toString())
-//            .merchantCode(ticket.get("merchant.original").toString())
-//            .amount(BigDecimal.valueOf(Double.parseDouble(ticket.get("amount").toString())))
-//            .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
-//            .build()).getField1();
-//    }
+    public static EipTransaction payMerchant(WebhookRequest webhookRequest){
+        Customer customer = isNewCustomer(webhookRequest);
+        Map<String, Object> ticket = getTicket(webhookRequest);
+        return eipService.postPayment(SubscriberToMerchantRequest.builder().msisdn(customer.getMsisdn())
+                .msisdn(customer.getMsisdn())
+                .merchantCode(getMerchantDetails(ticket.get("msisdn.original").toString())[1])
+                .amount(BigDecimal.valueOf(Double.parseDouble(ticket.get("amount").toString())))
+                .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
+                .build());
+    }
 
     public static Object[] closeTicket(WebhookRequest webhookRequest, TicketStatus ticketStatus){
         List<OutputContext> outputContexts = webhookRequest.getQueryResult().getOutputContexts();
@@ -253,7 +281,7 @@ public class DialogFlowUtil {
         return new Object[]{outputContext};
     }
 
-    public static Object[] createTicket(WebhookRequest webhookRequest, Usecase usecase) {
+    public static Object[] createTicket(WebhookRequest webhookRequest, UseCase usecase) {
         Ticket ticket = new Ticket();
         Optional<Profile> profile = profileRepository.getByChatId(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()));
         if(profile.isPresent()&&profile.get().isVerified()==true) ticket.setProfile(profile.get());
@@ -277,8 +305,8 @@ public class DialogFlowUtil {
         return new Object[]{outputContext};
     }
 
-    public static String promptProcessor(int stage, WebhookRequest webhookRequest, Customer customer){
-        Optional<Prompt> prompt = Optional.ofNullable(promptRepository.findByIntentAndStage(webhookRequest.getQueryResult().getIntent().getDisplayName(), stage).orElseThrow(() -> new PromptNotFoundException()));
+    public static String promptProcessor(int position, WebhookRequest webhookRequest, Customer customer){
+        Optional<Prompt> prompt = Optional.ofNullable(promptRepository.findByIntentAndPosition(webhookRequest.getQueryResult().getIntent().getDisplayName(), position).orElseThrow(() -> new PromptNotFoundException()));
         String[] phrase = prompt.get().getText().split("\\s");
         String processed="";
         for(String word:phrase){
@@ -295,7 +323,7 @@ public class DialogFlowUtil {
         return processed;
     }
 
-    public static WebhookResponse getResponse(WebhookRequest webhookRequest, String prompt, Object[] contexts, Usecase usecase) {
+    public static WebhookResponse getResponse(WebhookRequest webhookRequest, String prompt, Object[] contexts, UseCase usecase) {
         Customer customer = isNewCustomer(webhookRequest);
         if(customer==null) {
             String contextToBeRemoved="/redundant";
@@ -314,7 +342,7 @@ public class DialogFlowUtil {
                     .name(webhookRequest.getSession()+"/contexts/awaiting_verify_msisdn")
                     .parameters(UnverifiedCustomerParameter.builder().usecase(usecase).build())
                     .build();
-            if(!usecase.equals(Usecase.WELCOME)) {
+            if(!usecase.equals(UseCase.WELCOME)) {
                 if(contexts==null) contexts = new Object[]{goForVerification, redundantContext};
             }
             else contexts = new Object[]{};
@@ -336,28 +364,17 @@ public class DialogFlowUtil {
         else return false;
     }
 
-    //merchant code validity
-    public static boolean isMerchantCodeValid(WebhookRequest webhookRequest){
-    Optional<Merchant> merchant = merchantRepository.findByMerchantCode(webhookRequest.getQueryResult().getQueryText());
-    if(merchant.isPresent()){
-        return true;
-    }else{
+    public static boolean isCustomerValid(WebhookRequest webhookRequest) {
+        String response = paymentGatewayProcessor.lookupCustomer(webhookRequest.getQueryResult().getQueryText()).getField1();
+        if(response.equalsIgnoreCase("200"))return true;
         return false;
     }
 
+    public static boolean isMerchantNameOrCodeValid(WebhookRequest webhookRequest){
+        Optional<Merchant> merchant = merchantRepository.findByNameOrMerchantCode(webhookRequest.getQueryResult().getQueryText(),webhookRequest.getQueryResult().getQueryText());
+        if(merchant.isPresent()) return true;
+        return false;
     }
-
-    //merchant name validity
-    public static boolean isMerchantNameValid(WebhookRequest webhookRequest){
-        Optional<Merchant> merchant = merchantRepository.findByName(webhookRequest.getQueryResult().getQueryText());
-        if(merchant.isPresent()){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-
 
     public static WebhookResponse defaultUnknownCustomerResponse(WebhookRequest webhookRequest){
         return WebhookResponse.builder()
@@ -380,7 +397,7 @@ public class DialogFlowUtil {
         }
         Map<String,Object> map = objectMapper.convertValue(outputContexts.get(usecaseIndex).getParameters(),Map.class);
         String prompt = "Great! you have been verified" + Emoji.ThumbsUp + Emoji.Grin + " Now that we have that out of the way...\n";
-        switch (Usecase.valueOf(map.get("usecase").toString()) ){
+        switch (UseCase.valueOf(map.get("usecase").toString()) ){
             case PIN_RESET:
                 if (isEnrolled(customerService.getByChatId(getChatId(webhookRequest.getOriginalDetectIntentRequest())))) {
                     prompt+= "I can see you are enrolled on our self service platform \uD83D\uDE01 may I go on to ask your security questions to verify your identity?";
@@ -393,7 +410,7 @@ public class DialogFlowUtil {
                 return WebhookResponse.builder()
                         .fulfillmentText(prompt)
                         .source("ecocashchatbotcore")
-                        .outputContexts(new Object[]{pinresetOutputContext,createTicket(webhookRequest,Usecase.PIN_RESET)[0]})
+                        .outputContexts(new Object[]{pinresetOutputContext,createTicket(webhookRequest, UseCase.PIN_RESET)[0]})
                         .build();
             case BUY_AIRTIME:
                 break;
@@ -410,7 +427,7 @@ public class DialogFlowUtil {
                 return WebhookResponse.builder()
                         .fulfillmentText(prompt)
                         .source("ecocashchatbotcore")
-                        .outputContexts(new Object[]{billpaymentOutputContext,createTicket(webhookRequest,Usecase.BILL_PAYMENT)[0]})
+                        .outputContexts(new Object[]{billpaymentOutputContext,createTicket(webhookRequest, UseCase.BILL_PAYMENT)[0]})
                         .build();
             case SUBSCRIBER_STATEMENT:
                 prompt += "on what date"+Emoji.Calendar+" do you want the statement to start from?";
@@ -421,17 +438,17 @@ public class DialogFlowUtil {
                 return WebhookResponse.builder()
                         .fulfillmentText(prompt)
                         .source("ecocashchatbotcore")
-                        .outputContexts(new Object[]{outputContext,createTicket(webhookRequest,Usecase.SUBSCRIBER_STATEMENT)[0]})
+                        .outputContexts(new Object[]{outputContext,createTicket(webhookRequest, UseCase.SUBSCRIBER_STATEMENT)[0]})
                         .build();
             case REGISTRATION:
                 break;
             case SEND_MONEY_TARIFF:
                 break;
-            case BILLER_TARIFF:
+            case BILL_TARIFF:
                 break;
             case MERCHANT_TARIFF:
                 break;
-            case BILLER_LOOKUP:
+            case BILL_PROVIDER_LOOKUP:
                 break;
             case MERCHANT_LOOKUP:
                 break;
