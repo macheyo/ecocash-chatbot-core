@@ -6,7 +6,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.IntentHandlerAdapter;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Customer;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.Usecase;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.UseCase;
 
 @Slf4j
 public class ZesaUseCaseIntentHandler extends IntentHandlerAdapter {
@@ -24,7 +24,7 @@ public class ZesaUseCaseIntentHandler extends IntentHandlerAdapter {
 
         return DialogFlowUtil.getResponse(webhookRequest[0],
                 prompt,
-                DialogFlowUtil.createTicket(webhookRequest[0], Usecase.ZESA_PURCHASE),
-                Usecase.ZESA_PURCHASE);
+                DialogFlowUtil.createTicket(webhookRequest[0], UseCase.ZESA_PURCHASE),
+                UseCase.ZESA_PURCHASE);
     }
 }
