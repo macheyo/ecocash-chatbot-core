@@ -17,7 +17,7 @@ public class ZesaGetEcocashNumberHandler extends IntentHandlerAdapter {
         log.info("Processing Dialogflow Intent: {}", webhookRequest[0].getQueryResult().getIntent().getDisplayName());
         Customer customer = DialogFlowUtil.isNewCustomer(webhookRequest[0]);
         if (customer != null){
-            if(!DialogFlowUtil.isMerchantCodeValid(webhookRequest[0])){
+            if(!DialogFlowUtil.isMerchantNameOrCodeValid(webhookRequest[0])){
                 OutputContext outputContext = OutputContext.builder()
                         .lifespanCount(1)
                         .name(webhookRequest[0].getSession()+"/context/zesaAmountContext")
