@@ -514,14 +514,10 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         Map<String,Object> map = objectMapper.convertValue(outputContexts.get(0).getParameters(),Map.class);
         Map<String,Object> payment = objectMapper.convertValue(map.get("payment"),Map.class);
         Optional<Customer> customer = isNewCustomer(webhookRequest);
-        TransactionResponse transactionResponse = customerService.customerLookup(SubscriberDto.builder()
-                .msisdn(map.get("msisdn").toString()).build());
+        TransactionResponse transactionResponse = customerService.customerLookup(SubscriberDto.builder().msisdn(map.get("msisdn").toString()).build());
         String prompt;
         if(customer.isPresent()) {
-            prompt = "Alright thats fine "+DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest(),
-                    customer)+","+Emoji.Smiley+"\nSo in summary you want to send $ZWL"+ payment.get("amount")
-                    .toString()+" to "+map.get("msisdn").toString()+" ("+transactionResponse.getField6()+" "
-                    +transactionResponse.getField9()+")\ncan you confirm this is correct?";
+            prompt = "Alright thats fine "+DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest(),customer)+","+Emoji.Smiley+"\nSo in summary you want to send $ZWL"+ payment.get("amount").toString()+" to "+map.get("msisdn").toString()+" ("+transactionResponse.getField6()+" "+transactionResponse.getField9()+")\ncan you confirm this is correct?";
         }
         else prompt = "Alright " + DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest(),customer)+Emoji.Smiley+", but before we buy your airtime, what is your Ecocash number?";
         WebhookResponse webhookResponse = WebhookResponse.builder()
