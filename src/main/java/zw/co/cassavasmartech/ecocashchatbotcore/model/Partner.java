@@ -28,6 +28,4 @@ public class Partner extends BaseEntity {
     @Column( name = "status",nullable = false)
     @Enumerated(EnumType.STRING)
     private Status status;
-    @Column(name = "sms_header_text")
-    private String smsHeaderText;
 }
