@@ -51,7 +51,6 @@ public class StatementProcessorImpl implements StatementProcessor {
 
     @Override
     public void getStatementFile(String documentId, HttpServletRequest req, HttpServletResponse resp) {
-
         passThroughUtil.forwardRequest(String.format("%s/customer/statement/downloadFile/%s", statementServiceConfigurationProperties.getStatementServiceEndPointUrl(), documentId),
                 "GET", req, resp);
     }

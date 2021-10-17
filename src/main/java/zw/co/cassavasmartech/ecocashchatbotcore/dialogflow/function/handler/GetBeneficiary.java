@@ -11,8 +11,7 @@ public class GetBeneficiary extends FunctionAdapter {
 
     @Override
     public String process(PromptObject... args) {
-        Map<String, Object> ticket = DialogFlowUtil.getTicket(args[0].getWebhookRequest());
-        String[] beneficiary = DialogFlowUtil.getBeneficiaryDetails(ticket.get("msisdn").toString());
-        return ticket.get("msisdn").toString()+" ("+ beneficiary[0]+" "+ beneficiary[1] +")";
+        String[] beneficiary = DialogFlowUtil.getBeneficiaryDetails(args[0].getWebhookRequest());
+        return beneficiary[0]+" ("+ beneficiary[1]+" "+ beneficiary[2] +")";
     }
 }

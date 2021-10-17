@@ -23,7 +23,7 @@ public enum Function {
     public static FunctionAdapter lookup(String name) {
         Function f;
         try {
-            f = Enum.valueOf(Function.class, name.toUpperCase());
+            f = Enum.valueOf(Function.class, name.replaceAll("[^a-zA-Z ]", "").toUpperCase());
         } catch (RuntimeException e) {
             return null;
         }

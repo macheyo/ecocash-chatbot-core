@@ -206,11 +206,13 @@ public class DialogFlowUtil {
 
     }
 
-    public static String[] getBeneficiaryDetails(String msisdn){
-        TransactionResponse transactionResponse = customerService.customerLookup(SubscriberDto.builder().msisdn(msisdn).build());
+    public static String[] getBeneficiaryDetails(WebhookRequest webhookRequest){
+        Map<String, Object> ticket = DialogFlowUtil.getTicket(webhookRequest);
+        TransactionResponse transactionResponse = customerService.customerLookup(SubscriberDto.builder().msisdn(ticket.get("msisdn").toString()).build());
         if(transactionResponse.getField1().equalsIgnoreCase("200"))
-            return new String[]{transactionResponse.getField6(),transactionResponse.getField9()};
-        return null;
+            return new String[]{ticket.get("msisdn").toString(),transactionResponse.getField6(),transactionResponse.getField9()};
+        Customer customer = isNewCustomer(webhookRequest);
+        return new String[]{ticket.get("msisdn").toString(),customer.getFirstName(),customer.getLastName()};
     }
 
     public static String[] getMerchantDetails(String msisdn){
@@ -413,7 +415,16 @@ public class DialogFlowUtil {
                         .outputContexts(new Object[]{pinresetOutputContext,createTicket(webhookRequest, UseCase.PIN_RESET)[0]})
                         .build();
             case BUY_AIRTIME:
-                break;
+                prompt += "Are you buying airtime for yourself or for someone else?";
+                OutputContext buyAirtimeOutputContext = OutputContext.builder()
+                        .lifespanCount(1)
+                        .name(webhookRequest.getSession()+"/contexts/awaiting_send_airtime_choice")
+                        .build();
+                return WebhookResponse.builder()
+                        .fulfillmentText(prompt)
+                        .source("ecocashchatbotcore")
+                        .outputContexts(new Object[]{buyAirtimeOutputContext,createTicket(webhookRequest, UseCase.BUY_AIRTIME)[0]})
+                        .build();
             case SEND_MONEY:
                 break;
             case MERCHANT_PAYMENT:

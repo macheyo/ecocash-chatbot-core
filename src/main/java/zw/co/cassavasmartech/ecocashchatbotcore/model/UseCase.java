@@ -1,6 +1,6 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.model;
 
-public enum Usecase {
+public enum UseCase {
     PIN_RESET,
     BUY_AIRTIME,
     SEND_MONEY,
@@ -9,9 +9,9 @@ public enum Usecase {
     SUBSCRIBER_STATEMENT,
     REGISTRATION,
     SEND_MONEY_TARIFF,
-    BILLER_TARIFF,
+    BILL_TARIFF,
     MERCHANT_TARIFF,
-    BILLER_LOOKUP,
+    BILL_PROVIDER_LOOKUP,
     MERCHANT_LOOKUP,
     TRANSACTION_REVERSAL,
     WELCOME,
