@@ -30,9 +30,16 @@ import zw.co.cassavasmartech.ecocashchatbotcore.selfServiceCore.SelfServiceCoreP
 import zw.co.cassavasmartech.ecocashchatbotcore.service.CustomerService;
 import zw.co.cassavasmartech.ecocashchatbotcore.service.ProfileService;
 import zw.co.cassavasmartech.ecocashchatbotcore.service.TicketService;
+import zw.co.cassavasmartech.ecocashchatbotcore.statementProcessor.StatementServiceConfigurationProperties;
 
 import javax.annotation.PostConstruct;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
+import java.net.URL;
+import java.net.URLConnection;
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -91,6 +98,10 @@ public class DialogFlowUtil {
     EipService eipServ;
     private static EipService eipService;
 
+    @Autowired
+    StatementServiceConfigurationProperties statementServiceConfig;
+    private static StatementServiceConfigurationProperties statementServiceConfigurationProperties;
+
 
     @PostConstruct
     public void init() {
@@ -106,6 +117,7 @@ public class DialogFlowUtil {
         this.ticketService = ticketServ;
         this.merchantRepository = merchantRepo;
         this.eipService = eipServ;
+        this.statementServiceConfigurationProperties = statementServiceConfig;
     }
 
     public static String getAlias(OriginalDetectIntentRequest originalDetectIntentRequest,  Optional<Customer> customer) {
@@ -246,6 +258,58 @@ public class DialogFlowUtil {
                 .build()).getField1();
 
     }
+
+    public static boolean getStatement(WebhookRequest  webhookRequest) throws ParseException {
+        Customer customer = isNewCustomer(webhookRequest);
+        Map<String, Object> ticket = getTicket(webhookRequest);
+        Statement statement = customerService.getStatement(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()), StatementRequest.builder()
+                .endDate(ticket.get("startDateTime").toString())
+                .startDate(ticket.get("endDateTime").toString())
+                .msisdn(customer.getMsisdn())
+                .currency(Currency.RTGS)
+                .mime(MIME.PDF)
+                .encryptDocument(false)
+                .passKey("1234")
+                .build());
+        if(statement!=null) {
+            String downloadURL = statement.getFileDownloadUri().replace("http://217.15.118.15",statementServiceConfigurationProperties.getNgrokServiceEndpointUrl());
+
+            //log.info("Downloaded file: {}",downloadFromUrl(statement.getFileDownloadUri().replace("http://217.15.118.15",statementServiceConfigurationProperties.getNgrokServiceEndpointUrl()),"downloda"));
+            return true;
+        }
+
+            //prompt = "Done"+Emoji.Smiley+Emoji.ThumbsUp+"Here you go, please click the link below to download"+Emoji.PointDown+"\n"+statement.getFileDownloadUri().replace("http://217.15.118.15",statementServiceConfigurationProperties.getNgrokServiceEndpointUrl())+"\n\nIs there anything else I can assist you with?"+Emoji.Smiley;
+        return false;
+    }
+
+    public static String downloadFromUrl(URL url, String localFilename) throws IOException {
+        InputStream is = null;
+        FileOutputStream fos = null;
+        String tempDir = System.getProperty("java.io.tmpdir");
+        String outputPath = tempDir + "/" + localFilename;
+        try {
+            URLConnection urlConn = url.openConnection();
+            is = urlConn.getInputStream();
+            fos = new FileOutputStream(outputPath);
+            byte[] buffer = new byte[4096];
+            int length;
+            while ((length = is.read(buffer)) > 0) {
+                fos.write(buffer, 0, length);
+            }
+            return outputPath;
+        } finally {
+            try {
+                if (is != null) {
+                    is.close();
+                }
+            } finally {
+                if (fos != null) {
+                    fos.close();
+                }
+            }
+        }
+    }
+
 
     public static EipTransaction payMerchant(WebhookRequest webhookRequest){
         Customer customer = isNewCustomer(webhookRequest);

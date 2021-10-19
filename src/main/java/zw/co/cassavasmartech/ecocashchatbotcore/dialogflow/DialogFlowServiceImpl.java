@@ -958,7 +958,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                             .endDate(map.get("startDateTime").toString())
                             .startDate(map.get("endDateTime").toString())
                             .msisdn(customer.get().getMsisdn())
-                            .mime("PDF")
+                            .mime(MIME.PDF)
                             .build());
             if(statement!=null)
                 prompt = "Done"+Emoji.Smiley+Emoji.ThumbsUp+"Here you go, please click the link below to download"+Emoji.PointDown+"\n"+statement.getFileDownloadUri().replace("http://217.15.118.15",statementServiceConfigurationProperties.getNgrokServiceEndpointUrl())+"\n\nIs there anything else I can assist you with?"+Emoji.Smiley;
@@ -1008,7 +1008,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                     .endDate(datePeriod.get("startDate").toString())
                     .startDate(datePeriod.get("endDate").toString())
                     .msisdn(customer.get().getMsisdn())
-                    .mime("PDF")
+                    .mime(MIME.PDF)
                     .build());
             if(statement!=null)
                 prompt = "Done"+Emoji.Smiley+Emoji.ThumbsUp+"Here you go, please click the link below to download"+Emoji.PointDown+"\n"+statement.getFileDownloadUri().replace("http://217.15.118.15",statementServiceConfigurationProperties.getNgrokServiceEndpointUrl())+"\n\nIs there anything else I can assist you with?"+Emoji.Smiley;
@@ -1043,7 +1043,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                     .endDate(map.get("startdate").toString())
                     .startDate(map.get("enddate").toString())
                     .msisdn(customer.get().getMsisdn())
-                    .mime("PDF")
+                    .mime(MIME.PDF)
                     .build());
             if(statement!=null)
                 prompt = "Done"+Emoji.Smiley+Emoji.ThumbsUp+"Here you go, please click the link below to download"+Emoji.PointDown+"\n"+statement.getFileDownloadUri().replace("http://217.15.118.15",statementServiceConfigurationProperties.getNgrokServiceEndpointUrl())+"\n\nIs there anything else I can assist you with?"+Emoji.Smiley;
