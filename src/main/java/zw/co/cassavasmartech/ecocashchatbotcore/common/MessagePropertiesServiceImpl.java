@@ -16,8 +16,6 @@ import java.util.Locale;
 public class MessagePropertiesServiceImpl implements MessagePropertiesService {
 
     private final MessageSource messageSource;
-
-
     @Override
     public String getByKey(String key, Object[] args) {
 

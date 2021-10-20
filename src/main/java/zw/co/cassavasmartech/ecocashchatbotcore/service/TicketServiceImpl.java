@@ -60,8 +60,13 @@ public class TicketServiceImpl implements TicketService{
     }
 
     @Override
-    public Profile findByReference(String reference) {
+    public Profile findProfileByReference(String reference) {
         return ticketRepository.findByReference(reference).orElseThrow(()->new TicketNotFoundException(reference)).getProfile();
+    }
+
+    @Override
+    public Ticket findByReference(String reference){
+        return ticketRepository.findByReference(reference).orElseThrow(()->new TicketNotFoundException(reference));
     }
 
     @Override

@@ -358,6 +358,8 @@ public class DialogFlowUtil {
         else ticket.setSentimentStart(0.0);
         ticket.setOriginalQueryText(webhookRequest.getQueryResult().getQueryText());
         ticket.setUsecase(usecase);
+        String[] sessionInfo = webhookRequest.getSession().split("/");
+        ticket.setConversationId(sessionInfo[sessionInfo.length-1]);
         ticketRepository.save(ticket);
         TicketParameter ticketParameter = TicketParameter.builder()
                 .id(ticket.getId())

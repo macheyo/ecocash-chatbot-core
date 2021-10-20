@@ -1,14 +1,17 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.cpg;
 
-import com.twilio.rest.api.v2010.account.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.Util;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.BusinessException;
+import zw.co.cassavasmartech.ecocashchatbotcore.infobip.InfobipService;
+import zw.co.cassavasmartech.ecocashchatbotcore.infobip.data.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.service.TicketService;
 import zw.co.cassavasmartech.ecocashchatbotcore.telegram.TelegramService;
@@ -25,6 +28,8 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
     TelegramService telegramService;
     @Autowired
     TwilioService twilioService;
+    @Autowired
+    InfobipService infobipService;
     private final CheckSumGenerator checksumGenerator;
     private final PaymentGatewayInvoker paymentGatewayInvoker;
     private final CpgConfigurationProperties cpgConfigProperties;
@@ -112,13 +117,15 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
 
     @Override
     public Boolean handleCallBack(PostTransaction postTransaction) {
-        Profile profile = ticketService.findByReference(postTransaction.getTransactionRequest().getField3());
+        String reference = postTransaction.getTransactionRequest().getField3();
+        Profile profile = ticketService.findProfileByReference(reference);
+        Ticket ticket = ticketService.findByReference(reference);
         Boolean isNotified = false;
         String notification;
         if(postTransaction.getTransactionRequest().getField1().equalsIgnoreCase("200"))
         notification = "Done, your transaction was successfull. Is there anything else you would like me to do for you?";
         else notification = "Ooops!!! Your transaction failed. Is there anything else you would like me to do for you?";
-        isNotified =sendNotificationToPlatform(profile,notification);
+        isNotified =sendNotificationToPlatform(ticket.getConversationId(), profile,notification);
         return isNotified;
     }
 
@@ -336,12 +343,19 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .build();
     }
 
-    private Boolean sendNotificationToPlatform(Profile profile, String message){
+    private Boolean sendNotificationToPlatform(String conversationId, Profile profile, String message){
         switch (profile.getPlatform()){
             case WHATSAPP:
-                Message twilioResponse =twilioService.sendMessage(profile.getChatId(),message);
-                log.info("twilio response {}",twilioResponse);
-                return twilioResponse.getStatus().equals("sent");
+                ApiResponse<InfoBipRequest> response = infobipService.sendMessage(OutboundRequest.builder()
+                        .channel(Channel.WHATSAPP)
+                        .conversationId(conversationId)
+                        .to(profile.getChatId())
+                        .contentType(ContentType.TEXT)
+                        .content(Content.builder().text(message).build())
+                        .build());
+                log.info("Infobip Adapter response {}",response);
+                if(response.getStatus() == HttpStatus.OK.value()) return true;
+                return false;
             case FACEBOOK:
                 break;
             case TELEGRAM:

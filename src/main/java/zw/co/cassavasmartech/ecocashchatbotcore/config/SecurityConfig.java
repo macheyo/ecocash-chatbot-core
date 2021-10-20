@@ -36,6 +36,11 @@ import zw.co.cassavasmartech.ecocashchatbotcore.security.MyBasicAuthenticationEn
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(jsr250Enabled = true)
 public class SecurityConfig{
+    @Value("${dialogflow.security.user.name}")
+    private String dialogflowUsername;
+
+    @Value("${dialogflow.security.user.password}")
+    private String dialogflowPassword;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth, AuthenticationProvider authenticationProvider) throws Exception {
@@ -51,7 +56,7 @@ public class SecurityConfig{
         @Autowired
         public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
             auth.inMemoryAuthentication()
-                    .withUser("dialogflow").password(passwordEncoder().encode("C@55@v@"))
+                    .withUser(dialogflowUsername).password(passwordEncoder().encode(dialogflowPassword))
                     .authorities("ROLE_DIALOGFLOW");
         }
 

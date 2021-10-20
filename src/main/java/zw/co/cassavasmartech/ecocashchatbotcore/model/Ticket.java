@@ -20,6 +20,7 @@ public class Ticket extends BaseEntity{
     private Double sentimentEnd;
     private TicketStatus ticketStatus;
     private String reference;
+    private String conversationId;
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(nullable = false)

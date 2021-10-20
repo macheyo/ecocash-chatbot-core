@@ -18,7 +18,9 @@ public interface TicketService {
 
     Ticket update(String chatId, Long ticketId, Ticket ticket);
 
-    Profile findByReference(String reference);
+    Ticket findByReference(String reference);
+
+    Profile findProfileByReference(String reference);
 
     Boolean handleEipCallback(EipTransaction eipTransaction);
 

@@ -42,7 +42,7 @@ public class EipServiceImpl implements EipService {
 
     @Override
     public Boolean handleCallback(EipTransaction response) {
-        Profile profile = ticketService.findByReference(response.getReferenceCode());
+        Profile profile = ticketService.findProfileByReference(response.getReferenceCode());
         Boolean isNotified = false;
         String notification;
         switch (response.getTransactionOperationStatus()) {

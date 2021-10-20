@@ -12,7 +12,6 @@ import java.util.Collections;
 @Service
 @Slf4j
 public class ApiHeader {
-
     @Autowired
     private HttpSession httpSession;
 

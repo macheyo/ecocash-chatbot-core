@@ -1,8 +1,10 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.infobip.data;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class Content {
     private String url;
     private String text;
