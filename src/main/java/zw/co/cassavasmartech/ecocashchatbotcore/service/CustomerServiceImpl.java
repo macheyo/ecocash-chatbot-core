@@ -17,8 +17,8 @@ import zw.co.cassavasmartech.ecocashchatbotcore.exception.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.modelAssembler.CustomerModelAssembler;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.CustomerRepository;
-import zw.co.cassavasmartech.ecocashchatbotcore.selfServiceCore.SelfServiceCoreProcessor;
-import zw.co.cassavasmartech.ecocashchatbotcore.statementProcessor.StatementProcessor;
+import zw.co.cassavasmartech.ecocashchatbotcore.selfservice.SelfServiceCoreProcessor;
+import zw.co.cassavasmartech.ecocashchatbotcore.statementservice.StatementService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,7 +52,7 @@ public class CustomerServiceImpl implements CustomerService{
     SelfServiceCoreProcessor selfServiceCoreProcessor;
 
     @Autowired
-    StatementProcessor statementProcessor;
+    StatementService statementService;
 
     @Autowired
     MerchantRepository merchantRepository;
@@ -132,12 +132,12 @@ public class CustomerServiceImpl implements CustomerService{
         Customer customer = customerRepository.findByProfilesChatId(chatId).orElseThrow(() -> new CustomerNotFoundException(chatId));
         statementRequest.setMsisdn(customer.getMsisdn());
         log.info("Statement processor transaction request {}", statementRequest);
-        return statementProcessor.getStatement(statementRequest);
+        return statementService.getStatement(statementRequest);
     }
 
     @Override
     public void getStatementFile(String documentId, HttpServletRequest req, HttpServletResponse resp) {
-        statementProcessor.getStatementFile(documentId, req, resp);
+        statementService.getStatementFile(documentId, req, resp);
     }
 
     @Override

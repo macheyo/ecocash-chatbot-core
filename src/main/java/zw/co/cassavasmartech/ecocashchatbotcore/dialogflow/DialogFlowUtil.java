@@ -27,11 +27,11 @@ import zw.co.cassavasmartech.ecocashchatbotcore.repository.CustomerRepository;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.ProfileRepository;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.PromptRepository;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.TicketRepository;
-import zw.co.cassavasmartech.ecocashchatbotcore.selfServiceCore.SelfServiceCoreProcessor;
+import zw.co.cassavasmartech.ecocashchatbotcore.selfservice.SelfServiceCoreProcessor;
 import zw.co.cassavasmartech.ecocashchatbotcore.service.CustomerService;
 import zw.co.cassavasmartech.ecocashchatbotcore.service.ProfileService;
 import zw.co.cassavasmartech.ecocashchatbotcore.service.TicketService;
-import zw.co.cassavasmartech.ecocashchatbotcore.statementProcessor.StatementServiceConfigurationProperties;
+import zw.co.cassavasmartech.ecocashchatbotcore.statementservice.StatementServiceConfigurationProperties;
 
 import javax.annotation.PostConstruct;
 import java.io.FileOutputStream;

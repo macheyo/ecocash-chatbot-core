@@ -1,4 +1,4 @@
-package zw.co.cassavasmartech.ecocashchatbotcore.statementProcessor;
+package zw.co.cassavasmartech.ecocashchatbotcore.statementservice;
 
 import lombok.Getter;
 import lombok.Setter;

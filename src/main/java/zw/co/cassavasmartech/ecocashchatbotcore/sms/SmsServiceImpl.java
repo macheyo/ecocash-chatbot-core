@@ -1,24 +1,17 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.sms;
 
-import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.MessagePropertiesService;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.MobileNumberFormater;
-import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.EipTransaction;
 import zw.co.cassavasmartech.ecocashchatbotcore.invoker.CoreInvoker;
-import zw.co.cassavasmartech.ecocashchatbotcore.selfServiceCore.data.ReversalDto;
 
 import java.net.URI;
-import java.util.List;
-import java.util.Optional;
 
 import static zw.co.cassavasmartech.ecocashchatbotcore.common.Util.buildEIPJsonHttpHeaders;
 

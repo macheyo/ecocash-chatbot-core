@@ -17,7 +17,7 @@ public class SendMoneyGetBeneficiaryAmountIntentHandler extends IntentHandlerAda
 
         return DialogFlowUtil.getResponse(
                 webhookRequest[0],
-                DialogFlowUtil.promptProcessor(4,webhookRequest[0],customer), // TO BE MAPPED
+                DialogFlowUtil.promptProcessor(14,webhookRequest[0],customer), // TO BE MAPPED
                 new Object[]{},
                 UseCase.SEND_MONEY
         );

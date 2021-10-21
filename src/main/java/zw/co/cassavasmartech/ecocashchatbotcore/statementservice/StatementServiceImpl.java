@@ -1,4 +1,4 @@
-package zw.co.cassavasmartech.ecocashchatbotcore.statementProcessor;
+package zw.co.cassavasmartech.ecocashchatbotcore.statementservice;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class StatementProcessorImpl implements StatementProcessor {
+public class StatementServiceImpl implements StatementService {
     @Autowired
     MobileNumberFormater mobileNumberFormater;
     @Autowired

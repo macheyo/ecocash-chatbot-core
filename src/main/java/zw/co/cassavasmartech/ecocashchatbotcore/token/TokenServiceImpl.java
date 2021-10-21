@@ -7,7 +7,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
-import zw.co.cassavasmartech.ecocashchatbotcore.statementProcessor.StatementServiceConfigurationProperties;
+import zw.co.cassavasmartech.ecocashchatbotcore.statementservice.StatementServiceConfigurationProperties;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.BusinessException;
 import zw.co.cassavasmartech.ecocashchatbotcore.invoker.CoreInvoker;
 import zw.co.cassavasmartech.ecocashchatbotcore.token.data.TokenRequest;

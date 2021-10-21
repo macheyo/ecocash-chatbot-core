@@ -1,12 +1,12 @@
-package zw.co.cassavasmartech.ecocashchatbotcore.selfServiceCore;
+package zw.co.cassavasmartech.ecocashchatbotcore.selfservice;
 
 import org.springframework.http.HttpEntity;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Answer;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.EnrollmentResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.SubscriberDto;
-import zw.co.cassavasmartech.ecocashchatbotcore.selfServiceCore.data.EcocashTransaction;
-import zw.co.cassavasmartech.ecocashchatbotcore.selfServiceCore.data.ReversalDto;
+import zw.co.cassavasmartech.ecocashchatbotcore.selfservice.data.EcocashTransaction;
+import zw.co.cassavasmartech.ecocashchatbotcore.selfservice.data.ReversalDto;
 
 import java.util.List;
 import java.util.Optional;

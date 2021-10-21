@@ -1,4 +1,4 @@
-package zw.co.cassavasmartech.ecocashchatbotcore.selfServiceCore.data;
+package zw.co.cassavasmartech.ecocashchatbotcore.selfservice.data;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
