@@ -17,4 +17,4 @@ public class StatementEndDateIntentHandler extends IntentHandlerAdapter {
                 UseCase.SUBSCRIBER_STATEMENT);
     }
     }
-}
+

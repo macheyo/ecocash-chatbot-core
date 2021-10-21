@@ -15,7 +15,7 @@ public class SendMoneyScenario2IntentHandler extends IntentHandlerAdapter {
         log.info("Processing Dialogflow Intent: {}", webhookRequest[0].getQueryResult().getIntent().getDisplayName());
         Customer customer = DialogFlowUtil.isNewCustomer(webhookRequest[0]);
         return DialogFlowUtil.getResponse(webhookRequest[0],
-                DialogFlowUtil.promptProcessor(1,webhookRequest[0],customer), //TO BE MAPPED
+                DialogFlowUtil.promptProcessor(3,webhookRequest[0],customer),
                 new Object[]{},
                 UseCase.SEND_MONEY);
     }

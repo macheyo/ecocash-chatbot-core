@@ -11,6 +11,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessor;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.BillerLookupRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberAirtimeRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToBillerRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToSubscriberRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.EipService;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.EipTransaction;
@@ -245,6 +246,17 @@ public class DialogFlowUtil {
                 .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
                 .build()).getField1();
 
+    }
+
+    public static String sendMoney(WebhookRequest webhookRequest) {
+        Customer customer = isNewCustomer(webhookRequest);
+        Map<String, Object> ticket = getTicket(webhookRequest);
+        return paymentGatewayProcessor.subscriberToSubscriber(SubscriberToSubscriberRequest.builder()
+                .msisdn1(customer.getMsisdn())
+                .msisdn2(ticket.get("msisdn.original").toString())
+                .amount(ticket.get("amount").toString())
+                .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
+                .build()).getField1();
     }
 
     public static EipTransaction payMerchant(WebhookRequest webhookRequest){
