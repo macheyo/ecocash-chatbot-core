@@ -3,12 +3,16 @@ package zw.co.cassavasmartech.ecocashchatbotcore.eip;
 import com.twilio.rest.api.v2010.account.Message;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.Util;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.BusinessException;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.MerchantNotFoundException;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.TicketNotFoundException;
+import zw.co.cassavasmartech.ecocashchatbotcore.infobip.InfobipService;
+import zw.co.cassavasmartech.ecocashchatbotcore.infobip.data.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Profile;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Ticket;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.TicketRepository;
@@ -28,6 +32,8 @@ public class EipServiceImpl implements EipService {
     @Autowired
     TicketRepository ticketRepository;
     @Autowired
+    InfobipService infobipService;
+    @Autowired
     TwilioService twilioService;
     @Autowired
     TelegramService telegramService;
@@ -43,6 +49,7 @@ public class EipServiceImpl implements EipService {
     @Override
     public Boolean handleCallback(EipTransaction response) {
         Profile profile = ticketService.findProfileByReference(response.getReferenceCode());
+        Ticket ticket = ticketService.findByReference(response.getReferenceCode());
         Boolean isNotified = false;
         String notification;
         switch (response.getTransactionOperationStatus()) {
@@ -55,7 +62,7 @@ public class EipServiceImpl implements EipService {
                             +response.getMerchantCode()
                             +" ("+response.getPaymentAmount().getChargeMetaData().getOnBeHalfOf()+") "
                             +"has been successful. Is there anything else you would like me to do for you?";
-                    isNotified =sendNotificationToPlatform(profile,notification);
+                    isNotified =sendNotificationToPlatform(ticket.getConversationId(),profile,notification);
                     break;
                 case "PENDING SUBSCRIBER VALIDATION":
                     log.info("transaction not completed:{} because its still pending ");
@@ -66,7 +73,7 @@ public class EipServiceImpl implements EipService {
                             +response.getMerchantCode()
                             +" ("+response.getPaymentAmount().getChargeMetaData().getOnBeHalfOf()+") "
                             +"is still pending your approval, we are waiting for you to input your PIN on the USSD push on your phone. Shall we try the transaction again?";
-                    isNotified = sendNotificationToPlatform(profile,notification);
+                    isNotified = sendNotificationToPlatform(ticket.getConversationId(), profile,notification);
                 case "FAILED":
                     notification = "Transaction of "
                             +response.getPaymentAmount().getCharginginformation().getCurrency()
@@ -75,19 +82,26 @@ public class EipServiceImpl implements EipService {
                             +response.getMerchantCode()
                             +" ("+response.getPaymentAmount().getChargeMetaData().getOnBeHalfOf()+") "
                             +"has failed. Shall we try the transaction again?";
-                    isNotified = sendNotificationToPlatform(profile,notification);
+                    isNotified = sendNotificationToPlatform(ticket.getConversationId(), profile,notification);
                     log.info(" transaction Failed");
                     break;
             }
             return isNotified;
     }
 
-    private Boolean sendNotificationToPlatform(Profile profile, String message){
+    private Boolean sendNotificationToPlatform(String conversationId, Profile profile, String message){
         switch (profile.getPlatform()){
             case WHATSAPP:
-                Message twilioResponse =twilioService.sendMessage(profile.getChatId(),message);
-                log.info("twilio response {}",twilioResponse);
-                return twilioResponse.getStatus().equals("sent");
+                ApiResponse<InfoBipRequest> response = infobipService.sendMessage(OutboundRequest.builder()
+                        .channel(Channel.WHATSAPP)
+                        .conversationId(conversationId)
+                        .to(profile.getChatId())
+                        .contentType(ContentType.TEXT)
+                        .content(Content.builder().text(message).build())
+                        .build());
+                log.info("Infobip Adapter response {}",response);
+                if(response.getStatus() == HttpStatus.OK.value()) return true;
+                return false;
             case FACEBOOK:
                 break;
             case TELEGRAM:

@@ -21,12 +21,10 @@ public class PayMerchantGetNameIntentHandler extends IntentHandlerAdapter {
                         .lifespanCount(1)
                         .name(webhookRequest[0].getSession()+"/contexts/awaiting_merchant_msisdn")
                         .build();
-
                 OutputContext contextToRemove = OutputContext.builder()
                         .lifespanCount(0)
                         .name(webhookRequest[0].getSession()+"/contexts/awaiting_merchant_amount")
                         .build();
-
                 return DialogFlowUtil.getResponse(webhookRequest[0],
                         DialogFlowUtil.promptProcessor(3,webhookRequest[0],customer),
                         new Object[]{outputContext,contextToRemove},
