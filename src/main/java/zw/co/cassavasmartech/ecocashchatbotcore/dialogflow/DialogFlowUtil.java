@@ -260,6 +260,17 @@ public class DialogFlowUtil {
 
     }
 
+    public static String sendMoney(WebhookRequest webhookRequest) {
+        Customer customer = isNewCustomer(webhookRequest);
+        Map<String, Object> ticket = getTicket(webhookRequest);
+        return paymentGatewayProcessor.subscriberToSubscriber(SubscriberToSubscriberRequest.builder()
+                .msisdn1(customer.getMsisdn())
+                .msisdn2(ticket.get("msisdn.original").toString())
+                .amount(ticket.get("amount").toString())
+                .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
+                .build()).getField1();
+    }
+
     public static boolean getStatement(WebhookRequest  webhookRequest) throws ParseException {
         Customer customer = isNewCustomer(webhookRequest);
         Map<String, Object> ticket = getTicket(webhookRequest);

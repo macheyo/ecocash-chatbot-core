@@ -9,16 +9,15 @@ import zw.co.cassavasmartech.ecocashchatbotcore.model.Customer;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.UseCase;
 
 @Slf4j
-public class SendMoneyGetBeneficiaryAmountFallbackIntentHandler extends IntentHandlerAdapter {
+public class SendMoneyConfirmationNegativeIntentHandler extends IntentHandlerAdapter {
+
     @Override
     public WebhookResponse getWebhookResponse(WebhookRequest... webhookRequest) {
-
         log.info("Processing Dialogflow Intent: {}", webhookRequest[0].getQueryResult().getIntent().getDisplayName());
         Customer customer = DialogFlowUtil.isNewCustomer(webhookRequest[0]);
-
         return DialogFlowUtil.getResponse(
                 webhookRequest[0],
-                DialogFlowUtil.promptProcessor(9,webhookRequest[0],customer), // its not an amount
+                DialogFlowUtil.promptProcessor(6, webhookRequest[0], customer), // TO BE MAPPED
                 new Object[]{},
                 UseCase.SEND_MONEY);
     }
