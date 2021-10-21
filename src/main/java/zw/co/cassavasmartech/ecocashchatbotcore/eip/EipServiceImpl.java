@@ -48,6 +48,7 @@ public class EipServiceImpl implements EipService {
 
     @Override
     public Boolean handleCallback(EipTransaction response) {
+        log.info("Processing callback request: {}", response);
         Profile profile = ticketService.findProfileByReference(response.getReferenceCode());
         Ticket ticket = ticketService.findByReference(response.getReferenceCode());
         Boolean isNotified = false;
@@ -90,6 +91,8 @@ public class EipServiceImpl implements EipService {
     }
 
     private Boolean sendNotificationToPlatform(String conversationId, Profile profile, String message){
+        Content content = new Content();
+        content.setText(message);
         switch (profile.getPlatform()){
             case WHATSAPP:
                 ApiResponse<InfoBipRequest> response = infobipService.sendMessage(OutboundRequest.builder()
@@ -97,7 +100,7 @@ public class EipServiceImpl implements EipService {
                         .conversationId(conversationId)
                         .to(profile.getChatId())
                         .contentType(ContentType.TEXT)
-                        .content(Content.builder().text(message).build())
+                        .content(content)
                         .build());
                 log.info("Infobip Adapter response {}",response);
                 if(response.getStatus() == HttpStatus.OK.value()) return true;

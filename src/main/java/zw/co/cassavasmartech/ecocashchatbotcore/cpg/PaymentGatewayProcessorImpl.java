@@ -117,6 +117,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
 
     @Override
     public Boolean handleCallBack(PostTransaction postTransaction) {
+        log.info("Processing CPG callback request: {}", postTransaction);
         String reference = postTransaction.getTransactionRequest().getField3();
         Profile profile = ticketService.findProfileByReference(reference);
         Ticket ticket = ticketService.findByReference(reference);
@@ -344,6 +345,8 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
     }
 
     private Boolean sendNotificationToPlatform(String conversationId, Profile profile, String message){
+        Content content = new Content();
+        content.setText(message);
         switch (profile.getPlatform()){
             case WHATSAPP:
                 ApiResponse<InfoBipRequest> response = infobipService.sendMessage(OutboundRequest.builder()
@@ -351,7 +354,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                         .conversationId(conversationId)
                         .to(profile.getChatId())
                         .contentType(ContentType.TEXT)
-                        .content(Content.builder().text(message).build())
+                        .content(content)
                         .build());
                 log.info("Infobip Adapter response {}",response);
                 if(response.getStatus() == HttpStatus.OK.value()) return true;
