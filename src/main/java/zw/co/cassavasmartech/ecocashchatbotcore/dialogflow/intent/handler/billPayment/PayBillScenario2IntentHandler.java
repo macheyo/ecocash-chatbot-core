@@ -15,7 +15,7 @@ public class PayBillScenario2IntentHandler extends IntentHandlerAdapter {
         Customer customer = DialogFlowUtil.isNewCustomer(webhookRequest[0]);
         return DialogFlowUtil.getResponse(
                 webhookRequest[0],
-                DialogFlowUtil.promptProcessor(1,webhookRequest[0],customer),
+                DialogFlowUtil.promptProcessor(20,webhookRequest[0],customer),
                 new Object[]{},
                 UseCase.BILL_PAYMENT
         );

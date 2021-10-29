@@ -17,8 +17,8 @@ public class SendMoneyConfirmationNegativeNoIntentHandler extends IntentHandlerA
         Customer customer = DialogFlowUtil.isNewCustomer(webhookRequest[0]);
         return DialogFlowUtil.getResponse(
                 webhookRequest[0],
-                DialogFlowUtil.promptProcessor(7,webhookRequest[0],customer), // customer does not want to re-try
-                new Object[]{OutputContext.builder().lifespanCount(1).name(webhookRequest[0].getSession()+"/context here").build()},
+                DialogFlowUtil.promptProcessor(7,webhookRequest[0],customer),
+                new Object[]{},
                 UseCase.SEND_MONEY);
     }
 }

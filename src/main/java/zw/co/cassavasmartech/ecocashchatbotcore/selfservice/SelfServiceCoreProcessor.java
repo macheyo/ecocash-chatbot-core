@@ -6,6 +6,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.model.Answer;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.EnrollmentResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.SubscriberDto;
 import zw.co.cassavasmartech.ecocashchatbotcore.selfservice.data.EcocashTransaction;
+import zw.co.cassavasmartech.ecocashchatbotcore.selfservice.data.ReversalApproval;
 import zw.co.cassavasmartech.ecocashchatbotcore.selfservice.data.ReversalDto;
 
 import java.util.List;
@@ -17,5 +18,8 @@ public interface SelfServiceCoreProcessor {
     public SubscriberDto getAlternative(String msisdn);
     public HttpEntity<ApiResponse<Optional<EcocashTransaction>>> validateReversal(String msisdn, String reference);
     public HttpEntity<ApiResponse<Optional<ReversalDto>>> initiateReversal(String msisdn, String reference);
+
+    HttpEntity<ApiResponse<Optional<ReversalDto>>> approveReversal(ReversalApproval reversalApproval);
+
     public HttpEntity<ApiResponse<List<ReversalDto>>> pendingReversals(String msisdn);
 }

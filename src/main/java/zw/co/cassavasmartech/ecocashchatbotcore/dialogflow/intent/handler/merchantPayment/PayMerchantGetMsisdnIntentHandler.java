@@ -16,23 +16,23 @@ public class PayMerchantGetMsisdnIntentHandler extends IntentHandlerAdapter {
         log.info("Processing Dialogflow Intent: {}", webhookRequest[0].getQueryResult().getIntent().getDisplayName());
         Customer customer = DialogFlowUtil.isNewCustomer(webhookRequest[0]);
         if (customer != null){
-            if(!DialogFlowUtil.isMerchantNameOrCodeValid(webhookRequest[0])){
+            if(!DialogFlowUtil.isMerchantValid(webhookRequest[0])){
                 OutputContext outputContext = OutputContext.builder()
                         .lifespanCount(1)
-                        .name(webhookRequest[0].getSession()+"/contents/awaiting_merchant_msisdn")//TODO create context on DF
+                        .name(webhookRequest[0].getSession()+"/contexts/awaiting_merchant_msisdn")//TODO create context on DF
                         .build();
                 OutputContext contextToRemove = OutputContext.builder()
                         .lifespanCount(0)
-                        .name(webhookRequest[0].getSession()+"/context/awaiting_merchant_amount")//TODO create context on DF
+                        .name(webhookRequest[0].getSession()+"/contexts/awaiting_merchant_amount")//TODO create context on DF
                         .build();
                 return DialogFlowUtil.getResponse(webhookRequest[0],
-                    DialogFlowUtil.promptProcessor(1,webhookRequest[0],customer),
+                    DialogFlowUtil.promptProcessor(3,webhookRequest[0],customer),
                     new Object[]{outputContext,contextToRemove},
                     UseCase.MERCHANT_PAYMENT);
             }
 
             return DialogFlowUtil.getResponse(webhookRequest[0],
-                    DialogFlowUtil.promptProcessor(2,webhookRequest[0],customer),
+                    DialogFlowUtil.promptProcessor(4,webhookRequest[0],customer),
                     new Object[]{},
                     UseCase.MERCHANT_PAYMENT);
         }

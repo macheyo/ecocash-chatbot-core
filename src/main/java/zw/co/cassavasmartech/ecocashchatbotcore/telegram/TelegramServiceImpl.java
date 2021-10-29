@@ -15,7 +15,19 @@ public class TelegramServiceImpl implements TelegramService {
     TelegramConfigurationProperties telegramConfigurationProperties;
     @Override
     public void sendMessage(String chatId, String text) {
-        String urlString = String.format(telegramConfigurationProperties.getUrl(), telegramConfigurationProperties.getToken(), chatId, text);
+        String urlString = String.format(telegramConfigurationProperties.getSendMessageUrl(), telegramConfigurationProperties.getToken(), chatId, text);
+        try{
+            URL url = new URL(urlString);
+            URLConnection urlConnection = url.openConnection();
+            InputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void sendDocument(String chatId, String documentURL) {
+        String urlString = String.format(telegramConfigurationProperties.getSendDocumentUrl(), telegramConfigurationProperties.getToken(), chatId, documentURL,"This is your statement. Can I do anything else for you?");
         try{
             URL url = new URL(urlString);
             URLConnection urlConnection = url.openConnection();

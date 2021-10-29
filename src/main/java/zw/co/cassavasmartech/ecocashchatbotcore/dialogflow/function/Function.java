@@ -11,7 +11,12 @@ public enum Function {
     GETBILLER(new GetBillProvider()),
     GETBILLACCOUNT(new GetBillAccount()),
     GETMERCHANT(new GetMerchant()),
-    GETBENEFICIARY(new GetBeneficiary())
+    GETBENEFICIARY(new GetBeneficiary()),
+    GETTRANSACTIONREVERSALDETAILS(new GetTransactionReversalDetails()),
+    GETTRANSACTIONPENDINGREVERSALDETAILS(new GetTransactionPendingReversalDetails()),
+    GETSTATEMENT(new GetStatement()),
+    GETPENDINGREVERSALS(new GetPendingReversals()),
+    CARRIAGERETURN(new CarriageReturn())
     ;
 
     private final FunctionAdapter fa;

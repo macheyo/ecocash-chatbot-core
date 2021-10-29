@@ -1,5 +1,6 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function.handler;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function.FunctionAdapter;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.PromptObject;
@@ -11,7 +12,12 @@ public class GetAmount extends FunctionAdapter {
 
     @Override
     public String process(PromptObject... args) {
+        String amount="";
         Map<String, Object> ticket = DialogFlowUtil.getTicket(args[0].getWebhookRequest());
-        return ticket.get("amount").toString();
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String,Object> payment = objectMapper.convertValue(ticket.get("payment"),Map.class);
+        if(ticket.get("amount")!=null)amount=ticket.get("amount").toString();
+        else if(payment.get("amount")!=null)amount=payment.get("amount").toString();
+        return amount;
     }
 }

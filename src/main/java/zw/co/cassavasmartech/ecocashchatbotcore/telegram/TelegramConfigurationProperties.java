@@ -15,7 +15,9 @@ import javax.validation.constraints.NotNull;
 @Validated
 public class TelegramConfigurationProperties {
     @NotNull
-    private String url;
+    private String sendMessageUrl;
+    @NotNull
+    private String sendDocumentUrl;
     @NotNull
     private String token;
 

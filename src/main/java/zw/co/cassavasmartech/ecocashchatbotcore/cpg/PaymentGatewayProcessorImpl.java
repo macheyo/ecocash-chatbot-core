@@ -53,7 +53,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
 
     @Override
     public TransactionResponse subscriberToMerchant(SubscriberToMerchantRequest subscriberToMerchantRequest) {
-        final TransactionRequest transactionRequest = getTransactionRequest(subscriberToMerchantRequest);
+        final TransactionRequest transactionRequest = getSubscriberToMerchantRequest(subscriberToMerchantRequest);
         log.debug("Processing subscriber to merchant request");
         return invokeApi(transactionRequest);
 
@@ -130,6 +130,12 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
         return isNotified;
     }
 
+    @Override
+    public TransactionResponse lookupMerchant(MerchantLookupRequest merchantLookupRequest) {
+        final TransactionRequest transactionRequest = getMerchantLookupRequest(merchantLookupRequest);
+        log.debug("Processing biller lookup");
+        return invokeApi(transactionRequest);
+    }
 
     @Override
     public TransactionResponse getStatement(String msisdn) {
@@ -190,6 +196,18 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .build();
     }
 
+    private TransactionRequest getMerchantLookupRequest(MerchantLookupRequest merchantLookupRequest) {
+        return RequestBuilder.newInstance()
+                .vendorCode(vendorSASAICode)
+                .vendorApiKey(vendorSASAIApiKey)
+                .checksumGenerator(checksumGenerator)
+                .tranType(cpgConfigProperties.getMerchantLookupTranType())
+                .msisdn(merchantLookupRequest.getMerchant())
+                .applicationCode("ecocashzw")
+                .reference(Util.generateReference(merchantLookupRequest.getMerchant()))
+                .build();
+    }
+
     private TransactionRequest getSubscriberAirtimeRequest(SubscriberAirtimeRequest subscriberAirtimeRequest){
         String reference = Util.generateReference(subscriberAirtimeRequest.getMsisdn1());
         Ticket ticket = ticketService.findById(subscriberAirtimeRequest.getTicketId());
@@ -222,18 +240,23 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .build();
     }
 
-    private TransactionRequest getTransactionRequest(SubscriberToMerchantRequest request) {
+    private TransactionRequest getSubscriberToMerchantRequest(SubscriberToMerchantRequest request) {
+        String reference = Util.generateReference(request.getSubscriberMsisdn());
+        Ticket ticket = ticketService.findById(request.getTicketId());
+        ticket.setReference(reference);
+        ticketService.updateSingle(ticket);
         return RequestBuilder.newInstance()
-                .vendorCode(vendorEPGCode)
-                .vendorApiKey(vendorEPGApiKey)
+                .vendorCode(vendorSASAICode)
+                .vendorApiKey(vendorSASAIApiKey)
                 .checksumGenerator(checksumGenerator)
-                .currency("RTGS")
-                .pin(request.getPin())
                 .amount(String.valueOf(request.getAmount()))
                 .tranType(cpgConfigProperties.getSubscriberToMerchantTranType())
                 .msisdn2(request.getMerchantMsisdn())
                 .msisdn(request.getSubscriberMsisdn())
-                .reference(Util.generateReference(request.getSubscriberMsisdn()))
+                .callbackUrl(cpgConfigProperties.getCpgCallBackUrl())
+                .reference(reference)
+                .pin("0000")
+                .currency("ZWL")
                 .applicationCode("ecocashzw")
                 .build();
     }
@@ -256,7 +279,6 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .msisdn2(request.getMsisdn2())
                 .reference(reference)
                 .currency("ZWL")
-                .countryCode("ZW")
                 .amount(String.valueOf(request.getAmount()))
                 .build();
     }
@@ -278,7 +300,6 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .msisdn2(request.getMsisdn2())
                 .amount(String.valueOf(request.getAmount()))
                 .currency("RTGS")
-                .countryCode("ZW")
                 .build();
 
     }

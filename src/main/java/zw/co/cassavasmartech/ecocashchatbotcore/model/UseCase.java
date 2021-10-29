@@ -16,5 +16,8 @@ public enum UseCase {
     TRANSACTION_REVERSAL,
     WELCOME,
     VERIFICATION,
-    CALLBACK;
+    CALLBACK,
+    DEFAULTFALLBACK,
+    PAYMENT
+    ;
 }

@@ -61,7 +61,7 @@ public class RequestBuilder {
     }
 
     public RequestBuilder countryCode(String accountNumber) {
-        request.setField23(accountNumber);
+        request.setField2(accountNumber);
         return this;
     }
 

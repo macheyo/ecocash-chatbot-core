@@ -1,5 +1,8 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent;
 
+import org.hibernate.cfg.annotations.reflection.XMLContext;
+import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.DefaultFallbackIntentHandler;
+import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.PaymentIntentHandler;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.airtime.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.billPayment.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.merchantPayment.*;
@@ -12,6 +15,8 @@ import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.welcom
 
 public enum Intent {
     usecase_welcome (new WelcomeIntentHandler()),
+    default_fallback_intent(new DefaultFallbackIntentHandler()),
+    usecase_payment_intent(new PaymentIntentHandler()),
     usecase_verify_get_msisdn (new VerificationGetMsisdnIntentHandler()),
     usecase_verify_get_msisdn_fallback (new VerificationGetMsisdnFallbackIntentHandler()),
     usecase_verify_unregistered_msisdn_confirmation_affirmative(new UnregisteredMsisdnConfirmationAffirmativeIntentHandler()),
@@ -89,6 +94,13 @@ public enum Intent {
     usecase_send_money_get_beneficiary_msisdn(new SendMoneyGetBeneficiaryMsisdnIntentHandler()),
     usecase_send_money_get_beneficiary_amount(new SendMoneyGetBeneficiaryAmountIntentHandler()),
     usecase_send_money_confirmation_affirmative(new SendMoneyConfirmationAffirmativeIntentHandler()),
+    usecase_send_money_confirmation_negative(new SendMoneyConfirmationNegativeIntentHandler()),
+    usecase_send_money_confirmation_fallback(new SendMoneyConfirmationFallbackIntentHandler()),
+    usecase_send_money_confirmation_negative_no(new SendMoneyConfirmationNegativeNoIntentHandler()),
+    usecase_send_money_confirmation_negative_yes(new SendMoneyConfirmationNegativeYesIntentHandler()),
+    usecase_send_money_more_affirmative(new SendMoneyMoreAffirmativeIntentHandler()),
+    usecase_send_money_more_negative(new SendMoneyMoreNegativeIntentHandler()),
+    usecase_send_money_more_fallback(new SendMoneyMoreFallbackIntentHandler()),
     usecase_send_money_get_beneficiary_msisdn_fallback(new SendMoneyGetBeneficiaryMsisdnFallbackIntentHandler()),
     usecase_send_money_get_beneficiary_amount_fallback(new SendMoneyGetBeneficiaryAmountFallbackIntentHandler()),
     usecase_send_money_tariff(new SendMoneyTarriffIntent()),

@@ -5,13 +5,14 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.MobileNumberFormater;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessor;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.BillerLookupRequest;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberAirtimeRequest;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToBillerRequest;
-import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToSubscriberRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.EipService;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.EipTransaction;
@@ -28,10 +29,15 @@ import zw.co.cassavasmartech.ecocashchatbotcore.repository.ProfileRepository;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.PromptRepository;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.TicketRepository;
 import zw.co.cassavasmartech.ecocashchatbotcore.selfservice.SelfServiceCoreProcessor;
+import zw.co.cassavasmartech.ecocashchatbotcore.selfservice.data.BandType;
+import zw.co.cassavasmartech.ecocashchatbotcore.selfservice.data.EcocashTransaction;
+import zw.co.cassavasmartech.ecocashchatbotcore.selfservice.data.ReversalApproval;
+import zw.co.cassavasmartech.ecocashchatbotcore.selfservice.data.ReversalDto;
 import zw.co.cassavasmartech.ecocashchatbotcore.service.CustomerService;
 import zw.co.cassavasmartech.ecocashchatbotcore.service.ProfileService;
 import zw.co.cassavasmartech.ecocashchatbotcore.service.TicketService;
 import zw.co.cassavasmartech.ecocashchatbotcore.statementservice.StatementServiceConfigurationProperties;
+import zw.co.cassavasmartech.ecocashchatbotcore.telegram.TelegramService;
 
 import javax.annotation.PostConstruct;
 import java.io.FileOutputStream;
@@ -60,12 +66,21 @@ public class DialogFlowUtil {
     private static CustomerRepository customerRepository;
 
     @Autowired
+    PasswordEncoder passwordEncodr;
+    private static PasswordEncoder passwordEncoder;
+
+
+    @Autowired
     TicketRepository ticketRepo;
     private static TicketRepository ticketRepository;
 
     @Autowired
     TicketService ticketServ;
     private static TicketService ticketService;
+
+    @Autowired
+    TelegramService telegramServ;
+    private static TelegramService telegramService;
 
     @Autowired
     SelfServiceCoreProcessor selfServiceCore;
@@ -119,6 +134,8 @@ public class DialogFlowUtil {
         this.merchantRepository = merchantRepo;
         this.eipService = eipServ;
         this.statementServiceConfigurationProperties = statementServiceConfig;
+        this.telegramService = telegramServ;
+        this.passwordEncoder = passwordEncodr;
     }
 
     public static String getAlias(OriginalDetectIntentRequest originalDetectIntentRequest,  Optional<Customer> customer) {
@@ -174,7 +191,7 @@ public class DialogFlowUtil {
     public static Platform getPlatform(OriginalDetectIntentRequest originalDetectIntentRequest){
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String,Object> map = objectMapper.convertValue(originalDetectIntentRequest,Map.class);
-        if(map.get("Source")!=null)return Platform.TELEGRAM;
+        if(map.get("source")!=null)return Platform.TELEGRAM;
         else return Platform.WHATSAPP;
     }
 
@@ -228,10 +245,17 @@ public class DialogFlowUtil {
         return new String[]{ticket.get("msisdn").toString(),customer.getFirstName(),customer.getLastName()};
     }
 
+    public static String getCustomerNameAndSurnameByMsisdn(String msisdn){
+        TransactionResponse transactionResponse = customerService.customerLookup(SubscriberDto.builder().msisdn(msisdn).build());
+        return transactionResponse.getField6()+" "+transactionResponse.getField9();
+    }
+
     public static String[] getMerchantDetails(String msisdn){
-        Optional<Merchant> merchant = merchantRepository.findByNameOrMerchantCode(msisdn,msisdn);
-        if(merchant.isPresent())
-        return new String[]{merchant.get().getName(),merchant.get().getMerchantCode()};
+        TransactionResponse transactionResponse = paymentGatewayProcessor.lookupMerchant(MerchantLookupRequest.builder().merchant(msisdn).build());
+
+//        Optional<Merchant> merchant = merchantRepository.findByNameOrMerchantCode(msisdn,msisdn);
+        if(transactionResponse.getField1().equalsIgnoreCase("200"))
+            return new String[]{transactionResponse.getField6(),msisdn};
         return null;
     }
 
@@ -239,39 +263,130 @@ public class DialogFlowUtil {
     public static String buyAirtime(WebhookRequest webhookRequest) {
         Customer customer = isNewCustomer(webhookRequest);
         Map<String, Object> ticket = getTicket(webhookRequest);
-        return paymentGatewayProcessor.subscriberAirtime(SubscriberAirtimeRequest.builder()
+        ObjectMapper objectMapper = new ObjectMapper();
+        if(ticket.containsKey("amount"))
+            return paymentGatewayProcessor.subscriberAirtime(SubscriberAirtimeRequest.builder()
                 .msisdn1(customer.getMsisdn())
                 .msisdn2(ticket.get("msisdn").toString())
                 .amount(BigDecimal.valueOf(Double.parseDouble(ticket.get("amount").toString())))
                 .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
                 .build()).getField1();
+        else {
+            Map<String,Object> payment = objectMapper.convertValue(ticket.get("payment"),Map.class);
+            if (payment.containsKey("amount"))
+                return paymentGatewayProcessor.subscriberAirtime(SubscriberAirtimeRequest.builder()
+                        .msisdn1(customer.getMsisdn())
+                        .msisdn2(ticket.get("msisdn").toString())
+                        .amount(BigDecimal.valueOf(Double.parseDouble(payment.get("amount").toString())))
+                        .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
+                        .build()).getField1();
+        }
+        return null;
     }
 
     public static String payBill(WebhookRequest  webhookRequest){
         Customer customer = isNewCustomer(webhookRequest);
         Map<String, Object> ticket = getTicket(webhookRequest);
-        return paymentGatewayProcessor.subscriberToBiller(SubscriberToBillerRequest.builder()
+        ObjectMapper objectMapper = new ObjectMapper();
+        if(ticket.containsKey("amount"))
+            return paymentGatewayProcessor.subscriberToBiller(SubscriberToBillerRequest.builder()
                 .msisdn(customer.getMsisdn())
                 .billerCode(ticket.get("biller.original").toString())
                 .amount(BigDecimal.valueOf(Double.parseDouble(ticket.get("amount").toString())))
                 .msisdn2(ticket.get("number.original").toString())
                 .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
                 .build()).getField1();
+        else {
+            Map<String,Object> payment = objectMapper.convertValue(ticket.get("payment"),Map.class);
+            if (payment.containsKey("amount"))
+                return paymentGatewayProcessor.subscriberToBiller(SubscriberToBillerRequest.builder()
+                        .msisdn(customer.getMsisdn())
+                        .billerCode(ticket.get("biller.original").toString())
+                        .amount(BigDecimal.valueOf(Double.parseDouble(payment.get("amount").toString())))
+                        .msisdn2(ticket.get("number.original").toString())
+                        .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
+                        .build()).getField1();
+        }
+        return null;
 
     }
 
     public static String sendMoney(WebhookRequest webhookRequest) {
         Customer customer = isNewCustomer(webhookRequest);
         Map<String, Object> ticket = getTicket(webhookRequest);
-        return paymentGatewayProcessor.subscriberToSubscriber(SubscriberToSubscriberRequest.builder()
-                .msisdn1(customer.getMsisdn())
-                .msisdn2(ticket.get("msisdn.original").toString())
-                .amount(ticket.get("amount").toString())
-                .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
-                .build()).getField1();
+        ObjectMapper objectMapper = new ObjectMapper();
+        if(ticket.containsKey("amount"))
+            return paymentGatewayProcessor.subscriberToSubscriber(SubscriberToSubscriberRequest.builder()
+                    .msisdn1(customer.getMsisdn())
+                    .msisdn2(ticket.get("msisdn.original").toString())
+                    .amount(ticket.get("amount").toString())
+                    .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
+                    .build()).getField1();
+        else {
+            Map<String,Object> payment = objectMapper.convertValue(ticket.get("payment"),Map.class);
+            if (payment.containsKey("amount"))
+                return paymentGatewayProcessor.subscriberToSubscriber(SubscriberToSubscriberRequest.builder()
+                        .msisdn1(customer.getMsisdn())
+                        .msisdn2(ticket.get("msisdn.original").toString())
+                        .amount(payment.get("amount").toString())
+                        .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
+                        .build()).getField1();
+        }
+        return null;
     }
 
-    public static boolean getStatement(WebhookRequest  webhookRequest) throws ParseException {
+
+
+    public static List<Answer> getAnswerByMsisdnAndAnswerStatus(WebhookRequest webhookRequest){
+        Customer customer = isNewCustomer(webhookRequest);
+        return selfServiceCoreProcessor.getAnswerByMsisdnAndAnswerStatus(customer.getMsisdn());
+    }
+
+    public static String encodeText(String text){
+        return passwordEncoder.encode(text);
+    }
+
+    public static boolean isEncodingMatch(Answer answer, String userInput){
+        log.info("This is encoded customer answer {} and encoded answer from DB {}", userInput, answer.getAnswer());
+        return passwordEncoder.matches(userInput,answer.getAnswer());
+    }
+
+    public static boolean resetPIN(WebhookRequest webhookRequest){
+        boolean response = customerService.pinReset(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()));
+        log.info("This is the response from PIN reset service {}", response);
+        return customerService.pinReset(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()));
+    }
+
+    public static void getStatementScene3(WebhookRequest webhookRequest) throws ParseException{
+        Customer customer = isNewCustomer(webhookRequest);
+        Map<String, Object> ticket = getTicket(webhookRequest);
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String,Object> datePeriod = objectMapper.convertValue(ticket.get("datePeriod"),Map.class);
+        Statement statement = customerService.getStatement(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()), StatementRequest.builder()
+                .endDate(datePeriod.get("startDate").toString())
+                .startDate(datePeriod.get("endDate").toString())
+                .msisdn(customer.getMsisdn())
+                .currency(Currency.RTGS)
+                .mime(MIME.PDF)
+                .encryptDocument(false)
+                .passKey("1234")
+                .build());
+        if(statement!=null) {
+            String downloadURL = statement.getFileDownloadUri().replace("http://217.15.118.15",statementServiceConfigurationProperties.getNgrokServiceEndpointUrl());
+            if(getPlatform(webhookRequest.getOriginalDetectIntentRequest()).equals(Platform.TELEGRAM)) {
+                telegramService.sendDocument(getChatId(webhookRequest.getOriginalDetectIntentRequest()), downloadURL);
+                //return true;
+            }
+            //log.info("Downloaded file: {}",downloadFromUrl(statement.getFileDownloadUri().replace("http://217.15.118.15",statementServiceConfigurationProperties.getNgrokServiceEndpointUrl()),"downloda"));
+//            return true;
+        }
+
+        //prompt = "Done"+Emoji.Smiley+Emoji.ThumbsUp+"Here you go, please click the link below to download"+Emoji.PointDown+"\n"+statement.getFileDownloadUri().replace("http://217.15.118.15",statementServiceConfigurationProperties.getNgrokServiceEndpointUrl())+"\n\nIs there anything else I can assist you with?"+Emoji.Smiley;
+//        return false;
+
+    }
+
+    public static void getStatement(WebhookRequest  webhookRequest) throws ParseException {
         Customer customer = isNewCustomer(webhookRequest);
         Map<String, Object> ticket = getTicket(webhookRequest);
         Statement statement = customerService.getStatement(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()), StatementRequest.builder()
@@ -285,13 +400,16 @@ public class DialogFlowUtil {
                 .build());
         if(statement!=null) {
             String downloadURL = statement.getFileDownloadUri().replace("http://217.15.118.15",statementServiceConfigurationProperties.getNgrokServiceEndpointUrl());
-
+            if(getPlatform(webhookRequest.getOriginalDetectIntentRequest()).equals(Platform.TELEGRAM)) {
+                telegramService.sendDocument(getChatId(webhookRequest.getOriginalDetectIntentRequest()), downloadURL);
+                //return true;
+            }
             //log.info("Downloaded file: {}",downloadFromUrl(statement.getFileDownloadUri().replace("http://217.15.118.15",statementServiceConfigurationProperties.getNgrokServiceEndpointUrl()),"downloda"));
-            return true;
+//            return true;
         }
 
             //prompt = "Done"+Emoji.Smiley+Emoji.ThumbsUp+"Here you go, please click the link below to download"+Emoji.PointDown+"\n"+statement.getFileDownloadUri().replace("http://217.15.118.15",statementServiceConfigurationProperties.getNgrokServiceEndpointUrl())+"\n\nIs there anything else I can assist you with?"+Emoji.Smiley;
-        return false;
+//        return false;
     }
 
     public static String downloadFromUrl(URL url, String localFilename) throws IOException {
@@ -322,16 +440,35 @@ public class DialogFlowUtil {
         }
     }
 
-
-    public static EipTransaction payMerchant(WebhookRequest webhookRequest){
+    public static String payMerchant(WebhookRequest webhookRequest){
         Customer customer = isNewCustomer(webhookRequest);
         Map<String, Object> ticket = getTicket(webhookRequest);
-        return eipService.postPayment(SubscriberToMerchantRequest.builder().msisdn(customer.getMsisdn())
-                .msisdn(customer.getMsisdn())
-                .merchantCode(getMerchantDetails(ticket.get("msisdn.original").toString())[1])
-                .amount(BigDecimal.valueOf(Double.parseDouble(ticket.get("amount").toString())))
-                .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
-                .build());
+        ObjectMapper objectMapper = new ObjectMapper();
+        String merchantMsisdn = paymentGatewayProcessor.lookupMerchant(MerchantLookupRequest.builder().merchant(ticket.get("msisdn.original").toString()).build()).getField10();
+        if(ticket.containsKey("amount"))
+            return paymentGatewayProcessor.subscriberToMerchant(zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest.builder()
+                    .subscriberMsisdn(customer.getMsisdn())
+                    .merchantMsisdn(merchantMsisdn)
+                    .amount(BigDecimal.valueOf(Double.parseDouble(ticket.get("amount").toString())))
+                    .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
+                    .build()).getField1();
+//            return eipService.postPayment(SubscriberToMerchantRequest.builder().msisdn(customer.getMsisdn())
+//                .msisdn(customer.getMsisdn())
+//                .merchantCode(getMerchantDetails(ticket.get("msisdn.original").toString())[1])
+//                .amount(BigDecimal.valueOf(Double.parseDouble(ticket.get("amount").toString())))
+//                .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
+//                .build());
+        else {
+            Map<String,Object> payment = objectMapper.convertValue(ticket.get("payment"),Map.class);
+            if (payment.containsKey("amount"))
+                return paymentGatewayProcessor.subscriberToMerchant(zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest.builder()
+                        .subscriberMsisdn(customer.getMsisdn())
+                        .merchantMsisdn(merchantMsisdn)
+                        .amount(BigDecimal.valueOf(Double.parseDouble(payment.get("amount").toString())))
+                        .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
+                        .build()).getField1();
+        }
+        return null;
     }
 
     public static Object[] closeTicket(WebhookRequest webhookRequest, TicketStatus ticketStatus){
@@ -348,8 +485,11 @@ public class DialogFlowUtil {
         if(customer!=null) {
             Ticket ticket = new Ticket();
             ticket.setStage(4);
-            ticket.setSentimentEnd(webhookRequest.getQueryResult().getSentimentAnalysisResult().getQueryTextSentiment().getScore());
+            if (webhookRequest.getQueryResult().getSentimentAnalysisResult() != null)
+                ticket.setSentimentEnd(webhookRequest.getQueryResult().getSentimentAnalysisResult().getQueryTextSentiment().getScore());
+            else ticket.setSentimentEnd(0.0);
             ticket.setTicketStatus(ticketStatus);
+            if(map.containsKey("id"))
             ticketService.update(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()),Double.valueOf(map.get("id").toString()).longValue(),ticket);
             outputContext = OutputContext.builder()
                     .lifespanCount(0)
@@ -412,6 +552,11 @@ public class DialogFlowUtil {
                 break;
                 case BILL_PAYMENT:contextToBeRemoved="/awaiting_biller_code";
                 break;
+                case TRANSACTION_REVERSAL:contextToBeRemoved="/awaiting_reversal_choice";
+                break;
+                case MERCHANT_PAYMENT:contextToBeRemoved="/awaiting_merchant_msisdn";
+                break;
+                case SEND_MONEY:contextToBeRemoved="/awaiting_send_money_msisdn";
             }
             OutputContext redundantContext = OutputContext.builder()
                     .lifespanCount(0)
@@ -456,6 +601,12 @@ public class DialogFlowUtil {
         return false;
     }
 
+    public static boolean isMerchantValid(WebhookRequest webhookRequest){
+        String response = paymentGatewayProcessor.lookupMerchant(MerchantLookupRequest.builder().merchant(webhookRequest.getQueryResult().getQueryText()).build()).getField1();
+        if(response.equalsIgnoreCase("200"))return true;
+        return false;
+    }
+
     public static WebhookResponse defaultUnknownCustomerResponse(WebhookRequest webhookRequest){
         return WebhookResponse.builder()
                 .fulfillmentText("Before we proceed I need to verify your identity...What is your EcoCash number?")
@@ -465,6 +616,63 @@ public class DialogFlowUtil {
                         .name(webhookRequest.getSession()+"/contexts/awaiting_verify_msisdn")
                         .build()})
                 .build();
+    }
+
+    public static String[] getTransactionDetails(WebhookRequest webhookRequest){
+        Customer customer = isNewCustomer(webhookRequest);
+        Map<String,Object> ticket = getTicket(webhookRequest);
+        HttpEntity<ApiResponse<Optional<EcocashTransaction>>> response  = selfServiceCoreProcessor.validateReversal(customer.getMsisdn(),ticket.get("ecocashReference.original").toString());
+        if(response.getBody().getStatus()== HttpStatus.OK.value()) {
+            TransactionResponse transactionResponse = customerService.customerLookup(SubscriberDto.builder().msisdn(response.getBody().getBody().get().getRecipientMobileNumber()).build());
+            String transactionReference = response.getBody().getBody().get().getTransactionReference();
+            String transactionDate = response.getBody().getBody().get().getTransactionDate().toString();
+            String recipientMobileNumber = response.getBody().getBody().get().getRecipientMobileNumber();
+            String recipient = transactionResponse.getField6() + " " + transactionResponse.getField9();
+            String transactionAmount = "$ZWL" + response.getBody().getBody().get().getAmount();
+            return new String[]{transactionReference,transactionDate,recipientMobileNumber,recipient,transactionAmount};
+        }
+        else return null;
+
+    }
+
+    public static String[] getPendingTransactionDetails(WebhookRequest webhookRequest){
+        Customer customer = isNewCustomer(webhookRequest);
+        Map<String,Object> ticket = getTicket(webhookRequest);
+        List<ReversalDto> reversals = selfServiceCoreProcessor.pendingReversals(customer.getMsisdn()).getBody().getBody();
+        String[] reversalDetails = new String[]{};
+        for(ReversalDto reversal:reversals){
+            if(reversal.getReference().equalsIgnoreCase(ticket.get("ecocashReference.original").toString())) {
+                reversalDetails = new String[]{
+                        reversal.getReference(),
+                        reversal.getOriginalSenderMobileNumber(),
+                        getCustomerNameAndSurnameByMsisdn(reversal.getOriginalSenderMobileNumber()),
+                        reversal.getAmount().toString()};
+            }
+        }
+        return reversalDetails;
+    }
+
+    public static HttpEntity<ApiResponse<Optional<ReversalDto>>> initiateTransactionReversal(WebhookRequest webhookRequest){
+
+        Customer customer = isNewCustomer(webhookRequest);
+        Map<String,Object> ticket = getTicket(webhookRequest);
+        return selfServiceCoreProcessor.initiateReversal(customer.getMsisdn(),ticket.get("ecocashReference.original").toString());
+    }
+
+    public static HttpEntity<ApiResponse<Optional<ReversalDto>>> approveTransactionReversal(WebhookRequest webhookRequest){
+        Map<String,Object> ticket = getTicket(webhookRequest);
+        Customer customer = isNewCustomer(webhookRequest);
+        List<ReversalDto> reversals = selfServiceCoreProcessor.pendingReversals(customer.getMsisdn()).getBody().getBody();
+        ReversalDto reversalDto = null;
+        for(ReversalDto reversal:reversals)
+            if(reversal.getReference().equalsIgnoreCase(ticket.get("ecocashReference.original").toString()))
+                reversalDto=reversal;
+        return selfServiceCoreProcessor.approveReversal(ReversalApproval.builder().reversalId(reversalDto.getId()).bandType(BandType.SELF_INITIATED).applyCharge(true).build());
+    }
+
+    public static List<ReversalDto> getPendingReversals(WebhookRequest webhookRequest){
+        Customer customer = isNewCustomer(webhookRequest);
+        return selfServiceCoreProcessor.pendingReversals(customer.getMsisdn()).getBody().getBody();
     }
 
     public static WebhookResponse resumeConversation(WebhookRequest webhookRequest) {
@@ -504,9 +712,27 @@ public class DialogFlowUtil {
                         .outputContexts(new Object[]{buyAirtimeOutputContext,createTicket(webhookRequest, UseCase.BUY_AIRTIME)[0]})
                         .build();
             case SEND_MONEY:
-                break;
+                prompt += "What is the EcoCash number you want to send money to?";
+                OutputContext sendMoneyOutputContext = OutputContext.builder()
+                        .lifespanCount(1)
+                        .name(webhookRequest.getSession()+"/contexts/awaiting_send_money_msisdn")
+                        .build();
+                return WebhookResponse.builder()
+                        .fulfillmentText(prompt)
+                        .source("ecocashchatbotcore")
+                        .outputContexts(new Object[]{sendMoneyOutputContext,createTicket(webhookRequest, UseCase.BUY_AIRTIME)[0]})
+                        .build();
             case MERCHANT_PAYMENT:
-                break;
+                prompt += "What is the Merchant code/ name of merchant you want to pay?";
+                OutputContext merchantPaymentOutputContext = OutputContext.builder()
+                        .lifespanCount(1)
+                        .name(webhookRequest.getSession()+"/contexts/awaiting_merchant_msisdn")
+                        .build();
+                return WebhookResponse.builder()
+                        .fulfillmentText(prompt)
+                        .source("ecocashchatbotcore")
+                        .outputContexts(new Object[]{merchantPaymentOutputContext,createTicket(webhookRequest, UseCase.BUY_AIRTIME)[0]})
+                        .build();
             case BILL_PAYMENT:
                 prompt+= "What is the biller code that you want pay?";
                 OutputContext billpaymentOutputContext = OutputContext.builder()
@@ -542,7 +768,16 @@ public class DialogFlowUtil {
             case MERCHANT_LOOKUP:
                 break;
             case TRANSACTION_REVERSAL:
-                break;
+                prompt+= "Do you want to reverse a transaction or approve a reversal request?";
+                OutputContext transactionReversalOutputContext = OutputContext.builder()
+                        .lifespanCount(1)
+                        .name(webhookRequest.getSession()+"/contexts/awaiting_reversal_choice")
+                        .build();
+                return WebhookResponse.builder()
+                        .fulfillmentText(prompt)
+                        .source("ecocashchatbotcore")
+                        .outputContexts(new Object[]{transactionReversalOutputContext,createTicket(webhookRequest, UseCase.TRANSACTION_REVERSAL)[0]})
+                        .build();
             case WELCOME:
                 break;
             case VERIFICATION:

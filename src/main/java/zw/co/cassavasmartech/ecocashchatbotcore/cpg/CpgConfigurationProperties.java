@@ -52,6 +52,8 @@ public class CpgConfigurationProperties {
     private String subscriberAirtimeTranType;
     @NotEmpty
     private String registrationTrasType;
+    @NotEmpty
+    private String merchantLookupTranType;
 
 
 }

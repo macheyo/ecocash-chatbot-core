@@ -17,7 +17,7 @@ public class SendMoneyConfirmationNegativeIntentHandler extends IntentHandlerAda
         Customer customer = DialogFlowUtil.isNewCustomer(webhookRequest[0]);
         return DialogFlowUtil.getResponse(
                 webhookRequest[0],
-                DialogFlowUtil.promptProcessor(6, webhookRequest[0], customer), // TO BE MAPPED
+                DialogFlowUtil.promptProcessor(6, webhookRequest[0], customer),
                 new Object[]{},
                 UseCase.SEND_MONEY);
     }

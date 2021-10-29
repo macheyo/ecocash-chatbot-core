@@ -14,7 +14,12 @@ public class SendMoneyScenario2IntentHandler extends IntentHandlerAdapter {
     public WebhookResponse getWebhookResponse(WebhookRequest... webhookRequest) {
         log.info("Processing Dialogflow Intent: {}", webhookRequest[0].getQueryResult().getIntent().getDisplayName());
         Customer customer = DialogFlowUtil.isNewCustomer(webhookRequest[0]);
-        return DialogFlowUtil.getResponse(webhookRequest[0],
+        if(customer!=null)
+            return DialogFlowUtil.getResponse(webhookRequest[0],
+                DialogFlowUtil.promptProcessor(16,webhookRequest[0],customer),
+                DialogFlowUtil.createTicket(webhookRequest[0],UseCase.SEND_MONEY),
+                UseCase.SEND_MONEY);
+        else return DialogFlowUtil.getResponse(webhookRequest[0],
                 DialogFlowUtil.promptProcessor(16,webhookRequest[0],customer),
                 new Object[]{},
                 UseCase.SEND_MONEY);

@@ -17,12 +17,9 @@ public class StatementEndDateIntentHandler extends IntentHandlerAdapter {
         log.info("Processing dialogflow intent: {}", webhookRequest[0].getQueryResult().getIntent().getDisplayName());
         Customer customer = DialogFlowUtil.isNewCustomer(webhookRequest[0]);
         try {
-            if (DialogFlowUtil.getStatement(webhookRequest[0])) return DialogFlowUtil.getResponse(webhookRequest[0],
+            DialogFlowUtil.getStatement(webhookRequest[0]);
+            return DialogFlowUtil.getResponse(webhookRequest[0],
                     DialogFlowUtil.promptProcessor(4, webhookRequest[0], customer),
-                    new Object[]{},
-                    UseCase.SUBSCRIBER_STATEMENT);
-            else return DialogFlowUtil.getResponse(webhookRequest[0],
-                    DialogFlowUtil.promptProcessor(5, webhookRequest[0], customer),
                     new Object[]{},
                     UseCase.SUBSCRIBER_STATEMENT);
         } catch (ParseException e) {

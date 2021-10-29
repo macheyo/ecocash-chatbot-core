@@ -1,6 +1,7 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.handler.merchantPayment;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookResponse;
@@ -15,8 +16,8 @@ public class PayMerchantConfirmationAffirmativeIntentHandler extends IntentHandl
     public WebhookResponse getWebhookResponse(WebhookRequest... webhookRequest) {
         log.info("Processing dialogflow intent: {}", webhookRequest[0].getQueryResult().getIntent().getDisplayName());
         Customer customer = DialogFlowUtil.isNewCustomer(webhookRequest[0]);
-        EipTransaction response = DialogFlowUtil.payMerchant(webhookRequest[0]);
-        if(response!=null) return DialogFlowUtil.getResponse(webhookRequest[0],
+        String response = DialogFlowUtil.payMerchant(webhookRequest[0]);
+        if(response.equalsIgnoreCase("603")) return DialogFlowUtil.getResponse(webhookRequest[0],
                 DialogFlowUtil.promptProcessor(7,webhookRequest[0],customer),
                 new Object[]{},
                 UseCase.MERCHANT_PAYMENT);

@@ -294,7 +294,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         Optional<Customer> customer = isNewCustomer(webhookRequest);
         String prompt;
         if(customer.isPresent()) {
-            HttpEntity<ApiResponse<Optional<EcocashTransaction>>> response  = selfServiceCoreProcessor.validateReversal(customer.get().getMsisdn(),map.get("ecocashReference").toString());
+            HttpEntity<ApiResponse<Optional<EcocashTransaction>>> response  = selfServiceCoreProcessor.validateReversal(customer.get().getMsisdn(),map.get("ecocashReference.original").toString());
             if(response.getBody().getStatus()!= HttpStatus.OK.value())prompt="Ooops"+ Emoji.Pensive+response.getBody().getMessage();
             else {
                 TransactionResponse transactionResponse = customerService.customerLookup(SubscriberDto.builder().msisdn(response.getBody().getBody().get().getRecipientMobileNumber()).build());
@@ -373,7 +373,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         Optional<Customer> customer = isNewCustomer(webhookRequest);
         String prompt;
         if(customer.isPresent()) {
-            HttpEntity<ApiResponse<Optional<ReversalDto>>> response  = selfServiceCoreProcessor.initiateReversal(customer.get().getMsisdn(),map.get("ecocashReference").toString());
+            HttpEntity<ApiResponse<Optional<ReversalDto>>> response  = selfServiceCoreProcessor.initiateReversal(customer.get().getMsisdn(),map.get("ecocashReference.original").toString());
             if(response.getBody().getStatus()!= HttpStatus.OK.value()) {
                 prompt = "Ooops" + Emoji.Pensive + response.getBody().getMessage() + "\nAnything else I can do for you?";
             }
@@ -410,7 +410,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         Optional<Customer> customer = isNewCustomer(webhookRequest);
         String prompt;
         if(customer.isPresent()) {
-            HttpEntity<ApiResponse<Optional<EcocashTransaction>>> response  = selfServiceCoreProcessor.validateReversal(customer.get().getMsisdn(),map.get("ecocashReference").toString());
+            HttpEntity<ApiResponse<Optional<EcocashTransaction>>> response  = selfServiceCoreProcessor.validateReversal(customer.get().getMsisdn(),map.get("ecocashReference.original").toString());
             if(response.getBody().getStatus()!= HttpStatus.OK.value())prompt="Ooops"+Emoji.Pensive+response.getBody().getMessage();
             else {
                 TransactionResponse transactionResponse = customerService.customerLookup(SubscriberDto.builder().msisdn(response.getBody().getBody().get().getRecipientMobileNumber()).build());

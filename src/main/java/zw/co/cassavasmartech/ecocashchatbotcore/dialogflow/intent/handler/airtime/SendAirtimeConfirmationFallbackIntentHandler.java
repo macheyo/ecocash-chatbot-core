@@ -15,7 +15,7 @@ public class SendAirtimeConfirmationFallbackIntentHandler extends IntentHandlerA
         Customer customer = DialogFlowUtil.isNewCustomer(webhookRequest[0]);
         return DialogFlowUtil.getResponse(
                 webhookRequest[0],
-                DialogFlowUtil.promptProcessor(10,webhookRequest[0],customer),
+                DialogFlowUtil.promptProcessor(21,webhookRequest[0],customer),
                 new Object[]{},
                 UseCase.BUY_AIRTIME
         );
