@@ -6,6 +6,7 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.MailParseException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import zw.co.cassavasmartech.ecocashchatbotcore.email.data.EmailNotification;
@@ -29,7 +30,7 @@ public class EmailServiceImpl implements EmailService {
         this.mailSender = mailSender;
     }
 
-
+    @Async("threadPoolTaskExecutor")
     @Override
     public void send(EmailNotification message) {
         if(StringUtils.hasLength(message.getFilePath())){
@@ -49,7 +50,7 @@ public class EmailServiceImpl implements EmailService {
             email.setRecipients(Message.RecipientType.TO, toAddresses);
             email.setSubject(message.getSubject());
             email.setSentDate(new Date());
-            email.setContent(message.getTemplateName(), "text/html; charset=utf-8");
+            email.setContent(message.getBody(), "text/html; charset=utf-8");
             log.info("=> Sending email for user: {}", message.getTo());
             mailSender.send(email);
             log.info("<= Done sending email for user: {}", message.getTo());
@@ -66,7 +67,7 @@ public class EmailServiceImpl implements EmailService {
             helper.setFrom(emailMessage.getSender());
             helper.setTo(emailMessage.getTo());
             helper.setSubject(emailMessage.getSubject());
-            helper.setText(emailMessage.getTemplateName(),true);
+            helper.setText(emailMessage.getBody(),true);
             FileSystemResource file = new FileSystemResource(emailMessage.getFilePath());
             helper.addAttachment(file.getFilename(), file);
         } catch (MessagingException e) {

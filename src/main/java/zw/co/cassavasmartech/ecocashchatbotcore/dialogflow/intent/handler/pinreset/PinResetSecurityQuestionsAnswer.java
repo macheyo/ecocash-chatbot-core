@@ -11,6 +11,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.IntentHandlerA
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Answer;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Customer;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.TicketStatus;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.UseCase;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.emoji.Emoji;
 
 import java.util.List;
@@ -52,7 +53,7 @@ public class PinResetSecurityQuestionsAnswer extends IntentHandlerAdapter {
                             .build();
                 }else{
                     if(DialogFlowUtil.resetPIN(webhookRequest[0])) {
-                        prompt = "well done" + Emoji.ThumbsUp + "I have reset your PIN. You will receive an SMS on your phone with your new temporary PIN. You will be prompted to change this when you dial *151#. \nAnything else I can do for you" + Emoji.Smiley;
+                        prompt = DialogFlowUtil.promptProcessor(5, webhookRequest[0], customer);// "well done" + Emoji.ThumbsUp + "I have reset your PIN. You will receive an SMS on your phone with your new temporary PIN. You will be prompted to change this when you dial *151#. \nAnything else I can do for you" + Emoji.Smiley;
                         outputContext = OutputContext.builder()
                                 .lifespanCount(50)
                                 .name(webhookRequest[0].getSession() + "/contexts/ticket")
@@ -75,7 +76,7 @@ public class PinResetSecurityQuestionsAnswer extends IntentHandlerAdapter {
                     }
                 }
             } else {
-                prompt = "Your answer is wrong. An agent will be in touch shortly to verify your identity";
+                prompt = DialogFlowUtil.promptProcessor(6,webhookRequest[0],customer);
                 return WebhookResponse.builder()
                         .fulfillmentText(prompt)
                         .source("ecocashchatbotcore")

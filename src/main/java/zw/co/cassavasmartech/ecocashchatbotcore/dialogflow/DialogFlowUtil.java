@@ -5,8 +5,10 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
@@ -19,10 +21,13 @@ import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.EipTransaction;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.Merchant;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.MerchantRepository;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.SubscriberToMerchantRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.email.EmailService;
+import zw.co.cassavasmartech.ecocashchatbotcore.email.data.EmailNotification;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.PromptNotFoundException;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function.Function;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.function.FunctionAdapter;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.Currency;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.emoji.Emoji;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.CustomerRepository;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.ProfileRepository;
@@ -39,6 +44,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.service.TicketService;
 import zw.co.cassavasmartech.ecocashchatbotcore.statementservice.StatementServiceConfigurationProperties;
 import zw.co.cassavasmartech.ecocashchatbotcore.telegram.TelegramService;
 
+import javax.activation.MailcapCommandMap;
 import javax.annotation.PostConstruct;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -46,11 +52,10 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.DateFormat;
 import java.text.ParseException;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Slf4j
@@ -118,6 +123,9 @@ public class DialogFlowUtil {
     StatementServiceConfigurationProperties statementServiceConfig;
     private static StatementServiceConfigurationProperties statementServiceConfigurationProperties;
 
+    @Autowired
+    EmailService emailServ;
+    private static EmailService emailService;
 
     @PostConstruct
     public void init() {
@@ -136,6 +144,7 @@ public class DialogFlowUtil {
         this.statementServiceConfigurationProperties = statementServiceConfig;
         this.telegramService = telegramServ;
         this.passwordEncoder = passwordEncodr;
+        this.emailService = emailServ;
     }
 
     public static String getAlias(OriginalDetectIntentRequest originalDetectIntentRequest,  Optional<Customer> customer) {
@@ -191,7 +200,7 @@ public class DialogFlowUtil {
     public static Platform getPlatform(OriginalDetectIntentRequest originalDetectIntentRequest){
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String,Object> map = objectMapper.convertValue(originalDetectIntentRequest,Map.class);
-        if(map.get("source")!=null)return Platform.TELEGRAM;
+        if(map.containsKey("source"))return Platform.TELEGRAM;
         else return Platform.WHATSAPP;
     }
 
@@ -213,9 +222,21 @@ public class DialogFlowUtil {
         int ticketIndex=0;
         for(int i = 0;i<outputContexts.size();i++){
             Map<String,Object> map = objectMapper.convertValue(outputContexts.get(i),Map.class);
-            if(map.get("name").toString().equalsIgnoreCase(webhookRequest.getSession()+"/contexts/ticket")) ticketIndex=i;
+            String name = map.get("name").toString();
+            if(name.equalsIgnoreCase(webhookRequest.getSession()+"/contexts/ticket")) ticketIndex=i;
         }
         return objectMapper.convertValue(outputContexts.get(ticketIndex).getParameters(),Map.class);
+    }
+
+    public static Map<String,Object> getRecursion(WebhookRequest webhookRequest){
+        List<OutputContext> outputContexts = webhookRequest.getQueryResult().getOutputContexts();
+        ObjectMapper objectMapper = new ObjectMapper();
+        int recursionIndex=0;
+        for(int i = 0;i<outputContexts.size();i++){
+            Map<String,Object> map = objectMapper.convertValue(outputContexts.get(i),Map.class);
+            if(map.get("name").toString().equalsIgnoreCase(webhookRequest.getSession()+"/contexts/recursion")) recursionIndex=i;
+        }
+        return objectMapper.convertValue(outputContexts.get(recursionIndex).getParameters(),Map.class);
     }
 
     public static Map<String,Object> getUsecase(WebhookRequest webhookRequest){
@@ -311,6 +332,20 @@ public class DialogFlowUtil {
 
     }
 
+
+    public static void sendEmail(WebhookRequest webhookRequest){
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        Customer customer = isNewCustomer(webhookRequest);
+        emailService.send(EmailNotification.builder()
+                .sender("no-reply@ecocashholdings.co.zw")
+                .subject("Ecocash Chatbot Unfulfilled customer request")
+                .to("nunurai@ecocashholdings.co.zw")
+                .body("Hello, <br/><br/>Please assist Ecocash customer " + customer.getFirstName()+" "+customer.getLastName() +"("+customer.getMsisdn()+"). "+"<br/>The bot failed to fulfill customer's request under the " + webhookRequest.getQueryResult().getIntent().getDisplayName()+" intent on " + formatter.format(date)+"<br/><br/> Regards<br/><br/> Ecocash Chatbot")
+                .build());
+
+    }
+
     public static String sendMoney(WebhookRequest webhookRequest) {
         Customer customer = isNewCustomer(webhookRequest);
         Map<String, Object> ticket = getTicket(webhookRequest);
@@ -372,12 +407,13 @@ public class DialogFlowUtil {
                 .passKey("1234")
                 .build());
         if(statement!=null) {
-            String downloadURL = statement.getFileDownloadUri().replace("http://217.15.118.15",statementServiceConfigurationProperties.getNgrokServiceEndpointUrl());
+            String downloadURL = statement.getFileDownloadUri().replace("http://192.168.92.94:6060/reports-admin/",statementServiceConfigurationProperties.getNgrokServiceEndpointUrl());
             if(getPlatform(webhookRequest.getOriginalDetectIntentRequest()).equals(Platform.TELEGRAM)) {
                 telegramService.sendDocument(getChatId(webhookRequest.getOriginalDetectIntentRequest()), downloadURL);
                 //return true;
             }
-            //log.info("Downloaded file: {}",downloadFromUrl(statement.getFileDownloadUri().replace("http://217.15.118.15",statementServiceConfigurationProperties.getNgrokServiceEndpointUrl()),"downloda"));
+            log.info("Downloaded file: {}",downloadURL);
+
 //            return true;
         }
 
@@ -386,25 +422,66 @@ public class DialogFlowUtil {
 
     }
 
-    public static void getStatement(WebhookRequest  webhookRequest) throws ParseException {
+    public static String[] getStatementConfirmationDetails(WebhookRequest webhookRequest){
         Customer customer = isNewCustomer(webhookRequest);
+
         Map<String, Object> ticket = getTicket(webhookRequest);
-        Statement statement = customerService.getStatement(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()), StatementRequest.builder()
-                .endDate(ticket.get("startDateTime").toString())
-                .startDate(ticket.get("endDateTime").toString())
-                .msisdn(customer.getMsisdn())
+        log.info("This is the ticket id: {}", ticket.get("id").toString());
+        Ticket ticketObject = ticketService.findById(Double.valueOf(ticket.get("id").toString()).longValue());
+        if(ticket.containsKey("startDateTime")&&ticket.containsKey("endDateTime")) {
+            ticketObject.setFolio(ticket.get("startDateTime").toString()+" "+ticket.get("endDateTime").toString());
+            ticketRepository.save(ticketObject);
+            String[] dates=null;
+            try {
+                dates = correctStatementDate(ticket.get("startDateTime").toString(),ticket.get("endDateTime").toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return dates;
+        }
+        else {
+            ObjectMapper objectMapper = new ObjectMapper();
+            Map<String,Object> datePeriod = objectMapper.convertValue(ticket.get("datePeriod"),Map.class);
+            ticketObject.setFolio(datePeriod.get("startDate").toString()+" "+datePeriod.get("endDate").toString());
+            String[] dates=null;
+            try {
+                dates = correctStatementDate(datePeriod.get("startDate").toString(),datePeriod.get("endDate").toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return dates;
+        }
+    }
+
+    public static String[] correctStatementDate(String startDateTime, String endDateTime) throws ParseException {
+        DateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss+02:00");
+        DateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date today = new Date();
+        Date startDate = isoFormat.parse(startDateTime);
+        Date endDate = isoFormat.parse(endDateTime);
+        if(startDate.getYear()>today.getYear())startDate.setYear(today.getYear());
+        if(endDate.getTime()>today.getYear())endDate.setYear(today.getYear());
+        return new String[]{newFormat.format(startDate),newFormat.format(endDate)};
+    }
+
+    public static void getStatement(String startDate, String endDate, Profile profile) throws ParseException {
+        Statement statement = customerService.getStatement(profile.getChatId(), StatementRequest.builder()
+                .endDate(startDate)
+                .startDate(endDate)
+                .msisdn(profile.getCustomer().getMsisdn())
                 .currency(Currency.RTGS)
                 .mime(MIME.PDF)
                 .encryptDocument(false)
                 .passKey("1234")
                 .build());
         if(statement!=null) {
-            String downloadURL = statement.getFileDownloadUri().replace("http://217.15.118.15",statementServiceConfigurationProperties.getNgrokServiceEndpointUrl());
-            if(getPlatform(webhookRequest.getOriginalDetectIntentRequest()).equals(Platform.TELEGRAM)) {
-                telegramService.sendDocument(getChatId(webhookRequest.getOriginalDetectIntentRequest()), downloadURL);
+            String downloadURL = statement.getFileDownloadUri().replace("http://192.168.92.94:6060/reports-admin/",statementServiceConfigurationProperties.getNgrokServiceEndpointUrl());
+            if(profile.getPlatform().equals(Platform.TELEGRAM)) {
+                telegramService.sendDocument(profile.getChatId(), downloadURL);
                 //return true;
             }
-            //log.info("Downloaded file: {}",downloadFromUrl(statement.getFileDownloadUri().replace("http://217.15.118.15",statementServiceConfigurationProperties.getNgrokServiceEndpointUrl()),"downloda"));
+            log.info("Downloaded file: {}",downloadURL);
+
 //            return true;
         }
 
@@ -438,6 +515,18 @@ public class DialogFlowUtil {
                 }
             }
         }
+    }
+
+    public static String payForStatement(WebhookRequest webhookRequest) {
+        Customer customer = isNewCustomer(webhookRequest);
+        Map<String, Object> ticket = getTicket(webhookRequest);
+        String merchantMsisdn = paymentGatewayProcessor.lookupMerchant(MerchantLookupRequest.builder().merchant("019919").build()).getField10();
+        return paymentGatewayProcessor.subscriberToMerchant(zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest.builder()
+                    .subscriberMsisdn(customer.getMsisdn())
+                    .merchantMsisdn(merchantMsisdn)
+                    .amount(BigDecimal.valueOf(15))
+                    .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
+                    .build()).getField1();
     }
 
     public static String payMerchant(WebhookRequest webhookRequest){
@@ -513,16 +602,11 @@ public class DialogFlowUtil {
         String[] sessionInfo = webhookRequest.getSession().split("/");
         ticket.setConversationId(sessionInfo[sessionInfo.length-1]);
         ticketRepository.save(ticket);
-        TicketParameter ticketParameter = TicketParameter.builder()
-                .id(ticket.getId())
-                .usecase(usecase)
-                .build();
-        OutputContext outputContext = OutputContext.builder()
-                .lifespanCount(50)
-                .name(webhookRequest.getSession() + "/contexts/ticket")
-                .parameters(ticketParameter)
-                .build();
-        return new Object[]{outputContext};
+        RecursionParameter recursionParameter = RecursionParameter.builder().intent(webhookRequest.getQueryResult().getIntent().getDisplayName()).iteration(0).build();
+        TicketParameter ticketParameter = TicketParameter.builder().id(ticket.getId()).usecase(usecase).build();
+        OutputContext ticketContext = OutputContext.builder().lifespanCount(50).name(webhookRequest.getSession() + "/contexts/ticket").parameters(ticketParameter).build();
+        OutputContext recursionContext = OutputContext.builder().lifespanCount(5).name(webhookRequest.getSession() + "/contexts/recursion").parameters(recursionParameter).build();
+        return new Object[]{ticketContext,recursionContext};
     }
 
     public static String promptProcessor(int position, WebhookRequest webhookRequest, Customer customer){
@@ -572,6 +656,17 @@ public class DialogFlowUtil {
             }
             else contexts = new Object[]{};
         }
+//        int iteration;
+//        Map<String,Object> recursionObject = getRecursion(webhookRequest);
+//        if(recursionObject.get("intent").toString().equalsIgnoreCase(webhookRequest.getQueryResult().getIntent().getDisplayName())){
+//            int i = Integer.parseInt(recursionObject.get("iteration").toString());
+//            if(i>1) prompt="So here we are, at the end of the road....";
+//            else {
+//                iteration = i++;
+//            }
+//        }else{
+//
+//        }
         WebhookResponse response = WebhookResponse.builder()
                 .fulfillmentText(prompt)
                 .source("ecocashchatbotcore")

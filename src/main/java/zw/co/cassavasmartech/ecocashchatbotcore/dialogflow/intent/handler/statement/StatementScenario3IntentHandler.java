@@ -15,17 +15,9 @@ public class StatementScenario3IntentHandler extends IntentHandlerAdapter {
     public WebhookResponse getWebhookResponse(WebhookRequest... webhookRequest) {
         log.info("Processing dialogflow intent: {}", webhookRequest[0].getQueryResult().getIntent().getDisplayName());
         Customer customer = DialogFlowUtil.isNewCustomer(webhookRequest[0]);
-        try {
-            DialogFlowUtil.getStatementScene3(webhookRequest[0]);
-            return DialogFlowUtil.getResponse(webhookRequest[0],
-                    DialogFlowUtil.promptProcessor(4, webhookRequest[0], customer),
-                    new Object[]{},
-                    UseCase.SUBSCRIBER_STATEMENT);
-        } catch (ParseException e) {
-            return DialogFlowUtil.getResponse(webhookRequest[0],
-                    DialogFlowUtil.promptProcessor(5, webhookRequest[0], customer),
-                    new Object[]{},
-                    UseCase.SUBSCRIBER_STATEMENT);
-        }
+        return DialogFlowUtil.getResponse(webhookRequest[0],
+                DialogFlowUtil.promptProcessor(12, webhookRequest[0], customer),
+                new Object[]{},
+                UseCase.SUBSCRIBER_STATEMENT);
     }
 }

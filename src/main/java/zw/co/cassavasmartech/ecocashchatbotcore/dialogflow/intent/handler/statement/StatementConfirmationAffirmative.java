@@ -8,20 +8,24 @@ import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.IntentHandlerA
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Customer;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.UseCase;
 
-import java.text.ParseException;
-
 @Slf4j
-public class StatementEndDateIntentHandler extends IntentHandlerAdapter {
+public class StatementConfirmationAffirmative extends IntentHandlerAdapter {
     @Override
     public WebhookResponse getWebhookResponse(WebhookRequest... webhookRequest) {
-        log.info("Processing dialogflow intent: {}", webhookRequest[0].getQueryResult().getIntent().getDisplayName());
+        log.info("Processing Dialogflow Intent: {}", webhookRequest[0].getQueryResult().getIntent().getDisplayName());
         Customer customer = DialogFlowUtil.isNewCustomer(webhookRequest[0]);
-        return DialogFlowUtil.getResponse(webhookRequest[0],
-                    DialogFlowUtil.promptProcessor(4, webhookRequest[0], customer),
+        String response = DialogFlowUtil.payForStatement(webhookRequest[0]);
+        if(response.equalsIgnoreCase("603")){
+                return DialogFlowUtil.getResponse(webhookRequest[0],
+                    DialogFlowUtil.promptProcessor(10,webhookRequest[0],customer), // push sent
                     new Object[]{},
                     UseCase.SUBSCRIBER_STATEMENT);
-
-
+        }else{
+            return DialogFlowUtil.getResponse(
+                    webhookRequest[0],
+                    DialogFlowUtil.promptProcessor(11,webhookRequest[0],customer), //SOMETHING WENT WRONG
+                    new Object[]{},
+                    UseCase.SUBSCRIBER_STATEMENT);
+        }
     }
 }
-

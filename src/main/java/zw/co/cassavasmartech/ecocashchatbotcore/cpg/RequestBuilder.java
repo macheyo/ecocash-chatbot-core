@@ -56,12 +56,12 @@ public class RequestBuilder {
     }
 
     public RequestBuilder callbackUrl(String callbackUrl){
-        request.setField9(callbackUrl);
+        request.setField8(callbackUrl);
         return this;
     }
 
-    public RequestBuilder countryCode(String accountNumber) {
-        request.setField2(accountNumber);
+    public RequestBuilder countryCode(String countryCode) {
+        request.setField23(countryCode);
         return this;
     }
 
@@ -87,7 +87,6 @@ public class RequestBuilder {
         return this;
     }
 
-
     public RequestBuilder checksumGenerator(CheckSumGenerator checksumGenerator) {
         this.checksumGenerator = checksumGenerator;
         return this;
@@ -108,7 +107,7 @@ public class RequestBuilder {
 
 
     public RequestBuilder applicationCode(String serviceName) {
-        request.setField8(serviceName);
+        request.setField9(serviceName);
         return this;
     }
 

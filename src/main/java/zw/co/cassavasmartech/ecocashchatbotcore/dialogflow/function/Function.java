@@ -15,8 +15,11 @@ public enum Function {
     GETTRANSACTIONREVERSALDETAILS(new GetTransactionReversalDetails()),
     GETTRANSACTIONPENDINGREVERSALDETAILS(new GetTransactionPendingReversalDetails()),
     GETSTATEMENT(new GetStatement()),
+    GETSTATEMENTDETAILS(new GetStatementDetails()),
     GETPENDINGREVERSALS(new GetPendingReversals()),
-    CARRIAGERETURN(new CarriageReturn())
+    CARRIAGERETURN(new CarriageReturn()),
+    SENDEMAILTONUNURAI(new SendEmailToNunurai()),
+
     ;
 
     private final FunctionAdapter fa;

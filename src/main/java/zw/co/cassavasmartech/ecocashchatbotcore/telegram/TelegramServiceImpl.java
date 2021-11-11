@@ -1,6 +1,8 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.telegram;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedInputStream;
@@ -10,6 +12,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 @Service
+@Slf4j
 public class TelegramServiceImpl implements TelegramService {
     @Autowired
     TelegramConfigurationProperties telegramConfigurationProperties;
@@ -27,11 +30,12 @@ public class TelegramServiceImpl implements TelegramService {
 
     @Override
     public void sendDocument(String chatId, String documentURL) {
-        String urlString = String.format(telegramConfigurationProperties.getSendDocumentUrl(), telegramConfigurationProperties.getToken(), chatId, documentURL,"This is your statement. Can I do anything else for you?");
+        String urlString = String.format(telegramConfigurationProperties.getSendDocumentUrl(), telegramConfigurationProperties.getToken(), chatId, documentURL,"This is your statement");
         try{
             URL url = new URL(urlString);
             URLConnection urlConnection = url.openConnection();
             InputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
+            log.info("Input stream: {}", inputStream);
         }catch (IOException e){
             e.printStackTrace();
         }

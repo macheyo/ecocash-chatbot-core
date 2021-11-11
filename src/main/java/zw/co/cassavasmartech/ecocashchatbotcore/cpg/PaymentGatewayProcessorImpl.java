@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.Util;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.*;
+import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.BusinessException;
 import zw.co.cassavasmartech.ecocashchatbotcore.infobip.InfobipService;
 import zw.co.cassavasmartech.ecocashchatbotcore.infobip.data.*;
@@ -16,6 +17,8 @@ import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.service.TicketService;
 import zw.co.cassavasmartech.ecocashchatbotcore.telegram.TelegramService;
 import zw.co.cassavasmartech.ecocashchatbotcore.twilio.TwilioService;
+
+import java.text.ParseException;
 
 @Component
 @RequiredArgsConstructor
@@ -77,7 +80,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
     public TransactionResponse lookupCustomer(String msisdn) {
         final TransactionRequest transactionRequest = getLookUpCustomerRequest(msisdn);
         log.debug("Processing Lookup Customer request");
-        return invokeApi3(transactionRequest);
+        return invokeApi2(transactionRequest);
     }
 
     @Override
@@ -123,9 +126,18 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
         Ticket ticket = ticketService.findByReference(reference);
         Boolean isNotified = false;
         String notification;
-        if(postTransaction.getTransactionRequest().getField1().equalsIgnoreCase("200"))
-        notification = "Done, your transaction was successfull. Is there anything else you would like me to do for you?";
-        else notification = "Ooops!!! Your transaction failed. Is there anything else you would like me to do for you?";
+        if(postTransaction.getTransactionRequest().getField1().equalsIgnoreCase("200")) {
+            if(ticket.getUsecase().equals(UseCase.SUBSCRIBER_STATEMENT)) {
+                String[] period = ticket.getFolio().split("\\s");
+                try {
+                    DialogFlowUtil.getStatement(period[0],period[1],profile);
+                } catch (ParseException e) {
+                    log.info("Parse exception: {}", e);
+                }
+            }
+            notification = "Done, your transaction was successfull. Is there anything else you would like me to do for you?";
+        }
+        else notification = "Ooops!!! Your transaction failed with message: "+ postTransaction.getTransactionRequest().getField2() +". Is there anything else you would like me to do for you?";
         isNotified =sendNotificationToPlatform(ticket.getConversationId(), profile,notification);
         return isNotified;
     }
@@ -214,14 +226,16 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
         ticket.setReference(reference);
         ticketService.updateSingle(ticket);
         return RequestBuilder.newInstance()
-                .vendorCode(vendorEPGCode)
-                .vendorApiKey(vendorEPGApiKey)
+                .vendorCode(vendorSASAICode)
+                .vendorApiKey(vendorSASAIApiKey)
                 .checksumGenerator(checksumGenerator)
                 .msisdn(subscriberAirtimeRequest.getMsisdn1())
                 .applicationCode("ecocashzw")
                 .reference(reference)
                 .callbackUrl(cpgConfigProperties.getCpgCallBackUrl())
                 .msisdn2(subscriberAirtimeRequest.getMsisdn2())
+                .countryCode("ZW")
+                .currency("ZWL")
                 .amount(String.valueOf(subscriberAirtimeRequest.getAmount()))
                 .tranType(cpgConfigProperties.getSubscriberAirtimeTranType())
                 .build();
@@ -308,8 +322,8 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
 
     private TransactionRequest getMerchantTosubscriberRequest(MerchantToSubscriberRequest request) {
         return RequestBuilder.newInstance()
-                .vendorCode(vendorGIGAIOTCode)
-                .vendorApiKey(vendorGIGAIOTApiKey)
+                .vendorCode(vendorSASAICode)
+                .vendorApiKey(vendorSASAIApiKey)
                 .checksumGenerator(checksumGenerator)
                 .currency(request.getCurrency())
                 .amount(String.valueOf(request.getAmount()))

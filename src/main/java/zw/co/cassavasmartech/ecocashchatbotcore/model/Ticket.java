@@ -21,6 +21,7 @@ public class Ticket extends BaseEntity{
     private TicketStatus ticketStatus;
     private String reference;
     private String conversationId;
+    private String folio;
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(nullable = false)
