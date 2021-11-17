@@ -18,7 +18,7 @@ public class StatementScenario2IntentHandler extends IntentHandlerAdapter {
         Customer customer = DialogFlowUtil.isNewCustomer(webhookRequest[0]);
         return DialogFlowUtil.getResponse(webhookRequest[0],
                 DialogFlowUtil.promptProcessor(11, webhookRequest[0], customer),
-                new Object[]{},
+                DialogFlowUtil.createTicket(webhookRequest[0], UseCase.SUBSCRIBER_STATEMENT),
                 UseCase.SUBSCRIBER_STATEMENT);
     }
 }

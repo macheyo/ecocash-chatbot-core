@@ -430,7 +430,6 @@ public class DialogFlowUtil {
 
     public static String[] getStatementConfirmationDetails(WebhookRequest webhookRequest){
         Customer customer = isNewCustomer(webhookRequest);
-
         Map<String, Object> ticket = getTicket(webhookRequest);
         log.info("This is the ticket id: {}", ticket.get("id").toString());
         Ticket ticketObject = ticketService.findById(Double.valueOf(ticket.get("id").toString()).longValue());
@@ -449,6 +448,7 @@ public class DialogFlowUtil {
             ObjectMapper objectMapper = new ObjectMapper();
             Map<String,Object> datePeriod = objectMapper.convertValue(ticket.get("datePeriod"),Map.class);
             ticketObject.setFolio(datePeriod.get("startDate").toString()+" "+datePeriod.get("endDate").toString());
+            ticketRepository.save(ticketObject);
             String[] dates=null;
             try {
                 dates = correctStatementDate(datePeriod.get("startDate").toString(),datePeriod.get("endDate").toString());

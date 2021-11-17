@@ -50,6 +50,7 @@ public enum Intent {
     usecase_statement_scenario_1(new StatementScenario1IntentHandler()),
     usecase_statement_scenario_2(new StatementScenario2IntentHandler()),
     usecase_statement_scenario_3(new StatementScenario3IntentHandler()),
+    usecase_statement_charge_confirmation(new StatementChargeConfirmation()),
     usecase_statement_end_date(new StatementEndDateIntentHandler()),
     usecase_statement_start_date(new StatementStartDateIntentHandler()),
     usecase_statement_start_date_fallback(new StatementStartDateFallbackIntentHandler()),

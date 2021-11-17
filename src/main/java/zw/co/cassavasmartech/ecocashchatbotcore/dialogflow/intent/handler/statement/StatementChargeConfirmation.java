@@ -8,16 +8,15 @@ import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.IntentHandlerA
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Customer;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.UseCase;
 
-import java.text.ParseException;
 @Slf4j
-public class StatementScenario3IntentHandler extends IntentHandlerAdapter {
+public class StatementChargeConfirmation extends IntentHandlerAdapter {
     @Override
     public WebhookResponse getWebhookResponse(WebhookRequest... webhookRequest) {
         log.info("Processing dialogflow intent: {}", webhookRequest[0].getQueryResult().getIntent().getDisplayName());
         Customer customer = DialogFlowUtil.isNewCustomer(webhookRequest[0]);
         return DialogFlowUtil.getResponse(webhookRequest[0],
-                DialogFlowUtil.promptProcessor(12, webhookRequest[0], customer),
-                DialogFlowUtil.createTicket(webhookRequest[0], UseCase.SUBSCRIBER_STATEMENT),
+                DialogFlowUtil.promptProcessor(13, webhookRequest[0], customer),
+                new Object[]{},
                 UseCase.SUBSCRIBER_STATEMENT);
     }
 }
