@@ -1,5 +1,5 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.sms;
 
 public interface SmsService {
-    public void sendSms(String msisdn, String verificationCode);
+    public void sendSms(String msisdn, String verificationCode, String messageKey);
 }

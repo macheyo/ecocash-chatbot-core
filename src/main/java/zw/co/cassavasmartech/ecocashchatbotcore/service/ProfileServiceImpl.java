@@ -56,7 +56,7 @@ public class ProfileServiceImpl implements ProfileService{
        Profile profile = profileRepository.getByChatId(chatId).orElseThrow(()->new CustomerNotFoundException(chatId));
        profile.setOtp(createOtp());
        profileRepository.save(profile);
-       smsService.sendSms(profile.getCustomer().getMsisdn(),profile.getOtp().getVerificationCode());
+       smsService.sendSms(profile.getCustomer().getMsisdn(),profile.getOtp().getVerificationCode(),"messages.otp");
     }
 
     @Override

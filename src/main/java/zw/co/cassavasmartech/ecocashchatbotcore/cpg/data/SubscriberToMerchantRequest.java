@@ -11,6 +11,7 @@ public class SubscriberToMerchantRequest {
     private BigDecimal amount;
     private String merchantMsisdn;
     private String subscriberMsisdn;
+    private String merchantName;
     private String pin;
     private Long ticketId;
 }

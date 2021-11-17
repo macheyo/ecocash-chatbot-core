@@ -56,7 +56,7 @@ public class RequestBuilder {
     }
 
     public RequestBuilder callbackUrl(String callbackUrl){
-        request.setField8(callbackUrl);
+        request.setField9(callbackUrl);
         return this;
     }
 
@@ -107,7 +107,7 @@ public class RequestBuilder {
 
 
     public RequestBuilder applicationCode(String serviceName) {
-        request.setField9(serviceName);
+        request.setField8(serviceName);
         return this;
     }
 
@@ -119,6 +119,11 @@ public class RequestBuilder {
 
     public RequestBuilder securityMode(String securityMode) {
         request.setField14(securityMode);
+        return this;
+    }
+
+    public RequestBuilder merchantName(String merchantName){
+        request.setField14(merchantName);
         return this;
     }
 

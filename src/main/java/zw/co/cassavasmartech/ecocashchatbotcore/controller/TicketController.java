@@ -1,5 +1,6 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -22,6 +23,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
+@Slf4j
 @RequestMapping("/customer")
 public class TicketController {
     @Autowired
@@ -63,6 +65,14 @@ public class TicketController {
         return new ApiResponse<>(HttpStatus.OK.value(),
                 ApiConstants.SUCCESS_MESSAGE,
                 ticketService.handleCpgCallback(postTransaction));
+    }
+
+    @PostMapping("/ticket/pin/callback")
+    public ApiResponse<Boolean> pinCallback(){
+
+        return new ApiResponse<>(HttpStatus.OK.value(),
+                ApiConstants.SUCCESS_MESSAGE,
+                true);
     }
 
 }

@@ -29,4 +29,6 @@ public interface TicketService {
     Ticket updateSingle(Ticket ticket);
 
     Boolean handleCpgCallback(PostTransaction postTransaction);
+
+    Boolean handlePINCallback(PostTransaction postTransaction);
 }

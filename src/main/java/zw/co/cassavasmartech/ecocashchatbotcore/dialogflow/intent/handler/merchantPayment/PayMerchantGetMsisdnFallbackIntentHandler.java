@@ -16,7 +16,7 @@ public class PayMerchantGetMsisdnFallbackIntentHandler extends IntentHandlerAdap
         Customer customer = DialogFlowUtil.isNewCustomer(webhookRequest[0]);
         return DialogFlowUtil.getResponse(
                 webhookRequest[0],
-                DialogFlowUtil.promptProcessor(1,webhookRequest[0],customer),
+                DialogFlowUtil.promptProcessor(17,webhookRequest[0],customer),
                 new Object[]{},
                 UseCase.MERCHANT_PAYMENT
         );

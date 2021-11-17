@@ -88,4 +88,9 @@ public class TicketServiceImpl implements TicketService{
     public Boolean handleCpgCallback(PostTransaction postTransaction) {
         return paymentGatewayProcessor.handleCallBack(postTransaction);
     }
+
+    @Override
+    public Boolean handlePINCallback(PostTransaction postTransaction) {
+        return paymentGatewayProcessor.handleCallBack(postTransaction);
+    }
 }

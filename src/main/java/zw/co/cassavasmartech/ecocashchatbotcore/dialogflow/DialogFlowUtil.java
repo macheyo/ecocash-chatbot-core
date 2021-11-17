@@ -41,6 +41,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.selfservice.data.ReversalDto;
 import zw.co.cassavasmartech.ecocashchatbotcore.service.CustomerService;
 import zw.co.cassavasmartech.ecocashchatbotcore.service.ProfileService;
 import zw.co.cassavasmartech.ecocashchatbotcore.service.TicketService;
+import zw.co.cassavasmartech.ecocashchatbotcore.sms.SmsService;
 import zw.co.cassavasmartech.ecocashchatbotcore.statementservice.StatementServiceConfigurationProperties;
 import zw.co.cassavasmartech.ecocashchatbotcore.telegram.TelegramService;
 
@@ -124,6 +125,10 @@ public class DialogFlowUtil {
     private static StatementServiceConfigurationProperties statementServiceConfigurationProperties;
 
     @Autowired
+    SmsService smsServ;
+    private static SmsService smsService;
+
+    @Autowired
     EmailService emailServ;
     private static EmailService emailService;
 
@@ -145,6 +150,7 @@ public class DialogFlowUtil {
         this.telegramService = telegramServ;
         this.passwordEncoder = passwordEncodr;
         this.emailService = emailServ;
+        this.smsService = smsServ;
     }
 
     public static String getAlias(OriginalDetectIntentRequest originalDetectIntentRequest,  Optional<Customer> customer) {
@@ -389,7 +395,7 @@ public class DialogFlowUtil {
     public static boolean resetPIN(WebhookRequest webhookRequest){
         boolean response = customerService.pinReset(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()));
         log.info("This is the response from PIN reset service {}", response);
-        return customerService.pinReset(DialogFlowUtil.getChatId(webhookRequest.getOriginalDetectIntentRequest()));
+        return response;
     }
 
     public static void getStatementScene3(WebhookRequest webhookRequest) throws ParseException{
@@ -465,24 +471,23 @@ public class DialogFlowUtil {
     }
 
     public static void getStatement(String startDate, String endDate, Profile profile) throws ParseException {
+        String password = String.valueOf(new Random().nextInt(900000) + 100000);
         Statement statement = customerService.getStatement(profile.getChatId(), StatementRequest.builder()
                 .endDate(startDate)
                 .startDate(endDate)
                 .msisdn(profile.getCustomer().getMsisdn())
                 .currency(Currency.RTGS)
                 .mime(MIME.PDF)
-                .encryptDocument(false)
-                .passKey("1234")
+                .encryptDocument(true)
+                .passKey(password)
                 .build());
         if(statement!=null) {
             String downloadURL = statement.getFileDownloadUri().replace("http://192.168.92.94:6060/reports-admin/",statementServiceConfigurationProperties.getNgrokServiceEndpointUrl());
+            smsService.sendSms(profile.getCustomer().getMsisdn(),password,"messages.statement.password");
             if(profile.getPlatform().equals(Platform.TELEGRAM)) {
                 telegramService.sendDocument(profile.getChatId(), downloadURL);
-                //return true;
             }
             log.info("Downloaded file: {}",downloadURL);
-
-//            return true;
         }
 
             //prompt = "Done"+Emoji.Smiley+Emoji.ThumbsUp+"Here you go, please click the link below to download"+Emoji.PointDown+"\n"+statement.getFileDownloadUri().replace("http://217.15.118.15",statementServiceConfigurationProperties.getNgrokServiceEndpointUrl())+"\n\nIs there anything else I can assist you with?"+Emoji.Smiley;
@@ -520,10 +525,11 @@ public class DialogFlowUtil {
     public static String payForStatement(WebhookRequest webhookRequest) {
         Customer customer = isNewCustomer(webhookRequest);
         Map<String, Object> ticket = getTicket(webhookRequest);
-        String merchantMsisdn = paymentGatewayProcessor.lookupMerchant(MerchantLookupRequest.builder().merchant("019919").build()).getField10();
+        String merchantName = paymentGatewayProcessor.lookupMerchant(MerchantLookupRequest.builder().merchant("019919").build()).getField6();
         return paymentGatewayProcessor.subscriberToMerchant(zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest.builder()
                     .subscriberMsisdn(customer.getMsisdn())
-                    .merchantMsisdn(merchantMsisdn)
+                    .merchantMsisdn("019919")
+                    .merchantName(merchantName)
                     .amount(BigDecimal.valueOf(15))
                     .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
                     .build()).getField1();
@@ -533,11 +539,12 @@ public class DialogFlowUtil {
         Customer customer = isNewCustomer(webhookRequest);
         Map<String, Object> ticket = getTicket(webhookRequest);
         ObjectMapper objectMapper = new ObjectMapper();
-        String merchantMsisdn = paymentGatewayProcessor.lookupMerchant(MerchantLookupRequest.builder().merchant(ticket.get("msisdn.original").toString()).build()).getField10();
+        String merchantName = paymentGatewayProcessor.lookupMerchant(MerchantLookupRequest.builder().merchant(ticket.get("msisdn.original").toString()).build()).getField6();
         if(ticket.containsKey("amount"))
             return paymentGatewayProcessor.subscriberToMerchant(zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest.builder()
                     .subscriberMsisdn(customer.getMsisdn())
-                    .merchantMsisdn(merchantMsisdn)
+                    .merchantName(merchantName)
+                    .merchantMsisdn(ticket.get("msisdn.original").toString())
                     .amount(BigDecimal.valueOf(Double.parseDouble(ticket.get("amount").toString())))
                     .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
                     .build()).getField1();
@@ -552,7 +559,8 @@ public class DialogFlowUtil {
             if (payment.containsKey("amount"))
                 return paymentGatewayProcessor.subscriberToMerchant(zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest.builder()
                         .subscriberMsisdn(customer.getMsisdn())
-                        .merchantMsisdn(merchantMsisdn)
+                        .merchantMsisdn(ticket.get("msisdn.original").toString())
+                        .merchantName(merchantName)
                         .amount(BigDecimal.valueOf(Double.parseDouble(payment.get("amount").toString())))
                         .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
                         .build()).getField1();
@@ -915,7 +923,7 @@ public class DialogFlowUtil {
     }
 
     public static boolean isEnrolled(Customer customer){
-        if(selfServiceCoreProcessor.isEnrolled(customer.getMsisdn()).getIsEnrolled().equalsIgnoreCase("true")) return true;
+        if(selfServiceCoreProcessor.getAnswerByMsisdnAndAnswerStatus(customer.getMsisdn()).size()>0) return true;
         else return false;
     }
 }

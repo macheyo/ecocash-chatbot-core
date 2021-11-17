@@ -58,7 +58,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
     public TransactionResponse subscriberToMerchant(SubscriberToMerchantRequest subscriberToMerchantRequest) {
         final TransactionRequest transactionRequest = getSubscriberToMerchantRequest(subscriberToMerchantRequest);
         log.debug("Processing subscriber to merchant request");
-        return invokeApi(transactionRequest);
+        return invokeApi3(transactionRequest);
 
     }
 
@@ -267,6 +267,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .tranType(cpgConfigProperties.getSubscriberToMerchantTranType())
                 .msisdn2(request.getMerchantMsisdn())
                 .msisdn(request.getSubscriberMsisdn())
+                .merchantName(request.getMerchantName())
                 .callbackUrl(cpgConfigProperties.getCpgCallBackUrl())
                 .reference(reference)
                 .pin("0000")
