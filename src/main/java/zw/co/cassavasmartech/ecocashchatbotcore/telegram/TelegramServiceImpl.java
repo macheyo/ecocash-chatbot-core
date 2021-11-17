@@ -30,7 +30,7 @@ public class TelegramServiceImpl implements TelegramService {
 
     @Override
     public void sendDocument(String chatId, String documentURL) {
-        String urlString = String.format(telegramConfigurationProperties.getSendDocumentUrl(), telegramConfigurationProperties.getToken(), chatId, documentURL,"This is your statement");
+        String urlString = String.format(telegramConfigurationProperties.getSendDocumentUrl(), telegramConfigurationProperties.getToken(), chatId, documentURL,"Here is your statement for the requested period. The document is password protected for the security of your personal information. Please use the password sent in the SMS to your mobile number to open the document.");
         try{
             URL url = new URL(urlString);
             URLConnection urlConnection = url.openConnection();
