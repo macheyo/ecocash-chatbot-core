@@ -135,7 +135,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                     log.info("Parse exception: {}", e);
                 }
             }
-            notification = "Done, your transaction was successfull. Is there anything else you would like me to do for you?";
+            notification = "Done, your transaction was successful. Is there anything else you would like me to do for you?";
         }
         else notification = "Ooops!!! Your transaction failed with message: "+ postTransaction.getTransactionRequest().getField2() +". Is there anything else you would like me to do for you?";
         isNotified =sendNotificationToPlatform(ticket.getConversationId(), profile,notification);
