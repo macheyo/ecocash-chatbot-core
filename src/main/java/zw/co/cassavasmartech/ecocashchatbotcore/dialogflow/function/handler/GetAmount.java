@@ -14,10 +14,11 @@ public class GetAmount extends FunctionAdapter {
     public String process(PromptObject... args) {
         String amount="";
         Map<String, Object> ticket = DialogFlowUtil.getTicket(args[0].getWebhookRequest());
+        Map<String, Object> recursion = DialogFlowUtil.getRecursion(args[0].getWebhookRequest());
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String,Object> payment = objectMapper.convertValue(ticket.get("payment"),Map.class);
-        if(ticket.get("amount")!=null)amount=ticket.get("amount").toString();
-        else if(payment.get("amount")!=null)amount=payment.get("amount").toString();
+        if(recursion.get("intent").toString().equalsIgnoreCase("usecase_pay_merchant_scenario1"))amount=ticket.get("amount").toString();
+        else amount=payment.get("amount").toString();
         return amount;
     }
 }

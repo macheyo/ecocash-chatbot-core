@@ -290,8 +290,9 @@ public class DialogFlowUtil {
     public static String buyAirtime(WebhookRequest webhookRequest) {
         Customer customer = isNewCustomer(webhookRequest);
         Map<String, Object> ticket = getTicket(webhookRequest);
+        Map<String, Object> recursion = getRecursion(webhookRequest);
         ObjectMapper objectMapper = new ObjectMapper();
-        if(ticket.containsKey("amount"))
+        if(recursion.get("intent").toString().equalsIgnoreCase("usecase_send_airtime_scenario1"))
             return paymentGatewayProcessor.subscriberAirtime(SubscriberAirtimeRequest.builder()
                 .msisdn1(customer.getMsisdn())
                 .msisdn2(ticket.get("msisdn").toString())
@@ -314,8 +315,9 @@ public class DialogFlowUtil {
     public static String payBill(WebhookRequest  webhookRequest){
         Customer customer = isNewCustomer(webhookRequest);
         Map<String, Object> ticket = getTicket(webhookRequest);
+        Map<String, Object> recursion = getRecursion(webhookRequest);
         ObjectMapper objectMapper = new ObjectMapper();
-        if(ticket.containsKey("amount"))
+        if(recursion.get("intent").toString().equalsIgnoreCase("usecase_pay_biller_scenario1"))
             return paymentGatewayProcessor.subscriberToBiller(SubscriberToBillerRequest.builder()
                 .msisdn(customer.getMsisdn())
                 .billerCode(ticket.get("biller.original").toString())
@@ -355,8 +357,9 @@ public class DialogFlowUtil {
     public static String sendMoney(WebhookRequest webhookRequest) {
         Customer customer = isNewCustomer(webhookRequest);
         Map<String, Object> ticket = getTicket(webhookRequest);
+        Map<String, Object> recursion = getRecursion(webhookRequest);
         ObjectMapper objectMapper = new ObjectMapper();
-        if(ticket.containsKey("amount"))
+        if(recursion.get("intent").toString().equalsIgnoreCase("usecase_send_money_scenario1"))
             return paymentGatewayProcessor.subscriberToSubscriber(SubscriberToSubscriberRequest.builder()
                     .msisdn1(customer.getMsisdn())
                     .msisdn2(ticket.get("msisdn.original").toString())
@@ -538,9 +541,10 @@ public class DialogFlowUtil {
     public static String payMerchant(WebhookRequest webhookRequest){
         Customer customer = isNewCustomer(webhookRequest);
         Map<String, Object> ticket = getTicket(webhookRequest);
+        Map<String, Object> recursion = getRecursion(webhookRequest);
         ObjectMapper objectMapper = new ObjectMapper();
         String merchantName = paymentGatewayProcessor.lookupMerchant(MerchantLookupRequest.builder().merchant(ticket.get("msisdn.original").toString()).build()).getField6();
-        if(ticket.containsKey("amount"))
+        if(recursion.get("intent").toString().equalsIgnoreCase("usecase_pay_merchant_scenario1"))
             return paymentGatewayProcessor.subscriberToMerchant(zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest.builder()
                     .subscriberMsisdn(customer.getMsisdn())
                     .merchantName(merchantName)
