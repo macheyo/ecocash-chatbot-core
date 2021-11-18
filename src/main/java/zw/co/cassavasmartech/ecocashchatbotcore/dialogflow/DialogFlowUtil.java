@@ -292,10 +292,13 @@ public class DialogFlowUtil {
         Map<String, Object> ticket = getTicket(webhookRequest);
         Map<String, Object> recursion = getRecursion(webhookRequest);
         ObjectMapper objectMapper = new ObjectMapper();
+        String msisdn;
+        if(ticket.get("msisdn").toString().equalsIgnoreCase(""))msisdn=customer.getMsisdn();
+        else msisdn = ticket.get("msisdn").toString();
         if(recursion.get("intent").toString().equalsIgnoreCase("usecase_send_airtime_scenario1"))
             return paymentGatewayProcessor.subscriberAirtime(SubscriberAirtimeRequest.builder()
                 .msisdn1(customer.getMsisdn())
-                .msisdn2(ticket.get("msisdn").toString())
+                .msisdn2(msisdn)
                 .amount(BigDecimal.valueOf(Double.parseDouble(ticket.get("amount").toString())))
                 .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
                 .build()).getField1();
@@ -304,7 +307,7 @@ public class DialogFlowUtil {
             if (payment.containsKey("amount"))
                 return paymentGatewayProcessor.subscriberAirtime(SubscriberAirtimeRequest.builder()
                         .msisdn1(customer.getMsisdn())
-                        .msisdn2(ticket.get("msisdn").toString())
+                        .msisdn2(msisdn)
                         .amount(BigDecimal.valueOf(Double.parseDouble(payment.get("amount").toString())))
                         .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
                         .build()).getField1();
