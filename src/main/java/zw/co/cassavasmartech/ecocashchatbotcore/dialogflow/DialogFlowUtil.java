@@ -469,11 +469,18 @@ public class DialogFlowUtil {
         DateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss+02:00");
         DateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date today = new Date();
+        log.info("These are the switched dates: {} and {}", switcharoo(startDateTime), switcharoo(endDateTime));
         Date startDate = isoFormat.parse(startDateTime);
         Date endDate = isoFormat.parse(endDateTime);
         if(startDate.getYear()>today.getYear())startDate.setYear(today.getYear());
         if(endDate.getTime()>today.getYear())endDate.setYear(today.getYear());
         return new String[]{newFormat.format(startDate),newFormat.format(endDate)};
+    }
+
+    public static String switcharoo(String date){
+        String d = date.substring(0,9);
+        String dt[] = d.split("-");
+        return dt[0]+"-"+dt[2]+"-"+dt[1]+date.substring(10);
     }
 
     public static void getStatement(String startDate, String endDate, Profile profile) throws ParseException {

@@ -17,9 +17,9 @@ public class GetAmount extends FunctionAdapter {
         Map<String, Object> recursion = DialogFlowUtil.getRecursion(args[0].getWebhookRequest());
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String,Object> payment = objectMapper.convertValue(ticket.get("payment"),Map.class);
-        String intent = recursion.get("intent").toString();
-        if(intent.substring(intent.length() - 9).equalsIgnoreCase("scenario1"))amount=ticket.get("amount").toString();
-        else amount=payment.get("amount").toString();
+        String intent = args[0].getWebhookRequest().getQueryResult().getIntent().getDisplayName();
+        if(intent.substring(intent.length() - 9).equalsIgnoreCase("scenario2"))amount=payment.get("amount").toString();
+        else amount=ticket.get("amount").toString();
         return amount;
     }
 }
