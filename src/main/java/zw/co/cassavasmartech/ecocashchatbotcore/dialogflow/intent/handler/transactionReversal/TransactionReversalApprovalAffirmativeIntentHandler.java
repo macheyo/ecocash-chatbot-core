@@ -20,14 +20,16 @@ public class TransactionReversalApprovalAffirmativeIntentHandler extends IntentH
     public WebhookResponse getWebhookResponse(WebhookRequest... webhookRequest) {
         log.info("Processing dialogflow intent: {}", webhookRequest[0].getQueryResult().getIntent().getDisplayName());
         Customer customer = DialogFlowUtil.isNewCustomer(webhookRequest[0]);
-        HttpEntity<ApiResponse<Optional<ReversalDto>>> response = DialogFlowUtil.approveTransactionReversal(webhookRequest[0]);
-        if(Objects.requireNonNull(response.getBody()).getStatus()== HttpStatus.OK.value()) return DialogFlowUtil.getResponse(webhookRequest[0],
-                DialogFlowUtil.promptProcessor(10,webhookRequest[0],customer),
-                new Object[]{},
-                UseCase.TRANSACTION_REVERSAL);
-        else return DialogFlowUtil.getResponse(webhookRequest[0],
-                DialogFlowUtil.promptProcessor(11,webhookRequest[0],customer),
-                new Object[]{},
-                UseCase.TRANSACTION_REVERSAL);
+        DialogFlowUtil.validateCustomerPIN(webhookRequest[0]);
+//        HttpEntity<ApiResponse<Optional<ReversalDto>>> response = DialogFlowUtil.approveTransactionReversal(webhookRequest[0]);
+//        if(Objects.requireNonNull(response.getBody()).getStatus()== HttpStatus.OK.value()) return DialogFlowUtil.getResponse(webhookRequest[0],
+//                DialogFlowUtil.promptProcessor(10,webhookRequest[0],customer),
+//                new Object[]{},
+//                UseCase.TRANSACTION_REVERSAL);
+//        else return DialogFlowUtil.getResponse(webhookRequest[0],
+//                DialogFlowUtil.promptProcessor(11,webhookRequest[0],customer),
+//                new Object[]{},
+//                UseCase.TRANSACTION_REVERSAL);
+        return null;
     }
 }

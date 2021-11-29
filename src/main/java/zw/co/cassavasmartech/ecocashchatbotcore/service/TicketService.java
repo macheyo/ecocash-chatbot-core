@@ -3,10 +3,7 @@ package zw.co.cassavasmartech.ecocashchatbotcore.service;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.stereotype.Service;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.EipTransaction;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.PostTransaction;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.Profile;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.Ticket;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.TransactionRequest;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.*;
 
 import java.util.List;
 
@@ -19,6 +16,8 @@ public interface TicketService {
     Ticket update(String chatId, Long ticketId, Ticket ticket);
 
     Ticket findByReference(String reference);
+
+    Ticket findByReferenceAndTicketStatus(String reference, TicketStatus ticketStatus);
 
     Profile findProfileByReference(String reference);
 

@@ -4,24 +4,20 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiConstants;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.EipTransaction;
-import zw.co.cassavasmartech.ecocashchatbotcore.flares.data.FlaresRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.PostTransaction;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.Profile;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Ticket;
-import zw.co.cassavasmartech.ecocashchatbotcore.model.TransactionRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.modelAssembler.TicketModelAssembler;
 import zw.co.cassavasmartech.ecocashchatbotcore.service.TicketService;
+import zw.co.cassavasmartech.ecocashchatbotcore.ussd.UssdPushService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -34,6 +30,8 @@ public class TicketController {
     TicketModelAssembler ticketModelAssembler;
     @Autowired
     TicketService ticketService;
+    @Autowired
+    UssdPushService ussdPushService;
 
 
     @GetMapping("/ticket/list")
@@ -73,10 +71,7 @@ public class TicketController {
 
     @PostMapping("/ticket/pin/callback")
     public ResponseEntity<String> pinCallback(HttpServletRequest httpServletRequest){
-        log.info("This is the request from flares: {}", httpServletRequest);
-        String input = httpServletRequest.getParameter("INPUT");
-        log.info("This is the user input {}", input);
-        return new ResponseEntity<>(input,HttpStatus.OK);
+        return ussdPushService.handleCallback(httpServletRequest.getParameter("INPUT"),httpServletRequest.getParameter("MSISDN"));
     }
 
 }

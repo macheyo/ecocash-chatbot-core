@@ -26,6 +26,8 @@ public interface PaymentGatewayProcessor {
 
     TransactionResponse subscriberToBiller(SubscriberToBillerRequest subscriberToBillerRequest);
 
+    TransactionResponse validateCustomer(ValidateCustomerRequest validateCustomerRequest);
+
     TransactionResponse lookupBiller(BillerLookupRequest billerLookupRequest);
 
     TransactionResponse subscriberAirtime(SubscriberAirtimeRequest subscriberAirtimeRequest);

@@ -5,10 +5,8 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
@@ -17,10 +15,8 @@ import zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessor;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.EipService;
-import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.EipTransaction;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.Merchant;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.MerchantRepository;
-import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.SubscriberToMerchantRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.email.EmailService;
 import zw.co.cassavasmartech.ecocashchatbotcore.email.data.EmailNotification;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.PromptNotFoundException;
@@ -44,8 +40,10 @@ import zw.co.cassavasmartech.ecocashchatbotcore.service.TicketService;
 import zw.co.cassavasmartech.ecocashchatbotcore.sms.SmsService;
 import zw.co.cassavasmartech.ecocashchatbotcore.statementservice.StatementServiceConfigurationProperties;
 import zw.co.cassavasmartech.ecocashchatbotcore.telegram.TelegramService;
+import zw.co.cassavasmartech.ecocashchatbotcore.ussd.UssdPushService;
+import zw.co.cassavasmartech.ecocashchatbotcore.ussd.data.PushType;
+import zw.co.cassavasmartech.ecocashchatbotcore.ussd.data.UssdPushRequest;
 
-import javax.activation.MailcapCommandMap;
 import javax.annotation.PostConstruct;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -56,6 +54,8 @@ import java.net.URLConnection;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -121,6 +121,10 @@ public class DialogFlowUtil {
     private static EipService eipService;
 
     @Autowired
+    UssdPushService ussdPushServ;
+    private static UssdPushService ussdPushService;
+
+    @Autowired
     StatementServiceConfigurationProperties statementServiceConfig;
     private static StatementServiceConfigurationProperties statementServiceConfigurationProperties;
 
@@ -151,6 +155,7 @@ public class DialogFlowUtil {
         this.passwordEncoder = passwordEncodr;
         this.emailService = emailServ;
         this.smsService = smsServ;
+        this.ussdPushService = ussdPushServ;
     }
 
     public static String getAlias(OriginalDetectIntentRequest originalDetectIntentRequest,  Optional<Customer> customer) {
@@ -739,7 +744,7 @@ public class DialogFlowUtil {
         Customer customer = isNewCustomer(webhookRequest);
         Map<String,Object> ticket = getTicket(webhookRequest);
         HttpEntity<ApiResponse<Optional<EcocashTransaction>>> response  = selfServiceCoreProcessor.validateReversal(customer.getMsisdn(),ticket.get("ecocashReference.original").toString());
-        if(response.getBody().getStatus()== HttpStatus.OK.value()) {
+        if(response.getBody().getBody().isPresent() && response.getBody().getStatus()== HttpStatus.OK.value()) {
             TransactionResponse transactionResponse = customerService.customerLookup(SubscriberDto.builder().msisdn(response.getBody().getBody().get().getRecipientMobileNumber()).build());
             String transactionReference = response.getBody().getBody().get().getTransactionReference();
             String transactionDate = response.getBody().getBody().get().getTransactionDate().toString();
@@ -748,7 +753,7 @@ public class DialogFlowUtil {
             String transactionAmount = "$ZWL" + response.getBody().getBody().get().getAmount();
             return new String[]{transactionReference,transactionDate,recipientMobileNumber,recipient,transactionAmount};
         }
-        else return null;
+        else return new String[]{"Reversal not found","","","",""};
 
     }
 
@@ -776,14 +781,30 @@ public class DialogFlowUtil {
         return selfServiceCoreProcessor.initiateReversal(customer.getMsisdn(),ticket.get("ecocashReference.original").toString());
     }
 
-    public static HttpEntity<ApiResponse<Optional<ReversalDto>>> approveTransactionReversal(WebhookRequest webhookRequest){
+    public static Boolean validateCustomerPIN(WebhookRequest webhookRequest){
         Map<String,Object> ticket = getTicket(webhookRequest);
         Customer customer = isNewCustomer(webhookRequest);
+        Ticket ticketObject = ticketService.findById(Double.valueOf(ticket.get("id").toString()).longValue());
+        ticketObject.setReference(mobileNumberFormater.formatMobileNumberInternational(customer.getMsisdn()));
+        ticketObject.setFolio(ticket.get("ecocashReference.original").toString());
+        ticketService.updateSingle(ticketObject);
+        return ussdPushService.sendPrompt(UssdPushRequest.builder()
+                .message("You have a pending reversal. Please enter your EcoCash PIN to authorize")
+                .serviceCode("903*600")
+                .pushType(PushType.PROMPT)
+                .msisdn(customer.getMsisdn())
+                .build());
+    }
+
+    public static HttpEntity<ApiResponse<Optional<ReversalDto>>> approveTransactionReversal(Ticket ticket){
+        Customer customer = ticket.getProfile().getCustomer();
         List<ReversalDto> reversals = selfServiceCoreProcessor.pendingReversals(customer.getMsisdn()).getBody().getBody();
         ReversalDto reversalDto = null;
         for(ReversalDto reversal:reversals)
-            if(reversal.getReference().equalsIgnoreCase(ticket.get("ecocashReference.original").toString()))
+            if(reversal.getReference().equalsIgnoreCase(ticket.getFolio()))
                 reversalDto=reversal;
+        ticket.setTicketStatus(TicketStatus.CLOSED);
+        ticketService.updateSingle(ticket);
         return selfServiceCoreProcessor.approveReversal(ReversalApproval.builder().reversalId(reversalDto.getId()).bandType(BandType.SELF_INITIATED).applyCharge(true).build());
     }
 

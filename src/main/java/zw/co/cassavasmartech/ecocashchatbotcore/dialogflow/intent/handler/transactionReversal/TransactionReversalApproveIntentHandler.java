@@ -14,7 +14,7 @@ public class TransactionReversalApproveIntentHandler extends IntentHandlerAdapte
         if(DialogFlowUtil.getPendingReversals(webhookRequest[0]).size()>0)
         return DialogFlowUtil.getResponse(webhookRequest[0],
                 DialogFlowUtil.promptProcessor(7, webhookRequest[0], DialogFlowUtil.isNewCustomer(webhookRequest[0])),
-                new Object[]{},
+                DialogFlowUtil.createTicket(webhookRequest[0], UseCase.TRANSACTION_REVERSAL),
                 UseCase.TRANSACTION_REVERSAL);
         return DialogFlowUtil.getResponse(webhookRequest[0],
                 DialogFlowUtil.promptProcessor(8, webhookRequest[0], DialogFlowUtil.isNewCustomer(webhookRequest[0])),

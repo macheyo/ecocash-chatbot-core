@@ -54,6 +54,8 @@ public class CpgConfigurationProperties {
     private String registrationTrasType;
     @NotEmpty
     private String merchantLookupTranType;
+    @NotEmpty
+    private String customerValidationTranType;
 
 
 }

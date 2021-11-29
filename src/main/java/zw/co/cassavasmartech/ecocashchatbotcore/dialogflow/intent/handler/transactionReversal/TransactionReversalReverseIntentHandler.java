@@ -15,7 +15,7 @@ public class TransactionReversalReverseIntentHandler extends IntentHandlerAdapte
         log.info("Processing dialogflow intent: {}", webhookRequest[0].getQueryResult().getIntent().getDisplayName());
         return DialogFlowUtil.getResponse(webhookRequest[0],
                 DialogFlowUtil.promptProcessor(3, webhookRequest[0], DialogFlowUtil.isNewCustomer(webhookRequest[0])),
-                new Object[]{},
+                DialogFlowUtil.createTicket(webhookRequest[0], UseCase.TRANSACTION_REVERSAL),
                 UseCase.TRANSACTION_REVERSAL);
     }
 }

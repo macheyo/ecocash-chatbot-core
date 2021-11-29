@@ -98,6 +98,14 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
     }
 
     @Override
+    public TransactionResponse validateCustomer(ValidateCustomerRequest validateCustomerRequest) {
+        final TransactionRequest transactionRequest = getValidateCustomerRequest(validateCustomerRequest);
+        log.debug("processing validate customer request");
+        return invokeApi2(transactionRequest);
+    }
+
+
+    @Override
     public TransactionResponse lookupBiller(BillerLookupRequest billerLookupRequest) {
         final TransactionRequest transactionRequest = getBillerLookupRequest(billerLookupRequest);
         log.debug("Processing biller lookup");
@@ -251,6 +259,25 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .securityMode("101")
                 .vendorApiKey("abf8988717c777874645af9e60db6e607dd5962c6e9c821f775c515618d2393e")
                 .msisdn(msisdn)
+                .build();
+    }
+
+    private TransactionRequest getValidateCustomerRequest(ValidateCustomerRequest request) {
+        String reference = Util.generateReference(request.getMsisdn());
+//        Ticket ticket = ticketService.findById(request.getTicketId());
+//        ticket.setReference(reference);
+//        ticketService.updateSingle(ticket);
+        return RequestBuilder.newInstance()
+                .vendorCode(vendorEPGCode)
+                .vendorApiKey(vendorEPGApiKey)
+                .checksumGenerator(checksumGenerator)
+                .tranType(cpgConfigProperties.getCustomerValidationTranType())
+                .msisdn(request.getMsisdn())
+                .pin(request.getPin())
+                .callbackUrl(cpgConfigProperties.getCpgCallBackUrl())
+                .reference(reference)
+                .applicationCode("ecocashzw")
+                .securityMode("101")
                 .build();
     }
 

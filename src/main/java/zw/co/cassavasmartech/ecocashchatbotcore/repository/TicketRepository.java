@@ -5,10 +5,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Profile;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Ticket;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.TicketStatus;
 
 import java.util.Optional;
 
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
     Optional<Ticket> findByReference(String reference);
+    Optional<Ticket> findByReferenceAndTicketStatus(String reference, TicketStatus ticketStatus);
 }

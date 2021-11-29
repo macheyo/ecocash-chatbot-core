@@ -19,7 +19,7 @@ public class TransactionReversalIntentIntentHandler extends IntentHandlerAdapter
         else prompt = DialogFlowUtil.promptProcessor(2,webhookRequest[0], null);
         return DialogFlowUtil.getResponse(webhookRequest[0],
                 prompt,
-                DialogFlowUtil.createTicket(webhookRequest[0], UseCase.TRANSACTION_REVERSAL),
+                new Object[]{},
                 UseCase.TRANSACTION_REVERSAL);
     }
 
