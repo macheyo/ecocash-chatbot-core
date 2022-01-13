@@ -80,7 +80,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
     public TransactionResponse lookupCustomer(String msisdn) {
         final TransactionRequest transactionRequest = getLookUpCustomerRequest(msisdn);
         log.debug("Processing Lookup Customer request");
-        return invokeApi2(transactionRequest);
+        return invokeApi(transactionRequest);
     }
 
     @Override
@@ -197,7 +197,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .vendorApiKey(vendorGIGAIOTApiKey)
                 .checksum("checksum")
                 .tranType(cpgConfigProperties.getCustomerLookupTranType())
-                .applicationCode("ecocashzw")
+                .applicationCode("ecocash")
                 .reference(Util.generateReference(msisdn))
                 .msisdn(msisdn)
                 .currency("ZWL")
@@ -336,7 +336,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .msisdn(request.getMsisdn1())
                 .checksumGenerator(checksumGenerator)
                 .tranType(cpgConfigProperties.getSubscriberToSubscriberTranType())
-                .applicationCode("ecocashzw")
+                .applicationCode(cpgConfigProperties.getCpgCallBackUrl())
                 .reference(reference)
                 .callbackUrl(cpgConfigProperties.getCpgCallBackUrl())
                 .msisdn2(request.getMsisdn2())

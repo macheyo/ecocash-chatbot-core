@@ -753,7 +753,7 @@ public class DialogFlowUtil {
             String transactionAmount = "$ZWL" + response.getBody().getBody().get().getAmount();
             return new String[]{transactionReference,transactionDate,recipientMobileNumber,recipient,transactionAmount};
         }
-        else return new String[]{"Reversal not found","","","",""};
+        else return null;
 
     }
 

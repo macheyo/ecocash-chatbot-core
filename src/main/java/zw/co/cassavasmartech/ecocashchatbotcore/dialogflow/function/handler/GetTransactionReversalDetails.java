@@ -10,7 +10,7 @@ public class GetTransactionReversalDetails extends FunctionAdapter {
     public String process(PromptObject... args) {
         String[] transactionDetails = DialogFlowUtil.getTransactionDetails(args[0].getWebhookRequest());
         if (transactionDetails != null) {
-            return transactionDetails[0] + " Done on " + transactionDetails[1] + " to mobile number " + transactionDetails[2] + "(" + transactionDetails[3] + ")" + " of "+transactionDetails[4];
-        }return "Details not found";
+            return "Got it. So you want to reverse a send money transaction "+transactionDetails[0] + " Done on " + transactionDetails[1] + " to mobile number " + transactionDetails[2] + "(" + transactionDetails[3] + ")" + " of "+transactionDetails[4] +" Can you confirm this is correct";
+        }return " I could not find the transaction Id that you entered. do you want to proceed to capture a valid transaction reference so that I can assist you with your reversal.";
     }
 }

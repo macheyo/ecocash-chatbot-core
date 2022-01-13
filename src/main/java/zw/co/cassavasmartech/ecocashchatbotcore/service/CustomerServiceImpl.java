@@ -227,12 +227,13 @@ public class CustomerServiceImpl implements CustomerService{
         log.info("Cpg transaction response {}", transactionResponse);
         if(transactionResponse==null && transactionResponse.getField1()==null)throw new BusinessException("Null response from CPG");
         if(transactionResponse.getField1().equalsIgnoreCase(String.valueOf(HttpStatus.OK.value()))
-                && transactionResponse.getField7().equals("Y")){
-            customer.setFirstName(transactionResponse.getField6());
-            customer.setLastName(transactionResponse.getField9());
-            customer.setDob(transactionResponse.getField11());
-            customer.setMsisdn(transactionResponse.getField10());
-            customer.setNatId(transactionResponse.getField12());
+                && transactionResponse.getField7().equals("Active")){
+            String customerName [] = transactionResponse.getField6().split(" ");
+            customer.setFirstName(customerName[0]);
+            customer.setLastName(customerName[customerName.length-1]);
+            customer.setDob("");
+            customer.setMsisdn(msisdn);
+            customer.setNatId("");
         }
         else customer = null;
         return customer;
