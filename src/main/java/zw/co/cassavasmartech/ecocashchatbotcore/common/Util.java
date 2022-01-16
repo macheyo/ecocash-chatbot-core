@@ -3,9 +3,11 @@ package zw.co.cassavasmartech.ecocashchatbotcore.common;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.EipConfigurationProperties;
+import zw.co.cassavasmartech.ecocashchatbotcore.sms.SmsProperties;
 
 import java.nio.charset.Charset;
 import java.time.LocalDateTime;
@@ -14,6 +16,9 @@ import java.util.Base64;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Util {
+
+    @Autowired
+    SmsProperties smsProperties;
 
     public static HttpHeaders buildJsonHttpHeaders() {
         final HttpHeaders headers = new HttpHeaders();
@@ -32,6 +37,21 @@ public class Util {
             {
                 //String auth = eipConfigurationProperties.getUsername() + ":" + eipConfigurationProperties.getPassword();
                 String auth = "developer:#pass";
+                byte[] encodedAuth = Base64.getEncoder().encode(
+                        auth.getBytes(Charset.forName("US-ASCII")));
+                String authHeader = "Basic " + new String(encodedAuth);
+                set("Authorization", authHeader);
+            }
+        };
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add("Accept", MediaType.APPLICATION_JSON_VALUE);
+        return headers;
+    }
+
+    public static HttpHeaders buildSMSJsonHttpHeaders(){
+        HttpHeaders headers = new HttpHeaders() {
+            {
+                String auth = "cashback:$2a$10$H.9TSyFedm061PqYka9l0eJTYP.tjQHbhJ0tLXYpuB22DnNTCbsHP";
                 byte[] encodedAuth = Base64.getEncoder().encode(
                         auth.getBytes(Charset.forName("US-ASCII")));
                 String authHeader = "Basic " + new String(encodedAuth);

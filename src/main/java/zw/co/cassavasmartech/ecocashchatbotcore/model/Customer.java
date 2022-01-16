@@ -16,7 +16,6 @@ public class Customer extends BaseEntity{
     private String firstName;
     private String lastName;
     private String dob;
-    @Column(unique = true)
     private String natId;
     @OneToMany(mappedBy = "customer")
     @JsonBackReference
