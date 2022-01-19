@@ -211,7 +211,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .checksumGenerator(checksumGenerator)
                 .tranType(cpgConfigProperties.getBillerLookupTranType())
                 .msisdn(billerLookupRequest.getBiller())
-                .applicationCode("ecocashzw")
+                .applicationCode("ecocash")
                 .reference(Util.generateReference(billerLookupRequest.getBiller()))
                 .build();
     }
@@ -223,7 +223,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .checksumGenerator(checksumGenerator)
                 .tranType(cpgConfigProperties.getMerchantLookupTranType())
                 .msisdn(merchantLookupRequest.getMerchant())
-                .applicationCode("ecocashzw")
+                .applicationCode("ecocash")
                 .reference(Util.generateReference(merchantLookupRequest.getMerchant()))
                 .build();
     }
@@ -238,7 +238,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .vendorApiKey(vendorSASAIApiKey)
                 .checksumGenerator(checksumGenerator)
                 .msisdn(subscriberAirtimeRequest.getMsisdn1())
-                .applicationCode("ecocashzw")
+                .applicationCode("ecocash")
                 .reference(reference)
                 .callbackUrl(cpgConfigProperties.getCpgCallBackUrl())
                 .msisdn2(subscriberAirtimeRequest.getMsisdn2())
@@ -254,7 +254,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .vendorCode("EPGTESTPT")
                 .checksumGenerator(checksumGenerator)
                 .tranType("00029")
-                .applicationCode("ecocashzw")
+                .applicationCode("ecocash")
                 .reference(Util.generateReference(msisdn))
                 .securityMode("101")
                 .vendorApiKey("abf8988717c777874645af9e60db6e607dd5962c6e9c821f775c515618d2393e")
@@ -276,7 +276,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .pin(request.getPin())
                 .callbackUrl(cpgConfigProperties.getCpgCallBackUrl())
                 .reference(reference)
-                .applicationCode("ecocashzw")
+                .applicationCode("ecocash")
                 .securityMode("101")
                 .build();
     }
@@ -299,7 +299,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .reference(reference)
                 .pin("0000")
                 .currency("ZWL")
-                .applicationCode("ecocashzw")
+                .applicationCode("ecocash")
                 .build();
     }
 
@@ -316,7 +316,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .accountNumber(request.getBillerCode())
                 .msisdn2(request.getBillerCode())
                 .tranType(cpgConfigProperties.getSubscriberToBillerTranType())
-                .applicationCode("ecocashzw")
+                .applicationCode("ecocash")
                 .callbackUrl(cpgConfigProperties.getCpgCallBackUrl())
                 .msisdn2(request.getMsisdn2())
                 .reference(reference)
@@ -336,7 +336,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .msisdn(request.getMsisdn1())
                 .checksumGenerator(checksumGenerator)
                 .tranType(cpgConfigProperties.getSubscriberToSubscriberTranType())
-                .applicationCode(cpgConfigProperties.getCpgCallBackUrl())
+                .applicationCode("ecocash")
                 .reference(reference)
                 .callbackUrl(cpgConfigProperties.getCpgCallBackUrl())
                 .msisdn2(request.getMsisdn2())
@@ -386,7 +386,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .tranType(cpgConfigProperties.getPinResetTranType())
                 .msisdn(msisdn)
                 .callbackUrl(cpgConfigProperties.getCpgCallBackUrl())
-                .applicationCode("ecocashzw")
+                .applicationCode("ecocash")
                 .reference(Util.generateReference(msisdn))
                 .build();
     }
@@ -396,7 +396,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
         return RequestBuilder.newInstance()
                 .vendorCode(vendorEPGCode)
                 .vendorApiKey(vendorEPGApiKey)
-                .applicationCode("ecocashzw")
+                .applicationCode("ecocash")
                 .checksumGenerator(checksumGenerator)
                 .msisdn(registration.getMsisdn())
                 .pin(registration.getPin())

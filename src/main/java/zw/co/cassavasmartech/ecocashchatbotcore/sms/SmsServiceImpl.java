@@ -39,9 +39,8 @@ public class SmsServiceImpl implements SmsService{
     public void sendSms(String msisdn, String verificationCode, String messageKey) {
         final String notificationMessage = String.format(messagePropertiesService.getByKey(messageKey), verificationCode);
         final URI uri = UriComponentsBuilder.fromHttpUrl(smsProperties.getEndPointUrl()).buildAndExpand().toUri();
-        final RequestEntity<Sms> requestEntity = new RequestEntity<>(Sms.builder().to(mobileNumberFormater.formatMobileNumberInternational(msisdn)).text(notificationMessage).build(), buildSMSJsonHttpHeaders(), HttpMethod.POST, uri);
-        final ResponseEntity<Sms> responseEntity = restTemplate.exchange(requestEntity, Sms.class);
-        final Sms response = responseEntity.getBody();
-        log.info("Sms notification response {}", response);
+        final RequestEntity<Sms> requestEntity = new RequestEntity<>(Sms.builder().from(smsProperties.getSender()).to(mobileNumberFormater.formatMobileNumberInternational(msisdn)).text(notificationMessage).build(), buildSMSJsonHttpHeaders(smsProperties.getUser(),smsProperties.getPassword()), HttpMethod.POST, uri);
+        restTemplate.exchange(requestEntity, Sms.class);
+        log.info("Sms notification sent");
     }
 }

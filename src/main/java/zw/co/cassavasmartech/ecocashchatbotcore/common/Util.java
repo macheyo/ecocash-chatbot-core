@@ -17,9 +17,6 @@ import java.util.Base64;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Util {
 
-    @Autowired
-    SmsProperties smsProperties;
-
     public static HttpHeaders buildJsonHttpHeaders() {
         final HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
@@ -48,10 +45,10 @@ public class Util {
         return headers;
     }
 
-    public static HttpHeaders buildSMSJsonHttpHeaders(){
+    public static HttpHeaders buildSMSJsonHttpHeaders(String user, String password){
         HttpHeaders headers = new HttpHeaders() {
             {
-                String auth = "cashback:$2a$10$H.9TSyFedm061PqYka9l0eJTYP.tjQHbhJ0tLXYpuB22DnNTCbsHP";
+                String auth = user+":"+password;
                 byte[] encodedAuth = Base64.getEncoder().encode(
                         auth.getBytes(Charset.forName("US-ASCII")));
                 String authHeader = "Basic " + new String(encodedAuth);
