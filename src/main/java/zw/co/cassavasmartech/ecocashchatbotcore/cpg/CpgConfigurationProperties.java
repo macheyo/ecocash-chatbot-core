@@ -58,6 +58,8 @@ public class CpgConfigurationProperties {
     private String customerValidationTranType;
     @NotEmpty
     private String currency;
+    @NotEmpty
+    private String applicationCode;
 
 
 }
