@@ -305,7 +305,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                         + " to "
                         + response.getBody().getBody().get().getRecipientMobileNumber()
                         +"("+transactionResponse.getField6()+" "+transactionResponse.getField9()+")"
-                        +" for $ZWL"+response.getBody().getBody().get().getAmount()
+                        +" for $RTGS"+response.getBody().getBody().get().getAmount()
                         +"\nis this "+Emoji.PointUp+" correct?";
             }
         }
@@ -345,7 +345,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                                 + reversal.getReference() + " "
                                 + reversal.getOriginalSenderMobileNumber() + " "
                                 + "(" + transactionResponse.getField6() + " " + transactionResponse.getField9() + ")"
-                                + " of $ZWL" + reversal.getAmount();
+                                + " of $RTGS" + reversal.getAmount();
                     }
                     prompt += "\nwhat is the reference of the transaction you want to approve reversal for?";
                 }else prompt = "You have no pending reversals. Anything else I can do for you?";
@@ -384,7 +384,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                         + " to "
                         + response.getBody().getBody().get().getOriginalRecipientMobileNumber()
                         +"("+transactionResponse.getField6()+" "+transactionResponse.getField9()+")"
-                        +" for $ZWL"+response.getBody().getBody().get().getAmount()
+                        +" for $RTGS"+response.getBody().getBody().get().getAmount()
                         +"\nhas been initiated"+Emoji.ThumbsUp+". A notification has been sent to "+transactionResponse.getField6()+" for approval. Anything else I can do for you?";
             }
         }
@@ -421,7 +421,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
                         + " to "
                         + response.getBody().getBody().get().getRecipientMobileNumber()
                         +"("+transactionResponse.getField6()+" "+transactionResponse.getField9()+")"
-                        +" for $ZWL"+response.getBody().getBody().get().getAmount()
+                        +" for $RTGS"+response.getBody().getBody().get().getAmount()
                         +"\nis this "+Emoji.PointUp+" correct?";
             }
         }
@@ -491,7 +491,7 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         TransactionResponse transactionResponse = customerService.customerLookup(SubscriberDto.builder().msisdn(map.get("msisdn").toString()).build());
         String prompt;
         if(customer.isPresent()) {
-            prompt = "Alright thats fine "+DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest(),customer)+","+Emoji.Smiley+"\nSo in summary you want to send $ZWL"+ map.get("amount").toString()+" to "+map.get("msisdn").toString()+" ("+transactionResponse.getField6()+" "+transactionResponse.getField9()+")\ncan you confirm this is correct?";
+            prompt = "Alright thats fine "+DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest(),customer)+","+Emoji.Smiley+"\nSo in summary you want to send $RTGS"+ map.get("amount").toString()+" to "+map.get("msisdn").toString()+" ("+transactionResponse.getField6()+" "+transactionResponse.getField9()+")\ncan you confirm this is correct?";
         }
         else prompt = "Alright " + DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest(),customer)+Emoji.Smiley+", but before we pay sen your money, what is your Ecocash number?";
         WebhookResponse webhookResponse = WebhookResponse.builder()
@@ -517,7 +517,8 @@ public class DialogFlowServiceImpl implements DialogFlowService {
         TransactionResponse transactionResponse = customerService.customerLookup(SubscriberDto.builder().msisdn(map.get("msisdn").toString()).build());
         String prompt;
         if(customer.isPresent()) {
-            prompt = "Alright thats fine "+DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest(),customer)+","+Emoji.Smiley+"\nSo in summary you want to send $ZWL"+ payment.get("amount").toString()+" to "+map.get("msisdn").toString()+" ("+transactionResponse.getField6()+" "+transactionResponse.getField9()+")\ncan you confirm this is correct?";
+            prompt = "Alright thats fine "+DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest(),customer)+","+Emoji.Smiley+"\nSo in summary you want to send $" +
+                    "ZWL"+ payment.get("amount").toString()+" to "+map.get("msisdn").toString()+" ("+transactionResponse.getField6()+" "+transactionResponse.getField9()+")\ncan you confirm this is correct?";
         }
         else prompt = "Alright " + DialogFlowUtil.getAlias(webhookRequest.getOriginalDetectIntentRequest(),customer)+Emoji.Smiley+", but before we buy your airtime, what is your Ecocash number?";
         WebhookResponse webhookResponse = WebhookResponse.builder()

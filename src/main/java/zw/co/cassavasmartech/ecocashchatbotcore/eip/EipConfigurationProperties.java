@@ -29,4 +29,6 @@ public class EipConfigurationProperties {
     private String username;
     @NotNull
     private String password;
+    @NotNull
+    private String currency;
 }

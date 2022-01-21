@@ -15,7 +15,7 @@ public class GetPendingReversals extends FunctionAdapter {
         String prompt="";
         int count=1;
         for (ReversalDto pendingReversal:pendingReversals){
-            prompt += count +". "+pendingReversal.getReference()+" "+pendingReversal.getOriginalSenderMobileNumber()+"("+ DialogFlowUtil.getCustomerNameAndSurnameByMsisdn(pendingReversal.getOriginalSenderMobileNumber())+")"+" of $ZWL"+pendingReversal.getAmount()+"\n";
+            prompt += count +". "+pendingReversal.getReference()+" "+pendingReversal.getOriginalSenderMobileNumber()+"("+ DialogFlowUtil.getCustomerNameAndSurnameByMsisdn(pendingReversal.getOriginalSenderMobileNumber())+")"+" of $RTGS"+pendingReversal.getAmount()+"\n";
             count++;
         }
         return prompt;

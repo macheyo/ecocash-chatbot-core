@@ -200,7 +200,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .applicationCode("ecocash")
                 .reference(Util.generateReference(msisdn))
                 .msisdn(msisdn)
-                .currency("ZWL")
+                .currency(cpgConfigProperties.getCurrency())
                 .build();
     }
 
@@ -243,7 +243,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .callbackUrl(cpgConfigProperties.getCpgCallBackUrl())
                 .msisdn2(subscriberAirtimeRequest.getMsisdn2())
                 .countryCode("ZW")
-                .currency("ZWL")
+                .currency(cpgConfigProperties.getCurrency())
                 .amount(String.valueOf(subscriberAirtimeRequest.getAmount()))
                 .tranType(cpgConfigProperties.getSubscriberAirtimeTranType())
                 .build();
@@ -298,7 +298,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .callbackUrl(cpgConfigProperties.getCpgCallBackUrl())
                 .reference(reference)
                 .pin("0000")
-                .currency("ZWL")
+                .currency(cpgConfigProperties.getCurrency())
                 .applicationCode("ecocash")
                 .build();
     }
@@ -320,7 +320,7 @@ public class PaymentGatewayProcessorImpl implements PaymentGatewayProcessor {
                 .callbackUrl(cpgConfigProperties.getCpgCallBackUrl())
                 .msisdn2(request.getMsisdn2())
                 .reference(reference)
-                .currency("ZWL")
+                .currency(cpgConfigProperties.getCurrency())
                 .amount(String.valueOf(request.getAmount()))
                 .build();
     }

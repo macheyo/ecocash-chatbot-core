@@ -750,7 +750,7 @@ public class DialogFlowUtil {
             String transactionDate = response.getBody().getBody().get().getTransactionDate().toString();
             String recipientMobileNumber = response.getBody().getBody().get().getRecipientMobileNumber();
             String recipient = transactionResponse.getField6() + " " + transactionResponse.getField9();
-            String transactionAmount = "$ZWL" + response.getBody().getBody().get().getAmount();
+            String transactionAmount = "$RTGS" + response.getBody().getBody().get().getAmount();
             return new String[]{transactionReference,transactionDate,recipientMobileNumber,recipient,transactionAmount};
         }
         else return null;

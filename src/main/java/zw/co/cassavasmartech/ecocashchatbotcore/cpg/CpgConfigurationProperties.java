@@ -56,6 +56,8 @@ public class CpgConfigurationProperties {
     private String merchantLookupTranType;
     @NotEmpty
     private String customerValidationTranType;
+    @NotEmpty
+    private String currency;
 
 
 }

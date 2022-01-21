@@ -40,6 +40,7 @@ public class EipServiceImpl implements EipService {
     @Autowired
     EipConfigurationProperties eipConfigurationProperties;
 
+
     @Override
     public EipTransaction postPayment(SubscriberToMerchantRequest subscriberToMerchantRequest) {
         EipTransaction eipTransaction = getSubscriberToMerchantTransaction(subscriberToMerchantRequest);
@@ -137,7 +138,7 @@ public class EipServiceImpl implements EipService {
                 .merchantCode(merchant.getMerchantCode())
                 .merchantPin(merchant.getMerchantPin())
                 .merchantNumber(merchant.getMerchantNumber())
-                .currencyCode("ZWL")
+                .currencyCode(eipConfigurationProperties.getCurrency())
                 .countryCode("ZW")
                 .terminalID("web")
                 .location(merchant.getLocation())
@@ -154,7 +155,7 @@ public class EipServiceImpl implements EipService {
                             )
                             .charginginformation(
                                     Charginginformation.builder()
-                                            .currency("ZWL")
+                                            .currency(eipConfigurationProperties.getCurrency())
                                             .amount(subscriberToMerchantRequest.getAmount())
                                             .description("Escrow Online Payment")
                                             .build())
