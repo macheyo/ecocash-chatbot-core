@@ -22,5 +22,7 @@ public class StatementServiceConfigurationProperties {
     private String password;
     @NotEmpty
     private String ngrokServiceEndpointUrl;
+    @NotEmpty
+    private String merchantMsisdn;
 
 }

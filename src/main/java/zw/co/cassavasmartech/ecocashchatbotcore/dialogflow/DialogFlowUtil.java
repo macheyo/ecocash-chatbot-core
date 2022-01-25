@@ -546,7 +546,7 @@ public class DialogFlowUtil {
         String merchantName = paymentGatewayProcessor.lookupMerchant(MerchantLookupRequest.builder().merchant("019919").build()).getField6();
         return paymentGatewayProcessor.subscriberToMerchant(zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest.builder()
                     .subscriberMsisdn(customer.getMsisdn())
-                    .merchantMsisdn("019919")
+                    .merchantMsisdn(statementServiceConfigurationProperties.getMerchantMsisdn())
                     .merchantName(merchantName)
                     .amount(BigDecimal.valueOf(15))
                     .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
@@ -558,7 +558,7 @@ public class DialogFlowUtil {
         Map<String, Object> ticket = getTicket(webhookRequest);
         Map<String, Object> recursion = getRecursion(webhookRequest);
         ObjectMapper objectMapper = new ObjectMapper();
-        String merchantName = paymentGatewayProcessor.lookupMerchant(MerchantLookupRequest.builder().merchant(ticket.get("msisdn.original").toString()).build()).getField6();
+        String merchantName = paymentGatewayProcessor.lookupMerchant(MerchantLookupRequest.builder().merchant(ticket.get("msisdn.original").toString()).build()).getField10();
         if(recursion.get("intent").toString().equalsIgnoreCase("usecase_pay_merchant_scenario1"))
             return paymentGatewayProcessor.subscriberToMerchant(zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest.builder()
                     .subscriberMsisdn(customer.getMsisdn())
