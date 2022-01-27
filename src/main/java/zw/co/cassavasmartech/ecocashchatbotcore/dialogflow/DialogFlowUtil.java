@@ -544,12 +544,12 @@ public class DialogFlowUtil {
         Customer customer = isNewCustomer(webhookRequest);
         Map<String, Object> ticket = getTicket(webhookRequest);
         String merchantName = paymentGatewayProcessor.lookupMerchant(MerchantLookupRequest.builder().merchant(statementServiceConfigurationProperties.getMerchantMsisdn()).build()).getField6();
-        String merchantMsisdn = paymentGatewayProcessor.lookupMerchant(MerchantLookupRequest.builder().merchant(ticket.get("msisdn.original").toString()).build()).getField10();
+        String merchantMsisdn = paymentGatewayProcessor.lookupMerchant(MerchantLookupRequest.builder().merchant(statementServiceConfigurationProperties.getMerchantMsisdn()).build()).getField10();
         return paymentGatewayProcessor.subscriberToMerchant(zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest.builder()
                     .subscriberMsisdn(customer.getMsisdn())
                     .merchantMsisdn(merchantMsisdn)
                     .merchantName(merchantName)
-                    .amount(BigDecimal.valueOf(15))
+                    .amount(BigDecimal.valueOf(Double.valueOf(statementServiceConfigurationProperties.getChargeAmount())))
                     .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
                     .build()).getField1();
     }
