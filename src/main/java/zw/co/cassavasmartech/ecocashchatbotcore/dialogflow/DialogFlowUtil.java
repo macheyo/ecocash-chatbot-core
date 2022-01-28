@@ -15,8 +15,10 @@ import zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessor;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.EipService;
+import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.EipTransaction;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.Merchant;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.MerchantRepository;
+import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.SubscriberToMerchantRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.email.EmailService;
 import zw.co.cassavasmartech.ecocashchatbotcore.email.data.EmailNotification;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.PromptNotFoundException;
@@ -54,8 +56,6 @@ import java.net.URLConnection;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -540,21 +540,27 @@ public class DialogFlowUtil {
         }
     }
 
-    public static String payForStatement(WebhookRequest webhookRequest) {
+    public static EipTransaction payForStatement(WebhookRequest webhookRequest) {
         Customer customer = isNewCustomer(webhookRequest);
         Map<String, Object> ticket = getTicket(webhookRequest);
         String merchantName = paymentGatewayProcessor.lookupMerchant(MerchantLookupRequest.builder().merchant(statementServiceConfigurationProperties.getMerchantMsisdn()).build()).getField6();
         String merchantMsisdn = paymentGatewayProcessor.lookupMerchant(MerchantLookupRequest.builder().merchant(statementServiceConfigurationProperties.getMerchantMsisdn()).build()).getField10();
-        return paymentGatewayProcessor.subscriberToMerchant(zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest.builder()
-                    .subscriberMsisdn(customer.getMsisdn())
-                    .merchantMsisdn(merchantMsisdn)
-                    .merchantName(merchantName)
-                    .amount(BigDecimal.valueOf(Double.valueOf(statementServiceConfigurationProperties.getChargeAmount())))
-                    .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
-                    .build()).getField1();
+//        return paymentGatewayProcessor.subscriberToMerchant(zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest.builder()
+//                    .subscriberMsisdn(customer.getMsisdn())
+//                    .merchantMsisdn(merchantMsisdn)
+//                    .merchantName(merchantName)
+//                    .amount(BigDecimal.valueOf(Double.valueOf(statementServiceConfigurationProperties.getChargeAmount())))
+//                    .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
+//                    .build()).getField1();
+        return eipService.postPayment(zw.co.cassavasmartech.ecocashchatbotcore.eip.data.SubscriberToMerchantRequest.builder().msisdn(customer.getMsisdn())
+                .msisdn(customer.getMsisdn())
+                .merchantCode(statementServiceConfigurationProperties.getMerchantMsisdn())
+                .amount(BigDecimal.valueOf(Double.valueOf(statementServiceConfigurationProperties.getChargeAmount())))
+                .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
+                .build());
     }
 
-    public static String payMerchant(WebhookRequest webhookRequest){
+    public static EipTransaction payMerchant(WebhookRequest webhookRequest){
         Customer customer = isNewCustomer(webhookRequest);
         Map<String, Object> ticket = getTicket(webhookRequest);
         Map<String, Object> recursion = getRecursion(webhookRequest);
@@ -563,29 +569,40 @@ public class DialogFlowUtil {
         String merchantMsisdn = paymentGatewayProcessor.lookupMerchant(MerchantLookupRequest.builder().merchant(ticket.get("msisdn.original").toString()).build()).getField10();
 
         if(recursion.get("intent").toString().equalsIgnoreCase("usecase_pay_merchant_scenario1"))
-            return paymentGatewayProcessor.subscriberToMerchant(zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest.builder()
-                    .subscriberMsisdn(customer.getMsisdn())
-                    .merchantName(merchantName)
+//            return paymentGatewayProcessor.subscriberToMerchant(zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest.builder()
+//                    .subscriberMsisdn(customer.getMsisdn())
+//                    .merchantName(merchantName)
+//                    .merchantMsisdn(merchantMsisdn)
+//                    .amount(BigDecimal.valueOf(Double.parseDouble(ticket.get("amount").toString())))
+//                    .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
+//                    .build()).getField1();
+        {
+            EipTransaction eipTransaction = eipService.postPayment(SubscriberToMerchantRequest.builder()
+                    .msisdn(customer.getMsisdn())
                     .merchantMsisdn(merchantMsisdn)
+                    .merchantName(merchantName)
+                    .merchantCode(ticket.get("msisdn.original").toString())
                     .amount(BigDecimal.valueOf(Double.parseDouble(ticket.get("amount").toString())))
                     .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
-                    .build()).getField1();
-//            return eipService.postPayment(SubscriberToMerchantRequest.builder().msisdn(customer.getMsisdn())
-//                .msisdn(customer.getMsisdn())
-//                .merchantCode(getMerchantDetails(ticket.get("msisdn.original").toString())[1])
-//                .amount(BigDecimal.valueOf(Double.parseDouble(ticket.get("amount").toString())))
-//                .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
-//                .build());
-        else {
+                    .build());
+            log.info("Eip transaction: {}", eipTransaction);
+            return eipTransaction;
+        } else {
             Map<String,Object> payment = objectMapper.convertValue(ticket.get("payment"),Map.class);
             if (payment.containsKey("amount"))
-                return paymentGatewayProcessor.subscriberToMerchant(zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest.builder()
-                        .subscriberMsisdn(customer.getMsisdn())
-                        .merchantMsisdn(ticket.get("msisdn.original").toString())
-                        .merchantName(merchantName)
-                        .amount(BigDecimal.valueOf(Double.parseDouble(payment.get("amount").toString())))
+                return eipService.postPayment(zw.co.cassavasmartech.ecocashchatbotcore.eip.data.SubscriberToMerchantRequest.builder().msisdn(customer.getMsisdn())
+                        .msisdn(customer.getMsisdn())
+                        .merchantCode(ticket.get("msisdn.original").toString())
+                        .amount(BigDecimal.valueOf(Double.parseDouble(ticket.get("amount").toString())))
                         .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
-                        .build()).getField1();
+                        .build());
+//                return paymentGatewayProcessor.subscriberToMerchant(zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.SubscriberToMerchantRequest.builder()
+//                        .subscriberMsisdn(customer.getMsisdn())
+//                        .merchantMsisdn(ticket.get("msisdn.original").toString())
+//                        .merchantName(merchantName)
+//                        .amount(BigDecimal.valueOf(Double.parseDouble(payment.get("amount").toString())))
+//                        .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
+//                        .build()).getField1();
         }
         return null;
     }

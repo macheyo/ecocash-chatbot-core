@@ -16,8 +16,10 @@ public class PayMerchantConfirmationAffirmativeIntentHandler extends IntentHandl
     public WebhookResponse getWebhookResponse(WebhookRequest... webhookRequest) {
         log.info("Processing dialogflow intent: {}", webhookRequest[0].getQueryResult().getIntent().getDisplayName());
         Customer customer = DialogFlowUtil.isNewCustomer(webhookRequest[0]);
-        String response = DialogFlowUtil.payMerchant(webhookRequest[0]);
-        if(response.equalsIgnoreCase("603")) return DialogFlowUtil.getResponse(webhookRequest[0],
+        EipTransaction response = DialogFlowUtil.payMerchant(webhookRequest[0]);
+        EipTransaction transaction = response;
+        if(response.getTransactionOperationStatus().equalsIgnoreCase("PENDING SUBSCRIBER VALIDATION"))
+            return DialogFlowUtil.getResponse(webhookRequest[0],
                 DialogFlowUtil.promptProcessor(7,webhookRequest[0],customer),
                 new Object[]{},
                 UseCase.MERCHANT_PAYMENT);
@@ -25,6 +27,15 @@ public class PayMerchantConfirmationAffirmativeIntentHandler extends IntentHandl
                 DialogFlowUtil.promptProcessor(8,webhookRequest[0],customer),
                 new Object[]{},
                 UseCase.MERCHANT_PAYMENT);
+//        String response = DialogFlowUtil.payMerchant(webhookRequest[0]);
+//        if(response.equalsIgnoreCase("603")) return DialogFlowUtil.getResponse(webhookRequest[0],
+//                DialogFlowUtil.promptProcessor(7,webhookRequest[0],customer),
+//                new Object[]{},
+//                UseCase.MERCHANT_PAYMENT);
+//        else return DialogFlowUtil.getResponse(webhookRequest[0],
+//                DialogFlowUtil.promptProcessor(8,webhookRequest[0],customer),
+//                new Object[]{},
+//                UseCase.MERCHANT_PAYMENT);
     }
 
 }

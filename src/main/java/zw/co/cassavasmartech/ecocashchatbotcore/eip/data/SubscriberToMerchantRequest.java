@@ -9,6 +9,7 @@ import java.math.BigInteger;
 @Builder
 public class SubscriberToMerchantRequest {
     private String msisdn;
+    private String merchantMsisdn;
     private String merchantName;
     private String merchantCode;
     private BigDecimal amount;

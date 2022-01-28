@@ -44,7 +44,9 @@ public class EipServiceImpl implements EipService {
     @Override
     public EipTransaction postPayment(SubscriberToMerchantRequest subscriberToMerchantRequest) {
         EipTransaction eipTransaction = getSubscriberToMerchantTransaction(subscriberToMerchantRequest);
-        return eipInvoker.invoke(eipTransaction).orElseThrow(()->new BusinessException("EIP returned a null response"));
+        EipTransaction eipTransaction1 = eipInvoker.invoke(eipTransaction).orElseThrow(() -> new BusinessException("EIP returned a null response"));
+        EipTransaction eipTransaction2 = eipTransaction1;
+        return eipTransaction1;
     }
 
     @Override
@@ -122,7 +124,7 @@ public class EipServiceImpl implements EipService {
     }
 
     private EipTransaction getSubscriberToMerchantTransaction(SubscriberToMerchantRequest subscriberToMerchantRequest) {
-        Merchant merchant = merchantRepository.findByMerchantCode(subscriberToMerchantRequest.getMerchantCode()).orElseThrow(()->new MerchantNotFoundException(subscriberToMerchantRequest.getMerchantCode()));
+//        Merchant merchant = merchantRepository.findByMerchantCode(subscriberToMerchantRequest.getMerchantCode()).orElseThrow(()->new MerchantNotFoundException(subscriberToMerchantRequest.getMerchantCode()));
         String reference = Util.generateReference(subscriberToMerchantRequest.getMsisdn());
         Ticket ticket = ticketRepository.findById(subscriberToMerchantRequest.getTicketId()).orElseThrow(()->new TicketNotFoundException(subscriberToMerchantRequest.getTicketId().toString()));
         ticket.setReference(reference);
@@ -133,22 +135,22 @@ public class EipServiceImpl implements EipService {
                 .referenceCode(reference)
                 .tranType("MER")
                 .endUserId(subscriberToMerchantRequest.getMsisdn())
-                .remarks(merchant.getRemarks())
+                .remarks(subscriberToMerchantRequest.getMerchantName())
                 .transactionOperationStatus("Charged")
-                .merchantCode(merchant.getMerchantCode())
-                .merchantPin(merchant.getMerchantPin())
-                .merchantNumber(merchant.getMerchantNumber())
+                .merchantCode(subscriberToMerchantRequest.getMerchantCode())
+                .merchantPin("4827")
+                .merchantNumber(subscriberToMerchantRequest.getMerchantMsisdn())
                 .currencyCode(eipConfigurationProperties.getCurrency())
                 .countryCode("ZW")
                 .terminalID("web")
-                .location(merchant.getLocation())
-                .superMerchantName(merchant.getName())
-                .merchantName(merchant.getName())
+                .location(subscriberToMerchantRequest.getMerchantName())
+                .superMerchantName(subscriberToMerchantRequest.getMerchantName())
+                .merchantName(subscriberToMerchantRequest.getMerchantName())
                 .paymentAmount(
                     PaymentAmount.builder()
                             .chargeMetaData(
                                     ChargeMetaData.builder()
-                                            .onBeHalfOf(merchant.getName())
+                                            .onBeHalfOf(subscriberToMerchantRequest.getMerchantName())
                                             .channel("WEB")
                                             .purchaseCategoryCode("Online Payment")
                                             .build()

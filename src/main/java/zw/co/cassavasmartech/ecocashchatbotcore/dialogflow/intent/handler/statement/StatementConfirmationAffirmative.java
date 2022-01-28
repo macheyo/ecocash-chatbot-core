@@ -5,6 +5,7 @@ import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookRequest;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.data.WebhookResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.intent.IntentHandlerAdapter;
+import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.EipTransaction;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Customer;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.UseCase;
 
@@ -14,8 +15,9 @@ public class StatementConfirmationAffirmative extends IntentHandlerAdapter {
     public WebhookResponse getWebhookResponse(WebhookRequest... webhookRequest) {
         log.info("Processing Dialogflow Intent: {}", webhookRequest[0].getQueryResult().getIntent().getDisplayName());
         Customer customer = DialogFlowUtil.isNewCustomer(webhookRequest[0]);
-        String response = DialogFlowUtil.payForStatement(webhookRequest[0]);
-        if(response.equalsIgnoreCase("603")){
+        EipTransaction response = DialogFlowUtil.payMerchant(webhookRequest[0]);
+        if(response.getTransactionOperationStatus().equalsIgnoreCase("PENDING SUBSCRIBER VALIDATION"))
+       {
                 return DialogFlowUtil.getResponse(webhookRequest[0],
                     DialogFlowUtil.promptProcessor(10,webhookRequest[0],customer), // push sent
                     new Object[]{},
