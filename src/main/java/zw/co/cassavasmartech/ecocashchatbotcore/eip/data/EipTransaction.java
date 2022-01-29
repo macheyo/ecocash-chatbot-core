@@ -35,4 +35,6 @@ public class EipTransaction {
     private long startTime;
     private String serverReferenceCode;
     private String responseCode;
+    private String message;
+    private String text;
 }

@@ -585,7 +585,7 @@ public class DialogFlowUtil {
                     .amount(BigDecimal.valueOf(Double.parseDouble(ticket.get("amount").toString())))
                     .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())
                     .build());
-            log.info("Eip transaction: {}", eipTransaction);
+//            log.info("Eip transaction: {}", eipTransaction);
             return eipTransaction;
         } else {
             Map<String,Object> payment = objectMapper.convertValue(ticket.get("payment"),Map.class);
