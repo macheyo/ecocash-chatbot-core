@@ -15,7 +15,7 @@ public class StatementConfirmationAffirmative extends IntentHandlerAdapter {
     public WebhookResponse getWebhookResponse(WebhookRequest... webhookRequest) {
         log.info("Processing Dialogflow Intent: {}", webhookRequest[0].getQueryResult().getIntent().getDisplayName());
         Customer customer = DialogFlowUtil.isNewCustomer(webhookRequest[0]);
-        EipTransaction response = DialogFlowUtil.payMerchant(webhookRequest[0]);
+        EipTransaction response = DialogFlowUtil.payForStatement(webhookRequest[0]);
         if(response.getTransactionOperationStatus().equalsIgnoreCase("PENDING SUBSCRIBER VALIDATION"))
        {
                 return DialogFlowUtil.getResponse(webhookRequest[0],
