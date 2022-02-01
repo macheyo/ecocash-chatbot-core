@@ -554,6 +554,8 @@ public class DialogFlowUtil {
 //                    .build()).getField1();
         return eipService.postPayment(zw.co.cassavasmartech.ecocashchatbotcore.eip.data.SubscriberToMerchantRequest.builder().msisdn(customer.getMsisdn())
                 .msisdn(customer.getMsisdn())
+                .merchantMsisdn(merchantMsisdn)
+                .merchantName(merchantName)
                 .merchantCode(statementServiceConfigurationProperties.getMerchantMsisdn())
                 .amount(BigDecimal.valueOf(Double.valueOf(statementServiceConfigurationProperties.getChargeAmount())))
                 .ticketId(Double.valueOf(ticket.get("id").toString()).longValue())

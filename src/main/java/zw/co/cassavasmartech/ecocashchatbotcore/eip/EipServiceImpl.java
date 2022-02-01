@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.Util;
+import zw.co.cassavasmartech.ecocashchatbotcore.dialogflow.DialogFlowUtil;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.BusinessException;
 import zw.co.cassavasmartech.ecocashchatbotcore.exception.MerchantNotFoundException;
@@ -15,10 +16,13 @@ import zw.co.cassavasmartech.ecocashchatbotcore.infobip.InfobipService;
 import zw.co.cassavasmartech.ecocashchatbotcore.infobip.data.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Profile;
 import zw.co.cassavasmartech.ecocashchatbotcore.model.Ticket;
+import zw.co.cassavasmartech.ecocashchatbotcore.model.UseCase;
 import zw.co.cassavasmartech.ecocashchatbotcore.repository.TicketRepository;
 import zw.co.cassavasmartech.ecocashchatbotcore.service.TicketService;
 import zw.co.cassavasmartech.ecocashchatbotcore.telegram.TelegramService;
 import zw.co.cassavasmartech.ecocashchatbotcore.twilio.TwilioService;
+
+import java.text.ParseException;
 
 @Slf4j
 @Component
@@ -59,6 +63,14 @@ public class EipServiceImpl implements EipService {
         switch (response.getTransactionOperationStatus()) {
                 case "COMPLETED":
                     log.info(" transaction completed");
+                    if(ticket.getUsecase().equals(UseCase.SUBSCRIBER_STATEMENT)) {
+                        String[] period = ticket.getFolio().split("\\s");
+                        try {
+                            DialogFlowUtil.getStatement(period[0],period[1],profile);
+                        } catch (ParseException e) {
+                            log.info("Parse exception: {}", e);
+                        }
+                    }
                     notification = "Great! transaction of "
                             +response.getPaymentAmount().getCharginginformation().getCurrency()
                             +response.getPaymentAmount().getCharginginformation().getAmount()
