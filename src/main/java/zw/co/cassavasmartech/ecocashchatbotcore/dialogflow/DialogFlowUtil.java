@@ -500,7 +500,7 @@ public class DialogFlowUtil {
                 .passKey(password)
                 .build());
         if(statement!=null) {
-            String downloadURL = statement.getFileDownloadUri().replace("http://192.168.92.94:6060/reports-admin/",statementServiceConfigurationProperties.getNgrokServiceEndpointUrl());
+            String downloadURL = statement.getFileDownloadUri().replace(statementServiceConfigurationProperties.getStatementServiceEndPointUrl()+"/",statementServiceConfigurationProperties.getNgrokServiceEndpointUrl());
             smsService.sendSms(profile.getCustomer().getMsisdn(),password,"messages.statement.password");
             if(profile.getPlatform().equals(Platform.TELEGRAM)) {
                 telegramService.sendDocument(profile.getChatId(), downloadURL);
