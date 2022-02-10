@@ -10,7 +10,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiConstants;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
@@ -26,7 +25,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.*;
-import java.net.URLConnection;
 import java.text.ParseException;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -110,8 +108,8 @@ public class CustomerController {
     }
 
     @GetMapping("/statement/downloadFile/{documentId}")
-    public void downloadFile(@PathVariable("documentId") String documentId, HttpServletRequest req, HttpServletResponse resp) {
-        customerService.getStatementFile(documentId, req, resp);
+    public ResponseEntity<byte[]> downloadFile(@PathVariable("documentId") String documentId, HttpServletRequest req, HttpServletResponse resp) {
+        return customerService.getStatementFile(documentId, req, resp);
     }
 
     @GetMapping("/pinreset/{chatId}")

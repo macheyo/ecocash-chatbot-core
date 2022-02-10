@@ -1,6 +1,7 @@
 package zw.co.cassavasmartech.ecocashchatbotcore.service;
 
 import org.springframework.hateoas.EntityModel;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.*;
 import zw.co.cassavasmartech.ecocashchatbotcore.eip.data.EipTransaction;
@@ -43,7 +44,7 @@ public interface CustomerService {
 
     TransactionResponse buyAirtime(String chatId, SubscriberAirtimeRequest subscriberAirtimeRequest);
 
-    void getStatementFile(String documentId, HttpServletRequest req, HttpServletResponse resp);
+    ResponseEntity<byte[]> getStatementFile(String documentId, HttpServletRequest req, HttpServletResponse resp);
 
     Boolean verifyAnswers(String chatId, VerifyAnswerRequest verifyAnswerRequest);
 

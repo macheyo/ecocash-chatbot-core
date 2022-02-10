@@ -5,6 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.PaymentGatewayProcessor;
 import zw.co.cassavasmartech.ecocashchatbotcore.cpg.data.*;
@@ -136,8 +137,8 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public void getStatementFile(String documentId, HttpServletRequest req, HttpServletResponse resp) {
-        statementService.getStatementFile(documentId, req, resp);
+    public ResponseEntity<byte[]> getStatementFile(String documentId, HttpServletRequest req, HttpServletResponse resp) {
+        return statementService.getStatementFile(documentId, req, resp);
     }
 
     @Override

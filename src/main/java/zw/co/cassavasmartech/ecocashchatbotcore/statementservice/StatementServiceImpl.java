@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.ApiResponse;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.MobileNumberFormater;
 import zw.co.cassavasmartech.ecocashchatbotcore.common.PassThroughUtil;
@@ -19,6 +19,8 @@ import zw.co.cassavasmartech.ecocashchatbotcore.token.TokenService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.net.URI;
+import java.util.Arrays;
 
 @Component
 @RequiredArgsConstructor
@@ -50,9 +52,15 @@ public class StatementServiceImpl implements StatementService {
     }
 
     @Override
-    public void getStatementFile(String documentId, HttpServletRequest req, HttpServletResponse resp) {
-        passThroughUtil.forwardRequest(String.format("%s/customer/statement/downloadFile/%s", statementServiceConfigurationProperties.getStatementServiceEndPointUrl(), documentId),
-                "GET", req, resp);
+    public ResponseEntity<byte[]> getStatementFile(String documentId, HttpServletRequest req, HttpServletResponse resp) {
+//        passThroughUtil.forwardRequest(String.format("%s/customer/statement/downloadFile/%s", statementServiceConfigurationProperties.getStatementServiceEndPointUrl(), documentId),
+//                "GET", req, resp);
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_PDF, MediaType.APPLICATION_OCTET_STREAM));
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        final URI uri = UriComponentsBuilder.fromHttpUrl(String.format("%s/customer/statement/downloadFile/%s", statementServiceConfigurationProperties.getStatementServiceEndPointUrl(), documentId)).buildAndExpand().toUri();
+        return restTemplate.exchange(uri, HttpMethod.GET, entity, byte[].class);
     }
 
 
